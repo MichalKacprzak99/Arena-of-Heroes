@@ -1,6 +1,6 @@
 # Arena-of-Heroes
 ## Participants 
- - **Michał Kacprzak**
+ - **Michał Kacprzak - Team Leader**
  - Agnieszka Lasek
  - Tomasz Maczek
  - Bartek Mikołajczyk
