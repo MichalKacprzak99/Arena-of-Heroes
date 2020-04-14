@@ -1,7 +1,6 @@
 # Arena-of-Heroes
 ## Participants 
- - **Later**
- - Michał Kacprzak
+ - **Michał Kacprzak**
  - Agnieszka Lasek
  - Tomasz Maczek
  - Bartek Mikołajczyk
