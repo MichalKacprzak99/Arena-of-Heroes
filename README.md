@@ -14,5 +14,5 @@ Arena of Heroes will be a multiplayer RPG game. The player's task will be to cre
 - team creator
 - 5 diffrent class of heroes
 - 1 vs 1 
-- game mode against the computer to improve skills
+- possibility to play against the computer to improve skills
 - randomly generated map
