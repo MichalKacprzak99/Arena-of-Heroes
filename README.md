@@ -6,7 +6,7 @@
  - Bartek Mikołajczyk
 ### Do you need more people: No
 ## Short description of the idea
-Arena of Heroes will be a multiplayer RPG game. The player's task will be to create a team of heroes that will go to battle to the death in the arena. More information soon...
+Arena of Heroes will be a 2D multiplayer RPG game. The player's task will be to create a team of heroes that will go to battle to the death in the arena. More information soon...
 ## Feature'y:
 - player registration
 - option to save and load a game
