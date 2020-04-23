@@ -7,6 +7,7 @@
 ### Do you need more people: No
 ## Short description of the idea
 Arena of Heroes will be a 2D multiplayer RPG game. The player's task will be to create a team of heroes that will go to battle to the death in the arena. More information soon...
+Full description available [here](../project description.odt)
 ## Feature'y:
 - player registration
 - option to save and load a game
