@@ -1,0 +1,59 @@
+Arena of Heroes
+
+Basic information:
+
+    • Python 3
+    • additional modules/programs that we plan to use:
+        ◦ pygame
+        ◦ PyQt or wxPython
+        ◦ pickle
+        ◦ socket
+        ◦ pytmx
+        ◦ Tiled
+
+Features:
+
+        1. Player:
+    • create/save/load a game;
+    • create a unique team of 4 heroes;
+    • play a game;
+        2. Team Creator:
+    • decide which heroes will be in team
+    • make chosen heroes unique(name, change some stats like attack, defense, hp)
+        3. Game:
+    • turn-based;
+    • multiplayer( 1 vs 1);
+    • in his turn the player can choose a hero and decide on the move / attack / defense;
+        4. Hero
+    • move with different range;
+    • attack with different range;
+    • cast a special skill;
+    • stats;
+    • name;
+    • image;
+
+RoadMap:
+
+1. At this stage, all code will be created together, due to the need to fully understand the operation of data transfer. This stage will include:
+    • create server-client basic logic
+    • create test,basic tiled-based map and find out how to display it on screen
+    • create abstract class Hero with test image and implement movement to it
+
+The result of this stage will be a working connection client (a) - server - client (b), displayed map with Hero-class objects and the ability to move around with a Hero-class object.
+
+2. The tasks planned for this stage and all next will already be assigned to individual persons. During this stage, we plan to implement the following elements:
+    • create main menu with option to start a new game;
+    • GUI for game;
+    • create all classes of heroes;
+    • implement attack and other option;
+    • make our game to be turn-based;
+    • create a set of map using Tiled;
+After completing this stage, the player will be able to start a new game, wait for the second player to join and complete the game. For now, he will have a default test team at his disposal.
+
+3. During this stage, we plan to implement the following elements:
+    • team Creator
+    • add login and registration process;
+    • enable player to save/load a game;
+    • implement some "animation" of attack/defense etc;
+    • add some content to maps for example traps,chest other typical stuff for RPG games;
+Completing this stage means that the basic assumptions of our project will be met. However, if the work goes extremely well, we would like to try to implement the possibility of playing with a computer
