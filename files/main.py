@@ -1,12 +1,11 @@
 import pygame
-import sys
-from player import Player
-from hero import Hero
-from tile_map import TiledMap
-from settings import *
+from files.player import Player
+from files.tile_map import TiledMap
+from files.settings import *
 screen = pg.display.set_mode((WIDTH, HEIGHT))
 pygame.init()
 pygame.display.set_caption(TITLE)
+
 
 def get_tile_pos(pos):
     x, y = pos[0], pos[1]

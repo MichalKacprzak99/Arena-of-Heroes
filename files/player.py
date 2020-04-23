@@ -1,5 +1,4 @@
-import pygame as pg
-from hero import Hero
+from files.hero import Hero
 
 
 def coordinate(tile_pos):
