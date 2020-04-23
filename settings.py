@@ -14,8 +14,8 @@ BROWN = (106, 55, 5)
 # game settings
 WIDTH = 800   # 16 * 64 or 32 * 32 or 64 * 16
 HEIGHT = 800  # 16 * 48 or 32 * 24 or 64 * 12
-FPS = 60
-TITLE = "Tilemap Demo"
+#FPS = 60
+TITLE = "AoH Demo"
 BGCOLOR = BROWN
 
 #TILESIZE = 64

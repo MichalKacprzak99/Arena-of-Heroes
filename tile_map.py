@@ -16,7 +16,7 @@ class TiledMap:
     def draw(self):
         self.screen.fill((255, 255, 255))
         self.screen.blit(self.map_img, (0, 0))
-        pg.display.update()
+        #pg.display.update()
 
     @staticmethod
     def load_data(filename):
