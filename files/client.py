@@ -6,10 +6,11 @@ from files.tile_map import TiledMap
 from files.settings import *
 from os import path
 pg.init()
-screen = pg.display.set_mode((WIDTH, HEIGHT))
+window = pg.display.set_mode((WIDTH, HEIGHT))
 pg.display.set_caption(TITLE)
 pg.font.init()
-example_map = TiledMap('tmp_map.tmx', screen)
+example_map = TiledMap('tmp_map.tmx', window)
+
 
 def get_tile_pos(pos):
     x, y = pos[0], pos[1]
@@ -55,25 +56,47 @@ def main():
     player1 = n.get_player()
     player_id = player1.player_id
     opponent_id = abs(player_id-1)
-    player2 = None
+    opponent = None
     game_start = False
+    turn = 0
+    which_player_turn = 0
+
     while run:
         clock.tick(60)
         if game_start is False:
             try:
                 data = n.send(["get_another_player", opponent_id])
-                player2 = data[0]
+                opponent = data[0]
                 game_start = data[1]
             except:
                 pass
-            
-        if game_start:
-            redrawWindow(screen, player1, player2)
+        else:
+            try:
+                turns_data = n.send(["get_turn"])
+                turn, which_player_turn = turns_data[0], turns_data[1]
+            except:
+                pass
+            if which_player_turn == player_id:
+                for event in pg.event.get():
+                    if event.type == pg.QUIT:
+                        run = False
+                        pg.quit()
+                    if event.type == pg.MOUSEBUTTONUP:
+                        pos = pg.mouse.get_pos()
+                        if player1.clicked_hero is None:
+                            player1.clicked_hero = check_clicked_hero(pos, player1.heroes)
+                        else:
+                            player1.move(get_tile_pos(pos))
+                            n.send(["move", player_id, player1.heroes[player1.clicked_hero]])
+                            player1.clicked_hero = None
+            else:
+                pass
+                # try:
+                #     opponent = n.send(["echo", opponent_id])
+                # except:
+                #     pass
 
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                run = False
-                pg.quit()
+            redrawWindow(window, player1, opponent)
 
 
 main()

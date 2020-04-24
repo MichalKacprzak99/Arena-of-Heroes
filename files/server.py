@@ -25,7 +25,7 @@ def threaded_client(conn, player,gameId):
     global idCount
     games[gameId].players[player] = Player(name="df", player_id=p)
     conn.send(pickle.dumps(games[gameId].players[player]))
-    reply = ""
+    reply = []
     while True:
         try:
             data = pickle.loads(conn.recv(4096))  # lista [attack, id postaci atakujacej, ta co obrywa, za ile , arg*]
@@ -37,12 +37,18 @@ def threaded_client(conn, player,gameId):
                     break
                 else:
                     which_player_take_action = data[1]
-                    if data[0] == "get_another_player":  # data[0] = "move"
+                    if data[0] == "get_another_player":
                         reply = [game.players[which_player_take_action], game.ready]
                     if data[0] == "move":
-                        moved_hero = data[3]
+                        moved_hero = data[2]
                         game.players[which_player_take_action].heroes[moved_hero.hero_id] = moved_hero
-                        reply = game.players[data[1]]
+                        game.player_turn = abs(game.player_turn - 1)
+                        game.turns += 1
+                    if data[0] == "echo":
+                        reply = [game.players[data[1]]]
+                    if data[0] == "get_turn":
+                        reply = [game.player_turn, game.turns]
+
                     print("receivved: ", data)
                     print("Sending: ", reply)
                     conn.sendall(pickle.dumps(reply))
