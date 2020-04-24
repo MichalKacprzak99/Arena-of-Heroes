@@ -10,15 +10,21 @@ class Player:
     def __init__(self, name="", player_id=0):
         self.name = name
         self.player_id = player_id
-        self.heroes = [Hero("Mag.png", 0, [0,0]), Hero("Mag.png", 1, [0, 1])]#lista
+        self.heroes = self.set_starting_pos()
         self.clicked_hero = None
+
+    def set_starting_pos(self):
+        if self.player_id == 1:
+            return [Hero("Mag.png", 0, [9, 0]), Hero("Mag.png", 1, [9, 1])]
+        else:
+            return [Hero("Mag.png", 0, [0, 0]), Hero("Mag.png", 1, [0, 1])]
 
     def move(self, new_pos):
         hero_to_move = self.heroes[self.clicked_hero]
         hero_to_move.pos = new_pos
 
-    def draw(self, screen):
-        for hero in self.heroes:
-            screen.blit(hero.image, coordinate(hero.pos))
+    # def draw(self, screen):
+    #     for hero in self.heroes:
+    #         screen.blit(hero.image, coordinate(hero.pos))
 
         #pg.display.update()

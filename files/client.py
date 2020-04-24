@@ -1,0 +1,79 @@
+import pygame as pg
+from network import Network
+import pickle
+from files.player import Player
+from files.tile_map import TiledMap
+from files.settings import *
+from os import path
+pg.init()
+screen = pg.display.set_mode((WIDTH, HEIGHT))
+pg.display.set_caption(TITLE)
+pg.font.init()
+example_map = TiledMap('tmp_map.tmx', screen)
+
+def get_tile_pos(pos):
+    x, y = pos[0], pos[1]
+    return [int(x/80), int(y/80)]
+
+
+def coordinate(tile_pos):
+    x, y = tile_pos[0], tile_pos[1]
+    return [x*80, y*80]
+
+
+def check_clicked_hero(clicked_pos, heroes):
+    clicked_tile = get_tile_pos(clicked_pos)
+    for hero in heroes:
+        if clicked_tile == hero.pos:
+            return hero.hero_id
+    return None
+
+
+def load_data(filename):
+    game_folder = path.dirname(__file__)
+    map_folder = path.join(game_folder, 'image')
+    return path.join(map_folder, str(filename))
+
+
+def draw_heroes(screen, player):
+    for hero in player.heroes:
+        hero_image = pg.image.load(load_data(HERO_IMAGES[str(hero.image_id)]))
+        screen.blit(hero_image, coordinate(hero.pos))
+
+
+def redrawWindow(screen, player1, player2):
+    example_map.draw()
+    draw_heroes(screen, player1)
+    draw_heroes(screen, player2)
+    pg.display.update()
+
+
+def main():
+    run = True
+    clock = pg.time.Clock()
+    n = Network()
+    player1 = n.get_player()
+    player_id = player1.player_id
+    opponent_id = abs(player_id-1)
+    player2 = None
+    game_start = False
+    while run:
+        clock.tick(60)
+        if game_start is False:
+            try:
+                data = n.send(["get_another_player", opponent_id])
+                player2 = data[0]
+                game_start = data[1]
+            except:
+                pass
+            
+        if game_start:
+            redrawWindow(screen, player1, player2)
+
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                run = False
+                pg.quit()
+
+
+main()
