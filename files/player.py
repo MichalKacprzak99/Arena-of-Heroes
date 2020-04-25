@@ -22,8 +22,4 @@ class Player:
     def move(self, new_pos):
         self.heroes[self.clicked_hero].pos = new_pos
 
-    # def draw(self, screen):
-    #     for hero in self.heroes:
-    #         screen.blit(hero.image, coordinate(hero.pos))
 
-        #pg.display.update()

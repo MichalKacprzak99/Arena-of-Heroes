@@ -20,6 +20,13 @@ BGCOLOR = BROWN
 HERO_IMAGES = {
     "0": "Mag.png"
 }
-#TILESIZE = 64
-#GRIDWIDTH = WIDTH / TILESIZE
-#GRIDHEIGHT = HEIGHT / TILESIZE
+
+
+def get_tile_pos(pos):
+    x, y = pos[0], pos[1]
+    return [int(x / 80), int(y / 80)]
+
+
+def coordinate(tile_pos):
+    x, y = tile_pos[0], tile_pos[1]
+    return [x * 80, y * 80]
