@@ -5,7 +5,8 @@ from game import Game
 from player import Player
 from hero import Hero
 import pickle
-server = "10.10.0.102"
+#server = "10.10.0.102"
+server = "127.0.0.1"
 port = 5555
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -26,9 +27,10 @@ def threaded_client(conn, player,gameId):
     games[gameId].players[player] = Player(name="df", player_id=p)
     conn.send(pickle.dumps(games[gameId].players[player]))
     reply = []
+
     while True:
         try:
-            data = pickle.loads(conn.recv(4096))  # lista [attack, id postaci atakujacej, ta co obrywa, za ile , arg*]
+            data = pickle.loads(conn.recv(2048))  # lista [attack, id postaci atakujacej, ta co obrywa, za ile , arg*]
 
             if gameId in games:
                 game = games[gameId]
@@ -44,9 +46,10 @@ def threaded_client(conn, player,gameId):
                         game.players[which_player_take_action].heroes[moved_hero.hero_id] = moved_hero
                         game.player_turn = abs(game.player_turn - 1)
                         game.turns += 1
+                        reply = game.players[which_player_take_action]
                     if data[0] == "echo":
-                        reply = [game.players[data[1]]]
-                    if data[0] == "get_turn":
+                        reply = game.players[which_player_take_action]
+                    if data == "get_turn":
                         reply = [game.player_turn, game.turns]
 
                     print("receivved: ", data)

@@ -71,11 +71,32 @@ def main():
             except:
                 pass
         else:
+            try:
+                turns_data = n.send(["get_turn"])
+                turn, which_player_turn = turns_data[0], turns_data[1]
+            except:
+                pass
+            if which_player_turn == player_id:
+                for event in pg.event.get():
+                    if event.type == pg.QUIT:
+                        run = False
+                        pg.quit()
+                    if event.type == pg.MOUSEBUTTONUP:
+                        pos = pg.mouse.get_pos()
+                        if player1.clicked_hero is None:
+                            player1.clicked_hero = check_clicked_hero(pos, player1.heroes)
+                        else:
+                            player1.move(get_tile_pos(pos))
+                            n.send(["move", player_id, player1.heroes[player1.clicked_hero]])
+                            player1.clicked_hero = None
+            else:
+                pass
+                # try:
+                #     opponent = n.send(["echo", opponent_id])
+                # except:
+                #     pass
+
             redrawWindow(window, player1, opponent)
 
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                run = False
-                pg.quit()
 
 main()

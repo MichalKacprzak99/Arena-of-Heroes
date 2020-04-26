@@ -20,11 +20,6 @@ class Player:
             return [Hero("Mag.png", 0, [0, 0]), Hero("Mag.png", 1, [0, 1])]
 
     def move(self, new_pos):
-        hero_to_move = self.heroes[self.clicked_hero]
-        hero_to_move.pos = new_pos
+        self.heroes[self.clicked_hero].pos = new_pos
 
-    # def draw(self, screen):
-    #     for hero in self.heroes:
-    #         screen.blit(hero.image, coordinate(hero.pos))
 
-        #pg.display.update()
