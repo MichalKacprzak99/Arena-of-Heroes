@@ -13,6 +13,14 @@ pg.font.init()
 example_map = TiledMap('tmp_map.tmx', window)
 
 
+def draw_player_turn(screen, player_turn):
+    font = pg.font.SysFont("Arial", 25)
+    text_to_input = "Player %d turn" % player_turn
+    text_width, text_height = font.size(text_to_input)
+    text = font.render("Player %d turn" % player_turn, True, RED)
+    screen.blit(text, (WIDTH/2 - text_width/2, 20))
+
+
 def check_clicked_hero(clicked_pos, heroes):
     clicked_tile = get_tile_pos(clicked_pos)
     for hero in heroes:
@@ -33,10 +41,11 @@ def draw_heroes(screen, player):
         screen.blit(hero_image, coordinate(hero.pos))
 
 
-def redrawWindow(screen, player1, player2):
+def redrawWindow(screen, player1, player2, player_turn):
     example_map.draw()
     draw_heroes(screen, player1)
     draw_heroes(screen, player2)
+    draw_player_turn(screen, player_turn)
     pg.display.update()
 
 
@@ -73,7 +82,7 @@ def main():
                             player.clicked_hero = None
 
             opponent = n.send(["echo", opponent_id])
-            redrawWindow(window, player, opponent)
+            redrawWindow(window, player, opponent, which_player_turn)
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
