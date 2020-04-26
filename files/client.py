@@ -8,9 +8,26 @@ from os import path
 
 pg.init()
 window = pg.display.set_mode((WIDTH, HEIGHT))
-pg.display.set_caption("Client B")
+pg.display.set_caption(TITLE)
 pg.font.init()
 example_map = TiledMap('tmp_map.tmx', window)
+
+
+def draw_player_turn(screen, player_turn):
+    font = pg.font.SysFont("Arial", 25)
+    text_to_input = "Player %d turn" % player_turn
+    text_width, text_height = font.size(text_to_input)
+    text = font.render(text_to_input, True, RED)
+    screen.blit(text, (WIDTH/2 - text_width/2, 20))
+
+
+def draw_if_clicked(screen):
+    font = pg.font.SysFont("Arial", 15)
+    text_to_input = "Clicked"
+    text_width, text_height = font.size(text_to_input)
+    text = font.render(text_to_input, True, RED)
+    screen.blit(text, (WIDTH/2 - text_width/2, 50))
+    pg.display.update()
 
 
 def check_clicked_hero(clicked_pos, heroes):
@@ -33,10 +50,13 @@ def draw_heroes(screen, player):
         screen.blit(hero_image, coordinate(hero.pos))
 
 
-def redrawWindow(screen, player1, player2):
+def redraw_window(screen, player1, player2, player_turn, clicked_hero):
     example_map.draw()
     draw_heroes(screen, player1)
     draw_heroes(screen, player2)
+    draw_player_turn(screen, player_turn)
+    if clicked_hero is not None:
+        draw_if_clicked(window)
     pg.display.update()
 
 
@@ -61,7 +81,7 @@ def main():
             which_player_turn, turns = n.send("get_turn")
             if which_player_turn == player_id:
                 for event in pg.event.get():
-                    if event.type == pg.MOUSEBUTTONUP:#oddzielny plik na obsługe akcji gracza
+                    if event.type == pg.MOUSEBUTTONUP:
                         pos = pg.mouse.get_pos()
                         if player.clicked_hero is None:
                             player.clicked_hero = check_clicked_hero(pos, player.heroes)
@@ -73,7 +93,7 @@ def main():
                             player.clicked_hero = None
 
             opponent = n.send(["echo", opponent_id])
-            redrawWindow(window, player, opponent)
+            redraw_window(window, player, opponent, which_player_turn, player.clicked_hero)
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
