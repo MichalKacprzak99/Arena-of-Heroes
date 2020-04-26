@@ -1,25 +1,16 @@
 import pygame as pg
 from network import Network
 import pickle
-from files.player import Player
-from files.tile_map import TiledMap
-from files.settings import *
+from player import Player
+from tile_map import TiledMap
+from settings import *
 from os import path
+
 pg.init()
 window = pg.display.set_mode((WIDTH, HEIGHT))
-pg.display.set_caption(TITLE)
+pg.display.set_caption("Client B")
 pg.font.init()
 example_map = TiledMap('tmp_map.tmx', window)
-
-
-def get_tile_pos(pos):
-    x, y = pos[0], pos[1]
-    return [int(x/80), int(y/80)]
-
-
-def coordinate(tile_pos):
-    x, y = tile_pos[0], tile_pos[1]
-    return [x*80, y*80]
 
 
 def check_clicked_hero(clicked_pos, heroes):
@@ -53,50 +44,41 @@ def main():
     run = True
     clock = pg.time.Clock()
     n = Network()
-    player1 = n.get_player()
-    player_id = player1.player_id
-    opponent_id = abs(player_id-1)
-    opponent = None
+    player = n.get_player()
+    player_id = player.player_id
+    print(("Hi, you are client: "+str(player_id)))
+    opponent_id = abs(player_id - 1)
     game_start = False
-    turn = 0
-    which_player_turn = 0
-
     while run:
         clock.tick(60)
         if game_start is False:
             try:
-                data = n.send(["get_another_player", opponent_id])
-                opponent = data[0]
-                game_start = data[1]
+                opponent, game_start = n.send(["get_another_player", opponent_id])
+
             except:
                 pass
         else:
-            try:
-                turns_data = n.send(["get_turn"])
-                turn, which_player_turn = turns_data[0], turns_data[1]
-            except:
-                pass
+            which_player_turn, turns = n.send("get_turn")
             if which_player_turn == player_id:
                 for event in pg.event.get():
-                    if event.type == pg.QUIT:
-                        run = False
-                        pg.quit()
-                    if event.type == pg.MOUSEBUTTONUP:
+                    if event.type == pg.MOUSEBUTTONUP:#oddzielny plik na obsługe akcji gracza
                         pos = pg.mouse.get_pos()
-                        if player1.clicked_hero is None:
-                            player1.clicked_hero = check_clicked_hero(pos, player1.heroes)
+                        if player.clicked_hero is None:
+                            player.clicked_hero = check_clicked_hero(pos, player.heroes)
+                            print(player.clicked_hero)
                         else:
-                            player1.move(get_tile_pos(pos))
-                            n.send(["move", player_id, player1.heroes[player1.clicked_hero]])
-                            player1.clicked_hero = None
-            else:
-                pass
-                # try:
-                #     opponent = n.send(["echo", opponent_id])
-                # except:
-                #     pass
+                            player.move(get_tile_pos(pos))
+                            moved_hero = player.heroes[player.clicked_hero]
+                            tmp = n.send(["move", player_id, moved_hero])
+                            player.clicked_hero = None
 
-            redrawWindow(window, player1, opponent)
+            opponent = n.send(["echo", opponent_id])
+            redrawWindow(window, player, opponent)
+
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                run = False
+                pg.quit()
 
 
 main()
