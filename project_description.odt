@@ -34,31 +34,33 @@ Features:
 
 RoadMap:
 
-1. At this stage, all code will be created together, due to the need to fully understand the operation of data transfer. 
+1.(0 week) At this stage, all code will be created together, due to the need to fully understand the operation of data transfer. 
 This stage will include:
-    • create server-client basic logic
-    • create test,basic tiled-based map and find out how to display it on screen
-    • create abstract class Hero with test image and implement movement to it
+    • create server-client basic logic(DONE)
+    • create test,basic tiled-based map and find out how to display it on screen(DONE)
+    • create abstract class Hero with test image and implement movement to it(MORE TESTING NEEDED)
 
 The result of this stage will be a working connection client (a) - server - client (b), displayed map with Hero-class objects
 and the ability to move around with a Hero-class object.
 
-2. The tasks planned for this stage and all next will already be assigned to individual persons. During this stage, 
+2.(1-2 week) The tasks planned for this stage and all next will already be assigned to individual persons. During this stage, 
 we plan to implement the following elements:
-    • create main menu with option to start a new game;
-    • GUI for game;
-    • create all classes of heroes;
-    • implement attack and other option;
-    • make our game to be turn-based;
-    • create a set of map using Tiled;
+    • create main menu with option to start a new game(1 week);
+    • GUI for game(1/2 week);
+    • create all classes of heroes(2 week);
+    • implement attack, real movement and other option(2 week);
+    • make our game to be turn-based(WORKING PROGRESS);
+    • create a set of map using Tiled(1 week);
 After completing this stage, the player will be able to start a new game, wait for the second player to join and complete
 the game. For now, he will have a default test team at his disposal.
 
-3. During this stage, we plan to implement the following elements:
-    • team Creator
-    • add login and registration process;
-    • enable player to save/load a game;
-    • implement some "animation" of attack/defense etc;
-    • add some content to maps for example traps,chest other typical stuff for RPG games;
+3.(3-5 week) During this stage, we plan to implement the following elements:
+    • Team creator(3-4 week);
+    • add login and registration process(4-5 week);
+    • enable player to save/load a game(4-5 week);
+    • implement some "animation" of attack/defense etc(4 week);
+    • add some content to maps for example traps,chest other typical stuff for RPG games(5 week);
+
 Completing this stage means that the basic assumptions of our project will be met. However, if the work goes extremely well,
-we would like to try to implement the possibility of playing with a computer
+we would like to try to implement the possibility of playing with a computer.
+4.(6-7 week)
