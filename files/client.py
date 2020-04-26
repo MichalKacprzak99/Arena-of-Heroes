@@ -8,7 +8,7 @@ from os import path
 
 pg.init()
 window = pg.display.set_mode((WIDTH, HEIGHT))
-pg.display.set_caption("Client B")
+pg.display.set_caption(TITLE)
 pg.font.init()
 example_map = TiledMap('tmp_map.tmx', window)
 
@@ -61,7 +61,7 @@ def main():
             which_player_turn, turns = n.send("get_turn")
             if which_player_turn == player_id:
                 for event in pg.event.get():
-                    if event.type == pg.MOUSEBUTTONUP:#oddzielny plik na obsługe akcji gracza
+                    if event.type == pg.MOUSEBUTTONUP:
                         pos = pg.mouse.get_pos()
                         if player.clicked_hero is None:
                             player.clicked_hero = check_clicked_hero(pos, player.heroes)
