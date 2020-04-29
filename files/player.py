@@ -21,5 +21,3 @@ class Player:
 
     def move(self, new_pos):
         self.heroes[self.clicked_hero].pos = new_pos
-
-

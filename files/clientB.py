@@ -8,7 +8,7 @@ from os import path
 
 pg.init()
 window = pg.display.set_mode((WIDTH, HEIGHT))
-pg.display.set_caption("b")
+pg.display.set_caption(TITLE)
 pg.font.init()
 example_map = TiledMap('tmp_map.tmx', window)
 
