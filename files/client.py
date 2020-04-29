@@ -81,6 +81,9 @@ def main():
             which_player_turn, turns = n.send("get_turn")
             if which_player_turn == player_id:
                 for event in pg.event.get():
+                    if event.type == pg.QUIT:
+                        run = False
+                        pg.quit()
                     if event.type == pg.MOUSEBUTTONUP:
                         pos = pg.mouse.get_pos()
                         if player.clicked_hero is None:
@@ -94,11 +97,6 @@ def main():
 
             opponent = n.send(["echo", opponent_id])
             redraw_window(window, player, opponent, which_player_turn, player.clicked_hero)
-
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                run = False
-                pg.quit()
 
 
 main()
