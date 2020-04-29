@@ -21,19 +21,22 @@ def draw_player_turn(screen, player_turn):
     screen.blit(text, (WIDTH/2 - text_width/2, 20))
 
 
+def highlight_tile(screen, pos):
+    drawing_pos = coordinate(pos)
+    pg.draw.rect(screen, RED, (drawing_pos[0], drawing_pos[1], 80, 80), 1)
+    pg.display.update()
+
 def draw_if_clicked(screen):
     font = pg.font.SysFont("Arial", 15)
     text_to_input = "Clicked"
     text_width, text_height = font.size(text_to_input)
     text = font.render(text_to_input, True, RED)
     screen.blit(text, (WIDTH/2 - text_width/2, 50))
-    pg.display.update()
 
 
 def check_clicked_hero(clicked_pos, heroes):
-    clicked_tile = get_tile_pos(clicked_pos)
     for hero in heroes:
-        if clicked_tile == hero.pos:
+        if clicked_pos == hero.pos:
             return hero.hero_id
     return None
 
@@ -79,17 +82,26 @@ def main():
                 pass
         else:
             which_player_turn, turns = n.send("get_turn")
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    run = False
+                    pg.quit()
+                if event.type == pg.MOUSEBUTTONUP:
+                    if which_player_turn == player_id:
+                        if player.clicked_hero is None:
+                            player.clicked_hero = check_clicked_hero(get_tile_pos(pos), player.heroes)
+                        else:
+                            player.move(get_tile_pos(pos))
+                            moved_hero = player.heroes[player.clicked_hero]
+                            n.send(["move", player_id, moved_hero])
+                            player.clicked_hero = None
+
             opponent = n.send(["echo", opponent_id])
             redraw_window(window, player, opponent, which_player_turn, player.clicked_hero)
-            if which_player_turn == player_id:
-                action = player.handle_action(opponent)
-                if action is not None:
-                    tmp = n.send(action)
+            pos = pg.mouse.get_pos()
+            highlight_tile(window, get_tile_pos(pos))
 
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                run = False
-                pg.quit()
+
 
 
 main()
