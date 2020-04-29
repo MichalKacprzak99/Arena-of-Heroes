@@ -82,6 +82,7 @@ def main():
                 pass
         else:
             which_player_turn, turns = n.send("get_turn")
+            actual_pos = pg.mouse.get_pos()
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     run = False
@@ -89,17 +90,16 @@ def main():
                 if event.type == pg.MOUSEBUTTONUP:
                     if which_player_turn == player_id:
                         if player.clicked_hero is None:
-                            player.clicked_hero = check_clicked_hero(get_tile_pos(pos), player.heroes)
+                            player.clicked_hero = check_clicked_hero(get_tile_pos(actual_pos), player.heroes)
                         else:
-                            player.move(get_tile_pos(pos))
+                            player.move(get_tile_pos(actual_pos))
                             moved_hero = player.heroes[player.clicked_hero]
                             n.send(["move", player_id, moved_hero])
                             player.clicked_hero = None
 
             opponent = n.send(["echo", opponent_id])
             redraw_window(window, player, opponent, which_player_turn, player.clicked_hero)
-            pos = pg.mouse.get_pos()
-            highlight_tile(window, get_tile_pos(pos))
+            highlight_tile(window, get_tile_pos(actual_pos))
 
 
 
