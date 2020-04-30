@@ -32,10 +32,8 @@ def load_data(filename):
 
 
 def get_tile_pos(pos):
-    x, y = pos[0], pos[1]
-    return [int(x / 80), int(y / 80)]
+    return list(map(lambda cord: int(cord/80), pos))
 
 
 def coordinate(tile_pos):
-    x, y = tile_pos[0], tile_pos[1]
-    return [x * 80, y * 80]
+    return list(map(lambda cord: cord*80, tile_pos))
