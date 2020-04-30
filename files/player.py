@@ -1,14 +1,4 @@
-from files.hero import Hero
-import pygame as pg
-from settings import get_tile_pos, coordinate
-
-
-def check_clicked_hero(clicked_pos, heroes):
-    clicked_tile = get_tile_pos(clicked_pos)
-    for hero in heroes:
-        if clicked_tile == hero.pos:
-            return hero.hero_id
-    return None
+from hero import Hero
 
 
 class Player:
@@ -21,9 +11,14 @@ class Player:
 
     def set_starting_pos(self):
         if self.player_id == 1:
-            return [Hero("Mag.png", 0, [9, 0]), Hero("Mag.png", 1, [9, 1])]
+            return [Hero(0, 0, [9, 0]), Hero(0, 1, [9, 1])]
         else:
-            return [Hero("Mag.png", 0, [0, 0]), Hero("Mag.png", 1, [0, 1])]
+            return [Hero(0, 0, [0, 0]), Hero(0, 1, [0, 1])]
 
     def move(self, new_pos):
         self.heroes[self.clicked_hero].pos = new_pos
+
+    def check_clicked_hero(self, clicked_pos):
+        for hero in self.heroes:
+            if clicked_pos == hero.pos:
+                self.clicked_hero = hero.hero_id

@@ -1,11 +1,10 @@
 import pygame as pg
 import pytmx
-
 from os import path
 
 
 class TiledMap:
-    def __init__(self, filename, screen):#docelowo numer
+    def __init__(self, filename, screen):
         self.filename = self.load_data(filename)
         self.tmx_data = pytmx.load_pygame(self.filename, pixelalpha=True)
         self.width = self.tmx_data.width * self.tmx_data.tilewidth
@@ -16,7 +15,6 @@ class TiledMap:
     def draw(self):
         self.screen.fill((255, 255, 255))
         self.screen.blit(self.map_img, (0, 0))
-        #pg.display.update()
 
     @staticmethod
     def load_data(filename):
