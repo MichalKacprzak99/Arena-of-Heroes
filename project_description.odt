@@ -42,7 +42,7 @@ This stage will include:
 
     • creating server-client basic logic (DONE)
     • creating a test, basic tiled-based map and finding out how to display it on screen (DONE)
-    • creating abstract class Hero with test image and implementing movement to it (MORE TESTING NEEDED)
+    • creating abstract class Hero with test image and implementing movement to it (DONE)
 
     The result of this stage will be a working connection client (a) - server - client (b), displayed map with Hero-class objects
 and the ability to move around with a Hero-class object.
