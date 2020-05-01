@@ -20,7 +20,6 @@ def draw_player_turn(screen, player_turn):
 def highlight_tile(screen, pos):
     drawing_pos = coordinate(pos)
     pg.draw.rect(screen, RED, (drawing_pos[0], drawing_pos[1], 80, 80), 1)
-    pg.display.update()
 
 
 def draw_if_clicked(screen):
@@ -37,8 +36,9 @@ def draw_heroes(screen, player):
         screen.blit(hero_image, coordinate(hero.pos))
 
 
-def redraw_window(screen, player1, player2, player_turn, clicked_hero):
+def redraw_window(screen, player1, player2, player_turn, clicked_hero, actual_pos):
     example_map.draw()
+    highlight_tile(window, get_tile_pos(actual_pos))
     draw_heroes(screen, player1)
     draw_heroes(screen, player2)
     draw_player_turn(screen, player_turn)
@@ -81,8 +81,7 @@ def main():
                             n.send(["move", player_id, moved_hero])
                             player.clicked_hero = None
             opponent = n.send(["echo", opponent_id])
-            redraw_window(window, player, opponent, which_player_turn, player.clicked_hero)
-            highlight_tile(window, get_tile_pos(actual_pos))
+            redraw_window(window, player, opponent, which_player_turn, player.clicked_hero,actual_pos)
 
 
 if __name__ == '__main__':
