@@ -11,7 +11,7 @@ class Player:
 
     def set_starting_pos(self):
         if self.player_id == 1:
-            return [Hero(0, 0, [15, 0]), Hero(0, 1, [15, 1])]
+            return [Hero(0, 0, [11, 0]), Hero(0, 1, [11, 1])]
         else:
             return [Hero(0, 0, [0, 0]), Hero(0, 1, [0, 1])]
 

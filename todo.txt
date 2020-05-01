@@ -1,0 +1,9 @@
+-merge multiple png to one
+-create tileset
+-create design layer on map
+-create object layer
+-find how to handle object layer
+-add method to tile_map.py to create 2d-array of object position
+-change highlight function from client.py -> green if possible, red if enemy, black if not valid tile
+-create dictionary of maps in settings.py
+- in game.py add to _init__ random number of wchich map to load
