@@ -12,8 +12,8 @@ YELLOW = (255, 255, 0)
 BROWN = (106, 55, 5)
 
 # game settings
-WIDTH = 800   # 16 * 64 or 32 * 32 or 64 * 16
-HEIGHT = 800  # 16 * 48 or 32 * 24 or 64 * 12
+WIDTH = 768   # 16 * 64 or 32 * 32 or 64 * 16
+HEIGHT = 768  # 16 * 48 or 32 * 24 or 64 * 12
 #FPS = 60
 BGCOLOR = BROWN
 HERO_IMAGES = {
@@ -32,8 +32,8 @@ def load_data(filename):
 
 
 def get_tile_pos(pos):
-    return list(map(lambda cord: int(cord/80), pos))
+    return list(map(lambda cord: int(cord/64), pos))
 
 
 def coordinate(tile_pos):
-    return list(map(lambda cord: cord*80, tile_pos))
+    return list(map(lambda cord: cord*64, tile_pos))

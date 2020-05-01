@@ -6,7 +6,7 @@ import pickle
 pg.init()
 window = pg.display.set_mode((WIDTH, HEIGHT))
 pg.font.init()
-example_map = TiledMap('tmp_map.tmx', window)
+example_map = TiledMap('map1.tmx', window)
 
 
 def draw_player_turn(screen, player_turn):
@@ -19,7 +19,7 @@ def draw_player_turn(screen, player_turn):
 
 def highlight_tile(screen, pos):
     drawing_pos = coordinate(pos)
-    pg.draw.rect(screen, RED, (drawing_pos[0], drawing_pos[1], 80, 80), 1)
+    pg.draw.rect(screen, RED, (drawing_pos[0], drawing_pos[1], 64, 64), 1)
 
 
 def draw_if_clicked(screen):
