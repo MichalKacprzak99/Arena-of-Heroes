@@ -71,6 +71,7 @@ def main():
                 if event.type == pg.QUIT:
                     run = False
                     pg.quit()
+                    break
                 if event.type == pg.MOUSEBUTTONUP:
                     if which_player_turn == player_id:
                         if player.clicked_hero is None:
