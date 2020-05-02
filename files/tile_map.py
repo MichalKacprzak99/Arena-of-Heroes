@@ -11,6 +11,7 @@ class TiledMap:
         self.height = self.tmx_data.height * self.tmx_data.tileheight
         self.screen = screen
         self.map_img = self.make_map()
+        self.not_valid_pos = self.create_list_of_not_valid_pos()
 
     def draw(self):
         self.screen.fill((255, 255, 255))
@@ -22,8 +23,15 @@ class TiledMap:
         map_folder = path.join(game_folder, 'maps')
         return path.join(map_folder, str(filename))
 
+    def create_list_of_not_valid_pos(self):
+        tmp_list = []
+        for tile_object in self.tmx_data.objects:
+            tmp_list.append([int(tile_object.x),int(tile_object.y)])
+        return tmp_list
+
     def render(self, surface):
         ti = self.tmx_data.get_tile_image_by_gid
+
         for layer in self.tmx_data.visible_layers:
             if isinstance(layer, pytmx.TiledTileLayer):
                 for x, y, gid, in layer:

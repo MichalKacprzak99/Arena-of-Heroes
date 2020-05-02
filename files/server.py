@@ -38,7 +38,7 @@ def threaded_client(conn, player_id, game_id):
                 else:
                     which_player_take_action = data[1]
                     if data[0] == "get_another_player":
-                        reply = [game.players[which_player_take_action], game.ready]
+                        reply = [game.players[which_player_take_action], game.ready, game.which_map]
                     if data[0] == "move":
                         moved_hero = data[2]
                         game.players[which_player_take_action].heroes[moved_hero.hero_id] = moved_hero

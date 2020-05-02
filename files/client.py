@@ -1,12 +1,12 @@
 import pygame as pg
 from network import Network
 from tile_map import TiledMap
-from settings import WIDTH, HEIGHT, HERO_IMAGES, RED, CLIENT_NAME, coordinate, get_tile_pos, load_data
+from settings import WIDTH, HEIGHT, HERO_IMAGES, RED, CLIENT_NAME, MAPS, coordinate, get_tile_pos, load_data
 import pickle
 pg.init()
 window = pg.display.set_mode((WIDTH, HEIGHT))
 pg.font.init()
-example_map = TiledMap('map1.tmx', window)
+example_map = TiledMap('map1/map1.tmx', window)
 
 
 def draw_player_turn(screen, player_turn):
@@ -36,8 +36,8 @@ def draw_heroes(screen, player):
         screen.blit(hero_image, coordinate(hero.pos))
 
 
-def redraw_window(screen, player1, player2, player_turn, clicked_hero, actual_pos):
-    example_map.draw()
+def redraw_window(screen, board, player1, player2, player_turn, clicked_hero, actual_pos):
+    board.draw()
     highlight_tile(window, get_tile_pos(actual_pos))
     draw_heroes(screen, player1)
     draw_heroes(screen, player2)
@@ -61,7 +61,8 @@ def main():
         clock.tick(60)
         if game_start is False:
             try:
-                opponent, game_start = n.send(["get_another_player", opponent_id])
+                opponent, game_start, which_map = n.send(["get_another_player", opponent_id])
+                board = TiledMap(MAPS[str(which_map)], window)
             except pickle.UnpicklingError:
                 break
         else:
@@ -82,7 +83,7 @@ def main():
                             n.send(["move", player_id, moved_hero])
                             player.clicked_hero = None
             opponent = n.send(["echo", opponent_id])
-            redraw_window(window, player, opponent, which_player_turn, player.clicked_hero,actual_pos)
+            redraw_window(window, board, player, opponent, which_player_turn, player.clicked_hero, actual_pos)
 
 
 if __name__ == '__main__':
