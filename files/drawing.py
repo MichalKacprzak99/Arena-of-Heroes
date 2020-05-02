@@ -10,12 +10,14 @@ def draw_player_turn(screen, player_turn):
     screen.blit(text, (WIDTH/2 - text_width/2, 20))
 
 
-def highlight_tile(screen, board, opponent,  pos):
+def highlight_tile(screen, board, player, opponent, pos):
     color = COLORS["GREEN"]
     if pos in board.not_valid_tiles:
         color = COLORS["BLACK"]
-    if any(map(lambda hero: pos == hero.pos, opponent.heroes)):
+    if any(map(lambda opp_hero: pos == opp_hero.pos, opponent.heroes)):
         color = COLORS["RED"]
+    if any(map(lambda hero: pos == hero.pos, player.heroes)):
+        color = COLORS["BLUE"]
     drawing_pos = coordinate(pos)
     pg.draw.rect(screen, color, (drawing_pos[0], drawing_pos[1], 64, 64), 1)
 
@@ -36,7 +38,7 @@ def draw_heroes(screen, player):
 
 def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
     board.draw()
-    highlight_tile(screen, board, opponent, get_tile_pos(actual_pos))
+    highlight_tile(screen, board, player, opponent, get_tile_pos(actual_pos))
     draw_heroes(screen, player)
     draw_heroes(screen, opponent)
     draw_player_turn(screen, player_turn)
