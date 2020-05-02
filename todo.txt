@@ -8,6 +8,8 @@ BASIC:
 -change highlight function from client.py -> green if possible, red if enemy, black if not valid tile- done
 -create dictionary of maps in settings.py -done
 -in game.py add to _init__ random number of which map to load -> add this to get_another_player(server.py, switch name to get_info) - done
--player is not able to move to "red" or "black" tile
+-create method in Player class to handle any action-> now only move - done
+-player is not able to move to "red" or "black" tile - done
+
 EXTRA:
--deal with pygame.error when quit
+-deal with pygame.error when quit - done
