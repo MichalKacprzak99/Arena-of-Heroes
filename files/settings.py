@@ -23,6 +23,9 @@ CLIENT_NAME = {
     "0": "CLIENT A",
     "1": "CLIENT B"
 }
+MAPS = {
+    "0": "map1/map1.tmx"
+}
 
 
 def load_data(filename):
