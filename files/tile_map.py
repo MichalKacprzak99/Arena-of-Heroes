@@ -1,6 +1,10 @@
-import pygame as pg
 import pytmx
 from os import path
+from settings import MAPS, HEIGHT, WIDTH
+import pygame as pg
+pg.init()
+pg.font.init()
+window = pg.display.set_mode((WIDTH, HEIGHT))
 
 
 class TiledMap:
@@ -11,7 +15,7 @@ class TiledMap:
         self.height = self.tmx_data.height * self.tmx_data.tileheight
         self.screen = screen
         self.map_img = self.make_map()
-        self.not_valid_pos = self.create_list_of_not_valid_pos()
+        self.not_valid_tiles = self.objects_tiles()
 
     def draw(self):
         self.screen.fill((255, 255, 255))
@@ -23,10 +27,10 @@ class TiledMap:
         map_folder = path.join(game_folder, 'maps')
         return path.join(map_folder, str(filename))
 
-    def create_list_of_not_valid_pos(self):
+    def objects_tiles(self):
         tmp_list = []
         for tile_object in self.tmx_data.objects:
-            tmp_list.append([int(tile_object.x),int(tile_object.y)])
+            tmp_list.append([int(tile_object.x)//64, int(tile_object.y)//64])
         return tmp_list
 
     def render(self, surface):
@@ -44,3 +48,10 @@ class TiledMap:
         temp_surface = pg.Surface((self.width, self.height))
         self.render(temp_surface)
         return temp_surface
+
+
+board = TiledMap(MAPS[str(0)], window)
+print(board.not_valid_tiles)
+tmp = [192, 128]
+if tmp in board.not_valid_tiles:
+    print(tmp)

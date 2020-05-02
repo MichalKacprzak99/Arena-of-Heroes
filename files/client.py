@@ -1,32 +1,36 @@
 import pygame as pg
 from network import Network
 from tile_map import TiledMap
-from settings import WIDTH, HEIGHT, HERO_IMAGES, RED, CLIENT_NAME, MAPS, coordinate, get_tile_pos, load_data
+from settings import WIDTH, HEIGHT, HERO_IMAGES, COLORS, CLIENT_NAME, MAPS, coordinate, get_tile_pos, load_data
 import pickle
 pg.init()
 window = pg.display.set_mode((WIDTH, HEIGHT))
 pg.font.init()
-example_map = TiledMap('map1/map1.tmx', window)
 
 
 def draw_player_turn(screen, player_turn):
     font = pg.font.SysFont("Arial", 25)
     text_to_input = "Player %d turn" % player_turn
     text_width, text_height = font.size(text_to_input)
-    text = font.render(text_to_input, True, RED)
+    text = font.render(text_to_input, True, COLORS["RED"])
     screen.blit(text, (WIDTH/2 - text_width/2, 20))
 
 
-def highlight_tile(screen, pos):
+def highlight_tile(screen, board, opponent,  pos):
+    color = COLORS["GREEN"]
+    if pos in board.not_valid_tiles:
+        color = COLORS["BLACK"]
+    if any(map(lambda hero: pos == hero.pos, opponent.heroes)):
+        color = COLORS["RED"]
     drawing_pos = coordinate(pos)
-    pg.draw.rect(screen, RED, (drawing_pos[0], drawing_pos[1], 64, 64), 1)
+    pg.draw.rect(screen, color, (drawing_pos[0], drawing_pos[1], 64, 64), 1)
 
 
 def draw_if_clicked(screen):
     font = pg.font.SysFont("Arial", 15)
     text_to_input = "Clicked"
     text_width, text_height = font.size(text_to_input)
-    text = font.render(text_to_input, True, RED)
+    text = font.render(text_to_input, True, COLORS["RED"])
     screen.blit(text, (WIDTH/2 - text_width/2, 50))
 
 
@@ -36,11 +40,11 @@ def draw_heroes(screen, player):
         screen.blit(hero_image, coordinate(hero.pos))
 
 
-def redraw_window(screen, board, player1, player2, player_turn, clicked_hero, actual_pos):
+def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
     board.draw()
-    highlight_tile(window, get_tile_pos(actual_pos))
-    draw_heroes(screen, player1)
-    draw_heroes(screen, player2)
+    highlight_tile(window, board,opponent, get_tile_pos(actual_pos))
+    draw_heroes(screen, player)
+    draw_heroes(screen, opponent)
     draw_player_turn(screen, player_turn)
     if clicked_hero is not None:
         draw_if_clicked(window)
@@ -61,7 +65,7 @@ def main():
         clock.tick(60)
         if game_start is False:
             try:
-                opponent, game_start, which_map = n.send(["get_another_player", opponent_id])
+                opponent, game_start, which_map = n.send(["get_info", opponent_id])
                 board = TiledMap(MAPS[str(which_map)], window)
             except pickle.UnpicklingError:
                 break
