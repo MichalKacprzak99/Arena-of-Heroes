@@ -1,7 +1,8 @@
 import pytmx
 from os import path
-from settings import MAPS, HEIGHT, WIDTH
+from settings import HEIGHT, WIDTH
 import pygame as pg
+
 pg.init()
 pg.font.init()
 window = pg.display.set_mode((WIDTH, HEIGHT))

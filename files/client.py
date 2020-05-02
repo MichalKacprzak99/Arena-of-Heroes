@@ -45,10 +45,9 @@ def main():
                         if player.clicked_hero is None:
                             player.check_clicked_hero(actual_pos)
                         else:
-                            player.move(actual_pos)
-                            moved_hero = player.heroes[player.clicked_hero]
-                            n.send(["move", player_id, moved_hero])
-                            player.clicked_hero = None
+                            feedback = player.action(opponent, board.not_valid_tiles, actual_pos)
+                            if feedback:
+                                n.send(feedback)
             try:
                 opponent = n.send(["echo", opponent_id])
             except EOFError:
