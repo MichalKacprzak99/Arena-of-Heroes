@@ -31,16 +31,14 @@ def draw_if_clicked(screen):
 
 
 def draw_health_bar(screen, hero, hero_coordinate):
-    color1 = COLORS["RED"]
-    color2 = COLORS["BLACK"]
     health_bar = (hero_coordinate[0] + 12, hero_coordinate[1])
-    health_bar_width = 40 * hero.health / 100
+    health_bar_width = 40 * hero.health // 100
     health_bar_height = 5
-    pg.draw.rect(screen, color1, (health_bar, (health_bar_width, health_bar_height)), 0)
-    how_much_less_hp = 40 - 40 * hero.health // 100
+    pg.draw.rect(screen, COLORS["RED"], (health_bar, (health_bar_width, health_bar_height)), 0)
+    how_much_less_hp = 40 - health_bar_width
     if how_much_less_hp != 0:
         lose_hp = (health_bar[0] + health_bar_width, health_bar[1])
-        pg.draw.rect(screen, color2, (lose_hp, (how_much_less_hp, 5)), 0)
+        pg.draw.rect(screen, COLORS["BLACK"], (lose_hp, (how_much_less_hp, 5)), 0)
 
 
 def draw_heroes(screen, player):
@@ -49,8 +47,6 @@ def draw_heroes(screen, player):
         hero_image = pg.image.load(load_image(HERO_IMAGES[str(hero.image_id)]))
         screen.blit(hero_image, hero_coordinate)
         draw_health_bar(screen, hero, hero_coordinate)
-
-
 
 
 def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
