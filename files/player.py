@@ -1,4 +1,5 @@
 from hero import Hero
+from settings import get_tile_pos
 
 
 class Player:
@@ -16,9 +17,9 @@ class Player:
             return [Hero(0, 0, [0, 0]), Hero(0, 1, [0, 1])]
 
     def move(self, new_pos):
-        self.heroes[self.clicked_hero].pos = new_pos
+        self.heroes[self.clicked_hero].pos = get_tile_pos(new_pos)
 
     def check_clicked_hero(self, clicked_pos):
         for hero in self.heroes:
-            if clicked_pos == hero.pos:
+            if get_tile_pos(clicked_pos) == hero.pos:
                 self.clicked_hero = hero.hero_id

@@ -55,7 +55,7 @@ def threaded_client(conn, player_id, game_id):
                     conn.sendall(pickle.dumps(reply))
             else:
                 break
-        except pickle.UnpicklingError:
+        except EOFError:
             break
 
     print("Lost connection")

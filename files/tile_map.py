@@ -50,8 +50,4 @@ class TiledMap:
         return temp_surface
 
 
-board = TiledMap(MAPS[str(0)], window)
-print(board.not_valid_tiles)
-tmp = [192, 128]
-if tmp in board.not_valid_tiles:
-    print(tmp)
+

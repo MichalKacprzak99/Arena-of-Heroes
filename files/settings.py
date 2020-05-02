@@ -1,5 +1,4 @@
 from os import path
-#vec = pg.math.Vector2
 
 # define some colors (R, G, B)
 COLORS = {
@@ -12,8 +11,8 @@ COLORS = {
 }
 
 # game settings
-WIDTH = 768   # 16 * 64 or 32 * 32 or 64 * 16
-HEIGHT = 768  # 16 * 48 or 32 * 24 or 64 * 12
+WIDTH = 768
+HEIGHT = 768
 
 HERO_IMAGES = {
     "0": "Mag.png"
@@ -27,7 +26,7 @@ MAPS = {
 }
 
 
-def load_data(filename):
+def load_image(filename):
     game_folder = path.dirname(__file__)
     map_folder = path.join(game_folder, 'image')
     return path.join(map_folder, str(filename))
