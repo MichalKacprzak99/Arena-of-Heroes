@@ -3,3 +3,4 @@ class Hero:
         self.image_id = image_id
         self.hero_id = hero_id
         self.pos = pos
+        self.health = 75
