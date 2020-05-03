@@ -8,6 +8,7 @@ COLORS = {
     "RED": (255, 0, 0),
     "YELLOW": (255, 255, 0),
     "BROWN": (106, 55, 5),
+    "BLUE": (0, 0, 255)
 }
 
 # game settings
@@ -38,3 +39,11 @@ def get_tile_pos(pos):
 
 def coordinate(tile_pos):
     return list(map(lambda cord: cord*64, tile_pos))
+
+
+def clicked_object(not_valid_tiles, clicked_pos):
+    return clicked_pos not in not_valid_tiles
+
+
+def clicked_opponent_hero(opponent, clicked_pos):
+    return all(map(lambda opp_hero: clicked_pos != opp_hero.pos, opponent.heroes))
