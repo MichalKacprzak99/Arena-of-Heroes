@@ -6,7 +6,7 @@ def my_func():
     print("Please wait for other player...")
 
 
-def menu_init(window, game_start):
+def menu_init(window):
     btn1 = thorpy.make_button("Start Game")
     btn2 = thorpy.make_button("Load Game")
     btn3 = thorpy.make_button("Quit")

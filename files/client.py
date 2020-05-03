@@ -3,7 +3,7 @@ from network import Network
 from tile_map import TiledMap
 from settings import WIDTH, HEIGHT, CLIENT_NAME, MAPS
 from drawing import redraw_window
-
+from menu import menu_init
 
 pg.init()
 window = pg.display.set_mode((WIDTH, HEIGHT))
@@ -20,6 +20,7 @@ def main():
     print(("Hi, you are client: "+str(player_id)))
     opponent_id = abs(player_id - 1)
     game_start = False
+    menu = menu_init(window)
     while run:
         clock.tick(60)
         if game_start is False:
@@ -28,6 +29,8 @@ def main():
                 board = TiledMap(MAPS[str(which_map)], window)
             except EOFError:
                 break
+            for event in pg.event.get():
+                menu.react(event)
         else:
             try:
                 which_player_turn, turns = n.send("get_turn")
