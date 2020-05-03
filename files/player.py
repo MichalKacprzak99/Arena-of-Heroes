@@ -28,10 +28,7 @@ class Player:
         return ["move", self.player_id, moved_hero]
 
     def clicked_own_hero(self, clicked_pos):
-        if any(map(lambda hero: clicked_pos == hero.pos, self.heroes)):
-            return False
-        else:
-            return True
+        return any(map(lambda hero: clicked_pos == hero.pos, self.heroes))
 
     @staticmethod
     def clicked_object(object_tiles, clicked_pos):
@@ -46,7 +43,7 @@ class Player:
 
     def action(self, opponent, object_tiles, clicked_pos):
         tmp_pos = get_tile_pos(clicked_pos)
-        if self.clicked_own_hero(tmp_pos) is False:
+        if self.clicked_own_hero(tmp_pos):
             return False
         if self.clicked_not_valid_tile(object_tiles, opponent, clicked_pos) is False:
             return self.move(clicked_pos)

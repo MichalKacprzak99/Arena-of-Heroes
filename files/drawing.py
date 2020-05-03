@@ -16,7 +16,7 @@ def highlight_tile(screen, board, player, opponent,  pos):
         color = COLORS["BLACK"]
     if player.clicked_opponent_hero(opponent, pos):
         color = COLORS["RED"]
-    if any(map(lambda hero: pos == hero.pos, player.heroes)):
+    if player.clicked_own_hero(pos):
         color = COLORS["BLUE"]
     drawing_pos = coordinate(pos)
     pg.draw.rect(screen, color, (drawing_pos[0], drawing_pos[1], 64, 64), 1)
