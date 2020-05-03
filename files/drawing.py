@@ -10,11 +10,11 @@ def draw_player_turn(screen, player_turn):
     screen.blit(text, (WIDTH/2 - text_width/2, 20))
 
 
-def highlight_tile(screen, board, player, opponent, pos):
+def highlight_tile(screen, board, player, opponent,  pos):
     color = COLORS["GREEN"]
-    if pos in board.not_valid_tiles:
+    if player.clicked_object(board.object_tiles, pos):
         color = COLORS["BLACK"]
-    if any(map(lambda opp_hero: pos == opp_hero.pos, opponent.heroes)):
+    if player.clicked_opponent_hero(opponent, pos):
         color = COLORS["RED"]
     if any(map(lambda hero: pos == hero.pos, player.heroes)):
         color = COLORS["BLUE"]
