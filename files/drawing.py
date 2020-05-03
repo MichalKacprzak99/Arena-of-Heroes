@@ -58,3 +58,12 @@ def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, ac
     if clicked_hero is not None:
         draw_if_clicked(screen)
     pg.display.update()
+
+
+def loading_screen(screen):
+    screen.fill(COLORS["GREEN"])
+    font = pg.font.SysFont("Arial", 15)
+    text_to_input = "Game will start soon"
+    text = font.render(text_to_input, True, COLORS["BLACK"])
+    screen.blit(text, (300, 200))
+    pg.display.update()

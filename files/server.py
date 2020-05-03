@@ -38,7 +38,7 @@ def threaded_client(conn, player_id, game_id):
                 else:
                     which_player_take_action = data[1]
                     if data[0] == "get_info":
-                        reply = [game.players[which_player_take_action], game.ready, game.which_map]
+                        reply = [game.players[which_player_take_action], game.ready, game.which_map, game.is_started[abs(which_player_take_action-1)]]
                     if data[0] == "move":
                         moved_hero = data[2]
                         game.players[which_player_take_action].heroes[moved_hero.hero_id] = moved_hero
@@ -47,6 +47,9 @@ def threaded_client(conn, player_id, game_id):
                         reply = game.players[which_player_take_action]
                     if data[0] == "echo":
                         reply = game.players[which_player_take_action]
+                    if data[0] == "is_started":
+                        game.is_started[abs(which_player_take_action-1)] = data[2]
+                        reply = game.is_started[which_player_take_action]
                     if data == "get_turn":
                         reply = [game.player_turn, game.turns]
 

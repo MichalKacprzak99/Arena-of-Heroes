@@ -9,3 +9,4 @@ class Game:
         self.players = [None, None]
         self.ready = False
         self.which_map = randint(0, 0)
+        self.is_started = [False, False]
