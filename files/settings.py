@@ -12,8 +12,10 @@ COLORS = {
 }
 
 # game settings
-WIDTH = 768
-HEIGHT = 768
+GAME_SCREEN_WIDTH = 768
+GAME_SCREEN_HEIGHT = 768
+BOX_WIDTH = 120
+BOX_HEIGHT = 768
 
 HERO_IMAGES = {
     "0": "Mag.png"
@@ -34,11 +36,11 @@ def load_image(filename):
 
 
 def get_tile_pos(pos):
-    return list(map(lambda cord: cord//64, pos))
+    return list(map(lambda cord: (cord - 120)//64, pos))
 
 
 def coordinate(tile_pos):
-    return list(map(lambda cord: cord*64, tile_pos))
+    return list(map(lambda cord: cord*64 + 120, tile_pos))
 
 
 def clicked_object(not_valid_tiles, clicked_pos):
