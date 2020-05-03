@@ -1,27 +1,21 @@
 import thorpy
-from settings import COLORS
-import pygame as pg
+
 
 class Menu:
     def __init__(self, window):
         self.window = window
-        self.menu = self.create(self)
+        self.buttons = []
+        self.b_text = ["Start Game", "Load Game", "Instructions", "Quit"]
+        self.menu = self.create()
         self.active = True
-        self.start_game = False
-        self.load_game = False
 
-
-    @staticmethod
     def create(self):
-        btn1 = thorpy.make_button("Start Game")
-        btn2 = thorpy.make_button("Load Game")
-        btn3 = thorpy.make_button("Quit")
-
-        box = thorpy.Box([btn1, btn2, btn3])
+        thorpy.set_theme("round")
+        self.buttons = [thorpy.make_button(txt) for txt in self.b_text]
+        box = thorpy.Box(self.buttons)
         menu = thorpy.Menu(box)
         for element in menu.get_population():
             element.surface = self.window
-
         box.center()
         box.blit()
         box.update()
@@ -34,11 +28,9 @@ class Menu:
                     network.send(["is_started", p_id, True])
                     return True
                 elif element.get_full_txt() == "Load Game":
-                    self.load_game = True
+                    pass
+                elif element.get_full_txt() == "Instructions":
+                    pass
                 elif element.get_full_txt() == "Quit":
                     pass
         return False
-
-
-    def react(self, mouse):
-        pass

@@ -41,6 +41,9 @@ def main():
                         we_clicked = menu.click(actual_pos, n, player_id)
             else:
                 loading_screen(window)
+                for event in pg.event.get():
+                    pass
+                    #unintentional anti-disconnecting mechanism lol
         elif we_clicked is True and is_started is False:
             loading_screen(window)
             for event in pg.event.get():
