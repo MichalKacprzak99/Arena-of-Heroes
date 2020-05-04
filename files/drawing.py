@@ -47,14 +47,10 @@ def draw_health_bar(screen, hero, hero_coordinate):
 def draw_heroes(screen, player):
     for hero in player.heroes:
         if hero is not player.moved_hero:
-            hero_coordinate = coordinate(hero.pos)
-            hero_image = pg.image.load(load_image(HERO_IMAGES[str(hero.image_id)]))
-            screen.blit(hero_image, hero_coordinate)
-            draw_health_bar(screen, hero, hero_coordinate)
+            draw_hero(screen, hero, hero.pos)
 
 
-def draw_moved_hero(screen, player, tile):
-    hero = player.moved_hero
+def draw_hero(screen, hero, tile):
     hero_coordinate = coordinate(tile)
     hero_image = pg.image.load(load_image(HERO_IMAGES[str(hero.image_id)]))
     screen.blit(hero_image, hero_coordinate)
@@ -73,7 +69,7 @@ def draw_background(screen, board, player, opponent, player_turn, clicked_hero, 
 
 def draw_all(screen, board, player, opponent, player_turn, clicked_hero, actual_pos, tile):
     draw_background(screen, board, player, opponent, player_turn, clicked_hero, actual_pos)
-    draw_moved_hero(screen, player, tile)
+    draw_hero(screen, player.moved_hero, tile)
     pg.display.update()
     pg.time.delay(500)
 
