@@ -4,3 +4,4 @@ class Hero:
         self.hero_id = hero_id
         self.pos = pos
         self.health = 75
+        self.range = 2

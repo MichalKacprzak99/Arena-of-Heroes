@@ -1,5 +1,6 @@
 from hero import Hero
 from settings import get_tile_pos
+from math import sqrt
 
 
 class Player:
@@ -22,13 +23,23 @@ class Player:
                 self.clicked_hero = hero.hero_id
 
     def move(self, new_pos):
-        self.heroes[self.clicked_hero].pos = get_tile_pos(new_pos)
-        moved_hero = self.heroes[self.clicked_hero]
-        self.clicked_hero = None
-        return ["move", self.player_id, moved_hero]
+        new_pos = get_tile_pos(new_pos)
+        if self.clicked_in_range(new_pos):
+            self.heroes[self.clicked_hero].pos = new_pos
+            moved_hero = self.heroes[self.clicked_hero]
+            self.clicked_hero = None
+            return ["move", self.player_id, moved_hero]
+        else:
+            return False
 
     def clicked_own_hero(self, clicked_pos):
         return any(map(lambda hero: clicked_pos == hero.pos, self.heroes))
+
+    def clicked_in_range(self, clicked_pos):
+        x_dis = (clicked_pos[0] - self.heroes[self.clicked_hero].pos[0]) ** 2
+        y_dis = (clicked_pos[1] - self.heroes[self.clicked_hero].pos[1]) ** 2
+        distance = int(sqrt(x_dis+y_dis))
+        return distance <= self.heroes[self.clicked_hero].range
 
     @staticmethod
     def clicked_object(object_tiles, clicked_pos):

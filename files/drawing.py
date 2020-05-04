@@ -12,6 +12,8 @@ def draw_player_turn(screen, player_turn):
 
 def highlight_tile(screen, board, player, opponent,  pos):
     color = COLORS["GREEN"]
+    if player.clicked_hero is not None and player.clicked_in_range(pos) is False:
+        color = COLORS["GRAY"]
     if player.clicked_object(board.object_tiles, pos):
         color = COLORS["BLACK"]
     if player.clicked_opponent_hero(opponent, pos):

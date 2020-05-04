@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="" />
+    <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_04_05_2020_16_29__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_04_05_2020_16_29__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/drawing.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/drawing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/hero.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/hero.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/settings.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1aXGzmy7HRQwEcVcyWJ7an8eDLb" />
@@ -18,7 +48,55 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/files/server.py" />
+  </component>
+  <component name="RunManager" selected="Python.client">
+    <configuration name="client" type="PythonConfigurationType" factoryName="Python" singleton="false">
+      <module name="Arena-of-Heroes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\micha\anaconda3\envs\Arena_of_Heroes\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/files" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/files/client.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="server" type="PythonConfigurationType" factoryName="Python">
+      <module name="Arena-of-Heroes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\micha\anaconda3\envs\Arena_of_Heroes\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/files" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/files/server.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.client" />
+      <item itemvalue="Python.server" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -32,5 +110,34 @@
       <updated>1586874789988</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588603266759">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1588603266759" />
+    <state x="548" y="187" key="FileChooserDialogImpl" timestamp="1588603265571">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="548" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1588603265571" />
+    <state width="757" height="223" key="GridCell.Tab.0.bottom" timestamp="1588604678808">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="757" height="223" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1588604678808" />
+    <state width="757" height="223" key="GridCell.Tab.0.center" timestamp="1588604678808">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="757" height="223" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1588604678808" />
+    <state width="757" height="223" key="GridCell.Tab.0.left" timestamp="1588604678808">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="757" height="223" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1588604678808" />
+    <state width="757" height="223" key="GridCell.Tab.0.right" timestamp="1588604678808">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="757" height="223" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1588604678808" />
   </component>
 </project>
