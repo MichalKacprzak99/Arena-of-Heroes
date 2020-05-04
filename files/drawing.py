@@ -1,5 +1,6 @@
 from settings import WIDTH, HEIGHT, HERO_IMAGES, COLORS, coordinate, load_image, get_tile_pos
 import pygame as pg
+from player import Player
 
 
 def draw_player_turn(screen, player_turn):
@@ -45,13 +46,22 @@ def draw_health_bar(screen, hero, hero_coordinate):
 
 def draw_heroes(screen, player):
     for hero in player.heroes:
-        hero_coordinate = coordinate(hero.pos)
-        hero_image = pg.image.load(load_image(HERO_IMAGES[str(hero.image_id)]))
-        screen.blit(hero_image, hero_coordinate)
-        draw_health_bar(screen, hero, hero_coordinate)
+        if hero is not player.moved_hero:
+            hero_coordinate = coordinate(hero.pos)
+            hero_image = pg.image.load(load_image(HERO_IMAGES[str(hero.image_id)]))
+            screen.blit(hero_image, hero_coordinate)
+            draw_health_bar(screen, hero, hero_coordinate)
 
 
-def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
+def draw_moved_hero(screen, player, tile):
+    hero = player.moved_hero
+    hero_coordinate = coordinate(tile)
+    hero_image = pg.image.load(load_image(HERO_IMAGES[str(hero.image_id)]))
+    screen.blit(hero_image, hero_coordinate)
+    draw_health_bar(screen, hero, hero_coordinate)
+
+
+def draw_background(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
     board.draw()
     highlight_tile(screen, board, player, opponent, get_tile_pos(actual_pos))
     draw_heroes(screen, player)
@@ -59,4 +69,29 @@ def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, ac
     draw_player_turn(screen, player_turn)
     if clicked_hero is not None:
         draw_if_clicked(screen)
+
+
+def draw_all(screen, board, player, opponent, player_turn, clicked_hero, actual_pos, tile):
+    draw_background(screen, board, player, opponent, player_turn, clicked_hero, actual_pos)
+    draw_moved_hero(screen, player, tile)
     pg.display.update()
+    pg.time.delay(500)
+
+
+def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
+    make_move = False
+    if player.moved_hero is None or opponent.moved_hero is None:
+        draw_background(screen, board, player, opponent, player_turn, clicked_hero, actual_pos)
+        pg.display.update()
+    if player.moved_hero:
+        for tile in player.list_of_tiles:
+            draw_all(screen, board, player, opponent, player_turn, clicked_hero, actual_pos, tile)
+        player.moved_hero = None
+    if opponent.moved_hero:
+        for tile in opponent.list_of_tiles:
+            draw_all(screen, board, opponent, player, player_turn, clicked_hero, actual_pos, tile)
+        make_move = True
+        return make_move
+
+    return make_move
+

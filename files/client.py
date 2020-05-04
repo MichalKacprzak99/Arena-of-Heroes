@@ -34,7 +34,12 @@ def main():
             except EOFError:
                 break
             actual_pos = pg.mouse.get_pos()
-            redraw_window(window, board, player, opponent, which_player_turn, player.clicked_hero, actual_pos)
+            move = redraw_window(window, board, player, opponent, which_player_turn, player.clicked_hero, actual_pos)
+            if move:
+                try:
+                    n.send(["update", opponent_id])
+                except EOFError:
+                    break
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     run = False

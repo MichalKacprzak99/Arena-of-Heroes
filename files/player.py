@@ -10,6 +10,7 @@ class Player:
         self.heroes = self.set_starting_pos()
         self.clicked_hero = None
         self.moved_hero = None
+        self.list_of_tiles = None
 
     def set_starting_pos(self):
         if self.player_id == 1:
@@ -26,9 +27,10 @@ class Player:
         new_pos = get_tile_pos(new_pos)
         if self.clicked_in_range(new_pos):
             self.heroes[self.clicked_hero].pos = new_pos
-            moved_hero = self.heroes[self.clicked_hero]
+            self.moved_hero = self.heroes[self.clicked_hero]
+            self.list_of_tiles = [[0, 5], [1, 5]]
             self.clicked_hero = None
-            return ["move", self.player_id, moved_hero]
+            return ["move", self.player_id, self.moved_hero, self.list_of_tiles]
         else:
             return False
 
@@ -36,10 +38,8 @@ class Player:
         return any(map(lambda hero: clicked_pos == hero.pos, self.heroes))
 
     def clicked_in_range(self, clicked_pos):
-        x_dis = (clicked_pos[0] - self.heroes[self.clicked_hero].pos[0]) ** 2
-        y_dis = (clicked_pos[1] - self.heroes[self.clicked_hero].pos[1]) ** 2
-        distance = int(sqrt(x_dis+y_dis))
-        return distance <= self.heroes[self.clicked_hero].range
+        distance = sqrt(sum([(i-j)**2 for i, j in zip(clicked_pos, self.heroes[self.clicked_hero].pos)]))
+        return int(distance) <= self.heroes[self.clicked_hero].range
 
     @staticmethod
     def clicked_object(object_tiles, clicked_pos):
