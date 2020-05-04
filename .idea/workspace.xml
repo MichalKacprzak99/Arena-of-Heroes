@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/menu.py" afterDir="false" />
-    </list>
+    <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="create_map_michal" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -74,8 +88,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.server" />
       <item itemvalue="Python.client" />
+      <item itemvalue="Python.server" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -112,6 +126,9 @@
     </task>
     <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="menu in thorpy" />
@@ -164,10 +181,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1345" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1588527673459" />
-    <state x="184" y="6" key="SettingsEditor" timestamp="1588515788594">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="207" y="7" key="SettingsEditor" timestamp="1588602876222">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1588515788594" />
+    <state x="207" y="7" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1588602876222" />
     <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1588524782390">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
