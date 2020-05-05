@@ -1,6 +1,7 @@
 from hero import Hero
 from settings import get_tile_pos
 from math import sqrt
+from pathfinder import path_finder
 
 
 class Player:
@@ -23,12 +24,12 @@ class Player:
             if get_tile_pos(clicked_pos) == hero.pos:
                 self.clicked_hero = hero.hero_id
 
-    def move(self, new_pos):
+    def move(self, opponent, object_tiles, new_pos):
         new_pos = get_tile_pos(new_pos)
         if self.clicked_in_range(new_pos):
-            self.heroes[self.clicked_hero].pos = new_pos
             self.moved_hero = self.heroes[self.clicked_hero]
-            self.list_of_tiles = [[0, 5], [1, 5]]  # path finding algorithm
+            self.list_of_tiles = path_finder(self, opponent, object_tiles, new_pos)
+            self.heroes[self.clicked_hero].pos = new_pos
             self.clicked_hero = None
             return ["move", self.player_id, self.moved_hero, self.list_of_tiles]
         else:
@@ -57,8 +58,12 @@ class Player:
         if self.clicked_own_hero(tmp_pos):
             return False
         if self.clicked_not_valid_tile(object_tiles, opponent, clicked_pos) is False:
-            return self.move(clicked_pos)
+            return self.move(opponent, object_tiles, clicked_pos)
         else:
             return False
+
+
+
+
 
 
