@@ -4,10 +4,7 @@
     <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/drawing.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/drawing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,22 +132,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1588516098678" />
-    <state width="1345" height="133" key="GridCell.Tab.0.bottom" timestamp="1588715671093">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1588528285857">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="133" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1588715671093" />
-    <state width="1345" height="133" key="GridCell.Tab.0.center" timestamp="1588715671093">
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1588528285857" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1588528285857">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="133" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1588715671093" />
-    <state width="1345" height="133" key="GridCell.Tab.0.left" timestamp="1588715671093">
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1588528285857" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1588528285856">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="133" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1588715671093" />
-    <state width="1345" height="133" key="GridCell.Tab.0.right" timestamp="1588715671093">
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1588528285856" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1588528285857">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="133" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1588715671093" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1588528285857" />
     <state width="1345" height="223" key="GridCell.Tab.1.bottom" timestamp="1588527673459">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -179,15 +176,5 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="472" y="77" key="git4idea.branch.GitSmartOperationDialog/0.0.1366.728@0.0.1366.728" timestamp="1588517307886" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/files/client.py</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
