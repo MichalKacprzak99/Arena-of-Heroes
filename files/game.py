@@ -7,6 +7,5 @@ class Game:
         self.turns = 0
         self.game_id = game_id
         self.players = [None, None]
-        self.ready = False
         self.which_map = randint(0, 0)
-        self.is_started = [False, False]
+        self.is_ready = [False, False]
