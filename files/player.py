@@ -28,7 +28,7 @@ class Player:
         if self.clicked_in_range(new_pos):
             self.heroes[self.clicked_hero].pos = new_pos
             self.moved_hero = self.heroes[self.clicked_hero]
-            self.list_of_tiles = [[0, 5], [1, 5]]
+            self.list_of_tiles = [[0, 5], [1, 5]]  # path finding algorithm
             self.clicked_hero = None
             return ["move", self.player_id, self.moved_hero, self.list_of_tiles]
         else:

@@ -22,6 +22,7 @@
     <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/drawing.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/drawing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/player.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588621557254</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="clean code">
+      <created>1588622574187</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1588622574187</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -145,7 +153,8 @@
     <MESSAGE value="add range to hero, client is not able to move further than&#10; range -&gt; different highlight" />
     <MESSAGE value="y" />
     <MESSAGE value="inventing a way to send another tile that the hero &#10;overcomes" />
-    <option name="LAST_COMMIT_MESSAGE" value="inventing a way to send another tile that the hero &#10;overcomes" />
+    <MESSAGE value="clean code" />
+    <option name="LAST_COMMIT_MESSAGE" value="clean code" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588604900785">
@@ -160,22 +169,22 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="548" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1588603265571" />
-    <state width="1515" height="222" key="GridCell.Tab.0.bottom" timestamp="1588622350006">
+    <state width="1515" height="222" key="GridCell.Tab.0.bottom" timestamp="1588628799222">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="222" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1588622350006" />
-    <state width="1515" height="222" key="GridCell.Tab.0.center" timestamp="1588622350006">
+    <state width="1515" height="222" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1588628799222" />
+    <state width="1515" height="222" key="GridCell.Tab.0.center" timestamp="1588628799221">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="222" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1588622350006" />
-    <state width="1515" height="222" key="GridCell.Tab.0.left" timestamp="1588622350006">
+    <state width="1515" height="222" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1588628799221" />
+    <state width="1515" height="222" key="GridCell.Tab.0.left" timestamp="1588628799221">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="222" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1588622350006" />
-    <state width="1515" height="222" key="GridCell.Tab.0.right" timestamp="1588622350006">
+    <state width="1515" height="222" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1588628799221" />
+    <state width="1515" height="222" key="GridCell.Tab.0.right" timestamp="1588628799222">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="222" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1588622350006" />
+    <state width="1515" height="222" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1588628799222" />
     <state width="1515" height="277" key="GridCell.Tab.1.bottom" timestamp="1588610727598">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -196,9 +205,9 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="553" y="135" key="RollbackChangesDialog/0.0.1536.864@0.0.1536.864" timestamp="1588611594316" />
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1588621563255">
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1588622580659">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1588621563255" />
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1588622580659" />
   </component>
 </project>

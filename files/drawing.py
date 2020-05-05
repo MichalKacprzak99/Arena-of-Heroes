@@ -1,6 +1,5 @@
 from settings import WIDTH, HEIGHT, HERO_IMAGES, COLORS, coordinate, load_image, get_tile_pos
 import pygame as pg
-from player import Player
 
 
 def draw_player_turn(screen, player_turn):
@@ -44,17 +43,17 @@ def draw_health_bar(screen, hero, hero_coordinate):
         pg.draw.rect(screen, COLORS["BLACK"], (lose_hp, (how_much_less_hp, 5)), 0)
 
 
-def draw_heroes(screen, player):
-    for hero in player.heroes:
-        if hero is not player.moved_hero:
-            draw_hero(screen, hero, hero.pos)
-
-
 def draw_hero(screen, hero, tile):
     hero_coordinate = coordinate(tile)
     hero_image = pg.image.load(load_image(HERO_IMAGES[str(hero.image_id)]))
     screen.blit(hero_image, hero_coordinate)
     draw_health_bar(screen, hero, hero_coordinate)
+
+
+def draw_heroes(screen, player):
+    for hero in player.heroes:
+        if hero is not player.moved_hero:
+            draw_hero(screen, hero, hero.pos)
 
 
 def draw_background(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
