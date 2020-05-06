@@ -1,24 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/files/image/background.jpg" afterDir="false" />
+    <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="qol improvements">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_04_05_2020_16_29__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_04_05_2020_16_29__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/drawing.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/drawing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/tile_map.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/tile_map.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="real_movement" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1aXGzmy7HRQwEcVcyWJ7an8eDLb" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -26,20 +56,20 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/files/client.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/files/server.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.client">
-    <configuration name="client" type="PythonConfigurationType" factoryName="Python" singleton="false" nameIsGenerated="true">
+    <configuration name="client" type="PythonConfigurationType" factoryName="Python" singleton="false">
       <module name="Arena-of-Heroes" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Tomek\anaconda3\python.exe" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/files" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/files/client.py" />
@@ -51,16 +81,58 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="server" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration name="path_finder" type="PythonConfigurationType" factoryName="Python">
       <module name="Arena-of-Heroes" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Tomek\anaconda3\python.exe" />
+      <option name="SDK_HOME" value="C:\Users\micha\anaconda3\envs\Arena_of_Heroes\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/files" />
       <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/files/pathfinder.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="player" type="PythonConfigurationType" factoryName="Python">
+      <module name="Arena-of-Heroes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\micha\anaconda3\envs\Arena_of_Heroes\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/files" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/files/player.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="server" type="PythonConfigurationType" factoryName="Python">
+      <module name="Arena-of-Heroes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/files" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/files/server.py" />
@@ -72,9 +144,33 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="tmp" type="PythonConfigurationType" factoryName="Python">
+      <module name="Arena-of-Heroes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\micha\anaconda3\envs\Arena_of_Heroes\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/files" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/files/tmp.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.server" />
       <item itemvalue="Python.client" />
+      <item itemvalue="Python.path_finder" />
+      <item itemvalue="Python.player" />
+      <item itemvalue="Python.server" />
+      <item itemvalue="Python.tmp" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -88,100 +184,140 @@
       <option name="presentableId" value="Default" />
       <updated>1586874789988</updated>
     </task>
-    <task id="LOCAL-00001" summary="menu in thorpy">
-      <created>1588515462061</created>
+    <task id="LOCAL-00001" summary="add range to hero, client is not able to move further than&#10; range -&gt; different highlight">
+      <created>1588605090008</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1588515462061</updated>
+      <updated>1588605090008</updated>
     </task>
-    <task id="LOCAL-00002" summary="menu in thorpy this time working">
-      <created>1588516183803</created>
+    <task id="LOCAL-00002" summary="y">
+      <created>1588605167572</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1588516183803</updated>
+      <updated>1588605167572</updated>
     </task>
-    <task id="LOCAL-00003" summary="game starts on button clicked">
-      <created>1588524769324</created>
+    <task id="LOCAL-00003" summary="inventing a way to send another tile that the hero &#10;overcomes">
+      <created>1588621557254</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1588524769324</updated>
+      <updated>1588621557254</updated>
     </task>
-    <task id="LOCAL-00004" summary="cleaned up code + background">
-      <created>1588715753115</created>
+    <task id="LOCAL-00004" summary="clean code">
+      <created>1588622574187</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1588715753115</updated>
+      <updated>1588622574187</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="implement real movement&#10;(pathfinder module)">
+      <created>1588702690567</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1588702690567</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="menu in thorpy" />
-    <MESSAGE value="menu in thorpy this time working" />
-    <MESSAGE value="game starts on button clicked" />
-    <MESSAGE value="cleaned up code + background" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleaned up code + background" />
+    <MESSAGE value="add range to hero, client is not able to move further than&#10; range -&gt; different highlight" />
+    <MESSAGE value="y" />
+    <MESSAGE value="inventing a way to send another tile that the hero &#10;overcomes" />
+    <MESSAGE value="clean code" />
+    <MESSAGE value="implement real movement&#10;(pathfinder module)" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement real movement&#10;(pathfinder module)" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588520674072">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="223" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588781018001">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1588520674072" />
-    <state x="337" y="0" key="CommitChangelistDialog2" timestamp="1588715746702">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="223" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1588781018001" />
+    <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1588696791256" />
+    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1588784456264">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="337" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1588715746702" />
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1588516098678">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588784456264" />
+    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1588759609990">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1588516098678" />
-    <state width="672" height="132" key="GridCell.Tab.0.bottom" timestamp="1588716121254">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog/0.0.1536.864@0.0.1536.864" timestamp="1588759609990" />
+    <state x="548" y="178" key="FileChooserDialogImpl" timestamp="1588781016824">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="672" height="132" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1588716121254" />
-    <state width="672" height="132" key="GridCell.Tab.0.center" timestamp="1588716121253">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="548" y="178" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588781016824" />
+    <state x="548" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1588694590996" />
+    <state width="1515" height="208" key="GridCell.Tab.0.bottom" timestamp="1588784222226">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="672" height="132" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1588716121253" />
-    <state width="672" height="132" key="GridCell.Tab.0.left" timestamp="1588716121253">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1515" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588784222226" />
+    <state width="1515" height="222" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1588762971302" />
+    <state width="1515" height="208" key="GridCell.Tab.0.center" timestamp="1588784222226">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="672" height="132" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1588716121253" />
-    <state width="672" height="132" key="GridCell.Tab.0.right" timestamp="1588716121254">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1515" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588784222226" />
+    <state width="1515" height="222" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1588762971301" />
+    <state width="1515" height="208" key="GridCell.Tab.0.left" timestamp="1588784222226">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="672" height="132" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1588716121254" />
-    <state width="1345" height="223" key="GridCell.Tab.1.bottom" timestamp="1588527673459">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1515" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588784222226" />
+    <state width="1515" height="222" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1588762971300" />
+    <state width="1515" height="208" key="GridCell.Tab.0.right" timestamp="1588784222226">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1588527673459" />
-    <state width="1345" height="223" key="GridCell.Tab.1.center" timestamp="1588527673459">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1515" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588784222226" />
+    <state width="1515" height="222" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1588762971301" />
+    <state width="1515" height="277" key="GridCell.Tab.1.bottom" timestamp="1588701089598">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1588527673459" />
-    <state width="1345" height="223" key="GridCell.Tab.1.left" timestamp="1588527673459">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1515" height="277" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1588701089598" />
+    <state width="1515" height="277" key="GridCell.Tab.1.center" timestamp="1588701089598">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1588527673459" />
-    <state width="1345" height="223" key="GridCell.Tab.1.right" timestamp="1588527673459">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1515" height="277" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1588701089598" />
+    <state width="1515" height="277" key="GridCell.Tab.1.left" timestamp="1588701089598">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1345" height="223" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1588527673459" />
-    <state x="184" y="6" key="SettingsEditor" timestamp="1588715929099">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1515" height="277" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1588701089598" />
+    <state width="1515" height="277" key="GridCell.Tab.1.right" timestamp="1588701089598">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1588715929099" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1588715777822">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state width="1515" height="277" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1588701089598" />
+    <state x="481" y="128" key="MultipleFileMergeDialog" timestamp="1588780517110">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1588715777822" />
-    <state x="472" y="77" key="git4idea.branch.GitSmartOperationDialog" timestamp="1588517307886">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="481" y="128" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1588780517110" />
+    <state x="553" y="135" key="RollbackChangesDialog" timestamp="1588611594316">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="472" y="77" key="git4idea.branch.GitSmartOperationDialog/0.0.1366.728@0.0.1366.728" timestamp="1588517307886" />
+    <state x="553" y="135" key="RollbackChangesDialog/0.0.1536.864@0.0.1536.864" timestamp="1588611594316" />
+    <state x="277" y="73" key="SettingsEditor" timestamp="1588780364607">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="73" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1588780364607" />
+    <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1588694538021" />
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1588702696983">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1588702696983" />
+    <state x="550" y="125" key="git4idea.branch.GitSmartOperationDialog" timestamp="1588784314545">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="550" y="125" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.824@0.0.1536.824" timestamp="1588784314545" />
   </component>
 </project>

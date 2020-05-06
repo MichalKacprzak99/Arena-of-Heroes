@@ -1,12 +1,15 @@
 import pygame as pg
 from network import Network
 from tile_map import TiledMap
-from settings import WIDTH, HEIGHT, CLIENT_NAME, MAPS
+from settings import GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT, BOX_WIDTH, CLIENT_NAME, MAPS
 from drawing import redraw_window
 from menu import Menu
+from gui import Gui
+import thorpy
+
 
 pg.init()
-window = pg.display.set_mode((WIDTH, HEIGHT))
+window = pg.display.set_mode((GAME_SCREEN_WIDTH + BOX_WIDTH*2, GAME_SCREEN_HEIGHT))
 pg.font.init()
 
 
@@ -25,6 +28,7 @@ def main():
         if menu.both_ready() is False:
             try:
                 opponent, which_map, menu.opponent_ready = n.send(["get_info", opponent_id])
+                gui = Gui(window)
                 board = TiledMap(MAPS[str(which_map)], window)
             except EOFError:
                 break
@@ -43,6 +47,8 @@ def main():
             except EOFError:
                 break
             actual_pos = pg.mouse.get_pos()
+
+            gui.update_gui(actual_pos, player, opponent)
             redraw_window(window, board, player, opponent, which_player_turn, player.clicked_hero, actual_pos)
             for event in pg.event.get():
                 if event.type == pg.QUIT:
@@ -57,6 +63,7 @@ def main():
                             feedback = player.action(opponent, board.object_tiles, actual_pos)
                             if feedback:
                                 n.send(feedback)
+
             try:
                 opponent = n.send(["echo", opponent_id])
             except EOFError:

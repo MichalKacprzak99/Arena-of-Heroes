@@ -1,4 +1,4 @@
-from settings import WIDTH, HEIGHT, HERO_IMAGES, COLORS, coordinate, load_image, get_tile_pos
+from settings import GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT, BOX_WIDTH, HERO_IMAGES, COLORS, coordinate, load_image, get_tile_pos
 import pygame as pg
 
 
@@ -7,19 +7,21 @@ def draw_player_turn(screen, player_turn):
     text_to_input = "Player %d turn" % player_turn
     text_width, text_height = font.size(text_to_input)
     text = font.render(text_to_input, True, COLORS["RED"])
-    screen.blit(text, (WIDTH/2 - text_width/2, 20))
+    screen.blit(text, ((GAME_SCREEN_WIDTH + BOX_WIDTH * 2)/2 - text_width/2, 20))
 
 
-def highlight_tile(screen, board, player, opponent,  pos):
+def highlight_tile(screen, board, player, opponent, pos):
     color = COLORS["GREEN"]
-    if player.clicked_object(board.object_tiles, pos):
-        color = COLORS["BLACK"]
-    if player.clicked_opponent_hero(opponent, pos):
-        color = COLORS["RED"]
-    if player.clicked_own_hero(pos):
-        color = COLORS["BLUE"]
-    drawing_pos = coordinate(pos)
-    pg.draw.rect(screen, color, (drawing_pos[0], drawing_pos[1], 64, 64), 1)
+    if 120 < pos[0] < 888:
+        pos = get_tile_pos(pos)
+        if pos in board.object_tiles:
+            color = COLORS["BLACK"]
+        if any(map(lambda opp_hero: pos == opp_hero.pos, opponent.heroes)):
+            color = COLORS["RED"]
+        if any(map(lambda hero: pos == hero.pos, player.heroes)):
+            color = COLORS["BLUE"]
+        drawing_pos = coordinate(pos)
+        pg.draw.rect(screen, color, (drawing_pos[0], drawing_pos[1], 64, 64), 1)
 
 
 def draw_if_clicked(screen):
@@ -27,7 +29,7 @@ def draw_if_clicked(screen):
     text_to_input = "Clicked"
     text_width, text_height = font.size(text_to_input)
     text = font.render(text_to_input, True, COLORS["RED"])
-    screen.blit(text, (WIDTH/2 - text_width/2, 50))
+    screen.blit(text, ((GAME_SCREEN_WIDTH + BOX_WIDTH * 2)/2 - text_width/2, 50))
 
 
 def draw_health_bar(screen, hero, hero_coordinate):
@@ -51,10 +53,11 @@ def draw_heroes(screen, player):
 
 def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
     board.draw()
-    highlight_tile(screen, board, player, opponent, get_tile_pos(actual_pos))
+    highlight_tile(screen, board, player, opponent, actual_pos)
     draw_heroes(screen, player)
     draw_heroes(screen, opponent)
     draw_player_turn(screen, player_turn)
     if clicked_hero is not None:
         draw_if_clicked(screen)
+
     pg.display.update()

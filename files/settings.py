@@ -11,9 +11,25 @@ COLORS = {
     "BLUE": (0, 0, 255)
 }
 
+GUI_INFO = {
+    "DISPLAY_HERO": 0,
+    "HERO_NAME": 1,
+    "DISPLAY_HP": 2,
+    "HP_VALUE": 3,
+    "DISPLAY_ATTACK": 4,
+    "ATTACK_VALUE": 5,
+    "DISPLAY_DEFENSE": 6,
+    "DEFENSE_VALUE": 7,
+    "OPPONENT_HERO": 8
+}
+
 # game settings
-WIDTH = 768
-HEIGHT = 768
+GAME_SCREEN_WIDTH = 768
+GAME_SCREEN_HEIGHT = 768
+BOX_WIDTH = 120
+BOX_HEIGHT = 768
+LEFT_BOX_CENTER = BOX_WIDTH/2
+RIGHT_BOX_START = BOX_WIDTH + GAME_SCREEN_WIDTH
 
 HERO_IMAGES = {
     "0": "Mag.png"
@@ -34,11 +50,11 @@ def load_image(filename):
 
 
 def get_tile_pos(pos):
-    return list(map(lambda cord: cord//64, pos))
+    return list(map(lambda cord: (cord - 120)//64, pos))
 
 
 def coordinate(tile_pos):
-    return list(map(lambda cord: cord*64, tile_pos))
+    return list(map(lambda cord: cord*64 + 120, tile_pos))
 
 
 

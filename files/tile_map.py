@@ -1,11 +1,11 @@
 import pytmx
 from os import path
-from settings import HEIGHT, WIDTH
+from settings import GAME_SCREEN_HEIGHT, GAME_SCREEN_WIDTH, BOX_WIDTH
 import pygame as pg
 
 pg.init()
 pg.font.init()
-window = pg.display.set_mode((WIDTH, HEIGHT))
+window = pg.display.set_mode((GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT))
 
 
 class TiledMap:
@@ -17,10 +17,10 @@ class TiledMap:
         self.screen = screen
         self.map_img = self.make_map()
         self.object_tiles = self.get_objects_tiles()
+        self.screen.fill((168, 139, 50))
 
     def draw(self):
-        self.screen.fill((255, 255, 255))
-        self.screen.blit(self.map_img, (0, 0))
+        self.screen.blit(self.map_img, (BOX_WIDTH, 0))
 
     @staticmethod
     def load_data(filename):
