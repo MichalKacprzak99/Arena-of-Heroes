@@ -8,7 +8,7 @@ from gui import Gui
 
 
 pg.init()
-window = pg.display.set_mode((GAME_SETTINGS["GAME_SCREEN_WIDTH"], GAME_SETTINGS["GAME_SCREEN_HEIGHT"]-125))
+
 pg.font.init()
 
 
@@ -22,6 +22,7 @@ def main():
     pg.display.set_caption(CLIENT_NAME[str(player_id)])
     print(("Hi, you are client: "+str(player_id)))
     opponent_id = abs(player_id - 1)
+    window = pg.display.set_mode((GAME_SETTINGS["GAME_SCREEN_WIDTH"], GAME_SETTINGS["GAME_SCREEN_HEIGHT"]))
     menu = Menu(window)
 
     while run:
