@@ -16,11 +16,11 @@ class TiledMap:
         self.height = self.tmx_data.height * self.tmx_data.tileheight
         self.screen = screen
         self.map_img = self.make_map()
-        self.not_valid_tiles = self.objects_tiles()
+        self.object_tiles = self.get_objects_tiles()
         self.screen.fill((168, 139, 50))
 
     def draw(self):
-        self.screen.blit(self.map_img, (BOX_WIDTH, 0))
+        self.screen.blit(self.map_img, (0, 0))
 
     @staticmethod
     def load_data(filename):
@@ -28,7 +28,7 @@ class TiledMap:
         map_folder = path.join(game_folder, 'maps')
         return path.join(map_folder, str(filename))
 
-    def objects_tiles(self):
+    def get_objects_tiles(self):
         tmp_list = []
         for tile_object in self.tmx_data.objects:
             tmp_list.append([int(tile_object.x)//64, int(tile_object.y)//64])

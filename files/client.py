@@ -51,7 +51,7 @@ def main():
                         if player.clicked_hero is None:
                             player.check_clicked_hero(actual_pos)
                         else:
-                            feedback = player.action(opponent, board.not_valid_tiles, actual_pos)
+                            feedback = player.action(opponent, board.object_tiles, actual_pos)
                             if feedback:
                                 n.send(feedback)
 

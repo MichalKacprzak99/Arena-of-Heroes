@@ -1,5 +1,5 @@
 from hero import Hero
-from settings import get_tile_pos, clicked_object, clicked_opponent_hero
+from settings import get_tile_pos
 
 
 class Player:
@@ -28,16 +28,24 @@ class Player:
         return ["move", self.player_id, moved_hero]
 
     def clicked_own_hero(self, clicked_pos):
-        if any(map(lambda hero: clicked_pos == hero.pos, self.heroes)):
-            return False
-        else:
-            return True
+        return any(map(lambda hero: clicked_pos == hero.pos, self.heroes))
 
-    def action(self, opponent, not_valid_tiles, clicked_pos):
+    @staticmethod
+    def clicked_object(object_tiles, clicked_pos):
+        return clicked_pos in object_tiles
+
+    @staticmethod
+    def clicked_opponent_hero(opponent, clicked_pos):
+        return any(map(lambda opp_hero: clicked_pos == opp_hero.pos, opponent.heroes))
+
+    def clicked_not_valid_tile(self, object_tiles, opponent, clicked_pos):
+        return self.clicked_object(object_tiles, clicked_pos) or self.clicked_opponent_hero(opponent, clicked_pos)
+
+    def action(self, opponent, object_tiles, clicked_pos):
         tmp_pos = get_tile_pos(clicked_pos)
-        if self.clicked_own_hero(tmp_pos) is False:
+        if self.clicked_own_hero(tmp_pos):
             return False
-        if clicked_object(not_valid_tiles, tmp_pos) and clicked_opponent_hero(opponent, tmp_pos):
+        if self.clicked_not_valid_tile(object_tiles, opponent, clicked_pos) is False:
             return self.move(clicked_pos)
         else:
             return False

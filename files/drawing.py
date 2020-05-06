@@ -51,8 +51,6 @@ def draw_heroes(screen, player):
         draw_health_bar(screen, hero, hero_coordinate)
 
 
-
-
 def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
     board.draw()
     highlight_tile(screen, board, player, opponent, actual_pos)

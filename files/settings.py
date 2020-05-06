@@ -57,9 +57,4 @@ def coordinate(tile_pos):
     return list(map(lambda cord: cord*64 + 120, tile_pos))
 
 
-def clicked_object(not_valid_tiles, clicked_pos):
-    return clicked_pos not in not_valid_tiles
 
-
-def clicked_opponent_hero(opponent, clicked_pos):
-    return all(map(lambda opp_hero: clicked_pos != opp_hero.pos, opponent.heroes))
