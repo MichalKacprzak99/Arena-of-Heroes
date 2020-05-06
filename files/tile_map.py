@@ -17,7 +17,6 @@ class TiledMap:
         self.screen = screen
         self.map_img = self.make_map()
         self.object_tiles = self.get_objects_tiles()
-        self.screen.fill((168, 139, 50))
 
     def draw(self):
         self.screen.blit(self.map_img, (BOX_WIDTH, 0))
