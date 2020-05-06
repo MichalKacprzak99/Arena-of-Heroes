@@ -9,7 +9,7 @@ import thorpy
 
 
 pg.init()
-window = pg.display.set_mode((GAME_SCREEN_WIDTH + BOX_WIDTH*2, GAME_SCREEN_HEIGHT))
+beginning = pg.display.set_mode((GAME_SCREEN_WIDTH , GAME_SCREEN_HEIGHT-125))
 pg.font.init()
 
 
@@ -22,14 +22,14 @@ def main():
     pg.display.set_caption(CLIENT_NAME[str(player_id)])
     print(("Hi, you are client: "+str(player_id)))
     opponent_id = abs(player_id - 1)
-    menu = Menu(window)
+    menu = Menu(beginning)
+    gui_start = False
     while run:
         clock.tick(60)
         if menu.both_ready() is False:
             try:
                 opponent, which_map, menu.opponent_ready = n.send(["get_info", opponent_id])
-                gui = Gui(window)
-                board = TiledMap(MAPS[str(which_map)], window)
+                board = TiledMap(MAPS[str(which_map)], beginning)
             except EOFError:
                 break
             for event in pg.event.get():
@@ -42,6 +42,10 @@ def main():
             if menu.player_ready is True:
                 menu.loading_screen()
         else:
+            if not gui_start:
+                window = pg.display.set_mode((GAME_SCREEN_WIDTH + BOX_WIDTH * 2, GAME_SCREEN_HEIGHT))
+                gui = Gui(window)
+                gui_start = True
             try:
                 which_player_turn, turns = n.send("get_turn")
             except EOFError:
