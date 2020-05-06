@@ -14,17 +14,19 @@ def draw_player_turn(screen, player_turn):
 
 def highlight_tile(screen, board, player, opponent, pos):
     color = COLORS["GREEN"]
-    if 120 < pos[0] < 888:
-        if player.clicked_hero is not None and player.clicked_in_range(pos) is False:
+    draw_pos = coordinate(get_tile_pos(pos))
+    if 120 <= pos[0] <= 888:
+        tmp_pos = get_tile_pos(pos)
+        if player.clicked_hero is not None and player.clicked_in_range(tmp_pos) is False:
             color = COLORS["GRAY"]
-        if player.clicked_object(board.object_tiles, pos):
+        if player.clicked_object(board.object_tiles,  tmp_pos):
             color = COLORS["BLACK"]
-        if player.clicked_opponent_hero(opponent, pos):
+        if player.clicked_opponent_hero(opponent,  tmp_pos):
             color = COLORS["RED"]
-        if player.clicked_own_hero(pos):
+        if player.clicked_own_hero(tmp_pos):
             color = COLORS["BLUE"]
-    drawing_pos = coordinate(pos)
-    pg.draw.rect(screen, color, (drawing_pos[0], drawing_pos[1], 64, 64), 1)
+        draw_pos = coordinate(tmp_pos)
+        pg.draw.rect(screen, color, (*draw_pos, 64, 64), 1)
 
 
 def draw_if_clicked(screen):

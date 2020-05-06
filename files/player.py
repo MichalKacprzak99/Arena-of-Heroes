@@ -25,7 +25,7 @@ class Player:
                 self.clicked_hero = hero.hero_id
 
     def move(self, opponent, object_tiles, new_pos):
-        new_pos = get_tile_pos(new_pos)
+        # new_pos = get_tile_pos(new_pos)
         self.moved_hero = self.heroes[self.clicked_hero]
         self.list_of_tiles = path_finder(self, opponent, object_tiles, new_pos)
         self.heroes[self.clicked_hero].pos = new_pos
@@ -51,8 +51,8 @@ class Player:
         return self.clicked_object(object_tiles, clicked_pos) or self.clicked_opponent_hero(opponent, clicked_pos)
 
     def action(self, opponent, object_tiles, clicked_pos):
-        tmp_pos = get_tile_pos(clicked_pos)
-        if self.clicked_own_hero(tmp_pos) or self.clicked_in_range(tmp_pos) is False:
+        clicked_pos = get_tile_pos(clicked_pos)
+        if self.clicked_own_hero(clicked_pos) or self.clicked_in_range(clicked_pos) is False:
             return False
         if self.clicked_not_valid_tile(object_tiles, opponent, clicked_pos) is False:
             return self.move(opponent, object_tiles, clicked_pos)

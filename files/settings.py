@@ -56,11 +56,13 @@ def load_image(filename):
 
 
 def get_tile_pos(pos):
-    return list(map(lambda cord: (cord - 120)//64, pos))
+    # return list(map(lambda cord: (cord - 120)//64, pos))
+    return [(pos[0]-120)//64, pos[1]//64]
 
 
 def coordinate(tile_pos):
-    return list(map(lambda cord: cord*64 + 120, tile_pos))
+    return [tile_pos[0]*64 + 120, tile_pos[1]*64]
+    # return list(map(lambda cord: cord*64 + 120, tile_pos))
 
 
 

@@ -1,0 +1,45 @@
+Index: files/network.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import socket\r\nimport pickle\r\n\r\n\r\nclass Network:\r\n    def __init__(self):\r\n        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\n        self.server = \"127.0.0.1\"\r\n        self.port = 5555\r\n        self.adr = (self.server, self.port)\r\n        self.p = self.connect()\r\n\r\n    def get_player(self):\r\n        return self.p\r\n\r\n    def connect(self):\r\n        try:\r\n            self.client.connect(self.adr)\r\n            return pickle.loads(self.client.recv(2048))\r\n        except socket.error as e:\r\n            print(e)\r\n\r\n    def send(self, data):\r\n        try:\r\n            self.client.send(pickle.dumps(data))\r\n            return pickle.loads(self.client.recv(2048))\r\n        except socket.error as e:\r\n            print(e)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- files/network.py	(revision 2e7cc3db67c8a1ebd3febc3fc81327e01c3b5ae1)
++++ files/network.py	(date 1588780202784)
+@@ -6,7 +6,7 @@
+     def __init__(self):
+         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+         self.server = "127.0.0.1"
+-        self.port = 5555
++        self.port = 5556
+         self.adr = (self.server, self.port)
+         self.p = self.connect()
+ 
+Index: files/server.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import socket\r\nimport pickle\r\nfrom game import Game\r\nfrom player import Player\r\nfrom _thread import start_new_thread\r\n\r\nserver = \"127.0.0.1\"\r\nport = 5555\r\n\r\ns = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\r\n\r\ntry:\r\n    s.bind((server, port))\r\nexcept socket.error as e:\r\n    str(e)\r\n\r\ns.listen(2)\r\nprint(\"Waiting for a connection, Server Started\")\r\ngames = {}\r\nidCount = 0\r\n\r\n\r\ndef threaded_client(conn, player_id, game_id):\r\n    global idCount\r\n    games[game_id].players[player_id] = Player(name=\"df\", player_id=player_id)\r\n    conn.send(pickle.dumps(games[game_id].players[player_id]))\r\n    reply = []\r\n\r\n    while True:\r\n        try:\r\n            data = pickle.loads(conn.recv(2048))\r\n\r\n            if game_id in games:\r\n                game = games[game_id]\r\n\r\n                if not data:\r\n                    break\r\n                else:\r\n                    which_player_take_action = data[1]\r\n                    if data[0] == \"get_info\":\r\n                        reply = [game.players[which_player_take_action], game.which_map, game.is_ready[abs(which_player_take_action-1)]]\r\n                    if data[0] == \"move\":\r\n                        moved_hero = data[2]\r\n                        game.players[which_player_take_action].heroes[moved_hero.hero_id] = moved_hero\r\n                        game.player_turn = abs(game.player_turn - 1)\r\n                        game.turns += 1\r\n                        reply = game.players[which_player_take_action]\r\n                    if data[0] == \"echo\":\r\n                        reply = game.players[which_player_take_action]\r\n                    if data[0] == \"is_ready\":\r\n                        game.is_ready[abs(which_player_take_action-1)] = data[2]\r\n                        reply = game.is_ready[which_player_take_action]\r\n                    if data == \"get_turn\":\r\n                        reply = [game.player_turn, game.turns]\r\n\r\n                    print(\"received: \", data)\r\n                    print(\"Sending: \", reply)\r\n                    conn.sendall(pickle.dumps(reply))\r\n            else:\r\n                break\r\n        except EOFError:\r\n            break\r\n\r\n    print(\"Lost connection\")\r\n    try:\r\n        del games[game_id]\r\n        print(\"Closing Game\", game_id)\r\n    except KeyError:\r\n        pass\r\n    idCount -= 1\r\n    conn.close()\r\n\r\n\r\nplayer_id = 0\r\n\r\nwhile True:\r\n    conn, adr = s.accept()\r\n    print(\"Connected to:\", adr)\r\n    idCount += 1\r\n    player_id = 0\r\n    gameId = (idCount - 1) // 2\r\n    if idCount % 2 == 1:\r\n        games[gameId] = Game(gameId)\r\n\r\n        print(\"Creating a new game...\")\r\n    else:\r\n        games[gameId].ready = True\r\n        player_id = 1\r\n\r\n    start_new_thread(threaded_client, (conn, player_id, gameId))\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- files/server.py	(revision 2e7cc3db67c8a1ebd3febc3fc81327e01c3b5ae1)
++++ files/server.py	(date 1588780202789)
+@@ -5,7 +5,7 @@
+ from _thread import start_new_thread
+ 
+ server = "127.0.0.1"
+-port = 5555
++port = 5556
+ 
+ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+ 
+@@ -14,7 +14,7 @@
+ except socket.error as e:
+     str(e)
+ 
+-s.listen(2)
++s.listen()
+ print("Waiting for a connection, Server Started")
+ games = {}
+ idCount = 0
