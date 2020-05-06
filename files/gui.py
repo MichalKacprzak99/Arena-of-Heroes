@@ -47,7 +47,6 @@ class Gui:
         for hero in player.heroes:
             if hero.pos == mouse_pos:
                 chosen_id = hero.hero_id
-
         self.elements[GUI_INFO["DISPLAY_HERO"]].set_text(self.hero_info_text[GUI_INFO["DISPLAY_HERO"]])
         self.elements[GUI_INFO["HERO_NAME"]].set_text(str(player.heroes[chosen_id].hero_id))
 
@@ -64,7 +63,6 @@ class Gui:
         for hero in opponent.heroes:
             if hero.pos == mouse_pos:
                 chosen_id = hero.hero_id
-
         opponent_info_index = 8
         self.elements[GUI_INFO["DISPLAY_HERO"] + opponent_info_index].set_text(self.hero_info_text
                                                                                [GUI_INFO["DISPLAY_HERO"]])

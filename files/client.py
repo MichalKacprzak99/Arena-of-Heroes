@@ -7,11 +7,9 @@ from gui import Gui
 import thorpy
 
 
-
 pg.init()
 window = pg.display.set_mode((GAME_SCREEN_WIDTH + BOX_WIDTH*2, GAME_SCREEN_HEIGHT))
 pg.font.init()
-
 
 
 def main():
