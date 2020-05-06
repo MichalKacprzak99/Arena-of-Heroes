@@ -20,7 +20,7 @@ class TiledMap:
         self.screen.fill((168, 139, 50))
 
     def draw(self):
-        self.screen.blit(self.map_img, (0, 0))
+        self.screen.blit(self.map_img, (BOX_WIDTH, 0))
 
     @staticmethod
     def load_data(filename):

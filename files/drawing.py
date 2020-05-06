@@ -14,7 +14,7 @@ def highlight_tile(screen, board, player, opponent, pos):
     color = COLORS["GREEN"]
     if 120 < pos[0] < 888:
         pos = get_tile_pos(pos)
-        if pos in board.not_valid_tiles:
+        if pos in board.object_tiles:
             color = COLORS["BLACK"]
         if any(map(lambda opp_hero: pos == opp_hero.pos, opponent.heroes)):
             color = COLORS["RED"]
