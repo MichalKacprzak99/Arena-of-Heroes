@@ -2,31 +2,16 @@ import pygame as pg
 from network import Network
 from tile_map import TiledMap
 from settings import GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT, BOX_WIDTH, CLIENT_NAME, MAPS
-from drawing import redraw_window, update_gui
+from drawing import redraw_window
+from gui import Gui
 import thorpy
 
-
-class Gui:
-    def __init__(self, window):
-        self.action_button = thorpy.make_button("Actions", func=None)
-        self.random_button = thorpy.make_button("Random", func=None)
-        self.background = thorpy.Background(color=(168, 139, 50), elements=[self.action_button, self.random_button])
-        self.menu = thorpy.Menu(self.background)
-        # important : set the screen as surface for all elements
-        for element in self.menu.get_population():
-            element.surface = window
-        # use the elements normally...
-        thorpy.store(self.background, [self.action_button], x = BOX_WIDTH/2, y = 0, align="center")
-        thorpy.store(self.background, [self.random_button],  x = GAME_SCREEN_WIDTH + BOX_WIDTH + (BOX_WIDTH / 2), y = 0, align="center")
-        self.background.blit()
-        self.background.update()
 
 
 pg.init()
 window = pg.display.set_mode((GAME_SCREEN_WIDTH + BOX_WIDTH*2, GAME_SCREEN_HEIGHT))
 pg.font.init()
 
-gui = Gui(window)
 
 
 def main():
@@ -45,6 +30,7 @@ def main():
         if game_start is False:
             try:
                 opponent, game_start, which_map = n.send(["get_info", opponent_id])
+                gui = Gui(window)
                 board = TiledMap(MAPS[str(which_map)], window)
             except EOFError:
                 break
@@ -55,7 +41,7 @@ def main():
                 break
             actual_pos = pg.mouse.get_pos()
 
-            update_gui(gui)
+            gui.update_gui(actual_pos, player, opponent)
             redraw_window(window, board, player, opponent, which_player_turn, player.clicked_hero, actual_pos)
             for event in pg.event.get():
                 if event.type == pg.QUIT:
@@ -71,7 +57,6 @@ def main():
                             if feedback:
                                 n.send(feedback)
 
-                gui.menu.react(event)
             try:
                 opponent = n.send(["echo", opponent_id])
             except EOFError:

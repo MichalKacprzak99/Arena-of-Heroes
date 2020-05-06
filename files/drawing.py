@@ -50,8 +50,7 @@ def draw_heroes(screen, player):
         screen.blit(hero_image, hero_coordinate)
         draw_health_bar(screen, hero, hero_coordinate)
 
-def update_gui(gui):
-    gui.background.blit()
+
 
 
 def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
