@@ -1,5 +1,7 @@
 from settings import WIDTH, HEIGHT, HERO_IMAGES, COLORS, coordinate, load_image, get_tile_pos
 import pygame as pg
+last_moved_hero_id = None
+last_which_side = ""
 
 
 def draw_player_turn(screen, player_turn):
@@ -45,7 +47,7 @@ def draw_health_bar(screen, hero, hero_coordinate):
 
 def draw_hero(screen, hero, tile):
     hero_coordinate = coordinate(tile)
-    hero_image = pg.image.load(load_image(HERO_IMAGES[str(hero.image_id)]))
+    hero_image = pg.image.load(load_image(HERO_IMAGES[hero.name][hero.which_side]))
     screen.blit(hero_image, hero_coordinate)
     draw_health_bar(screen, hero, hero_coordinate)
 
@@ -74,17 +76,25 @@ def draw_all(screen, board, player, opponent, player_turn, clicked_hero, actual_
 
 
 def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
+    global last_moved_hero_id, last_which_side
     make_move = False
     if player.moved_hero is None or opponent.moved_hero is None:
+        if last_moved_hero_id is not None:
+            opponent.heroes[last_moved_hero_id].which_side = last_which_side
         draw_background(screen, board, player, opponent, player_turn, clicked_hero, actual_pos)
         pg.display.update()
     if player.moved_hero:
-        for tile in player.list_of_tiles:
+        for tile, side in player.list_of_tiles:
+            player.moved_hero.which_side = side
             draw_all(screen, board, player, opponent, player_turn, clicked_hero, actual_pos, tile)
+        player.heroes[player.moved_hero.hero_id].which_side = player.moved_hero.which_side
         player.moved_hero = None
     if opponent.moved_hero:
-        for tile in opponent.list_of_tiles:
+        for tile, side in opponent.list_of_tiles:
+            opponent.moved_hero.which_side = side
             draw_all(screen, board, opponent, player, player_turn, clicked_hero, actual_pos, tile)
+        last_which_side = opponent.moved_hero.which_side
+        last_moved_hero_id = opponent.moved_hero.hero_id
         make_move = True
         return make_move
 

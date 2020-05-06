@@ -20,12 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_04_05_2020_16_29__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_04_05_2020_16_29__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_04_05_2020_16_40__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_04_05_2020_16_40__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/drawing.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/drawing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/hero.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/hero.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/maps/map1/map1.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/files/maps/map1/map1.tmx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/Mag.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/pathfinder.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/pathfinder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588622574187</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="implement real movement&#10;(pathfinder module)">
+      <created>1588702690567</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1588702690567</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -231,37 +239,38 @@
     <MESSAGE value="y" />
     <MESSAGE value="inventing a way to send another tile that the hero &#10;overcomes" />
     <MESSAGE value="clean code" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean code" />
+    <MESSAGE value="implement real movement&#10;(pathfinder module)" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement real movement&#10;(pathfinder module)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588696791256">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1588696791256" />
-    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1588611603042">
+    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1588759609990">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog/0.0.1536.864@0.0.1536.864" timestamp="1588611603042" />
+    <state x="93" y="93" width="1350" height="678" key="DiffContextDialog/0.0.1536.864@0.0.1536.864" timestamp="1588759609990" />
     <state x="548" y="187" key="FileChooserDialogImpl" timestamp="1588694590996">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="548" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1588694590996" />
-    <state width="1515" height="222" key="GridCell.Tab.0.bottom" timestamp="1588701511362">
+    <state width="1515" height="222" key="GridCell.Tab.0.bottom" timestamp="1588762971302">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="222" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1588701511362" />
-    <state width="1515" height="222" key="GridCell.Tab.0.center" timestamp="1588701511362">
+    <state width="1515" height="222" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1588762971302" />
+    <state width="1515" height="222" key="GridCell.Tab.0.center" timestamp="1588762971301">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="222" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1588701511362" />
-    <state width="1515" height="222" key="GridCell.Tab.0.left" timestamp="1588701511362">
+    <state width="1515" height="222" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1588762971301" />
+    <state width="1515" height="222" key="GridCell.Tab.0.left" timestamp="1588762971300">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="222" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1588701511362" />
-    <state width="1515" height="222" key="GridCell.Tab.0.right" timestamp="1588701511362">
+    <state width="1515" height="222" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1588762971300" />
+    <state width="1515" height="222" key="GridCell.Tab.0.right" timestamp="1588762971301">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1515" height="222" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1588701511362" />
+    <state width="1515" height="222" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1588762971301" />
     <state width="1515" height="277" key="GridCell.Tab.1.bottom" timestamp="1588701089598">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -286,9 +295,9 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1588694538021" />
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1588622580659">
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1588702696983">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1588622580659" />
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1588702696983" />
   </component>
 </project>

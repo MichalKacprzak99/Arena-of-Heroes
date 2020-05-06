@@ -15,7 +15,7 @@ class Player:
 
     def set_starting_pos(self):
         if self.player_id == 1:
-            return [Hero(0, 0, [11, 0]), Hero(0, 1, [11, 1])]
+            return [Hero(0, 0, [11, 0], "west"), Hero(0, 1, [11, 1], "west")]
         else:
             return [Hero(0, 0, [0, 0]), Hero(0, 1, [0, 1])]
 
@@ -26,14 +26,11 @@ class Player:
 
     def move(self, opponent, object_tiles, new_pos):
         new_pos = get_tile_pos(new_pos)
-        if self.clicked_in_range(new_pos):
-            self.moved_hero = self.heroes[self.clicked_hero]
-            self.list_of_tiles = path_finder(self, opponent, object_tiles, new_pos)
-            self.heroes[self.clicked_hero].pos = new_pos
-            self.clicked_hero = None
-            return ["move", self.player_id, self.moved_hero, self.list_of_tiles]
-        else:
-            return False
+        self.moved_hero = self.heroes[self.clicked_hero]
+        self.list_of_tiles = path_finder(self, opponent, object_tiles, new_pos)
+        self.heroes[self.clicked_hero].pos = new_pos
+        self.clicked_hero = None
+        return ["move", self.player_id, self.moved_hero, self.list_of_tiles]
 
     def clicked_own_hero(self, clicked_pos):
         return any(map(lambda hero: clicked_pos == hero.pos, self.heroes))
@@ -55,7 +52,7 @@ class Player:
 
     def action(self, opponent, object_tiles, clicked_pos):
         tmp_pos = get_tile_pos(clicked_pos)
-        if self.clicked_own_hero(tmp_pos):
+        if self.clicked_own_hero(tmp_pos) or self.clicked_in_range(tmp_pos) is False:
             return False
         if self.clicked_not_valid_tile(object_tiles, opponent, clicked_pos) is False:
             return self.move(opponent, object_tiles, clicked_pos)

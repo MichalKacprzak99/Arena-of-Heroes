@@ -16,15 +16,20 @@ COLORS = {
 WIDTH = 768
 HEIGHT = 768
 
-HERO_IMAGES = {
-    "0": "Mag.png"
-}
 CLIENT_NAME = {
     "0": "CLIENT A",
     "1": "CLIENT B"
 }
 MAPS = {
     "0": "map1/map1.tmx"
+}
+HERO_IMAGES = {
+    "HERO": {
+        "north": "HERO/north.png",
+        "south": "HERO/south.png",
+        "east": "HERO/east.png",
+        "west": "HERO/west.png"
+    }
 }
 
 
