@@ -10,12 +10,13 @@ class Gui:
     def __init__(self, pygame_screen):
         self.window = pygame_screen
         self.radio_buttons = []
-        self.button_text = ["Attack type:",  "Basic",  "Special", "TOBEADDED"]
+        self.button_text = ["Basic",  "Special", "TOBEADDED"]
         self.hero_info_text = ["Selected hero:", " ", "HP: ", " ", "Attack: ", " ", "Defense: ", " "]
         self.opponent_info_text = ["Opponent hero:"]
         self.menu = None
         self.background = None
         self.elements = []
+        self.radio_pool = None
         self.create()
 
     def fill_elements_table(self):
@@ -25,15 +26,20 @@ class Gui:
 
     def create(self):
         self.fill_elements_table()
-        self.background = thorpy.Background(color=(168, 139, 50), elements=self.elements)
+        self.background = thorpy.Background(color=(168, 139, 50), elements=self.elements+self.radio_buttons)
         thorpy.set_theme("round")
         self.menu = thorpy.Menu(self.background)
         for element in self.menu.get_population():
             element.surface = self.window
+        for txt in self.button_text:
+            self.radio_buttons.append(thorpy.Checker(txt, type_="radio"))
+        self.radio_pool = thorpy.RadioPool(self.radio_buttons, first_value=self.radio_buttons[0], always_value=True)
+
         thorpy.store(self.background, self.elements[GUI_INFO["DISPLAY_HERO"]:GUI_INFO["OPPONENT_HERO"]],
                      x=10, y=0, align="center")
         thorpy.store(self.background, self.elements[GUI_INFO["OPPONENT_HERO"]:], x=RIGHT_BOX_START + 10, y=0,
                      align="center")
+
         self.background.blit()
         self.background.update()
 
