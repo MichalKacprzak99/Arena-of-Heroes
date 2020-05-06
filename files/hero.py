@@ -9,4 +9,4 @@ class Hero:
         self.range = 5
         self.which_side = which_side
         self.name = name
-
+        self.action = "move"
