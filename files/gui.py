@@ -38,36 +38,18 @@ class Gui:
 
         self.background.blit()
         self.background.update()
+#  LOOP!!!!!!!!!!!!
 
-    def set_hero_info(self, player, mouse_pos):
-        for hero in player.heroes:
-            if hero.pos == mouse_pos:
-                chosen_id = hero.hero_id
-        self.elements[GUI_INFO["DISPLAY_HERO"]].set_text(self.hero_info_text[GUI_INFO["DISPLAY_HERO"]])
-        self.elements[GUI_INFO["HERO_NAME"]].set_text(str(player.heroes[chosen_id].hero_id))
-
-        self.elements[GUI_INFO["DISPLAY_HP"]].set_text(self.hero_info_text[GUI_INFO["DISPLAY_HP"]])
-        self.elements[GUI_INFO["HP_VALUE"]].set_text(str(player.heroes[chosen_id].health))
-
-        self.elements[GUI_INFO["DISPLAY_ATTACK"]].set_text(self.hero_info_text[GUI_INFO["DISPLAY_ATTACK"]])
-        self.elements[GUI_INFO["ATTACK_VALUE"]].set_text("PLACEHOLDER")
-
-        self.elements[GUI_INFO["DISPLAY_DEFENSE"]].set_text(self.hero_info_text[GUI_INFO["DISPLAY_DEFENSE"]])
-        self.elements[GUI_INFO["DEFENSE_VALUE"]].set_text("PLACEHOLDER")
-
-    def set_opponent_info(self, opponent, mouse_pos):
-        for hero in opponent.heroes:
-            if hero.pos == mouse_pos:
-                chosen_id = hero.hero_id
-        opponent_info_index = 8
+    def set_hero_info(self, player, mouse_pos, opponent_info_index):
+        chosen_hero = list(filter(lambda hero: hero.pos == mouse_pos, player.heroes))[0]
         self.elements[GUI_INFO["DISPLAY_HERO"] +
                       opponent_info_index].set_text(self.hero_info_text[GUI_INFO["DISPLAY_HERO"]])
         self.elements[GUI_INFO["HERO_NAME"] +
-                      opponent_info_index].set_text(str(opponent.heroes[chosen_id].hero_id))
+                      opponent_info_index].set_text(str(chosen_hero.hero_id))
         self.elements[GUI_INFO["DISPLAY_HP"] +
                       opponent_info_index].set_text(self.hero_info_text[GUI_INFO["DISPLAY_HP"]])
         self.elements[GUI_INFO["HP_VALUE"] +
-                      opponent_info_index].set_text(str(opponent.heroes[chosen_id].health))
+                      opponent_info_index].set_text(str(chosen_hero.health))
         self.elements[GUI_INFO["DISPLAY_ATTACK"] +
                       opponent_info_index].set_text(self.hero_info_text[GUI_INFO["DISPLAY_ATTACK"]])
         self.elements[GUI_INFO["ATTACK_VALUE"] + opponent_info_index].set_text("PLACEHOLDER")
@@ -76,16 +58,16 @@ class Gui:
         self.elements[GUI_INFO["DEFENSE_VALUE"] + opponent_info_index].set_text("PLACEHOLDER")
 
     def reset_gui(self):
-        for element_index in range(16):
-            self.elements[element_index].set_text(" ")
+        for element_id in range(len(self.elements)):
+            self.elements[element_id].set_text(" ")
 
     def update_gui(self, mouse_pos, player, opponent):
         if 120 < mouse_pos[0] < 888:
             mouse_pos = get_tile_pos(mouse_pos)
-            if any(map(lambda hero: mouse_pos == hero.pos, player.heroes)):
-                self.set_hero_info(player, mouse_pos)
-            elif any(map(lambda opp_hero: mouse_pos == opp_hero.pos, opponent.heroes)):
-                self.set_opponent_info(opponent, mouse_pos)
+            if player.clicked_own_hero(mouse_pos):
+                self.set_hero_info(player, mouse_pos, 0 if player.player_id == 0 else 8)
+            elif player.clicked_opponent_hero(opponent, mouse_pos):
+                self.set_hero_info(opponent, mouse_pos, 8 if player.player_id == 0 else 0)
             else:
                 self.reset_gui()
 

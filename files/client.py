@@ -8,7 +8,6 @@ from gui import Gui
 
 
 pg.init()
-
 pg.font.init()
 
 
@@ -27,7 +26,7 @@ def main():
 
     while run:
         clock.tick(60)
-        if menu.both_ready() is False:
+        if not menu.both_ready():
             try:
                 opponent, which_map, menu.opponent_ready = n.send(["get_info", opponent_id])
                 board = TiledMap(MAPS[str(which_map)], window)
@@ -40,7 +39,7 @@ def main():
                 if event.type == pg.MOUSEBUTTONUP:
                     actual_pos = pg.mouse.get_pos()
                     menu.click(actual_pos, n, player_id)
-            if menu.player_ready is True:
+            if menu.player_ready:
                 menu.loading_screen()
         else:
             if not gui_start:
@@ -58,7 +57,7 @@ def main():
 
             gui.update_gui(actual_pos, player, opponent)
 
-            move = redraw_window(window, board, player, opponent, which_player_turn, player.clicked_hero, actual_pos)
+            move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos)
             if move:
                 try:
                     n.send(["update", opponent_id])
@@ -71,12 +70,12 @@ def main():
                     break
                 if event.type == pg.MOUSEBUTTONUP:
                     if which_player_turn == player_id:
-                        if player.clicked_hero is None:
+                        if not player.clicked_hero:
                             player.check_clicked_hero(actual_pos)
                         else:
-                            feedback = player.action(opponent, board.object_tiles, actual_pos)
-                            if feedback:
-                                n.send(feedback)
+                            made_action = player.action(opponent, board.object_tiles, actual_pos)
+                            if made_action:
+                                n.send(made_action)
 
             try:
                 opponent = n.send(["echo", opponent_id])

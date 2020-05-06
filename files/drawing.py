@@ -14,10 +14,10 @@ def draw_player_turn(screen, player_turn):
 
 
 def highlight_tile(screen, board, player, opponent, pos):
-    color = COLORS["GREEN"]
     if 120 <= pos[0] <= 888:
+        color = COLORS["GREEN"]
         tmp_pos = get_tile_pos(pos)
-        if player.clicked_hero is not None and player.clicked_in_range(tmp_pos) is False:
+        if player.clicked_hero and player.clicked_in_range(tmp_pos) is False:
             color = COLORS["GRAY"]
         if player.clicked_object(board.object_tiles,  tmp_pos):
             color = COLORS["BLACK"]
@@ -62,44 +62,43 @@ def draw_heroes(screen, player):
             draw_hero(screen, hero, hero.pos)
 
 
-def draw_background(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
+def draw_background(screen, board, player, opponent, player_turn, actual_pos):
     board.draw()
     highlight_tile(screen, board, player, opponent, actual_pos)
     draw_heroes(screen, player)
     draw_heroes(screen, opponent)
     draw_player_turn(screen, player_turn)
-    if clicked_hero is not None:
+    if player.clicked_hero:
         draw_if_clicked(screen)
 
 
-def draw_all(screen, board, player, opponent, player_turn, clicked_hero, actual_pos, tile):
-    draw_background(screen, board, player, opponent, player_turn, clicked_hero, actual_pos)
+def draw_all(screen, board, player, opponent, player_turn, actual_pos, tile):
+    draw_background(screen, board, player, opponent, player_turn, actual_pos)
     draw_hero(screen, player.moved_hero, tile)
     pg.display.update()
     pg.time.delay(500)
 
 
-def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
+def redraw_window(screen, board, player, opponent, player_turn, actual_pos):
     global last_moved_hero_id, last_which_side
-    make_move = False
-    if player.moved_hero is None or opponent.moved_hero is None:
-        if last_moved_hero_id is not None:
-            opponent.heroes[last_moved_hero_id].which_side = last_which_side
-        draw_background(screen, board, player, opponent, player_turn, clicked_hero, actual_pos)
-        pg.display.update()
+    made_move = False
     if player.moved_hero:
         for tile, side in player.list_of_tiles:
             player.moved_hero.which_side = side
-            draw_all(screen, board, player, opponent, player_turn, clicked_hero, actual_pos, tile)
+            draw_all(screen, board, player, opponent, player_turn, actual_pos, tile)
         player.heroes[player.moved_hero.hero_id].which_side = player.moved_hero.which_side
         player.moved_hero = None
     if opponent.moved_hero:
         for tile, side in opponent.list_of_tiles:
             opponent.moved_hero.which_side = side
-            draw_all(screen, board, opponent, player, player_turn, clicked_hero, actual_pos, tile)
+            draw_all(screen, board, opponent, player, player_turn, actual_pos, tile)
         last_which_side = opponent.moved_hero.which_side
         last_moved_hero_id = opponent.moved_hero.hero_id
-        make_move = True
-        return make_move
-
-    return make_move
+        made_move = True
+        return made_move
+    else:
+        if last_moved_hero_id is not None:
+            opponent.heroes[last_moved_hero_id].which_side = last_which_side
+        draw_background(screen, board, player, opponent, player_turn, actual_pos)
+        pg.display.update()
+    return made_move

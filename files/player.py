@@ -12,6 +12,9 @@ class Player:
         self.clicked_hero = None
         self.moved_hero = None
         self.list_of_tiles = None
+        self.actions = {
+            "move": self.move,
+        }
 
     def set_starting_pos(self):
         if self.player_id == 1:
@@ -26,9 +29,7 @@ class Player:
 
     def action(self, opponent, object_tiles, clicked_pos):
         clicked_pos = get_tile_pos(clicked_pos)
-        if self.clicked_hero.action == "move":
-            return self.move(opponent, object_tiles, clicked_pos)
-        return False
+        return self.actions[self.clicked_hero.action](opponent, object_tiles, clicked_pos)
 
     def move(self, opponent, object_tiles, pos):
         if self.clicked_in_range(pos) and self.clicked_not_valid_tile(object_tiles, opponent, pos) is False:
