@@ -1,5 +1,7 @@
 from settings import GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT, BOX_WIDTH, HERO_IMAGES, COLORS, coordinate, load_image, get_tile_pos
 import pygame as pg
+last_moved_hero_id = None
+last_which_side = ""
 
 
 def draw_player_turn(screen, player_turn):
@@ -13,15 +15,16 @@ def draw_player_turn(screen, player_turn):
 def highlight_tile(screen, board, player, opponent, pos):
     color = COLORS["GREEN"]
     if 120 < pos[0] < 888:
-        pos = get_tile_pos(pos)
-        if pos in board.object_tiles:
+        if player.clicked_hero is not None and player.clicked_in_range(pos) is False:
+            color = COLORS["GRAY"]
+        if player.clicked_object(board.object_tiles, pos):
             color = COLORS["BLACK"]
-        if any(map(lambda opp_hero: pos == opp_hero.pos, opponent.heroes)):
+        if player.clicked_opponent_hero(opponent, pos):
             color = COLORS["RED"]
-        if any(map(lambda hero: pos == hero.pos, player.heroes)):
+        if player.clicked_own_hero(pos):
             color = COLORS["BLUE"]
-        drawing_pos = coordinate(pos)
-        pg.draw.rect(screen, color, (drawing_pos[0], drawing_pos[1], 64, 64), 1)
+    drawing_pos = coordinate(pos)
+    pg.draw.rect(screen, color, (drawing_pos[0], drawing_pos[1], 64, 64), 1)
 
 
 def draw_if_clicked(screen):
@@ -43,15 +46,20 @@ def draw_health_bar(screen, hero, hero_coordinate):
         pg.draw.rect(screen, COLORS["BLACK"], (lose_hp, (how_much_less_hp, 5)), 0)
 
 
+def draw_hero(screen, hero, tile):
+    hero_coordinate = coordinate(tile)
+    hero_image = pg.image.load(load_image(HERO_IMAGES[hero.name][hero.which_side]))
+    screen.blit(hero_image, hero_coordinate)
+    draw_health_bar(screen, hero, hero_coordinate)
+
+
 def draw_heroes(screen, player):
     for hero in player.heroes:
-        hero_coordinate = coordinate(hero.pos)
-        hero_image = pg.image.load(load_image(HERO_IMAGES[str(hero.image_id)]))
-        screen.blit(hero_image, hero_coordinate)
-        draw_health_bar(screen, hero, hero_coordinate)
+        if hero is not player.moved_hero:
+            draw_hero(screen, hero, hero.pos)
 
 
-def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
+def draw_background(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
     board.draw()
     highlight_tile(screen, board, player, opponent, actual_pos)
     draw_heroes(screen, player)
@@ -60,4 +68,36 @@ def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, ac
     if clicked_hero is not None:
         draw_if_clicked(screen)
 
+
+def draw_all(screen, board, player, opponent, player_turn, clicked_hero, actual_pos, tile):
+    draw_background(screen, board, player, opponent, player_turn, clicked_hero, actual_pos)
+    draw_hero(screen, player.moved_hero, tile)
     pg.display.update()
+    pg.time.delay(500)
+
+
+def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, actual_pos):
+    global last_moved_hero_id, last_which_side
+    make_move = False
+    if player.moved_hero is None or opponent.moved_hero is None:
+        if last_moved_hero_id is not None:
+            opponent.heroes[last_moved_hero_id].which_side = last_which_side
+        draw_background(screen, board, player, opponent, player_turn, clicked_hero, actual_pos)
+        pg.display.update()
+    if player.moved_hero:
+        for tile, side in player.list_of_tiles:
+            player.moved_hero.which_side = side
+            draw_all(screen, board, player, opponent, player_turn, clicked_hero, actual_pos, tile)
+        player.heroes[player.moved_hero.hero_id].which_side = player.moved_hero.which_side
+        player.moved_hero = None
+    if opponent.moved_hero:
+        for tile, side in opponent.list_of_tiles:
+            opponent.moved_hero.which_side = side
+            draw_all(screen, board, opponent, player, player_turn, clicked_hero, actual_pos, tile)
+        last_which_side = opponent.moved_hero.which_side
+        last_moved_hero_id = opponent.moved_hero.hero_id
+        make_move = True
+        return make_move
+
+    return make_move
+

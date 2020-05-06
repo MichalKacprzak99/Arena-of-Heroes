@@ -8,7 +8,8 @@ COLORS = {
     "RED": (255, 0, 0),
     "YELLOW": (255, 255, 0),
     "BROWN": (106, 55, 5),
-    "BLUE": (0, 0, 255)
+    "BLUE": (0, 0, 255),
+    "GRAY": (128, 128, 128)
 }
 
 GUI_INFO = {
@@ -31,15 +32,20 @@ BOX_HEIGHT = 768
 LEFT_BOX_CENTER = BOX_WIDTH/2
 RIGHT_BOX_START = BOX_WIDTH + GAME_SCREEN_WIDTH
 
-HERO_IMAGES = {
-    "0": "Mag.png"
-}
 CLIENT_NAME = {
     "0": "CLIENT A",
     "1": "CLIENT B"
 }
 MAPS = {
     "0": "map1/map1.tmx"
+}
+HERO_IMAGES = {
+    "HERO": {
+        "north": "HERO/north.png",
+        "south": "HERO/south.png",
+        "east": "HERO/east.png",
+        "west": "HERO/west.png"
+    }
 }
 
 

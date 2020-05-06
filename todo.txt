@@ -1,15 +1,5 @@
-BASIC:
--merge multiple png to one- not needed
--create tileset - done
--create design layer on map - done
--create object layer - done
--find how to handle object layer -done
--add method to tile_map.py to create 2d-array of object position - change 2d to list - done
--change highlight function from client.py -> green if possible, red if enemy, black if not valid tile- done
--create dictionary of maps in settings.py -done
--in game.py add to _init__ random number of which map to load -> add this to get_another_player(server.py, switch name to get_info) - done
--create method in Player class to handle any action-> now only move - done
--player is not able to move to "red" or "black" tile - done
-
-EXTRA:
--deal with pygame.error when quit - done
+to do:
+- algorithm to find shortest path
+- how display moves
+- how to send next moves
+- display different images(depends on where the hero looks)

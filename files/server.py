@@ -14,7 +14,7 @@ try:
 except socket.error as e:
     str(e)
 
-s.listen(2)
+s.listen()
 print("Waiting for a connection, Server Started")
 games = {}
 idCount = 0
@@ -42,6 +42,8 @@ def threaded_client(conn, player_id, game_id):
                     if data[0] == "move":
                         moved_hero = data[2]
                         game.players[which_player_take_action].heroes[moved_hero.hero_id] = moved_hero
+                        game.players[which_player_take_action].moved_hero = moved_hero
+                        game.players[which_player_take_action].list_of_tiles = data[3]
                         game.player_turn = abs(game.player_turn - 1)
                         game.turns += 1
                         reply = game.players[which_player_take_action]
@@ -52,7 +54,8 @@ def threaded_client(conn, player_id, game_id):
                         reply = game.is_ready[which_player_take_action]
                     if data == "get_turn":
                         reply = [game.player_turn, game.turns]
-
+                    if data[0] == "update":
+                        game.players[which_player_take_action].moved_hero = None
                     print("received: ", data)
                     print("Sending: ", reply)
                     conn.sendall(pickle.dumps(reply))
