@@ -1,20 +1,20 @@
 import pygame as pg
 from network import Network
 from tile_map import TiledMap
-from settings import GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT, BOX_WIDTH, CLIENT_NAME, MAPS
+from settings import GAME_SETTINGS, BOX_SETTINGS, CLIENT_NAME, MAPS
 from drawing import redraw_window
 from menu import Menu
 from gui import Gui
-import thorpy
 
 
 pg.init()
-beginning = pg.display.set_mode((GAME_SCREEN_WIDTH , GAME_SCREEN_HEIGHT-125))
+beginning = pg.display.set_mode((GAME_SETTINGS["GAME_SCREEN_WIDTH"], GAME_SETTINGS["GAME_SCREEN_HEIGHT"]-125))
 pg.font.init()
 
 
 def main():
     run = True
+    gui_start = False
     clock = pg.time.Clock()
     n = Network()
     player = n.get_player()
@@ -23,7 +23,7 @@ def main():
     print(("Hi, you are client: "+str(player_id)))
     opponent_id = abs(player_id - 1)
     menu = Menu(beginning)
-    gui_start = False
+
     while run:
         clock.tick(60)
         if menu.both_ready() is False:
@@ -43,7 +43,9 @@ def main():
                 menu.loading_screen()
         else:
             if not gui_start:
-                window = pg.display.set_mode((GAME_SCREEN_WIDTH + BOX_WIDTH * 2, GAME_SCREEN_HEIGHT))
+                width = GAME_SETTINGS["GAME_SCREEN_WIDTH"] + BOX_SETTINGS["BOX_WIDTH"] * 2
+                height = GAME_SETTINGS["GAME_SCREEN_HEIGHT"]
+                window = pg.display.set_mode((width, height))
                 gui = Gui(window)
                 gui_start = True
             try:

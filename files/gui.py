@@ -1,9 +1,5 @@
-import pygame as pg
 import thorpy
-from hero import Hero
-from player import Player
-from settings import GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT, BOX_WIDTH, RIGHT_BOX_START, GUI_INFO, \
-    get_tile_pos, coordinate
+from settings import BOX_SETTINGS, GUI_INFO, get_tile_pos
 
 
 class Gui:
@@ -20,7 +16,7 @@ class Gui:
         self.create()
 
     def fill_elements_table(self):
-        for txt in self.hero_info_text:
+        for _ in self.hero_info_text:
             self.elements.append(thorpy.make_text(" ", 12, (0, 0, 0)))
             self.elements.append(thorpy.make_text(" ", 12, (0, 0, 0)))
 
@@ -37,8 +33,8 @@ class Gui:
 
         thorpy.store(self.background, self.elements[GUI_INFO["DISPLAY_HERO"]:GUI_INFO["OPPONENT_HERO"]],
                      x=10, y=0, align="center")
-        thorpy.store(self.background, self.elements[GUI_INFO["OPPONENT_HERO"]:], x=RIGHT_BOX_START + 10, y=0,
-                     align="center")
+        thorpy.store(self.background, self.elements[GUI_INFO["OPPONENT_HERO"]:],
+                     x=BOX_SETTINGS["RIGHT_BOX"] + 10, y=0, align="center")
 
         self.background.blit()
         self.background.update()
@@ -64,19 +60,19 @@ class Gui:
             if hero.pos == mouse_pos:
                 chosen_id = hero.hero_id
         opponent_info_index = 8
-        self.elements[GUI_INFO["DISPLAY_HERO"] + opponent_info_index].set_text(self.hero_info_text
-                                                                               [GUI_INFO["DISPLAY_HERO"]])
-        self.elements[GUI_INFO["HERO_NAME"] + opponent_info_index].set_text(str(opponent.heroes
-                                                                                [chosen_id].hero_id))
-        self.elements[GUI_INFO["DISPLAY_HP"] + opponent_info_index].set_text(self.hero_info_text
-                                                                               [GUI_INFO["DISPLAY_HP"]])
-        self.elements[GUI_INFO["HP_VALUE"] + opponent_info_index].set_text(str(opponent.heroes
-                                                                               [chosen_id].health))
-        self.elements[GUI_INFO["DISPLAY_ATTACK"] + opponent_info_index].set_text(self.hero_info_text
-                                                                                 [GUI_INFO["DISPLAY_ATTACK"]])
+        self.elements[GUI_INFO["DISPLAY_HERO"] +
+                      opponent_info_index].set_text(self.hero_info_text[GUI_INFO["DISPLAY_HERO"]])
+        self.elements[GUI_INFO["HERO_NAME"] +
+                      opponent_info_index].set_text(str(opponent.heroes[chosen_id].hero_id))
+        self.elements[GUI_INFO["DISPLAY_HP"] +
+                      opponent_info_index].set_text(self.hero_info_text[GUI_INFO["DISPLAY_HP"]])
+        self.elements[GUI_INFO["HP_VALUE"] +
+                      opponent_info_index].set_text(str(opponent.heroes[chosen_id].health))
+        self.elements[GUI_INFO["DISPLAY_ATTACK"] +
+                      opponent_info_index].set_text(self.hero_info_text[GUI_INFO["DISPLAY_ATTACK"]])
         self.elements[GUI_INFO["ATTACK_VALUE"] + opponent_info_index].set_text("PLACEHOLDER")
-        self.elements[GUI_INFO["DISPLAY_DEFENSE"] + opponent_info_index].set_text(self.hero_info_text
-                                                                                  [GUI_INFO["DISPLAY_DEFENSE"]])
+        self.elements[GUI_INFO["DISPLAY_DEFENSE"] +
+                      opponent_info_index].set_text(self.hero_info_text[GUI_INFO["DISPLAY_DEFENSE"]])
         self.elements[GUI_INFO["DEFENSE_VALUE"] + opponent_info_index].set_text("PLACEHOLDER")
 
     def reset_gui(self):

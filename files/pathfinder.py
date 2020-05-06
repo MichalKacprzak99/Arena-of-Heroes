@@ -39,5 +39,3 @@ def path_finder(player, opponent, object_tiles, new_pos):
     finder = AStarFinder(diagonal_movement=DiagonalMovement.never)
     path, runs = finder.find_path(start, end, grid)
     return add_side(path)
-
-

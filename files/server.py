@@ -20,15 +20,15 @@ games = {}
 idCount = 0
 
 
-def threaded_client(conn, player_id, game_id):
+def threaded_client(connection, p_id, game_id):
     global idCount
-    games[game_id].players[player_id] = Player(name="df", player_id=player_id)
-    conn.send(pickle.dumps(games[game_id].players[player_id]))
+    games[game_id].players[p_id] = Player(name="df", player_id=p_id)
+    connection.send(pickle.dumps(games[game_id].players[p_id]))
     reply = []
 
     while True:
         try:
-            data = pickle.loads(conn.recv(2048))
+            data = pickle.loads(connection.recv(2048))
 
             if game_id in games:
                 game = games[game_id]
@@ -38,7 +38,8 @@ def threaded_client(conn, player_id, game_id):
                 else:
                     which_player_take_action = data[1]
                     if data[0] == "get_info":
-                        reply = [game.players[which_player_take_action], game.which_map, game.is_ready[abs(which_player_take_action-1)]]
+                        opponent_ready = game.is_ready[abs(which_player_take_action-1)]
+                        reply = [game.players[which_player_take_action], game.which_map, opponent_ready]
                     if data[0] == "move":
                         moved_hero = data[2]
                         game.players[which_player_take_action].heroes[moved_hero.hero_id] = moved_hero
@@ -58,7 +59,7 @@ def threaded_client(conn, player_id, game_id):
                         game.players[which_player_take_action].moved_hero = None
                     print("received: ", data)
                     print("Sending: ", reply)
-                    conn.sendall(pickle.dumps(reply))
+                    connection.sendall(pickle.dumps(reply))
             else:
                 break
         except EOFError:
@@ -71,7 +72,7 @@ def threaded_client(conn, player_id, game_id):
     except KeyError:
         pass
     idCount -= 1
-    conn.close()
+    connection.close()
 
 
 player_id = 0
@@ -87,7 +88,6 @@ while True:
 
         print("Creating a new game...")
     else:
-        games[gameId].ready = True
         player_id = 1
 
     start_new_thread(threaded_client, (conn, player_id, gameId))

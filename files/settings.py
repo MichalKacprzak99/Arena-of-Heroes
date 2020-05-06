@@ -25,12 +25,17 @@ GUI_INFO = {
 }
 
 # game settings
-GAME_SCREEN_WIDTH = 768
-GAME_SCREEN_HEIGHT = 768
-BOX_WIDTH = 120
-BOX_HEIGHT = 768
-LEFT_BOX_CENTER = BOX_WIDTH/2
-RIGHT_BOX_START = BOX_WIDTH + GAME_SCREEN_WIDTH
+GAME_SETTINGS = {
+    "GAME_SCREEN_WIDTH": 768,
+    "GAME_SCREEN_HEIGHT": 768,
+}
+BOX_SETTINGS = {
+    "BOX_WIDTH": 120,
+    "BOX_HEIGHT": 768,
+    "LEFT_BOX_CENTER": 60,
+    "RIGHT_BOX": 120 + GAME_SETTINGS["GAME_SCREEN_WIDTH"]
+}
+
 
 CLIENT_NAME = {
     "0": "CLIENT A",
@@ -56,13 +61,8 @@ def load_image(filename):
 
 
 def get_tile_pos(pos):
-    # return list(map(lambda cord: (cord - 120)//64, pos))
     return [(pos[0]-120)//64, pos[1]//64]
 
 
 def coordinate(tile_pos):
     return [tile_pos[0]*64 + 120, tile_pos[1]*64]
-    # return list(map(lambda cord: cord*64 + 120, tile_pos))
-
-
-

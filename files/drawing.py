@@ -1,4 +1,4 @@
-from settings import GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT, BOX_WIDTH, HERO_IMAGES, COLORS, coordinate, load_image, get_tile_pos
+from settings import GAME_SETTINGS, BOX_SETTINGS, HERO_IMAGES, COLORS, coordinate, load_image, get_tile_pos
 import pygame as pg
 last_moved_hero_id = None
 last_which_side = ""
@@ -9,12 +9,12 @@ def draw_player_turn(screen, player_turn):
     text_to_input = "Player %d turn" % player_turn
     text_width, text_height = font.size(text_to_input)
     text = font.render(text_to_input, True, COLORS["RED"])
-    screen.blit(text, ((GAME_SCREEN_WIDTH + BOX_WIDTH * 2)/2 - text_width/2, 20))
+    width = GAME_SETTINGS["GAME_SCREEN_WIDTH"] + BOX_SETTINGS["BOX_WIDTH"] * 2
+    screen.blit(text, (width/2 - text_width/2, 20))
 
 
 def highlight_tile(screen, board, player, opponent, pos):
     color = COLORS["GREEN"]
-    draw_pos = coordinate(get_tile_pos(pos))
     if 120 <= pos[0] <= 888:
         tmp_pos = get_tile_pos(pos)
         if player.clicked_hero is not None and player.clicked_in_range(tmp_pos) is False:
@@ -34,7 +34,8 @@ def draw_if_clicked(screen):
     text_to_input = "Clicked"
     text_width, text_height = font.size(text_to_input)
     text = font.render(text_to_input, True, COLORS["RED"])
-    screen.blit(text, ((GAME_SCREEN_WIDTH + BOX_WIDTH * 2)/2 - text_width/2, 50))
+    width = GAME_SETTINGS["GAME_SCREEN_WIDTH"] + BOX_SETTINGS["BOX_WIDTH"] * 2
+    screen.blit(text, (width/2 - text_width/2, 50))
 
 
 def draw_health_bar(screen, hero, hero_coordinate):
@@ -102,4 +103,3 @@ def redraw_window(screen, board, player, opponent, player_turn, clicked_hero, ac
         return make_move
 
     return make_move
-

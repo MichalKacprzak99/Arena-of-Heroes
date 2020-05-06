@@ -1,11 +1,13 @@
 import pytmx
 from os import path
-from settings import GAME_SCREEN_HEIGHT, GAME_SCREEN_WIDTH, BOX_WIDTH
+from settings import GAME_SETTINGS, BOX_SETTINGS
 import pygame as pg
 
 pg.init()
 pg.font.init()
-window = pg.display.set_mode((GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT))
+width = GAME_SETTINGS["GAME_SCREEN_WIDTH"]
+height = GAME_SETTINGS["GAME_SCREEN_HEIGHT"]
+window = pg.display.set_mode((width, height))
 
 
 class TiledMap:
@@ -20,7 +22,7 @@ class TiledMap:
         self.screen.fill((168, 139, 50))
 
     def draw(self):
-        self.screen.blit(self.map_img, (BOX_WIDTH, 0))
+        self.screen.blit(self.map_img, (BOX_SETTINGS["BOX_WIDTH"], 0))
 
     @staticmethod
     def load_data(filename):
@@ -49,6 +51,3 @@ class TiledMap:
         temp_surface = pg.Surface((self.width, self.height))
         self.render(temp_surface)
         return temp_surface
-
-
-
