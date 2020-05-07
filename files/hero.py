@@ -16,4 +16,4 @@ class Hero:
             "DEFENSE": self.defense,
             "RANGE": self.range
         }
-        self.action = "move"
+

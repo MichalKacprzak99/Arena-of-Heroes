@@ -55,7 +55,7 @@ class Gui:
 
     def get_radio_value(self):
         for index in range(len(self.radio_buttons)):
-            if self.radio_buttons[index]._checked == 1:
+            if self.radio_buttons[index].get_value() == 1:
                 return self.button_text[index].lower()
 
     def reset_gui(self):
@@ -67,7 +67,7 @@ class Gui:
             rad.set_visible(appear_value)
 
     def update_gui(self, mouse_pos, player, opponent):
-        if 120 < mouse_pos[0] < 888:
+        if BOX_SETTINGS["BOX_WIDTH"] < mouse_pos[0] < BOX_SETTINGS["RIGHT_BOX"]:
             mouse_pos = get_tile_pos(mouse_pos)
             self.buttons_appearing(1) if player.clicked_hero else self.buttons_appearing(0)
             if player.clicked_own_hero(mouse_pos):

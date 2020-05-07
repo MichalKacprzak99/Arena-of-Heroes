@@ -74,7 +74,7 @@ def main():
                         if not player.clicked_hero:
                             player.check_clicked_hero(actual_pos)
                         else:
-                            made_action = player.action(opponent, board.object_tiles, actual_pos)
+                            made_action = player.action(opponent, board.object_tiles, actual_pos, gui)
                             if made_action:
                                 n.send(made_action)
                 gui.menu.react(event)
