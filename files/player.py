@@ -56,7 +56,7 @@ class Player:
 
     def clicked_in_range(self, clicked_pos):
         distance = sqrt(sum([(i-j)**2 for i, j in zip(clicked_pos, self.clicked_hero.pos)]))
-        return int(distance) <= self.clicked_hero.range
+        return int(distance) <= self.clicked_hero.attributes["RANGE"]
 
     @staticmethod
     def clicked_object(object_tiles, clicked_pos):

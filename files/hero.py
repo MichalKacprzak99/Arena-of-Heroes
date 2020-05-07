@@ -4,10 +4,10 @@ class Hero:
         self.hero_id = hero_id
         self.pos = pos
         self.which_side = which_side
-        self.hp = 100
+        self.max_health = self.hp = 100
         self.attributes = {
             "NAME": name,
-            "MAX HP": 100,
+            "MAX HP": self.max_health,
             "HP": self.hp,
             "ATTACK": 10,
             "DEFENSE": 10,
