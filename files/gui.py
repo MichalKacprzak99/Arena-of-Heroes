@@ -6,7 +6,7 @@ class Gui:
     def __init__(self, pygame_screen):
         self.window = pygame_screen
         self.radio_buttons = []
-        self.button_text = ["Basic",  "Special", "TOBEADDED"]
+        self.button_text = ["Move",  "Basic", "Special"]
         self.hero_info_text = ["Hero:", " ", "HP: ", " ", "Attack: ", " ", "Defense: ", " "]
         self.menu = None
         self.background = None
@@ -35,6 +35,8 @@ class Gui:
         thorpy.store(self.background, self.elements[GUI_INFO["OPPONENT_HERO"]:],
                      x=BOX_SETTINGS["RIGHT_BOX"] + 10, y=100, align="center")
         thorpy.store(self.background, self.radio_buttons, x=20, y= 400, align="left")
+        self.buttons_appearing(0)
+        #self.radio_buttons = map(lambda radio: radio.set_visible(0), self.radio_buttons)
         self.background.blit()
         self.background.update()
 
@@ -42,9 +44,10 @@ class Gui:
         chosen_hero = list(filter(lambda hero: hero.pos == mouse_pos, player.heroes))[0]
         self.hero_info_text[1] = str(chosen_hero.hero_id)
         self.hero_info_text[3] = str(chosen_hero.health)
-        self.hero_info_text[5] = "0"
-        self.hero_info_text[7] = "0"
-        for index in range (4):
+        self.hero_info_text[5] = str(chosen_hero.attack)
+        self.hero_info_text[7] = str(chosen_hero.defense)
+        end_of_display = 4
+        for index in range (end_of_display):
             display_index = 2*index+1
             self.elements[index + opponent_info_index].set_text(self.hero_info_text[2*index] +
                                                                 self.hero_info_text[display_index])
@@ -53,9 +56,14 @@ class Gui:
         for element_id in range(len(self.elements)):
             self.elements[element_id].set_text(" ")
 
+    def buttons_appearing(self, appear_value):
+        for rad in self.radio_buttons:
+            rad.set_visible(appear_value)
+
     def update_gui(self, mouse_pos, player, opponent):
         if 120 < mouse_pos[0] < 888:
             mouse_pos = get_tile_pos(mouse_pos)
+            self.buttons_appearing(1) if player.clicked_hero else self.buttons_appearing(0)
             if player.clicked_own_hero(mouse_pos):
                 self.set_hero_info(player, mouse_pos, 0 if player.player_id == 0 else 4)
             elif player.clicked_opponent_hero(opponent, mouse_pos):
