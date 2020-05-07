@@ -1,4 +1,4 @@
-from hero import Hero
+from hero import Hero, Healer
 from settings import get_tile_pos
 from math import sqrt
 from pathfinder import path_finder
@@ -21,9 +21,9 @@ class Player:
 
     def set_starting_pos(self):
         if self.player_id == 1:
-            return [Hero(0, 0, [11, 0], "west"), Hero(0, 1, [11, 1], "west")]
+            return [Hero(0, [11, 0], which_side="west"), Hero(1, [11, 1], which_side="west")]
         else:
-            return [Hero(0, 0, [0, 0]), Hero(0, 1, [0, 1])]
+            return [Healer(0, [0, 0]), Hero(1, [0, 1])]
 
     def check_clicked_hero(self, clicked_pos):
         for hero in self.heroes:

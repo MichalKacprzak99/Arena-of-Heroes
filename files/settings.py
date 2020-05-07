@@ -37,7 +37,13 @@ hero_images = {
         "south": "HERO/south.png",
         "east": "HERO/east.png",
         "west": "HERO/west.png"
-    }
+    },
+    "Michal": {
+            "north": "HERO/north.png",
+            "south": "HERO/south.png",
+            "east": "HERO/east.png",
+            "west": "HERO/west.png"
+        }
 }
 
 
