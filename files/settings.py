@@ -42,7 +42,8 @@ CLIENT_NAME = {
     "1": "CLIENT B"
 }
 MAPS = {
-    "0": "map1/map1.tmx"
+    "0": "map1/map1.tmx",
+    "1": "map2/map2.tmx"
 }
 HERO_IMAGES = {
     "HERO": {
