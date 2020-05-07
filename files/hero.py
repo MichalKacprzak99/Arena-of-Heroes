@@ -9,4 +9,11 @@ class Hero:
         self.range = 5
         self.which_side = which_side
         self.name = name
+        self.attributes = {
+            "HERO": self.name,
+            "HP": self.health,
+            "ATTACK": self.attack,
+            "DEFENSE": self.defense,
+            "RANGE": self.range
+        }
         self.action = "move"

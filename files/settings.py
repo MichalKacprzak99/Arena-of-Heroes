@@ -11,15 +11,6 @@ COLORS = {
     "BLUE": (0, 0, 255),
     "GRAY": (128, 128, 128)
 }
-
-GUI_INFO = {
-    "HERO_NAME": 0,
-    "HP_VALUE": 1,
-    "ATTACK_VALUE": 2,
-    "DEFENSE_VALUE": 3,
-    "OPPONENT_HERO": 4
-}
-
 # game settings
 GAME_SETTINGS = {
     "GAME_SCREEN_WIDTH": 768,
