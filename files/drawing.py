@@ -51,7 +51,7 @@ def draw_health_bar(screen, hero, hero_coordinate):
 
 def draw_hero(screen, hero, tile):
     hero_coordinate = coordinate(tile)
-    hero_image = pg.image.load(load_image(hero_images[hero.attributes["NAME"]][hero.which_side]))
+    hero_image = pg.image.load(load_image(hero_images[hero.attributes["NAME"]][hero.side]))
     screen.blit(hero_image, hero_coordinate)
     draw_health_bar(screen, hero, hero_coordinate)
 
@@ -82,23 +82,23 @@ def draw_all(screen, board, player, opponent, player_turn, actual_pos, tile):
 def redraw_window(screen, board, player, opponent, player_turn, actual_pos):
     global last_moved_hero_id, last_which_side
     made_move = False
+    if last_moved_hero_id is not None:
+        opponent.heroes[last_moved_hero_id].side = last_which_side
     if player.moved_hero:
         for tile, side in player.path:
-            player.moved_hero.which_side = side
+            player.moved_hero.side = side
             draw_all(screen, board, player, opponent, player_turn, actual_pos, tile)
-        player.heroes[player.moved_hero.hero_id].which_side = player.moved_hero.which_side
+        player.heroes[player.moved_hero.hero_id].side = player.moved_hero.side
         player.moved_hero = None
     if opponent.moved_hero:
         for tile, side in opponent.path:
-            opponent.moved_hero.which_side = side
+            opponent.moved_hero.side = side
             draw_all(screen, board, opponent, player, player_turn, actual_pos, tile)
-        last_which_side = opponent.moved_hero.which_side
+        last_which_side = opponent.moved_hero.side
         last_moved_hero_id = opponent.moved_hero.hero_id
         made_move = True
         return made_move
     else:
-        if last_moved_hero_id is not None:
-            opponent.heroes[last_moved_hero_id].which_side = last_which_side
         draw_background(screen, board, player, opponent, player_turn, actual_pos)
         pg.display.update()
     return made_move
