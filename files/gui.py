@@ -53,6 +53,11 @@ class Gui:
             value = str(chosen_hero.attributes[attribute])
             self.elements[index + opponent_info_index].set_text(attribute + ": " + value)
 
+    def get_radio_value(self):
+        for index in range(len(self.radio_buttons)):
+            if self.radio_buttons[index]._checked == 1:
+                return self.button_text[index].lower()
+
     def reset_gui(self):
         for element_id in range(len(self.elements)):
             self.elements[element_id].set_text(" ")
