@@ -53,12 +53,12 @@ STAGE 2 - WEEK 1/2
     The tasks planned for this stage and all next will already be assigned to individual persons. During this stage, 
 we plan to implement the following elements:
 
-    • create main menu with option to start a new game (1 week);
+    • create main menu with option to start a new game (DONE);
     • GUI for game(1/2 week);
     • create all classes of heroes(2 week);
     • implement attack, real movement and other option(2 week);
-    • make our game to be turn-based(WORKING PROGRESS);
-    • create a set of map using Tiled(1 week);
+    • make our game to be turn-based(DONE);
+    • create a set of map using Tiled(DONE);
     
     After completing this stage, the player will be able to start a new game, wait for the second player to join and complete
 the game. For now, he will have a default test team at his disposal.
