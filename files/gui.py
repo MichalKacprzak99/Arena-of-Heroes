@@ -1,13 +1,14 @@
 import thorpy
 from settings import box_settings, get_tile_pos
 
-GUI_INFO = {
+gui_info = {
     "HERO_NAME": 0,
     "HP_VALUE": 1,
-    "ATTACK_VALUE": 2,
-    "DEFENSE_VALUE": 3,
-    "RANGE_VALUE": 4,
-    "OPPONENT_HERO": 5
+    "MAX_HP_VALUE": 2,
+    "ATTACK_VALUE": 3,
+    "DEFENSE_VALUE": 4,
+    "RANGE_VALUE": 5,
+    "OPPONENT_HERO": 6
 }
 
 
@@ -24,7 +25,7 @@ class Gui:
         self.create()
 
     def fill_elements_table(self):
-        for _ in range(len(GUI_INFO)*2):
+        for _ in range(len(gui_info) * 2):
             self.elements.append(thorpy.make_text(" ", 12, (0, 0, 0)))
 
     def create(self):
@@ -39,9 +40,9 @@ class Gui:
         self.menu = thorpy.Menu(self.background)
         for element in self.menu.get_population():
             element.surface = self.window
-        thorpy.store(self.background, self.elements[GUI_INFO["HERO_NAME"]:GUI_INFO["OPPONENT_HERO"]],
+        thorpy.store(self.background, self.elements[gui_info["HERO_NAME"]:gui_info["OPPONENT_HERO"]],
                      x=10, y=100, align="center")
-        thorpy.store(self.background, self.elements[GUI_INFO["OPPONENT_HERO"]:],
+        thorpy.store(self.background, self.elements[gui_info["OPPONENT_HERO"]:],
                      x=box_settings["RIGHT_BOX"] + 10, y=100, align="center")
         thorpy.store(self.background, self.radio_buttons, x=20 + self.p_id * box_settings["RIGHT_BOX"], y=400, align="left")
         self.buttons_appearing(0)
@@ -72,9 +73,9 @@ class Gui:
             mouse_pos = get_tile_pos(mouse_pos)
             self.buttons_appearing(1) if player.clicked_hero else self.buttons_appearing(0)
             if player.clicked_own_hero(mouse_pos):
-                self.set_hero_info(player, mouse_pos, 5*player.player_id)
+                self.set_hero_info(player, mouse_pos, len(gui_info) * player.player_id)
             elif player.clicked_opponent_hero(opponent, mouse_pos):
-                self.set_hero_info(opponent, mouse_pos, 5*opponent.player_id)
+                self.set_hero_info(opponent, mouse_pos, len(gui_info) * opponent.player_id)
             else:
                 self.reset_gui()
 
