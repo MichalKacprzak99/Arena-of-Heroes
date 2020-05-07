@@ -1,0 +1,5 @@
+pygame~=1.9.6
+pytmx~=3.21.7
+numpy~=1.18.1
+pathfinding~=0.0.4
+thorpy
