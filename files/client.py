@@ -5,7 +5,7 @@ from settings import GAME_SETTINGS, BOX_SETTINGS, CLIENT_NAME, MAPS
 from drawing import redraw_window
 from menu import Menu
 from gui import Gui
-
+import thorpy
 
 pg.init()
 pg.font.init()
@@ -47,6 +47,7 @@ def main():
                 width = GAME_SETTINGS["GAME_SCREEN_WIDTH"] + BOX_SETTINGS["BOX_WIDTH"] * 2
                 height = GAME_SETTINGS["GAME_SCREEN_HEIGHT"]
                 window = pg.display.set_mode((width, height))
+
                 gui = Gui(window)
                 gui_start = True
             try:
@@ -76,7 +77,7 @@ def main():
                             made_action = player.action(opponent, board.object_tiles, actual_pos)
                             if made_action:
                                 n.send(made_action)
-
+                gui.menu.react(event)
             try:
                 opponent = n.send(["echo", opponent_id])
             except EOFError:

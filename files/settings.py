@@ -13,15 +13,11 @@ COLORS = {
 }
 
 GUI_INFO = {
-    "DISPLAY_HERO": 0,
-    "HERO_NAME": 1,
-    "DISPLAY_HP": 2,
-    "HP_VALUE": 3,
-    "DISPLAY_ATTACK": 4,
-    "ATTACK_VALUE": 5,
-    "DISPLAY_DEFENSE": 6,
-    "DEFENSE_VALUE": 7,
-    "OPPONENT_HERO": 8
+    "HERO_NAME": 0,
+    "HP_VALUE": 1,
+    "ATTACK_VALUE": 2,
+    "DEFENSE_VALUE": 3,
+    "OPPONENT_HERO": 4
 }
 
 # game settings
