@@ -1,11 +1,10 @@
 import pygame as pg
 from network import Network
 from tile_map import TiledMap
-from settings import GAME_SETTINGS, BOX_SETTINGS, CLIENT_NAME, MAPS
+from settings import game_settings, box_settings, client_name, maps
 from drawing import redraw_window
 from menu import Menu
 from gui import Gui
-import thorpy
 
 pg.init()
 pg.font.init()
@@ -18,10 +17,10 @@ def main():
     n = Network()
     player = n.get_player()
     player_id = player.player_id
-    pg.display.set_caption(CLIENT_NAME[str(player_id)])
+    pg.display.set_caption(client_name[str(player_id)])
     print(("Hi, you are client: "+str(player_id)))
     opponent_id = abs(player_id - 1)
-    window = pg.display.set_mode((GAME_SETTINGS["GAME_SCREEN_WIDTH"], GAME_SETTINGS["GAME_SCREEN_HEIGHT"]))
+    window = pg.display.set_mode((game_settings["GAME_SCREEN_WIDTH"], game_settings["GAME_SCREEN_HEIGHT"]))
     menu = Menu(window)
 
     while run:
@@ -29,7 +28,7 @@ def main():
         if not menu.both_ready():
             try:
                 opponent, which_map, menu.opponent_ready = n.send(["get_info", opponent_id])
-                board = TiledMap(MAPS[str(which_map)], window)
+                board = TiledMap(maps[str(which_map)], window)
             except EOFError:
                 break
             for event in pg.event.get():
@@ -44,11 +43,11 @@ def main():
         else:
             if not gui_start:
                 board.screen.fill((168, 139, 50))
-                width = GAME_SETTINGS["GAME_SCREEN_WIDTH"] + BOX_SETTINGS["BOX_WIDTH"] * 2
-                height = GAME_SETTINGS["GAME_SCREEN_HEIGHT"]
+                width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
+                height = game_settings["GAME_SCREEN_HEIGHT"]
                 window = pg.display.set_mode((width, height))
 
-                gui = Gui(window)
+                gui = Gui(window, player_id)
                 gui_start = True
             try:
                 which_player_turn, turns = n.send("get_turn")

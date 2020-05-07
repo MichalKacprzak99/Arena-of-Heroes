@@ -2,8 +2,7 @@ from hero import Hero
 from settings import get_tile_pos
 from math import sqrt
 from pathfinder import path_finder
-from settings import GAME_SETTINGS, BOX_SETTINGS
-from gui import Gui
+from settings import box_settings
 
 
 class Player:
@@ -13,7 +12,7 @@ class Player:
         self.heroes = self.set_starting_pos()
         self.clicked_hero = None
         self.moved_hero = None
-        self.list_of_tiles = None
+        self.path = None
         self.actions = {
             "move": self.move,
             "basic": self.basic_attack,
@@ -32,7 +31,7 @@ class Player:
                 self.clicked_hero = hero
 
     def action(self, opponent, object_tiles, clicked_pos, gui):
-        if BOX_SETTINGS["BOX_WIDTH"] < clicked_pos[0] < BOX_SETTINGS["RIGHT_BOX"]:
+        if box_settings["BOX_WIDTH"] < clicked_pos[0] < box_settings["RIGHT_BOX"]:
             clicked_pos = get_tile_pos(clicked_pos)
             action_to_perform = gui.get_radio_value()
             return self.actions[action_to_perform](opponent, object_tiles, clicked_pos)
@@ -40,10 +39,10 @@ class Player:
     def move(self, opponent, object_tiles, pos):
         if self.clicked_in_range(pos) and self.clicked_not_valid_tile(object_tiles, opponent, pos) is False:
             self.moved_hero = self.clicked_hero
-            self.list_of_tiles = path_finder(self, opponent, object_tiles, pos)
+            self.path = path_finder(self, opponent, object_tiles, pos)
             self.heroes[self.clicked_hero.hero_id].pos = pos
             self.clicked_hero = None
-            return ["move", self.player_id, self.moved_hero, self.list_of_tiles]
+            return ["move", self.player_id, self.moved_hero, self.path]
         return False
 
     def basic_attack(self, opponent, object_tiles, pos):

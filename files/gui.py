@@ -1,5 +1,5 @@
 import thorpy
-from settings import BOX_SETTINGS, get_tile_pos
+from settings import box_settings, get_tile_pos
 
 GUI_INFO = {
     "HERO_NAME": 0,
@@ -12,7 +12,7 @@ GUI_INFO = {
 
 
 class Gui:
-    def __init__(self, screen):
+    def __init__(self, screen, p_id):
         self.window = screen
         self.radio_buttons = []
         self.button_text = ["Move", "Basic", "Special"]
@@ -20,6 +20,7 @@ class Gui:
         self.background = None
         self.elements = []
         self.radio_pool = None
+        self.p_id = p_id
         self.create()
 
     def fill_elements_table(self):
@@ -41,8 +42,8 @@ class Gui:
         thorpy.store(self.background, self.elements[GUI_INFO["HERO_NAME"]:GUI_INFO["OPPONENT_HERO"]],
                      x=10, y=100, align="center")
         thorpy.store(self.background, self.elements[GUI_INFO["OPPONENT_HERO"]:],
-                     x=BOX_SETTINGS["RIGHT_BOX"] + 10, y=100, align="center")
-        thorpy.store(self.background, self.radio_buttons, x=20, y=400, align="left")
+                     x=box_settings["RIGHT_BOX"] + 10, y=100, align="center")
+        thorpy.store(self.background, self.radio_buttons, x=20 + self.p_id * box_settings["RIGHT_BOX"], y=400, align="left")
         self.buttons_appearing(0)
         self.background.blit()
         self.background.update()
@@ -67,13 +68,13 @@ class Gui:
             rad.set_visible(appear_value)
 
     def update_gui(self, mouse_pos, player, opponent):
-        if BOX_SETTINGS["BOX_WIDTH"] < mouse_pos[0] < BOX_SETTINGS["RIGHT_BOX"]:
+        if box_settings["BOX_WIDTH"] < mouse_pos[0] < box_settings["RIGHT_BOX"]:
             mouse_pos = get_tile_pos(mouse_pos)
             self.buttons_appearing(1) if player.clicked_hero else self.buttons_appearing(0)
             if player.clicked_own_hero(mouse_pos):
-                self.set_hero_info(player, mouse_pos, 0 if player.player_id == 0 else 5)
+                self.set_hero_info(player, mouse_pos, 5*player.player_id)
             elif player.clicked_opponent_hero(opponent, mouse_pos):
-                self.set_hero_info(opponent, mouse_pos, 5 if player.player_id == 0 else 0)
+                self.set_hero_info(opponent, mouse_pos, 5*opponent.player_id)
             else:
                 self.reset_gui()
 

@@ -17,21 +17,21 @@ except socket.error as e:
 s.listen()
 print("Waiting for a connection, Server Started")
 games = {}
-idCount = 0
+id_count = 0
 
 
-def threaded_client(connection, p_id, game_id):
-    global idCount
-    games[game_id].players[p_id] = Player(name="df", player_id=p_id)
-    connection.send(pickle.dumps(games[game_id].players[p_id]))
+def threaded_client(connection, p_id, g_id):
+    global id_count
+    games[g_id].players[p_id] = Player(name="df", player_id=p_id)
+    connection.send(pickle.dumps(games[g_id].players[p_id]))
     reply = []
 
     while True:
         try:
             data = pickle.loads(connection.recv(2048))
 
-            if game_id in games:
-                game = games[game_id]
+            if g_id in games:
+                game = games[g_id]
 
                 if not data:
                     break
@@ -44,7 +44,7 @@ def threaded_client(connection, p_id, game_id):
                         moved_hero = data[2]
                         game.players[which_player_take_action].heroes[moved_hero.hero_id] = moved_hero
                         game.players[which_player_take_action].moved_hero = moved_hero
-                        game.players[which_player_take_action].list_of_tiles = data[3]
+                        game.players[which_player_take_action].path = data[3]
                         game.player_turn = abs(game.player_turn - 1)
                         game.turns += 1
                         reply = game.players[which_player_take_action]
@@ -71,7 +71,7 @@ def threaded_client(connection, p_id, game_id):
         print("Closing Game", game_id)
     except KeyError:
         pass
-    idCount -= 1
+    id_count -= 1
     connection.close()
 
 
@@ -80,14 +80,14 @@ player_id = 0
 while True:
     conn, adr = s.accept()
     print("Connected to:", adr)
-    idCount += 1
+    id_count += 1
     player_id = 0
-    gameId = (idCount - 1) // 2
-    if idCount % 2 == 1:
-        games[gameId] = Game(gameId)
+    game_id = (id_count - 1) // 2
+    if id_count % 2 == 1:
+        games[game_id] = Game(game_id)
 
         print("Creating a new game...")
     else:
         player_id = 1
 
-    start_new_thread(threaded_client, (conn, player_id, gameId))
+    start_new_thread(threaded_client, (conn, player_id, game_id))

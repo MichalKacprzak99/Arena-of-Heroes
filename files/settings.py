@@ -1,7 +1,7 @@
 from os import path
 
 # define some colors (R, G, B)
-COLORS = {
+colors = {
     "WHITE": (255, 255, 255),
     "BLACK": (0, 0, 0),
     "GREEN": (0, 255, 0),
@@ -12,26 +12,26 @@ COLORS = {
     "GRAY": (128, 128, 128)
 }
 # game settings
-GAME_SETTINGS = {
+game_settings = {
     "GAME_SCREEN_WIDTH": 768,
     "GAME_SCREEN_HEIGHT": 768,
 }
-BOX_SETTINGS = {
+box_settings = {
     "BOX_WIDTH": 120,
     "BOX_HEIGHT": 768,
     "LEFT_BOX_CENTER": 60,
-    "RIGHT_BOX": 120 + GAME_SETTINGS["GAME_SCREEN_WIDTH"]
+    "RIGHT_BOX": 120 + game_settings["GAME_SCREEN_WIDTH"]
 }
 
 
-CLIENT_NAME = {
+client_name = {
     "0": "CLIENT A",
     "1": "CLIENT B"
 }
-MAPS = {
+maps = {
     "0": "map1/map1.tmx"
 }
-HERO_IMAGES = {
+hero_images = {
     "HERO": {
         "north": "HERO/north.png",
         "south": "HERO/south.png",
