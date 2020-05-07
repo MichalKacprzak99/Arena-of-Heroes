@@ -2,6 +2,7 @@ from hero import Hero
 from settings import get_tile_pos
 from math import sqrt
 from pathfinder import path_finder
+from settings import GAME_SETTINGS, BOX_SETTINGS
 from gui import Gui
 
 
@@ -31,7 +32,7 @@ class Player:
                 self.clicked_hero = hero
 
     def action(self, opponent, object_tiles, clicked_pos, gui):
-        if 120 < clicked_pos[0] < 888:
+        if BOX_SETTINGS["BOX_WIDTH"] < clicked_pos[0] < BOX_SETTINGS["RIGHT_BOX"]:
             clicked_pos = get_tile_pos(clicked_pos)
             action_to_perform = gui.get_radio_value()
             return self.actions[action_to_perform](opponent, object_tiles, clicked_pos)
