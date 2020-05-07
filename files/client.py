@@ -1,7 +1,7 @@
 import pygame as pg
 from network import Network
 from tile_map import TiledMap
-from settings import game_settings, box_settings, client_name, maps
+from settings import game_settings, box_settings, client_name, maps, mouse_button
 from drawing import redraw_window
 from menu import Menu
 from gui import Gui
@@ -68,7 +68,9 @@ def main():
                     run = False
                     pg.quit()
                     break
-                if event.type == pg.MOUSEBUTTONUP:
+                if event.type == pg.MOUSEBUTTONUP and event.button == mouse_button["RIGHT"]:
+                    player.clicked_hero = None
+                if event.type == pg.MOUSEBUTTONUP and event.button == mouse_button["LEFT"]:
                     if which_player_turn == player_id:
                         if not player.clicked_hero:
                             player.check_clicked_hero(actual_pos)

@@ -16,6 +16,13 @@ game_settings = {
     "GAME_SCREEN_WIDTH": 768,
     "GAME_SCREEN_HEIGHT": 768,
 }
+mouse_button = {
+    "LEFT": 1,
+    "MIDDLE": 2,
+    "RIGHT": 3,
+    "SCROLL_UP": 4,
+    "SCROLL_DOWN": 5
+}
 box_settings = {
     "BOX_WIDTH": 120,
     "BOX_HEIGHT": 768,
