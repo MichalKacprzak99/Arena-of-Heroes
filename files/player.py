@@ -2,6 +2,7 @@ from hero import Hero
 from settings import get_tile_pos
 from math import sqrt
 from pathfinder import path_finder
+from gui import Gui
 
 
 class Player:
@@ -14,6 +15,8 @@ class Player:
         self.list_of_tiles = None
         self.actions = {
             "move": self.move,
+            "basic": self.basic_attack,
+            "special": self.special_attack
         }
 
     def set_starting_pos(self):
@@ -27,9 +30,11 @@ class Player:
             if get_tile_pos(clicked_pos) == hero.pos:
                 self.clicked_hero = hero
 
-    def action(self, opponent, object_tiles, clicked_pos):
-        clicked_pos = get_tile_pos(clicked_pos)
-        return self.actions[self.clicked_hero.action](opponent, object_tiles, clicked_pos)
+    def action(self, opponent, object_tiles, clicked_pos, gui):
+        if 120 < clicked_pos[0] < 888:
+            clicked_pos = get_tile_pos(clicked_pos)
+            action_to_perform = gui.get_radio_value()
+            return self.actions[action_to_perform](opponent, object_tiles, clicked_pos)
 
     def move(self, opponent, object_tiles, pos):
         if self.clicked_in_range(pos) and self.clicked_not_valid_tile(object_tiles, opponent, pos) is False:
@@ -39,6 +44,12 @@ class Player:
             self.clicked_hero = None
             return ["move", self.player_id, self.moved_hero, self.list_of_tiles]
         return False
+
+    def basic_attack(self, opponent, object_tiles, pos):
+        return None
+    
+    def special_attack(self, opponent, object_tiles, pos):
+        return None
 
     def clicked_own_hero(self, clicked_pos):
         return any(map(lambda hero: clicked_pos == hero.pos, self.heroes))
