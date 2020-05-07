@@ -18,11 +18,7 @@ class Gui:
         for _ in self.hero_info_text:
             self.elements.append(thorpy.make_text(" ", 12, (0, 0, 0)))
 
-    def func(self):
-        pass
-
     def create(self):
-        self.button = thorpy.make_button("dupa", self.func)
         self.fill_elements_table()
         for txt in self.button_text:
             rad = thorpy.Checker(txt, type_="radio")
