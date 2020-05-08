@@ -45,19 +45,19 @@ hero_images = {
         "east": "HERO/east.png",
         "west": "HERO/west.png"
     },
-    "Michal": {
-            "north": "HERO/north.png",
-            "south": "HERO/south.png",
-            "east": "HERO/east.png",
-            "west": "HERO/west.png"
+    "HEALER": {
+            "north": "HEALER/north.png",
+            "south": "HEALER/south.png",
+            "east": "HEALER/east.png",
+            "west": "HEALER/west.png"
         }
 }
 
 
 def load_image(filename):
     game_folder = path.dirname(__file__)
-    map_folder = path.join(game_folder, 'image')
-    return path.join(map_folder, str(filename))
+    image_folder = path.join(game_folder, 'image')
+    return path.join(image_folder, str(filename))
 
 
 def get_tile_pos(pos):

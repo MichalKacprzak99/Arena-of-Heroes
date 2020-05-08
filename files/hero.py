@@ -6,8 +6,7 @@ class Hero:
         self.max_health = self.hp = hp
         self.attributes = {
             "NAME": name,
-            "MAX HP": self.max_health,
-            "HP": self.hp,
+            "HP": str(self.hp) + "/" + str(self.max_health),
             "ATTACK": attack,
             "DEFENSE": defense,
             "RANGE": move_range
@@ -16,7 +15,7 @@ class Hero:
 
 class Healer(Hero):
     def __init__(self, hero_id, pos, side="east"):
-        super().__init__(hero_id, pos, 5, 5, 3, 75, side=side, name="Michal")
+        super().__init__(hero_id, pos, 5, 5, 3, 75, side=side, name="HEALER")
 
     def special_skill(self, *args):
         pass
