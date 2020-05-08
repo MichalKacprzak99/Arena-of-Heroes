@@ -8,7 +8,8 @@ gui_info = {
     "ATTACK_VALUE": 3,
     "DEFENSE_VALUE": 4,
     "RANGE_VALUE": 5,
-    "OPPONENT_HERO": 6}
+    "SKILL_RANGE": 6,
+    "OPPONENT_HERO": 7}
 
 
 class Gui:
@@ -69,6 +70,7 @@ class Gui:
             rad.set_visible(appear_value)
 
     def update_gui(self, mouse_pos, player, opponent):
+        self.reset_gui()
         if box_settings["BOX_WIDTH"] < mouse_pos[0] < box_settings["RIGHT_BOX"]:
             mouse_pos = get_tile_pos(mouse_pos)
             self.buttons_appearing(1) if player.clicked_hero else self.buttons_appearing(0)
@@ -76,7 +78,4 @@ class Gui:
                 self.set_hero_info(player, mouse_pos, len(gui_info) * player.player_id)
             elif player.clicked_opponent_hero(opponent, mouse_pos):
                 self.set_hero_info(opponent, mouse_pos, len(gui_info) * opponent.player_id)
-            else:
-                self.reset_gui()
-
         self.background.blit()

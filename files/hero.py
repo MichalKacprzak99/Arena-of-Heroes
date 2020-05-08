@@ -20,7 +20,7 @@ class Healer(Hero):
     def __init__(self, hero_id, pos, side="east"):
         super().__init__(hero_id, pos, 5, 5, 3, 75, 75, side=side, name="HEALER")
         self.healing = 30
-        self.healing_range = 2
+        self.stats["SKILL_RANGE"] = 2
 
     def special_skill(self, player, *args):
         opponent, object_tiles, clicked_pos = args
@@ -37,4 +37,4 @@ class Healer(Hero):
 
     def in_range_of_healing(self, clicked_pos):
         distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)]))
-        return int(distance) <= self.healing_range
+        return int(distance) <= self.stats["SKILL_RANGE"]
