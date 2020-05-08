@@ -1,6 +1,5 @@
 from settings import game_settings, box_settings, hero_images, colors, coordinate, load_image, get_tile_pos
 import pygame as pg
-from fractions import Fraction
 last_moved_hero_id = None
 last_which_side = ""
 
@@ -41,7 +40,7 @@ def draw_if_clicked(screen):
 
 def draw_health_bar(screen, hero, hero_coordinate):
     health_bar = (hero_coordinate[0] + 12, hero_coordinate[1])
-    health_bar_width = 40 * float(Fraction(hero.attributes["HP"]))
+    health_bar_width = 40 * hero.stats["HP"] / hero.stats["MAX_HP"]
     health_bar_height = 5
     pg.draw.rect(screen, colors["RED"], (health_bar, (health_bar_width, health_bar_height)), 0)
     how_much_less_hp = 40 - health_bar_width
@@ -52,7 +51,7 @@ def draw_health_bar(screen, hero, hero_coordinate):
 
 def draw_hero(screen, hero, tile):
     hero_coordinate = coordinate(tile)
-    hero_image = pg.image.load(load_image(hero_images[hero.attributes["NAME"]][hero.side]))
+    hero_image = pg.image.load(load_image(hero_images[hero.stats["NAME"]][hero.side]))
     screen.blit(hero_image, hero_coordinate)
     draw_health_bar(screen, hero, hero_coordinate)
 

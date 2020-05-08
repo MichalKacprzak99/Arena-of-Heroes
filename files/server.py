@@ -4,17 +4,17 @@ from game import Game
 from player import Player
 from _thread import start_new_thread
 
-
+server = '127.0.0.1'
 port = 5555
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 try:
-    s.bind(('', port))
+    s.bind((server, port))
 except socket.error as e:
     str(e)
 
-s.listen(5)
+s.listen()
 print("Waiting for a connection, Server Started")
 games = {}
 id_count = 0
@@ -45,6 +45,12 @@ def threaded_client(connection, p_id, g_id):
                         game.players[which_player_take_action].heroes[moved_hero.hero_id] = moved_hero
                         game.players[which_player_take_action].moved_hero = moved_hero
                         game.players[which_player_take_action].path = data[3]
+                        game.player_turn = abs(game.player_turn - 1)
+                        game.turns += 1
+                        reply = game.players[which_player_take_action]
+                    if data[0] == "heal":
+                        hero_to_heal = data[2]
+                        game.players[which_player_take_action].heroes[hero_to_heal.hero_id] = hero_to_heal
                         game.player_turn = abs(game.player_turn - 1)
                         game.turns += 1
                         reply = game.players[which_player_take_action]

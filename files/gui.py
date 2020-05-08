@@ -4,10 +4,11 @@ from settings import box_settings, get_tile_pos
 gui_info = {
     "HERO_NAME": 0,
     "HP_VALUE": 1,
-    "ATTACK_VALUE": 2,
-    "DEFENSE_VALUE": 3,
-    "RANGE_VALUE": 4,
-    "OPPONENT_HERO": 65}
+    "MAX_HP_VALUE": 2,
+    "ATTACK_VALUE": 3,
+    "DEFENSE_VALUE": 4,
+    "RANGE_VALUE": 5,
+    "OPPONENT_HERO": 6}
 
 
 class Gui:
@@ -42,15 +43,16 @@ class Gui:
                      x=10, y=100, align="center")
         thorpy.store(self.background, self.elements[gui_info["OPPONENT_HERO"]:],
                      x=box_settings["RIGHT_BOX"] + 10, y=100, align="center")
-        thorpy.store(self.background, self.radio_buttons, x=20 + self.p_id * box_settings["RIGHT_BOX"], y=400, align="left")
+        thorpy.store(self.background, self.radio_buttons,
+                     x=20 + self.p_id * box_settings["RIGHT_BOX"], y=400, align="left")
         self.buttons_appearing(0)
         self.background.blit()
         self.background.update()
 
     def set_hero_info(self, player, mouse_pos, opponent_info_index):
         chosen_hero = list(filter(lambda hero: hero.pos == mouse_pos, player.heroes))[0]
-        for index, attribute in enumerate(chosen_hero.attributes):
-            value = str(chosen_hero.attributes[attribute])
+        for index, attribute in enumerate(chosen_hero.stats):
+            value = str(chosen_hero.stats[attribute])
             self.elements[index + opponent_info_index].set_text(attribute + ": " + value)
 
     def get_radio_value(self):

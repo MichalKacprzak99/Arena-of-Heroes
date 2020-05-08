@@ -16,7 +16,7 @@ class Player:
         self.actions = {
             "move": self.move,
             "basic": self.basic_attack,
-            "special": self.special_attack
+            "special": self.special_skill
         }
 
     def set_starting_pos(self):
@@ -45,18 +45,22 @@ class Player:
             return ["move", self.player_id, self.moved_hero, self.path]
         return False
 
-    def basic_attack(self, opponent, object_tiles, pos):
+    def basic_attack(self, *args):
         return None
     
-    def special_attack(self, opponent, object_tiles, pos):
-        return None
+    def special_skill(self, *args):
+        return self.clicked_hero.special_skill(self, *args)
 
     def clicked_own_hero(self, clicked_pos):
-        return any(map(lambda hero: clicked_pos == hero.pos, self.heroes))
+        clicked_hero_it = filter(lambda hero: clicked_pos == hero.pos, self.heroes)
+        if not clicked_hero_it:
+            return False
+        else:
+            return list(clicked_hero_it)
 
     def clicked_in_range(self, clicked_pos):
         distance = sqrt(sum([(i-j)**2 for i, j in zip(clicked_pos, self.clicked_hero.pos)]))
-        return int(distance) <= self.clicked_hero.attributes["RANGE"]
+        return int(distance) <= self.clicked_hero.stats["RANGE"]
 
     @staticmethod
     def clicked_object(object_tiles, clicked_pos):
