@@ -52,11 +52,10 @@ class Player:
         return self.clicked_hero.special_skill(self, *args)
 
     def clicked_own_hero(self, clicked_pos):
-        clicked_hero_it = filter(lambda hero: clicked_pos == hero.pos, self.heroes)
-        if not clicked_hero_it:
+        try:
+            return list(filter(lambda hero: clicked_pos == hero.pos, self.heroes))[0]
+        except IndexError:
             return False
-        else:
-            return list(clicked_hero_it)
 
     def clicked_in_range(self, clicked_pos):
         distance = sqrt(sum([(i-j)**2 for i, j in zip(clicked_pos, self.clicked_hero.pos)]))
@@ -68,7 +67,10 @@ class Player:
 
     @staticmethod
     def clicked_opponent_hero(opponent, clicked_pos):
-        return any(map(lambda opp_hero: clicked_pos == opp_hero.pos, opponent.heroes))
+        try:
+            return list(filter(lambda hero: clicked_pos == hero.pos, opponent.heroes))[0]
+        except IndexError:
+            return False
 
     def clicked_another_hero(self, opponent, clicked_pos):
         return self.clicked_opponent_hero(opponent, clicked_pos) or self.clicked_own_hero(clicked_pos)

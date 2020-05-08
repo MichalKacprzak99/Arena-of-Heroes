@@ -20,9 +20,8 @@ class Healer(Hero):
 
     def special_skill(self, player, *args):
         opponent, object_tiles, clicked_pos = args
-        clicked_hero = player.clicked_own_hero(clicked_pos)
-        if clicked_hero:
-            hero_to_heal = clicked_hero[0]
+        hero_to_heal = player.clicked_own_hero(clicked_pos)
+        if hero_to_heal:
             hero_to_heal.stats["HP"] += self.healing
             if hero_to_heal.stats["HP"] > hero_to_heal.stats["MAX_HP"]:
                 hero_to_heal.stats["HP"] = 100
