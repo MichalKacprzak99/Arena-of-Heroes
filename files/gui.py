@@ -4,12 +4,10 @@ from settings import box_settings, get_tile_pos
 gui_info = {
     "HERO_NAME": 0,
     "HP_VALUE": 1,
-    "MAX_HP_VALUE": 2,
-    "ATTACK_VALUE": 3,
-    "DEFENSE_VALUE": 4,
-    "RANGE_VALUE": 5,
-    "OPPONENT_HERO": 6
-}
+    "ATTACK_VALUE": 2,
+    "DEFENSE_VALUE": 3,
+    "RANGE_VALUE": 4,
+    "OPPONENT_HERO": 65}
 
 
 class Gui:

@@ -21,7 +21,7 @@ class Player:
 
     def set_starting_pos(self):
         if self.player_id == 1:
-            return [Hero(0, [11, 0], which_side="west"), Hero(1, [11, 1], which_side="west")]
+            return [Hero(0, [11, 0], side="west"), Hero(1, [11, 1], side="west")]
         else:
             return [Healer(0, [0, 0]), Hero(1, [0, 1])]
 
