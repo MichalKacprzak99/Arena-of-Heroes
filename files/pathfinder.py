@@ -14,9 +14,9 @@ def add_side(list_of_tiles):
         elif tmp_x > tile[0]:
             extended_list.append([tile, "west"])
         if tmp_y < tile[1]:
-            extended_list.append([tile, "north"])
-        elif tmp_y > tile[1]:
             extended_list.append([tile, "south"])
+        elif tmp_y > tile[1]:
+            extended_list.append([tile, "north"])
         tmp = tile
     return extended_list
 
