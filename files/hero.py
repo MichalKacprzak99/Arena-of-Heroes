@@ -1,15 +1,28 @@
 from math import sqrt
 
 
+class HealthDisplay:
+    def __init__(self, hp, max_hp):
+        self.hp = hp
+        self.max_hp = max_hp
+
+    def __repr__(self):
+        return str(self.hp) + "\\" + str(self.max_hp)
+
+    def __float__(self):
+        return self.hp / self.max_hp
+
+
 class Hero:
     def __init__(self, hero_id, pos, attack=10, defense=10, move_range=5, hp=60, max_hp=100, side="east", name="HERO"):
         self.hero_id = hero_id
         self.pos = pos
         self.side = side
+        self.hp = hp
+        self.max_hp = max_hp
         self.stats = {
             "NAME": name,
-            "HP": hp,
-            "MAX_HP": max_hp,
+            "HP": HealthDisplay(hp, max_hp),
             "ATTACK": attack,
             "DEFENSE": defense,
             "RANGE": move_range
@@ -26,9 +39,10 @@ class Healer(Hero):
         opponent, object_tiles, clicked_pos = args
         hero_to_heal = player.clicked_own_hero(clicked_pos)
         if hero_to_heal and self.in_range_of_healing(clicked_pos):
-            hero_to_heal.stats["HP"] += self.healing
-            if hero_to_heal.stats["HP"] > hero_to_heal.stats["MAX_HP"]:
-                hero_to_heal.stats["HP"] = 100
+            hero_to_heal.hp += self.healing
+            if hero_to_heal.hp > hero_to_heal.max_hp:
+                hero_to_heal.hp = 100
+            hero_to_heal.stats["HP"] = HealthDisplay(hero_to_heal.hp, hero_to_heal.max_hp)
             player.heroes[hero_to_heal.hero_id] = hero_to_heal
             player.clicked_hero = None
             return ["heal", player.player_id, hero_to_heal]
