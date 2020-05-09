@@ -56,6 +56,14 @@ def threaded_client(connection, p_id, g_id):
                         game.player_turn = abs(game.player_turn - 1)
                         game.turns += 1
                         reply = game.players[which_player_take_action]
+                    if data[0] == "bolt":
+                        last_action = data[2]
+                        attacked_hero = last_action[2]
+                        game.players[which_player_take_action].last_action = last_action
+                        game.players[abs(which_player_take_action - 1)].heroes[attacked_hero.hero_id] = attacked_hero
+                        game.player_turn = abs(game.player_turn - 1)
+                        game.turns += 1
+                        reply = game.players[which_player_take_action]
                     if data[0] == "heal":
                         hero_to_heal = data[2]
                         game.players[which_player_take_action].heroes[hero_to_heal.hero_id] = hero_to_heal

@@ -50,7 +50,13 @@ hero_images = {
             "south": "HEALER/south.png",
             "east": "HEALER/east.png",
             "west": "HEALER/west.png"
-        }
+    },
+    "MAGE": {
+        "north": "MAGE/north.png",
+        "south": "MAGE/south.png",
+        "east": "MAGE/east.png",
+        "west": "MAGE/west.png"
+    }
 }
 
 

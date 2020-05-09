@@ -1,4 +1,4 @@
-from hero import Hero, Healer
+from hero import Hero, Healer, Mage
 from settings import get_tile_pos
 from math import sqrt
 from pathfinder import path_finder
@@ -24,7 +24,7 @@ class Player:
         if self.player_id == 1:
             return [Hero(0, [11, 0], side="west"), Hero(1, [11, 1], side="west")]
         else:
-            return [Healer(0, [0, 0]), Hero(1, [0, 1])]
+            return [Healer(0, [0, 0]), Mage(1, [0, 1])]
 
     def check_clicked_hero(self, clicked_pos):
         for hero in self.heroes:
@@ -47,8 +47,7 @@ class Player:
         return False
 
     def basic_attack(self, *args):
-        opponent = args[0]
-        clicked_pos = args[2]
+        opponent, object_tiles, clicked_pos = args
         distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.clicked_hero.pos)]))
         if self.clicked_opponent_hero(opponent, clicked_pos) and (int(distance) <= 1) is True:
             attacking_hero = self.clicked_hero
