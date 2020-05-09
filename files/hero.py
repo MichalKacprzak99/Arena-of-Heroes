@@ -2,15 +2,14 @@ from math import sqrt
 
 
 class HealthDisplay:
-    def __init__(self, hp, max_hp):
-        self.hp = hp
-        self.max_hp = max_hp
+    def __init__(self, hero):
+        self.hero = hero
 
     def __repr__(self):
-        return str(self.hp) + "\\" + str(self.max_hp)
+        return str(self.hero.hp) + "\\" + str(self.hero.max_hp)
 
     def __float__(self):
-        return self.hp / self.max_hp
+        return self.hero.hp / self.hero.max_hp
 
 
 class Hero:
@@ -22,7 +21,7 @@ class Hero:
         self.max_hp = max_hp
         self.stats = {
             "NAME": name,
-            "HP": HealthDisplay(hp, max_hp),
+            "HP": HealthDisplay(self),
             "ATTACK": attack,
             "DEFENSE": defense,
             "RANGE": move_range
@@ -42,7 +41,7 @@ class Healer(Hero):
             hero_to_heal.hp += self.healing
             if hero_to_heal.hp > hero_to_heal.max_hp:
                 hero_to_heal.hp = 100
-            hero_to_heal.stats["HP"] = HealthDisplay(hero_to_heal.hp, hero_to_heal.max_hp)
+            hero_to_heal.stats["HP"] = HealthDisplay(hero_to_heal)
             player.heroes[hero_to_heal.hero_id] = hero_to_heal
             player.clicked_hero = None
             return ["heal", player.player_id, hero_to_heal]
