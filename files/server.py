@@ -28,7 +28,7 @@ def threaded_client(connection, p_id, g_id):
 
     while True:
         try:
-            data = pickle.loads(connection.recv(2048))
+            data = pickle.loads(connection.recv(4096))
 
             if g_id in games:
                 game = games[g_id]
@@ -45,6 +45,14 @@ def threaded_client(connection, p_id, g_id):
                         game.players[which_player_take_action].heroes[moved_hero.hero_id] = moved_hero
                         game.players[which_player_take_action].moved_hero = moved_hero
                         game.players[which_player_take_action].path = data[3]
+                        game.player_turn = abs(game.player_turn - 1)
+                        game.turns += 1
+                        reply = game.players[which_player_take_action]
+                    if data[0] == "basic_attack":
+                        last_action = data[2]
+                        attacked_hero = last_action[2]
+                        game.players[which_player_take_action].last_action = last_action
+                        game.players[abs(which_player_take_action-1)].heroes[attacked_hero.hero_id] = attacked_hero
                         game.player_turn = abs(game.player_turn - 1)
                         game.turns += 1
                         reply = game.players[which_player_take_action]

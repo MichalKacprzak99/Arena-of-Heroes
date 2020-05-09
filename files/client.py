@@ -10,6 +10,16 @@ pg.init()
 pg.font.init()
 
 
+def react_to_event(player, opponent):
+    name_of_action = opponent.last_action[0]
+    if opponent.last_action[0] == "basic_attack":
+        attacking_hero = opponent.last_action[1]
+        attacked_hero = opponent.last_action[2]
+        attacked_hero.stats["HP"] -= attacking_hero.stats["ATTACK"] - attacked_hero.stats["DEFENSE"] / 2
+        player.heroes[attacked_hero.hero_id] = attacked_hero
+        opponent.last_action = None
+
+
 def main():
     run = True
     gui_start = False
@@ -54,9 +64,9 @@ def main():
             except EOFError:
                 break
             actual_pos = pg.mouse.get_pos()
-
+            if opponent.last_action:
+                react_to_event(player, opponent)
             gui.update_gui(actual_pos, player, opponent)
-
             move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos)
             if move:
                 try:

@@ -13,6 +13,7 @@ class Player:
         self.clicked_hero = None
         self.moved_hero = None
         self.path = None
+        self.last_action = []
         self.actions = {
             "move": self.move,
             "basic": self.basic_attack,
@@ -46,7 +47,18 @@ class Player:
         return False
 
     def basic_attack(self, *args):
-        return None
+        opponent = args[0]
+        clicked_pos = args[2]
+        distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.clicked_hero.pos)]))
+        if self.clicked_opponent_hero(opponent, clicked_pos) and (int(distance) <= 1) is True:
+            attacking_hero = self.clicked_hero
+            attacked_hero = self.clicked_opponent_hero(opponent, clicked_pos)
+            attacked_hero.stats["HP"] -= attacking_hero.stats["ATTACK"] - attacked_hero.stats["DEFENSE"]/2
+            opponent.heroes[attacked_hero.hero_id] = attacked_hero
+            self.clicked_hero = None
+            self.last_action = ["basic_attack", attacking_hero, attacked_hero]
+            return["basic_attack", self.player_id, self.last_action]
+        return False
     
     def special_skill(self, *args):
         return self.clicked_hero.special_skill(self, *args)

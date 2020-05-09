@@ -21,6 +21,7 @@ class Gui:
         self.background = None
         self.elements = []
         self.radio_pool = None
+        self.buttons_update_flag = 1
         self.p_id = p_id
         self.create()
 
@@ -66,8 +67,12 @@ class Gui:
             self.elements[element_id].set_text(" ")
 
     def buttons_appearing(self, appear_value):
+        #if self.buttons_update_flag != appear_value:
+            #self.buttons_update_flag = appear_value
+            #self.radio_pool.refresh(self.radio_buttons[0])
         for rad in self.radio_buttons:
             rad.set_visible(appear_value)
+
 
     def update_gui(self, mouse_pos, player, opponent):
         self.reset_gui()
