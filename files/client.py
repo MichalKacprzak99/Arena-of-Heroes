@@ -70,6 +70,7 @@ def main():
             actual_pos = pg.mouse.get_pos()
             if opponent.last_action:
                 react_to_event(player, opponent)
+                n.send(["reset_action", opponent_id])
             gui.update_gui(actual_pos, player, opponent)
             move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos)
             if move:
