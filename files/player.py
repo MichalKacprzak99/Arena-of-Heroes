@@ -1,7 +1,6 @@
 from hero import Hero, Healer, Mage
 from settings import get_tile_pos
 from math import sqrt
-from pathfinder import path_finder
 from settings import box_settings
 
 
@@ -14,11 +13,6 @@ class Player:
         self.moved_hero = None
         self.path = None
         self.last_action = []
-        self.actions = {
-            "move": self.move,
-            "basic": self.basic_attack,
-            "special": self.special_skill
-        }
 
     def set_starting_pos(self):
         if self.player_id == 1:
@@ -35,23 +29,7 @@ class Player:
         if box_settings["BOX_WIDTH"] < clicked_pos[0] < box_settings["RIGHT_BOX"]:
             clicked_pos = get_tile_pos(clicked_pos)
             action_to_perform = gui.get_radio_value()
-            return self.actions[action_to_perform](opponent, object_tiles, clicked_pos)
-
-    def move(self, *args):
-        opponent, object_tiles, pos = args
-        if self.clicked_in_range(pos) and self.clicked_not_valid_tile(object_tiles, opponent, pos) is False:
-            self.moved_hero = self.clicked_hero
-            self.path = path_finder(self, opponent, object_tiles, pos)
-            self.heroes[self.clicked_hero.hero_id].pos = pos
-            self.clicked_hero = None
-            return ["move", self.player_id, self.moved_hero, self.path]
-        return False
-
-    def basic_attack(self, *args):
-        return self.clicked_hero.basic_attack(self, *args)
-    
-    def special_skill(self, *args):
-        return self.clicked_hero.special_skill(self, *args)
+            return self.clicked_hero.actions[action_to_perform](self, opponent, object_tiles, clicked_pos)
 
     def clicked_own_hero(self, clicked_pos):
         try:
