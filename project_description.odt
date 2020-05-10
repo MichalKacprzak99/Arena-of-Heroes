@@ -62,8 +62,8 @@ STAGE 2 - WEEK 1/2
 we plan to implement the following elements:
 
     • create main menu with option to start a new game (DONE);
-    • GUI for game(1/2 week);
-    • create all classes of heroes(2 week);
+    • GUI for game(DONE);
+    • create all classes of heroes(DONE);
     • implement attack, real movement and other option(DONE);
     • make our game to be turn-based(DONE);
     • create a set of map using Tiled(DONE);
