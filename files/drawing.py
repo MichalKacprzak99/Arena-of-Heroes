@@ -19,11 +19,11 @@ def highlight_tile(screen, board, player, opponent, pos):
         tmp_pos = get_tile_pos(pos)
         if player.clicked_hero and player.clicked_in_range(tmp_pos) is False:
             color = colors["GRAY"]
-        if player.clicked_object(board.object_tiles,  tmp_pos):
+        elif player.clicked_object(board.object_tiles,  tmp_pos):
             color = colors["BLACK"]
-        if player.clicked_opponent_hero(opponent,  tmp_pos):
+        elif player.clicked_opponent_hero(opponent,  tmp_pos):
             color = colors["RED"]
-        if player.clicked_own_hero(tmp_pos):
+        elif player.clicked_own_hero(tmp_pos):
             color = colors["BLUE"]
         draw_pos = coordinate(tmp_pos)
         pg.draw.rect(screen, color, (*draw_pos, tile_dim["width"], tile_dim["height"]), 1)
@@ -40,7 +40,7 @@ def draw_if_clicked(screen):
 
 def draw_health_bar(screen, hero, hero_coordinate):
     health_bar = (hero_coordinate[0] + 12, hero_coordinate[1])
-    health_bar_width = 40 * hero.stats["HP"] / hero.stats["MAX_HP"]
+    health_bar_width = 40 * float(hero.stats["HP"])
     health_bar_height = 5
     pg.draw.rect(screen, colors["RED"], (health_bar, (health_bar_width, health_bar_height)), 0)
     how_much_less_hp = 40 - health_bar_width

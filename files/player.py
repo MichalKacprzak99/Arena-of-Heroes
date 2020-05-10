@@ -36,7 +36,8 @@ class Player:
             action_to_perform = gui.get_radio_value()
             return self.actions[action_to_perform](opponent, object_tiles, clicked_pos)
 
-    def move(self, opponent, object_tiles, pos):
+    def move(self, *args):
+        opponent, object_tiles, pos = args
         if self.clicked_in_range(pos) and self.clicked_not_valid_tile(object_tiles, opponent, pos) is False:
             self.moved_hero = self.clicked_hero
             self.path = path_finder(self, opponent, object_tiles, pos)

@@ -82,18 +82,18 @@ def threaded_client(connection, p_id, g_id):
 
 
 player_id = 0
+if __name__ == '__main__':
+    while True:
+        conn, adr = s.accept()
+        print("Connected to:", adr)
+        id_count += 1
+        player_id = 0
+        game_id = (id_count - 1) // 2
+        if id_count % 2 == 1:
+            games[game_id] = Game(game_id)
 
-while True:
-    conn, adr = s.accept()
-    print("Connected to:", adr)
-    id_count += 1
-    player_id = 0
-    game_id = (id_count - 1) // 2
-    if id_count % 2 == 1:
-        games[game_id] = Game(game_id)
+            print("Creating a new game...")
+        else:
+            player_id = 1
 
-        print("Creating a new game...")
-    else:
-        player_id = 1
-
-    start_new_thread(threaded_client, (conn, player_id, game_id))
+        start_new_thread(threaded_client, (conn, player_id, game_id))
