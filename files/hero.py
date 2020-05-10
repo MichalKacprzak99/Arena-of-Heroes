@@ -59,7 +59,7 @@ class Healer(Hero):
         if hero_to_heal and self.in_range_of_skill(clicked_pos):
             hero_to_heal.hp += self.healing
             if hero_to_heal.hp > hero_to_heal.max_hp:
-                hero_to_heal.hp = 100
+                hero_to_heal.hp = hero_to_heal.max_hp
             hero_to_heal.stats["HP"] = HealthDisplay(hero_to_heal)
             player.heroes[hero_to_heal.hero_id] = hero_to_heal
             player.clicked_hero = None
