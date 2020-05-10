@@ -72,7 +72,7 @@ def draw_background(screen, board, player, opponent, player_turn, actual_pos):
         draw_if_clicked(screen)
 
 
-def draw_all(screen, board, player, opponent, player_turn, actual_pos, tile):
+def draw_with_moving_hero(screen, board, player, opponent, player_turn, actual_pos, tile):
     draw_background(screen, board, player, opponent, player_turn, actual_pos)
     draw_hero(screen, player.moved_hero, tile)
     pg.display.update()
@@ -87,13 +87,13 @@ def redraw_window(screen, board, player, opponent, player_turn, actual_pos):
     if player.moved_hero:
         for tile, side in player.path:
             player.moved_hero.side = side
-            draw_all(screen, board, player, opponent, player_turn, actual_pos, tile)
+            draw_with_moving_hero(screen, board, player, opponent, player_turn, actual_pos, tile)
         player.heroes[player.moved_hero.hero_id].side = player.moved_hero.side
         player.moved_hero = None
     if opponent.moved_hero:
         for tile, side in opponent.path:
             opponent.moved_hero.side = side
-            draw_all(screen, board, opponent, player, player_turn, actual_pos, tile)
+            draw_with_moving_hero(screen, board, opponent, player, player_turn, actual_pos, tile)
         last_which_side = opponent.moved_hero.side
         last_moved_hero_id = opponent.moved_hero.hero_id
         made_move = True
