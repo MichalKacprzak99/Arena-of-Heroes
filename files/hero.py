@@ -124,6 +124,7 @@ class Warrior(Hero):
         else:
             return False
 
+
 class Archer(Hero):
     def __init__(self, hero_id, pos, side="east"):
         super().__init__(hero_id, pos, 3, 3, 4, 55, 55, 7, "ARCHER", side)
