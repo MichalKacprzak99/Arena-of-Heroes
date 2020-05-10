@@ -15,7 +15,7 @@ Basic information:
 HOW TO PLAY:
     * when starting a game for 2 players on 1 PC: *
         ◦ Start server.py
-        ◦ Start client.py 2x - this initiates a connection between server and the client
+        ◦ Start client.py twice in parallel - this initiates a connection between server and the client
         ◦ Press "Start Game" on both clients and wait for the second player to connect
         ◦ Voila! Enjoy the game
 
