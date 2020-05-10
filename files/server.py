@@ -47,18 +47,11 @@ def threaded_client(connection, p_id, g_id):
                         game.players[which_player_take_action].path = data[3]
                         game.get_next_turn()
                         reply = game.players[which_player_take_action]
-                    if data[0] == "basic_attack":
+                    if data[0] == "basic_attack" or data[0] == "bolt":
                         last_action = data[2]
                         attacked_hero = last_action[2]
                         game.players[which_player_take_action].last_action = last_action
                         game.players[abs(which_player_take_action-1)].heroes[attacked_hero.hero_id] = attacked_hero
-                        game.get_next_turn()
-                        reply = game.players[which_player_take_action]
-                    if data[0] == "bolt":
-                        last_action = data[2]
-                        attacked_hero = last_action[2]
-                        game.players[which_player_take_action].last_action = last_action
-                        game.players[abs(which_player_take_action - 1)].heroes[attacked_hero.hero_id] = attacked_hero
                         game.get_next_turn()
                         reply = game.players[which_player_take_action]
                     if data[0] == "heal":
