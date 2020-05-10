@@ -15,7 +15,7 @@ class HealthDisplay:
 
 
 class Hero(ABC):
-    def __init__(self, hero_id, pos, attack=10, defense=10, move_range=5, hp=60, max_hp=100, side="east", name="HERO"):
+    def __init__(self, hero_id, pos, attack, defense, move_range, hp, max_hp, skill_range, name,  side="east"):
         self.hero_id = hero_id
         self.pos = pos
         self.side = side
@@ -28,7 +28,7 @@ class Hero(ABC):
             "ATTACK": attack,
             "DEFENSE": defense,
             "RANGE": move_range,
-            "SKILL_RANGE": 0
+            "SKILL_RANGE": skill_range
         }
         self.actions = {
             "move": self.move,
@@ -69,9 +69,8 @@ class Hero(ABC):
 
 class Healer(Hero):
     def __init__(self, hero_id, pos, side="east"):
-        super().__init__(hero_id, pos, 5, 5, 3, 75, 75, side=side, name="HEALER")
+        super().__init__(hero_id, pos, 5, 5, 3, 75, 75, 2, "HEALER", side)
         self.healing = 30
-        self.stats["SKILL_RANGE"] = 2
 
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args
@@ -89,8 +88,7 @@ class Healer(Hero):
 
 class Mage(Hero):
     def __init__(self, hero_id, pos, side="east"):
-        super().__init__(hero_id, pos, 14, 7, 2, 50, 50, side=side, name="MAGE")
-        self.stats["SKILL_RANGE"] = 10
+        super().__init__(hero_id, pos, 14, 7, 2, 50, 50, 10, "MAGE", side)
 
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args

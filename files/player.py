@@ -15,9 +15,10 @@ class Player:
 
     def set_starting_pos(self):
         if self.player_id == 1:
-            return [Healer(0, [11, 0], side="west"), Mage(1, [11, 1], side="west")]
+            side = "west"
+            return [Healer(0, [11, 1], side), Mage(1, [11, 4], side),  Mage(2, [11, 7], side),  Mage(3, [11, 10], side)]
         else:
-            return [Healer(0, [0, 0]), Mage(1, [0, 1])]
+            return [Healer(0, [0, 1]), Mage(1, [0, 4]),  Mage(2, [0, 7]),  Mage(3, [0, 10])]
 
     def check_clicked_hero(self, clicked_pos):
         for hero in self.heroes:
