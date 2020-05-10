@@ -85,13 +85,13 @@ def redraw_window(screen, board, player, opponent, player_turn, actual_pos):
     if last_moved_hero_id is not None:
         opponent.heroes[last_moved_hero_id].side = last_which_side
     if player.moved_hero:
-        for tile, side in player.path:
+        for tile, side in player.moved_hero.path:
             player.moved_hero.side = side
             draw_with_moving_hero(screen, board, player, opponent, player_turn, actual_pos, tile)
         player.heroes[player.moved_hero.hero_id].side = player.moved_hero.side
         player.moved_hero = None
     if opponent.moved_hero:
-        for tile, side in opponent.path:
+        for tile, side in opponent.moved_hero.path:
             opponent.moved_hero.side = side
             draw_with_moving_hero(screen, board, opponent, player, player_turn, actual_pos, tile)
         last_which_side = opponent.moved_hero.side

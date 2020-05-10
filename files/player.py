@@ -11,12 +11,11 @@ class Player:
         self.heroes = self.set_starting_pos()
         self.clicked_hero = None
         self.moved_hero = None
-        self.path = None
         self.last_action = []
 
     def set_starting_pos(self):
         if self.player_id == 1:
-            return [Hero(0, [11, 0], side="west"), Hero(1, [11, 1], side="west")]
+            return [Healer(0, [11, 0], side="west"), Mage(1, [11, 1], side="west")]
         else:
             return [Healer(0, [0, 0]), Mage(1, [0, 1])]
 
