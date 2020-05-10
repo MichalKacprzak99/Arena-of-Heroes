@@ -88,6 +88,7 @@ def main():
                             made_action = player.action(opponent, board.object_tiles, actual_pos, gui)
                             if made_action:
                                 n.send(made_action)
+                                player.clicked_hero = None
                 gui.menu.react(event)
             try:
                 opponent = n.send(["echo", opponent_id])

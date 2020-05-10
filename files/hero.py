@@ -35,13 +35,12 @@ class Hero:
     def basic_attack(self, player, *args):
         opponent, object_tiles, clicked_pos = args
         distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)]))
-        if player.clicked_opponent_hero(opponent, clicked_pos) and (distance <= 1) is True:
+        attacked_hero = player.clicked_opponent_hero(opponent, clicked_pos)
+        if attacked_hero and distance <= 1:
             attacking_hero = self
-            attacked_hero = player.clicked_opponent_hero(opponent, clicked_pos)
             attacked_hero.hp -= attacking_hero.stats["ATTACK"] - attacked_hero.stats["DEFENSE"]/2
             attacked_hero.stats["HP"] = HealthDisplay(attacked_hero)
             opponent.heroes[attacked_hero.hero_id] = attacked_hero
-            player.clicked_hero = None
             player.last_action = ["basic_attack", attacking_hero, attacked_hero]
             return["basic_attack", player.player_id, player.last_action]
         return False
@@ -62,7 +61,6 @@ class Healer(Hero):
                 hero_to_heal.hp = hero_to_heal.max_hp
             hero_to_heal.stats["HP"] = HealthDisplay(hero_to_heal)
             player.heroes[hero_to_heal.hero_id] = hero_to_heal
-            player.clicked_hero = None
             return ["heal", player.player_id, hero_to_heal]
         else:
             return False
@@ -83,7 +81,6 @@ class Mage(Hero):
             hero_to_attack.stats["HP"] = HealthDisplay(hero_to_attack)
             attacking_hero = player.clicked_hero
             player.last_action = ["bolt", attacking_hero, hero_to_attack]
-            player.clicked_hero = None
             return ["bolt", player.player_id, player.last_action]
         else:
             return False
