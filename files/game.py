@@ -7,7 +7,7 @@ class Game:
         self.turns = 0
         self.game_id = game_id
         self.players = [None, None]
-        self.which_map = randint(0, 0)
+        self.which_map = randint(0, 2)
         self.is_ready = [False, False]
 
     def get_next_turn(self):

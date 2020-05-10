@@ -105,3 +105,24 @@ class Mage(Hero):
             return ["bolt", player.player_id, player.last_action]
         else:
             return False
+
+
+class Warrior(Hero):
+    def __init__(self, hero_id, pos, side="east"):
+        super().__init__(hero_id, pos, 10, 10, 5, 100, 100, side=side, name="WARRIOR")
+        self.stats["SKILL_RANGE"] = 1
+        self.powerful_attack = 20
+
+    def special_skill(self, player, *args):
+        opponent, object_tiles, clicked_pos = args
+        hero_to_attack = player.clicked_opponent_hero(opponent, clicked_pos)
+        if hero_to_attack and self.in_range_of_skill(clicked_pos):
+            hero_to_attack.hp -= self.powerful_attack
+            if hero_to_attack.hp < 0:
+                hero_to_attack.hp = 0
+            hero_to_attack.stats["HP"] = HealthDisplay(hero_to_attack)
+            attacking_hero = player.clicked_hero
+            player.last_action = ["powerful_attack", attacking_hero, hero_to_attack]
+            return ["powerful_attack", player.player_id, player.last_action]
+        else:
+            return False

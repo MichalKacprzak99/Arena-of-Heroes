@@ -1,4 +1,4 @@
-from hero import Hero, Healer, Mage
+from hero import Hero, Healer, Mage, Warrior
 from settings import get_tile_pos
 from math import sqrt
 from settings import box_settings
@@ -15,9 +15,9 @@ class Player:
 
     def set_starting_pos(self):
         if self.player_id == 1:
-            return [Healer(0, [11, 0], side="west"), Mage(1, [11, 1], side="west")]
+            return [Healer(0, [11, 0], side="west"), Mage(1, [11, 1], side="west"), Warrior(2, [11, 2], side="west")]
         else:
-            return [Healer(0, [0, 0]), Mage(1, [0, 1])]
+            return [Healer(0, [0, 0]), Mage(1, [0, 1]), Warrior(2, [0, 2])]
 
     def check_clicked_hero(self, clicked_pos):
         for hero in self.heroes:

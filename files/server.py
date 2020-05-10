@@ -46,7 +46,7 @@ def threaded_client(connection, p_id, g_id):
                         game.players[which_player_take_action].moved_hero = moved_hero
                         game.get_next_turn()
                         reply = game.players[which_player_take_action]
-                    if data[0] == "basic_attack" or data[0] == "bolt":
+                    if data[0] == "basic_attack" or data[0] == "bolt" or data[0] == "powerful_attack":
                         last_action = data[2]
                         attacked_hero = last_action[2]
                         game.players[which_player_take_action].last_action = last_action
