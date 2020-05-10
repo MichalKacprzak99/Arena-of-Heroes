@@ -38,7 +38,8 @@ class Hero:
         if player.clicked_opponent_hero(opponent, clicked_pos) and (int(distance) <= 1) is True:
             attacking_hero = self
             attacked_hero = player.clicked_opponent_hero(opponent, clicked_pos)
-            attacked_hero.stats["HP"] -= attacking_hero.stats["ATTACK"] - attacked_hero.stats["DEFENSE"]/2
+            attacked_hero.hp -= attacking_hero.stats["ATTACK"] - attacked_hero.stats["DEFENSE"]/2
+            attacked_hero.stats["HP"] = HealthDisplay(attacked_hero)
             opponent.heroes[attacked_hero.hero_id] = attacked_hero
             player.clicked_hero = None
             player.last_action = ["basic_attack", attacking_hero, attacked_hero]
@@ -67,7 +68,6 @@ class Healer(Hero):
             return False
 
 
-
 class Mage(Hero):
     def __init__(self, hero_id, pos, side="east"):
         super().__init__(hero_id, pos, 14, 7, 2, 50, 50, side=side, name="MAGE")
@@ -76,10 +76,11 @@ class Mage(Hero):
     def special_skill(self, player, *args):
         opponent, object_tiles, clicked_pos = args
         hero_to_attack = player.clicked_opponent_hero(opponent, clicked_pos)
-        if hero_to_attack and self.in_range_of_thunderbolt(clicked_pos):
-            hero_to_attack.stats["HP"] -= self.stats["ATTACK"]
-            if hero_to_attack.stats["HP"] < 0:
-                hero_to_attack.stats["HP"] = 0
+        if hero_to_attack and self.in_range_of_skill(clicked_pos):
+            hero_to_attack.hp -= self.stats["ATTACK"]
+            if hero_to_attack.hp < 0:
+                hero_to_attack.hp = 0
+            hero_to_attack.stats["HP"] = HealthDisplay(hero_to_attack)
             attacking_hero = player.clicked_hero
             player.last_action = ["bolt", attacking_hero, hero_to_attack]
             player.clicked_hero = None
@@ -87,7 +88,3 @@ class Mage(Hero):
         else:
             return False
 
-
-    def in_range_of_thunderbolt(self, clicked_pos):
-        distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)]))
-        return int(distance) <= self.stats["SKILL_RANGE"]
