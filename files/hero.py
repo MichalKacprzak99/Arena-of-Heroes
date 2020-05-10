@@ -15,7 +15,7 @@ class HealthDisplay:
 
 
 class Hero(ABC):
-    def __init__(self, hero_id, pos, attack=10, defense=10, move_range=5, hp=60, max_hp=100, side="east", name="HERO"):
+    def __init__(self, hero_id, pos, attack, defense, move_range, hp, max_hp, skill_range, name,  side="east"):
         self.hero_id = hero_id
         self.pos = pos
         self.side = side
@@ -28,7 +28,7 @@ class Hero(ABC):
             "ATTACK": attack,
             "DEFENSE": defense,
             "RANGE": move_range,
-            "SKILL_RANGE": 0
+            "SKILL_RANGE": skill_range
         }
         self.actions = {
             "move": self.move,
@@ -69,9 +69,8 @@ class Hero(ABC):
 
 class Healer(Hero):
     def __init__(self, hero_id, pos, side="east"):
-        super().__init__(hero_id, pos, 5, 5, 3, 75, 75, side=side, name="HEALER")
+        super().__init__(hero_id, pos, 5, 5, 3, 75, 75, 2, "HEALER", side)
         self.healing = 30
-        self.stats["SKILL_RANGE"] = 2
 
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args
@@ -89,8 +88,7 @@ class Healer(Hero):
 
 class Mage(Hero):
     def __init__(self, hero_id, pos, side="east"):
-        super().__init__(hero_id, pos, 14, 7, 2, 50, 50, side=side, name="MAGE")
-        self.stats["SKILL_RANGE"] = 10
+        super().__init__(hero_id, pos, 14, 7, 2, 50, 50, 10, "MAGE", side)
 
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args
@@ -109,12 +107,11 @@ class Mage(Hero):
 
 class Warrior(Hero):
     def __init__(self, hero_id, pos, side="east"):
-        super().__init__(hero_id, pos, 10, 10, 5, 100, 100, side=side, name="WARRIOR")
-        self.stats["SKILL_RANGE"] = 1
+        super().__init__(hero_id, pos, 10, 10, 5, 100, 100, 1, "WARRIOR", side)
         self.powerful_attack = 20
 
-    def special_skill(self, player, *args):
-        opponent, object_tiles, clicked_pos = args
+    def special_skill(self, *args):
+        player, opponent, object_tiles, clicked_pos = args
         hero_to_attack = player.clicked_opponent_hero(opponent, clicked_pos)
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
             hero_to_attack.hp -= self.powerful_attack
