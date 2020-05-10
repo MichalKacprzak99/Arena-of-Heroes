@@ -1,4 +1,6 @@
 from math import sqrt
+from pathfinder import path_finder
+from abc import ABC, abstractmethod
 
 
 class HealthDisplay:
@@ -12,8 +14,8 @@ class HealthDisplay:
         return self.hero.hp / self.hero.max_hp
 
 
-class Hero:
-    def __init__(self, hero_id, pos, attack=10, defense=10, move_range=5, hp=60, max_hp=100, side="east", name="HERO"):
+class Hero(ABC):
+    def __init__(self, hero_id, pos, attack, defense, move_range, hp, max_hp, skill_range, name,  side="east"):
         self.hero_id = hero_id
         self.pos = pos
         self.side = side
@@ -32,8 +34,8 @@ class Hero:
         distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)]))
         return int(distance) <= self.stats["SKILL_RANGE"]
 
-    def basic_attack(self, player, *args):
-        opponent, object_tiles, clicked_pos = args
+    def basic_attack(self, *args):
+        player, opponent, object_tiles, clicked_pos = args
         distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)]))
         attacked_hero = player.clicked_opponent_hero(opponent, clicked_pos)
         if attacked_hero and distance <= 1:
@@ -45,15 +47,27 @@ class Hero:
             return["basic_attack", player.player_id, player.last_action]
         return False
 
+    def move(self, *args):
+        player, opponent, object_tiles, pos = args
+        if player.clicked_in_range(pos) and player.clicked_not_valid_tile(object_tiles, opponent, pos) is False:
+            player.moved_hero = self
+            self.path = path_finder(player, opponent, object_tiles, pos)
+            player.heroes[self.hero_id].pos = pos
+            return ["move", player.player_id, self]
+        return False
+
+    @abstractmethod
+    def special_skill(self, *args):
+        pass
+
 
 class Healer(Hero):
     def __init__(self, hero_id, pos, side="east"):
-        super().__init__(hero_id, pos, 5, 5, 3, 75, 75, side=side, name="HEALER")
+        super().__init__(hero_id, pos, 5, 5, 3, 75, 75, 2, "HEALER", side)
         self.healing = 30
-        self.stats["SKILL_RANGE"] = 2
 
-    def special_skill(self, player, *args):
-        opponent, object_tiles, clicked_pos = args
+    def special_skill(self, *args):
+        player, opponent, object_tiles, clicked_pos = args
         hero_to_heal = player.clicked_own_hero(clicked_pos)
         if hero_to_heal and self.in_range_of_skill(clicked_pos):
             hero_to_heal.hp += self.healing
@@ -68,11 +82,10 @@ class Healer(Hero):
 
 class Mage(Hero):
     def __init__(self, hero_id, pos, side="east"):
-        super().__init__(hero_id, pos, 14, 7, 2, 50, 50, side=side, name="MAGE")
-        self.stats["SKILL_RANGE"] = 10
+        super().__init__(hero_id, pos, 14, 7, 2, 50, 50, 10, "MAGE", side)
 
-    def special_skill(self, player, *args):
-        opponent, object_tiles, clicked_pos = args
+    def special_skill(self, *args):
+        player, opponent, object_tiles, clicked_pos = args
         hero_to_attack = player.clicked_opponent_hero(opponent, clicked_pos)
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
             hero_to_attack.hp -= self.stats["ATTACK"]
