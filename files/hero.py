@@ -24,8 +24,13 @@ class Hero:
             "HP": HealthDisplay(self),
             "ATTACK": attack,
             "DEFENSE": defense,
-            "RANGE": move_range
+            "RANGE": move_range,
+            "SKILL_RANGE": 0
         }
+
+    def in_range_of_skill(self, clicked_pos):
+        distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)]))
+        return int(distance) <= self.stats["SKILL_RANGE"]
 
 
 class Healer(Hero):
@@ -37,7 +42,7 @@ class Healer(Hero):
     def special_skill(self, player, *args):
         opponent, object_tiles, clicked_pos = args
         hero_to_heal = player.clicked_own_hero(clicked_pos)
-        if hero_to_heal and self.in_range_of_healing(clicked_pos):
+        if hero_to_heal and self.in_range_of_skill(clicked_pos):
             hero_to_heal.hp += self.healing
             if hero_to_heal.hp > hero_to_heal.max_hp:
                 hero_to_heal.hp = 100
@@ -48,6 +53,3 @@ class Healer(Hero):
         else:
             return False
 
-    def in_range_of_healing(self, clicked_pos):
-        distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)]))
-        return int(distance) <= self.stats["SKILL_RANGE"]
