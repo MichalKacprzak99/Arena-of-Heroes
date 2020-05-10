@@ -15,6 +15,19 @@ class Hero:
             "RANGE": move_range
         }
 
+    def basic_attack(self, player, *args):
+        opponent, object_tiles, clicked_pos = args
+        distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, player.clicked_hero.pos)]))
+        if player.clicked_opponent_hero(opponent, clicked_pos) and (int(distance) <= 1) is True:
+            attacking_hero = self
+            attacked_hero = player.clicked_opponent_hero(opponent, clicked_pos)
+            attacked_hero.stats["HP"] -= attacking_hero.stats["ATTACK"] - attacked_hero.stats["DEFENSE"]/2
+            opponent.heroes[attacked_hero.hero_id] = attacked_hero
+            player.clicked_hero = None
+            player.last_action = ["basic_attack", attacking_hero, attacked_hero]
+            return["basic_attack", player.player_id, player.last_action]
+        return False
+
 
 class Healer(Hero):
     def __init__(self, hero_id, pos, side="east"):
