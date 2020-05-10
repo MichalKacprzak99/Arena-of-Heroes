@@ -40,7 +40,10 @@ client_name = {
     "1": "CLIENT B"
 }
 maps = {
-    "0": "map1/map1.tmx"
+    "0": "map1/map1.tmx",
+    "1": "map2/map2.tmx",
+    "2": "map3/map3.tmx",
+    "3": "map4/map4.tmx"
 }
 hero_images = {
     "HERO": {
@@ -61,11 +64,11 @@ hero_images = {
         "east": "MAGE/east.png",
         "west": "MAGE/west.png"
     },
-    "ARCHER": {
-        "north": "ARCHER/north.png",
-        "south": "ARCHER/south.png",
-        "east": "ARCHER/east.png",
-        "west": "ARCHER/west.png"
+    "WARRIOR": {
+        "north": "WARRIOR/north.png",
+        "south": "WARRIOR/south.png",
+        "east": "WARRIOR/east.png",
+        "west": "WARRIOR/west.png"
     }
 }
 

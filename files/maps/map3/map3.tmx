@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="right-down" width="12" height="12" tilewidth="64" tileheight="64" infinite="0" nextlayerid="7" nextobjectid="48">
+ <tileset firstgid="1" source="tiles.tsx"/>
+ <layer id="1" name="ground" width="12" height="12">
+  <data encoding="csv">
+11,11,11,11,11,11,11,11,11,11,11,11,
+11,11,11,11,11,11,11,11,11,11,11,11,
+11,11,11,11,11,11,11,11,11,11,11,11,
+11,11,11,11,11,11,11,11,11,11,11,11,
+11,11,11,11,11,11,11,11,11,11,11,11,
+11,11,11,11,11,11,11,11,11,11,11,11,
+11,11,11,11,11,11,11,11,11,11,11,11,
+11,11,11,11,11,11,11,11,11,11,11,11,
+11,11,11,11,11,11,11,11,11,11,11,11,
+11,11,11,11,11,11,11,11,11,11,11,11,
+11,11,11,11,11,11,11,11,11,11,11,11,
+11,11,11,11,11,11,11,11,11,11,11,11
+</data>
+ </layer>
+ <layer id="3" name="road" width="12" height="12">
+  <data encoding="csv">
+0,0,45,46,46,46,46,46,46,47,0,0,
+0,0,51,34,34,34,34,34,34,52,0,0,
+0,0,51,34,34,34,34,34,34,52,0,0,
+0,0,51,34,34,34,34,34,34,52,0,0,
+0,43,36,34,34,34,34,34,34,37,44,0,
+0,0,51,34,34,34,34,34,34,52,0,0,
+0,0,51,34,34,34,34,34,34,52,0,0,
+0,0,51,34,34,34,34,34,34,52,0,0,
+0,43,36,34,34,34,34,34,34,37,44,0,
+0,0,51,34,34,34,34,34,34,52,0,0,
+0,0,51,34,34,34,34,34,34,52,0,0,
+0,0,48,53,53,53,53,53,53,50,0,0
+</data>
+ </layer>
+ <layer id="2" name="objects" width="12" height="12">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,57,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,40,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,38,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="6" name="obstacles" visible="0">
+  <object id="1" name="wall" x="128" y="64" width="64" height="64"/>
+  <object id="3" name="wall" x="320" y="0" width="64" height="64"/>
+  <object id="5" name="wall" x="384" y="0" width="64" height="64"/>
+  <object id="9" name="wall" x="448" y="0" width="64" height="64"/>
+  <object id="15" name="obstacle" x="320" y="320" width="64" height="64"/>
+  <object id="16" name="obstacle" x="64" y="448" width="64" height="64"/>
+  <object id="17" name="obstacle" x="384" y="512" width="64" height="64"/>
+  <object id="18" name="wall" x="576" y="0" width="64" height="64"/>
+  <object id="19" name="wall" x="512" y="0" width="64" height="64"/>
+  <object id="20" name="wall" x="128" y="640" width="64" height="64"/>
+  <object id="21" name="wall" x="192" y="704" width="64" height="64"/>
+  <object id="22" name="wall" x="256" y="704" width="64" height="64"/>
+  <object id="23" name="wall" x="320" y="704" width="64" height="64"/>
+  <object id="24" name="wall" x="384" y="704" width="64" height="64"/>
+  <object id="25" name="wall" x="576" y="640" width="64" height="64"/>
+  <object id="26" name="wall" x="448" y="704" width="64" height="64"/>
+  <object id="27" name="wall" x="512" y="704" width="64" height="64"/>
+  <object id="29" name="wall" x="128" y="320" width="64" height="64"/>
+  <object id="30" name="wall" x="128" y="384" width="64" height="64"/>
+  <object id="31" name="wall" x="128" y="448" width="64" height="64"/>
+  <object id="32" name="wall" x="128" y="576" width="64" height="64"/>
+  <object id="33" name="wall" x="128" y="704" width="64" height="64"/>
+  <object id="34" name="wall" x="576" y="704" width="64" height="64"/>
+  <object id="35" name="wall" x="576" y="448" width="64" height="64"/>
+  <object id="36" name="wall" x="576" y="576" width="64" height="64"/>
+  <object id="37" name="wall" x="576" y="384" width="64" height="64"/>
+  <object id="38" name="wall" x="576" y="320" width="64" height="64"/>
+  <object id="39" name="wall" x="576" y="64" width="64" height="64"/>
+  <object id="40" name="wall" x="576" y="128" width="64" height="64"/>
+  <object id="41" name="wall" x="576" y="192" width="64" height="64"/>
+  <object id="43" name="wall" x="256" y="0" width="64" height="64"/>
+  <object id="44" name="wall" x="192" y="0" width="64" height="64"/>
+  <object id="45" name="wall" x="128" y="0" width="64" height="64"/>
+  <object id="46" name="wall" x="128" y="128" width="64" height="64"/>
+  <object id="47" name="wall" x="128" y="192" width="64" height="64"/>
+ </objectgroup>
+</map>
