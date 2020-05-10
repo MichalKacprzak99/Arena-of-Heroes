@@ -23,6 +23,7 @@ class Menu:
         self.buttons[1].active = False
         self.box = thorpy.Box(self.buttons)
         menu = thorpy.Menu(self.box)
+        self.box.set_main_color((0, 1, 255))
         for element in menu.get_population():
             element.surface = self.window
 
@@ -90,9 +91,7 @@ class Menu:
         self.draw_image("HERO\south.png", 70, 370)
         self.draw_text("Warrior can dish out heavy damage in close range attacks.", 130, 390)
         self.draw_text("Click anywhere to go back", 300, 450)
-
         pg.display.update()
-        pass
 
     def draw_text(self, text_to_input, pos_x, pos_y, size=15):
         font = pg.font.SysFont("Arial", size)
