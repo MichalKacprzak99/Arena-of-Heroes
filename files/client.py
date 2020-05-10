@@ -11,8 +11,8 @@ pg.font.init()
 
 
 def react_to_event(player, opponent):
-    if opponent.last_action[0] == "basic_attack" or opponent.last_action[0] == "bolt" or \
-            opponent.last_action[0] == "powerful_attack":
+    reaction = ["basic_attack", "special_attack"]
+    if opponent.last_action[0] in reaction:
         attacked_hero = opponent.last_action[2]
         player.heroes[attacked_hero.hero_id] = attacked_hero
     opponent.last_action = None

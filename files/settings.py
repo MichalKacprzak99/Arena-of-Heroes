@@ -46,12 +46,6 @@ maps = {
     "3": "map4/map4.tmx"
 }
 hero_images = {
-    "HERO": {
-        "north": "HERO/north.png",
-        "south": "HERO/south.png",
-        "east": "HERO/east.png",
-        "west": "HERO/west.png"
-    },
     "HEALER": {
             "north": "HEALER/north.png",
             "south": "HEALER/south.png",

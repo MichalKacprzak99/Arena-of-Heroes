@@ -8,7 +8,7 @@ class HealthDisplay:
         self.hero = hero
 
     def __repr__(self):
-        return str(self.hero.hp) + "\\" + str(self.hero.max_hp)
+        return str(self.hero.hp) + "/" + str(self.hero.max_hp)
 
     def __float__(self):
         return self.hero.hp / self.hero.max_hp
@@ -99,8 +99,8 @@ class Mage(Hero):
                 hero_to_attack.hp = 0
             hero_to_attack.stats["HP"] = HealthDisplay(hero_to_attack)
             attacking_hero = player.clicked_hero
-            player.last_action = ["bolt", attacking_hero, hero_to_attack]
-            return ["bolt", player.player_id, player.last_action]
+            player.last_action = ["special_attack", attacking_hero, hero_to_attack]
+            return ["special_attack", player.player_id, player.last_action]
         else:
             return False
 
@@ -119,8 +119,8 @@ class Warrior(Hero):
                 hero_to_attack.hp = 0
             hero_to_attack.stats["HP"] = HealthDisplay(hero_to_attack)
             attacking_hero = player.clicked_hero
-            player.last_action = ["powerful_attack", attacking_hero, hero_to_attack]
-            return ["powerful_attack", player.player_id, player.last_action]
+            player.last_action = ["special_attack", attacking_hero, hero_to_attack]
+            return ["special_attack", player.player_id, player.last_action]
         else:
             return False
 
@@ -139,7 +139,7 @@ class Archer(Hero):
                 hero_to_attack.hp = 0
             hero_to_attack.stats["HP"] = HealthDisplay(hero_to_attack)
             attacking_hero = player.clicked_hero
-            player.last_action = ["bolt", attacking_hero, hero_to_attack]
-            return ["bolt", player.player_id, player.last_action]
+            player.last_action = ["special_attack", attacking_hero, hero_to_attack]
+            return ["special_attack", player.player_id, player.last_action]
         else:
             return False
