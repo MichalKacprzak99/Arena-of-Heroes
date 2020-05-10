@@ -1,4 +1,4 @@
-from settings import game_settings, box_settings, hero_images, colors, coordinate, load_image, get_tile_pos
+from settings import game_settings, box_settings, hero_images, colors, coordinate, load_image, get_tile_pos, tile_dim
 import pygame as pg
 last_moved_hero_id = None
 last_which_side = ""
@@ -14,7 +14,7 @@ def draw_player_turn(screen, player_turn):
 
 
 def highlight_tile(screen, board, player, opponent, pos):
-    if 120 <= pos[0] <= 888:
+    if box_settings["BOX_WIDTH"] < pos[0] < box_settings["RIGHT_BOX"]:
         color = colors["GREEN"]
         tmp_pos = get_tile_pos(pos)
         if player.clicked_hero and player.clicked_in_range(tmp_pos) is False:
@@ -26,7 +26,7 @@ def highlight_tile(screen, board, player, opponent, pos):
         if player.clicked_own_hero(tmp_pos):
             color = colors["BLUE"]
         draw_pos = coordinate(tmp_pos)
-        pg.draw.rect(screen, color, (*draw_pos, 64, 64), 1)
+        pg.draw.rect(screen, color, (*draw_pos, tile_dim["width"], tile_dim["height"]), 1)
 
 
 def draw_if_clicked(screen):

@@ -12,6 +12,10 @@ colors = {
     "GRAY": (128, 128, 128)
 }
 # game settings
+tile_dim = {
+    "width": 64,
+    "height": 64,
+}
 game_settings = {
     "GAME_SCREEN_WIDTH": 768,
     "GAME_SCREEN_HEIGHT": 768,
@@ -61,8 +65,8 @@ def load_image(filename):
 
 
 def get_tile_pos(pos):
-    return [(pos[0]-120)//64, pos[1]//64]
+    return [(pos[0]-box_settings["BOX_WIDTH"])//tile_dim["width"], pos[1]//tile_dim["height"]]
 
 
 def coordinate(tile_pos):
-    return [tile_pos[0]*64 + 120, tile_pos[1]*64]
+    return [tile_pos[0]*tile_dim["width"] + box_settings["BOX_WIDTH"], tile_pos[1]*tile_dim["height"]]
