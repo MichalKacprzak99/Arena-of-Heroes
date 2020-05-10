@@ -21,13 +21,19 @@ class Hero(ABC):
         self.side = side
         self.hp = hp
         self.max_hp = max_hp
+        self.path = None
         self.stats = {
             "NAME": name,
             "HP": HealthDisplay(self),
             "ATTACK": attack,
             "DEFENSE": defense,
             "RANGE": move_range,
-            "SKILL_RANGE": 0
+            "SKILL_RANGE": skill_range
+        }
+        self.actions = {
+            "move": self.move,
+            "basic": self.basic_attack,
+            "special": self.special_skill
         }
 
     def in_range_of_skill(self, clicked_pos):
@@ -101,11 +107,10 @@ class Mage(Hero):
 
 class Archer(Hero):
     def __init__(self, hero_id, pos, side="east"):
-        super().__init__(hero_id, pos, 3, 3, 4, 55, 55, side=side, name="ARCHER")
-        self.stats["SKILL_RANGE"] = 4
+        super().__init__(hero_id, pos, 3, 3, 4, 55, 55, 7, "ARCHER", side)
 
-    def special_skill(self, player, *args):
-        opponent, object_tiles, clicked_pos = args
+    def special_skill(self, *args):
+        player, opponent, object_tiles, clicked_pos = args
         hero_to_attack = player.clicked_opponent_hero(opponent, clicked_pos)
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
             multi = int(sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)])))
