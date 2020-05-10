@@ -1,5 +1,6 @@
 from math import sqrt
 from pathfinder import path_finder
+from abc import ABC, abstractmethod
 
 
 class HealthDisplay:
@@ -13,13 +14,14 @@ class HealthDisplay:
         return self.hero.hp / self.hero.max_hp
 
 
-class Hero:
+class Hero(ABC):
     def __init__(self, hero_id, pos, attack=10, defense=10, move_range=5, hp=60, max_hp=100, side="east", name="HERO"):
         self.hero_id = hero_id
         self.pos = pos
         self.side = side
         self.hp = hp
         self.max_hp = max_hp
+        self.path = None
         self.stats = {
             "NAME": name,
             "HP": HealthDisplay(self),
@@ -55,11 +57,12 @@ class Hero:
         player, opponent, object_tiles, pos = args
         if player.clicked_in_range(pos) and player.clicked_not_valid_tile(object_tiles, opponent, pos) is False:
             player.moved_hero = self
-            player.path = path_finder(player, opponent, object_tiles, pos)
+            self.path = path_finder(player, opponent, object_tiles, pos)
             player.heroes[self.hero_id].pos = pos
-            return ["move", player.player_id, self, player.path]
+            return ["move", player.player_id, self]
         return False
 
+    @abstractmethod
     def special_skill(self, *args):
         pass
 
