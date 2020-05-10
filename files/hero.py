@@ -35,7 +35,7 @@ class Hero:
     def basic_attack(self, player, *args):
         opponent, object_tiles, clicked_pos = args
         distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)]))
-        if player.clicked_opponent_hero(opponent, clicked_pos) and (int(distance) <= 1) is True:
+        if player.clicked_opponent_hero(opponent, clicked_pos) and (distance <= 1) is True:
             attacking_hero = self
             attacked_hero = player.clicked_opponent_hero(opponent, clicked_pos)
             attacked_hero.hp -= attacking_hero.stats["ATTACK"] - attacked_hero.stats["DEFENSE"]/2
