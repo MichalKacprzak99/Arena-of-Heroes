@@ -123,3 +123,22 @@ class Warrior(Hero):
             return ["powerful_attack", player.player_id, player.last_action]
         else:
             return False
+
+class Archer(Hero):
+    def __init__(self, hero_id, pos, side="east"):
+        super().__init__(hero_id, pos, 3, 3, 4, 55, 55, 7, "ARCHER", side)
+
+    def special_skill(self, *args):
+        player, opponent, object_tiles, clicked_pos = args
+        hero_to_attack = player.clicked_opponent_hero(opponent, clicked_pos)
+        if hero_to_attack and self.in_range_of_skill(clicked_pos):
+            multi = int(sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)])))
+            hero_to_attack.hp -= multi * self.stats["ATTACK"]
+            if hero_to_attack.hp < 0:
+                hero_to_attack.hp = 0
+            hero_to_attack.stats["HP"] = HealthDisplay(hero_to_attack)
+            attacking_hero = player.clicked_hero
+            player.last_action = ["bolt", attacking_hero, hero_to_attack]
+            return ["bolt", player.player_id, player.last_action]
+        else:
+            return False
