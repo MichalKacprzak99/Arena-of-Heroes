@@ -101,14 +101,15 @@ class Mage(Hero):
 
 class Archer(Hero):
     def __init__(self, hero_id, pos, side="east"):
-        super().__init__(hero_id, pos, 7, 3, 4, 55, 55, side=side, name="ARCHER")
+        super().__init__(hero_id, pos, 3, 3, 4, 55, 55, side=side, name="ARCHER")
         self.stats["SKILL_RANGE"] = 4
 
     def special_skill(self, player, *args):
         opponent, object_tiles, clicked_pos = args
         hero_to_attack = player.clicked_opponent_hero(opponent, clicked_pos)
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
-            hero_to_attack.hp -= self.stats["ATTACK"]
+            multi = int(sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)])))
+            hero_to_attack.hp -= multi * self.stats["ATTACK"]
             if hero_to_attack.hp < 0:
                 hero_to_attack.hp = 0
             hero_to_attack.stats["HP"] = HealthDisplay(hero_to_attack)
