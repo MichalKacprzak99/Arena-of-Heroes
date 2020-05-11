@@ -20,10 +20,12 @@ class Menu:
 
         thorpy.set_theme("round")
         self.buttons = [thorpy.make_button(txt) for txt in self.b_text]
+        [button.set_font_size(30) for button in self.buttons]
+        [button.scale_to_title() for button in self.buttons]
         self.buttons[1].active = False
         self.box = thorpy.Box(self.buttons)
         menu = thorpy.Menu(self.box)
-        self.box.set_main_color((0, 1, 255))
+        self.box.set_main_color((0, 0, 0, 0))
         for element in menu.get_population():
             element.surface = self.window
 
@@ -88,7 +90,7 @@ class Menu:
         self.draw_text("Healer can keep your characters alive when needed.", 130, 250)
         self.draw_image("MAGE\south.png", 70, 300)
         self.draw_text("Mage can cast strong magic spells on your enemies.", 130, 320)
-        self.draw_image("HERO\south.png", 70, 370)
+        self.draw_image("WARRIOR\south.png", 70, 370)
         self.draw_text("Warrior can dish out heavy damage in close range attacks.", 130, 390)
         self.draw_text("Click anywhere to go back", 300, 450)
         pg.display.update()

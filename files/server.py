@@ -3,6 +3,7 @@ import pickle
 from game import Game
 from player import Player
 from _thread import start_new_thread
+import logging
 
 server = '127.0.0.1'
 port = 5555
@@ -15,7 +16,12 @@ except socket.error as e:
     str(e)
 
 s.listen()
-print("Waiting for a connection, Server Started")
+
+fmt_str = '[%(asctime)s] %(levelname)s @ line %(lineno)d: %(message)s'
+logging.basicConfig(level=logging.DEBUG, format=fmt_str)
+logger = logging.getLogger(__name__)
+logger.info('Waiting for a connection, Server Started')
+
 games = {}
 id_count = 0
 
@@ -79,8 +85,9 @@ def threaded_client(connection, p_id, g_id):
                             reply = True
                         else:
                             reply = False
-                    print("received: ", data)
-                    print("Sending: ", reply)
+
+                    logger.info("Received: " + str(data))
+                    logger.info("Sending: " + str(reply))
                     connection.sendall(pickle.dumps(reply))
                     reply = None
             else:
@@ -88,10 +95,10 @@ def threaded_client(connection, p_id, g_id):
         except EOFError:
             break
 
-    print("Lost connection")
+    logger.info("Lost connection")
     try:
         del games[game_id]
-        print("Closing Game", game_id)
+        logger.info("Closing Game " + str(game_id))
     except KeyError:
         pass
     id_count -= 1
@@ -102,14 +109,14 @@ player_id = 0
 if __name__ == '__main__':
     while True:
         conn, adr = s.accept()
-        print("Connected to:", adr)
+        logger.info("Connected to: " + str(adr))
         id_count += 1
         player_id = 0
         game_id = (id_count - 1) // 2
         if id_count % 2 == 1:
             games[game_id] = Game(game_id)
 
-            print("Creating a new game...")
+            logger.info("Creating a new game ...")
         else:
             player_id = 1
 
