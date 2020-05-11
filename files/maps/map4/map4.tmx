@@ -59,7 +59,6 @@
   <object id="4" name="obstacle" x="128" y="512" width="64" height="64"/>
   <object id="6" name="obstacle" x="192" y="640" width="64" height="64"/>
   <object id="7" name="obstacle" x="256" y="640" width="64" height="64"/>
-  <object id="8" name="obstacle" x="192" y="128" width="64" height="64"/>
   <object id="9" name="obstacle" x="192" y="64" width="64" height="64"/>
  </objectgroup>
 </map>

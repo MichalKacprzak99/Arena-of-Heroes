@@ -43,7 +43,8 @@ maps = {
     "0": "map1/map1.tmx",
     "1": "map2/map2.tmx",
     "2": "map3/map3.tmx",
-    "3": "map4/map4.tmx"
+    "3": "map4/map4.tmx",
+    "4": "map5/map5.tmx"
 }
 death_image = "death.png"
 hero_images = {
