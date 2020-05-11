@@ -74,6 +74,16 @@ def threaded_client(connection, p_id, g_id):
                         game.players[which_player_take_action].heroes = data[2]
                         game.players[which_player_take_action].death_heroes_pos = data[3]
                         reply = game.players[which_player_take_action]
+                    if data[0] == "lose":
+                        game.loser = data[1]
+                        # game.get_next_turn()
+                    if data[0] == "win":
+                        game.winner = data[1]
+                    if data[0] == "end":
+                        if game.winner is not None and game.loser is not None:
+                            reply = True
+                        else:
+                            reply = False
                     print("received: ", data)
                     print("Sending: ", reply)
                     connection.sendall(pickle.dumps(reply))

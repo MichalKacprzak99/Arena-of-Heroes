@@ -2,7 +2,15 @@ from settings import game_settings, box_settings, hero_images, colors, coordinat
 import pygame as pg
 last_moved_hero_id = None
 last_which_side = ""
-from itertools import zip_longest
+
+
+def draw_result_of_game(screen, player):
+    font = pg.font.SysFont("Arial", 50)
+    text_to_input = player.result
+    text_width, text_height = font.size(text_to_input)
+    text = font.render(text_to_input, True, colors["RED"])
+    width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
+    screen.blit(text, (width/2 - text_width/2, 50))
 
 
 def draw_player_turn(screen, player_turn):
@@ -60,7 +68,6 @@ def draw_hero(screen, hero, tile):
 
 
 def draw_heroes(screen, player):
-
     for hero in player.heroes:
         if hero is not None:
             if hero is not player.moved_hero:
@@ -83,6 +90,7 @@ def draw_background(screen, board, player, opponent, player_turn, actual_pos):
     draw_heroes(screen, player)
     draw_heroes(screen, opponent)
     draw_player_turn(screen, player_turn)
+    draw_result_of_game(screen, player)
     if player.clicked_hero:
         draw_if_clicked(screen)
 

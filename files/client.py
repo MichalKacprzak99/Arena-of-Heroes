@@ -10,17 +10,16 @@ pg.init()
 pg.font.init()
 
 
-def react_to_event(player, opponent):
+def react_to_event(player, opponent, n):
     reaction = ["basic_attack", "special_attack"]
     if opponent.last_action[0] in reaction:
         attacked_hero = opponent.last_action[2]
         player.heroes[attacked_hero.hero_id] = attacked_hero
         if player.heroes[attacked_hero.hero_id].hp == 0:
-            player.death_heroes_pos.append(attacked_hero.pos)
-            del player.heroes[attacked_hero.hero_id]
-            if len(player.heroes):
-                for hero in player.heroes[attacked_hero.hero_id:]:
-                    hero.hero_id -= 1
+            player.add_death_hero(attacked_hero)
+        n.send(["reset_action", opponent.player_id])
+        n.send(["death_heroes", player.player_id, player.heroes, player.death_heroes_pos])
+
     opponent.last_action = None
 
 
@@ -36,7 +35,6 @@ def main():
     opponent_id = abs(player_id - 1)
     window = pg.display.set_mode((game_settings["GAME_SCREEN_WIDTH"], game_settings["GAME_SCREEN_HEIGHT"]))
     menu = Menu(window)
-
     while run:
         clock.tick(60)
         if not menu.both_ready():
@@ -72,40 +70,43 @@ def main():
             actual_pos = pg.mouse.get_pos()
 
             if opponent.last_action:
-                react_to_event(player, opponent)
-                n.send(["reset_action", opponent_id])
-                n.send(["death_heroes", player_id, player.heroes, player.death_heroes_pos])
-            gui.update_gui(actual_pos, player, opponent)
-            move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos)
+                react_to_event(player, opponent, n)
 
-            if move:
+            gui.update_gui(actual_pos, player, opponent)
+            player.check_result(opponent, n)
+            move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos)
+            if n.send(["end", player.player_id]):
+                pg.time.delay(2000)
+                pg.quit()
+                run = False
+            else:
+                if move:
+                    try:
+                        n.send(["update", opponent_id])
+                    except EOFError:
+                        break
+
+                for event in pg.event.get():
+                    if event.type == pg.QUIT:
+                        run = False
+                        pg.quit()
+                        break
+                    if event.type == pg.MOUSEBUTTONUP and event.button == mouse_button["RIGHT"]:
+                        player.clicked_hero = None
+                    if event.type == pg.MOUSEBUTTONUP and event.button == mouse_button["LEFT"]:
+                        if which_player_turn == player_id:
+                            if not player.clicked_hero:
+                                player.check_clicked_hero(actual_pos)
+                            else:
+                                made_action = player.action(opponent, board.object_tiles, actual_pos, gui)
+                                if made_action:
+                                    n.send(made_action)
+                                    player.clicked_hero = None
+                    gui.menu.react(event)
                 try:
-                    n.send(["update", opponent_id])
+                    opponent = n.send(["echo", opponent_id])
                 except EOFError:
                     break
-            for event in pg.event.get():
-                if event.type == pg.QUIT:
-                    run = False
-                    pg.quit()
-                    break
-                if event.type == pg.MOUSEBUTTONUP and event.button == mouse_button["RIGHT"]:
-                    player.clicked_hero = None
-                if event.type == pg.MOUSEBUTTONUP and event.button == mouse_button["LEFT"]:
-                    if which_player_turn == player_id:
-                        if not player.clicked_hero:
-                            player.check_clicked_hero(actual_pos)
-                        else:
-                            made_action = player.action(opponent, board.object_tiles, actual_pos, gui)
-                            if made_action:
-                                n.send(made_action)
-                                player.clicked_hero = None
-                                # opponent.check_death_heroes()
-                                # n.send(["death_heroes", opponent_id, opponent.death_heroes_pos, opponent.heroes])
-                gui.menu.react(event)
-            try:
-                opponent = n.send(["echo", opponent_id])
-            except EOFError:
-                break
 
 
 if __name__ == '__main__':

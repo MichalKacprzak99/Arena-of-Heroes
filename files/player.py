@@ -13,13 +13,30 @@ class Player:
         self.clicked_hero = None
         self.moved_hero = None
         self.last_action = []
+        self.result = ""
 
     def set_starting_pos(self):
         if self.player_id == 1:
             side = "west"
-            return [Healer(0, [11, 1], side), Mage(1, [11, 4], side),  Warrior(2, [11, 7], side),  Archer(3, [11, 10], side)]
+            return [Healer(0, [11, 1], side)]
+            # return [Healer(0, [11, 1], side), Mage(1, [11, 4], side),  Warrior(2, [11, 7], side),  Archer(3, [11, 10], side)]
         else:
             return [Healer(0, [0, 1]), Mage(1, [0, 4]),  Warrior(2, [0, 7]),  Archer(3, [0, 10])]
+
+    def add_death_hero(self, death_hero):
+        self.death_heroes_pos.append(death_hero.pos)
+        del self.heroes[death_hero.hero_id]
+        if len(self.heroes):
+            for hero in self.heroes[death_hero.hero_id:]:
+                hero.hero_id -= 1
+
+    def check_result(self, opponent, n):
+        if len(self.heroes) == 0:
+            n.send(["lose", self.player_id])
+            self.result = "lose"
+        elif len(opponent.heroes) == 0:
+            n.send(["win", self.player_id])
+            self.result = "win"
 
     def check_clicked_hero(self, pos):
         for hero in self.heroes:
