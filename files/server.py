@@ -86,6 +86,8 @@ def threaded_client(connection, p_id, g_id):
                         else:
                             reply = False
 
+                    logger.info("Received: " + str(data))
+                    logger.info("Sending: " + str(reply))
                     connection.sendall(pickle.dumps(reply))
                     reply = None
             else:
