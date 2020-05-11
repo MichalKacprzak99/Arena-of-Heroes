@@ -62,7 +62,11 @@ def main():
             gui.update_gui(actual_pos, player, opponent)
             player.check_result(opponent, n)
             move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos)
-            if n.send(["end", player.player_id]):
+            try:
+                end = n.send(["end", player.player_id])
+            except EOFError:
+                break
+            if end:
                 pg.time.delay(2000)
                 pg.quit()
                 run = False
