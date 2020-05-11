@@ -20,10 +20,12 @@ class Menu:
 
         thorpy.set_theme("round")
         self.buttons = [thorpy.make_button(txt) for txt in self.b_text]
+        [button.set_font_size(30) for button in self.buttons]
+        [button.scale_to_title() for button in self.buttons]
         self.buttons[1].active = False
         self.box = thorpy.Box(self.buttons)
         menu = thorpy.Menu(self.box)
-        self.box.set_main_color((0, 1, 255))
+        self.box.set_main_color((0, 0, 0, 0))
         for element in menu.get_population():
             element.surface = self.window
 
