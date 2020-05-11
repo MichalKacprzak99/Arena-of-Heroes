@@ -9,6 +9,8 @@ class Game:
         self.players = [None, None]
         self.which_map = randint(0, 3)
         self.is_ready = [False, False]
+        self.winner = None
+        self.loser = None
 
     def get_next_turn(self):
         self.player_turn = abs(self.player_turn - 1)

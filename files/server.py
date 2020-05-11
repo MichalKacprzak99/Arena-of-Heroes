@@ -45,19 +45,16 @@ def threaded_client(connection, p_id, g_id):
                         game.players[which_player_take_action].heroes[moved_hero.hero_id] = moved_hero
                         game.players[which_player_take_action].moved_hero = moved_hero
                         game.get_next_turn()
-                        reply = game.players[which_player_take_action]
                     if data[0] == "basic_attack" or data[0] == "special_attack":
                         last_action = data[2]
                         attacked_hero = last_action[2]
                         game.players[which_player_take_action].last_action = last_action
                         game.players[abs(which_player_take_action-1)].heroes[attacked_hero.hero_id] = attacked_hero
                         game.get_next_turn()
-                        reply = game.players[which_player_take_action]
                     if data[0] == "heal":
                         hero_to_heal = data[2]
                         game.players[which_player_take_action].heroes[hero_to_heal.hero_id] = hero_to_heal
                         game.get_next_turn()
-                        reply = game.players[which_player_take_action]
                     if data[0] == "echo":
                         reply = game.players[which_player_take_action]
                     if data[0] == "is_ready":
@@ -69,16 +66,14 @@ def threaded_client(connection, p_id, g_id):
                         game.players[which_player_take_action].moved_hero = None
                     if data[0] == "reset_action":
                         game.players[which_player_take_action].last_action = None
-                        reply = game.players[which_player_take_action]
                     if data[0] == "death_heroes":
                         game.players[which_player_take_action].heroes = data[2]
                         game.players[which_player_take_action].death_heroes_pos = data[3]
-                        reply = game.players[which_player_take_action]
-                    if data[0] == "lose":
-                        game.loser = data[1]
-                        # game.get_next_turn()
-                    if data[0] == "win":
-                        game.winner = data[1]
+                    if data[0] == "result":
+                        if data[2] == "lose":
+                            game.loser = data[1]
+                        elif data[2] == "win":
+                            game.winner = data[1]
                     if data[0] == "end":
                         if game.winner is not None and game.loser is not None:
                             reply = True
@@ -87,6 +82,7 @@ def threaded_client(connection, p_id, g_id):
                     print("received: ", data)
                     print("Sending: ", reply)
                     connection.sendall(pickle.dumps(reply))
+                    reply = None
             else:
                 break
         except EOFError:

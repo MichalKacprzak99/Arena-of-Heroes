@@ -18,8 +18,7 @@ class Player:
     def set_starting_pos(self):
         if self.player_id == 1:
             side = "west"
-            return [Healer(0, [11, 1], side)]
-            # return [Healer(0, [11, 1], side), Mage(1, [11, 4], side),  Warrior(2, [11, 7], side),  Archer(3, [11, 10], side)]
+            return [Healer(0, [11, 1], side), Mage(1, [11, 4], side), Warrior(2, [11, 7], side), Archer(3, [11, 10], side)]
         else:
             return [Healer(0, [0, 1]), Mage(1, [0, 4]),  Warrior(2, [0, 7]),  Archer(3, [0, 10])]
 
@@ -30,13 +29,30 @@ class Player:
             for hero in self.heroes[death_hero.hero_id:]:
                 hero.hero_id -= 1
 
+    def react_to_event(self, opponent, n):
+        reaction = ["basic_attack", "special_attack"]
+        if opponent.last_action[0] in reaction:
+            attacked_hero = opponent.last_action[2]
+            self.heroes[attacked_hero.hero_id] = attacked_hero
+            if self.heroes[attacked_hero.hero_id].hp == 0:
+                self.add_death_hero(attacked_hero)
+            n.send(["reset_action", opponent.player_id])
+            n.send(["death_heroes", self.player_id, self.heroes, self.death_heroes_pos])
+
+        opponent.last_action = None
+
     def check_result(self, opponent, n):
         if len(self.heroes) == 0:
-            n.send(["lose", self.player_id])
             self.result = "lose"
         elif len(opponent.heroes) == 0:
-            n.send(["win", self.player_id])
             self.result = "win"
+        n.send(["result", self.player_id, self.result])
+
+    def action(self, opponent, object_tiles, pos, gui):
+        if box_settings["BOX_WIDTH"] < pos[0] < box_settings["RIGHT_BOX"]:
+            pos = get_tile_pos(pos)
+            action_to_perform = gui.get_radio_value()
+            return self.clicked_hero.actions[action_to_perform](self, opponent, object_tiles, pos)
 
     def check_clicked_hero(self, pos):
         for hero in self.heroes:
@@ -48,12 +64,6 @@ class Player:
             return list(filter(lambda death_hero_pos: death_hero_pos == pos, self.death_heroes_pos))[0]
         except IndexError:
             return False
-
-    def action(self, opponent, object_tiles, pos, gui):
-        if box_settings["BOX_WIDTH"] < pos[0] < box_settings["RIGHT_BOX"]:
-            pos = get_tile_pos(pos)
-            action_to_perform = gui.get_radio_value()
-            return self.clicked_hero.actions[action_to_perform](self, opponent, object_tiles, pos)
 
     def clicked_own_hero(self, pos):
         try:

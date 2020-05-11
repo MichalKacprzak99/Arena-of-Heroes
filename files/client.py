@@ -10,19 +10,6 @@ pg.init()
 pg.font.init()
 
 
-def react_to_event(player, opponent, n):
-    reaction = ["basic_attack", "special_attack"]
-    if opponent.last_action[0] in reaction:
-        attacked_hero = opponent.last_action[2]
-        player.heroes[attacked_hero.hero_id] = attacked_hero
-        if player.heroes[attacked_hero.hero_id].hp == 0:
-            player.add_death_hero(attacked_hero)
-        n.send(["reset_action", opponent.player_id])
-        n.send(["death_heroes", player.player_id, player.heroes, player.death_heroes_pos])
-
-    opponent.last_action = None
-
-
 def main():
     run = True
     gui_start = False
@@ -70,7 +57,7 @@ def main():
             actual_pos = pg.mouse.get_pos()
 
             if opponent.last_action:
-                react_to_event(player, opponent, n)
+                player.react_to_event(opponent, n)
 
             gui.update_gui(actual_pos, player, opponent)
             player.check_result(opponent, n)
