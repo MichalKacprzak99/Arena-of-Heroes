@@ -90,7 +90,7 @@ class Menu:
         self.draw_text("Healer can keep your characters alive when needed.", 130, 250)
         self.draw_image("MAGE\south.png", 70, 300)
         self.draw_text("Mage can cast strong magic spells on your enemies.", 130, 320)
-        self.draw_image("HERO\south.png", 70, 370)
+        self.draw_image("WARRIOR\south.png", 70, 370)
         self.draw_text("Warrior can dish out heavy damage in close range attacks.", 130, 390)
         self.draw_text("Click anywhere to go back", 300, 450)
         pg.display.update()

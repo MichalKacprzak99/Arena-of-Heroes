@@ -18,10 +18,10 @@ def main():
     player = n.get_player()
     player_id = player.player_id
     pg.display.set_caption(client_name[str(player_id)])
-    print(("Hi, you are client: "+str(player_id)))
     opponent_id = abs(player_id - 1)
     window = pg.display.set_mode((game_settings["GAME_SCREEN_WIDTH"], game_settings["GAME_SCREEN_HEIGHT"]))
     menu = Menu(window)
+
     while run:
         clock.tick(60)
         if not menu.both_ready():
