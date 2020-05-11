@@ -70,6 +70,10 @@ def threaded_client(connection, p_id, g_id):
                     if data[0] == "reset_action":
                         game.players[which_player_take_action].last_action = None
                         reply = game.players[which_player_take_action]
+                    if data[0] == "death_heroes":
+                        game.players[which_player_take_action].heroes = data[2]
+                        game.players[which_player_take_action].death_heroes_pos = data[3]
+                        reply = game.players[which_player_take_action]
                     print("received: ", data)
                     print("Sending: ", reply)
                     connection.sendall(pickle.dumps(reply))

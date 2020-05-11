@@ -19,7 +19,7 @@ class Hero(ABC):
         self.hero_id = hero_id
         self.pos = pos
         self.side = side
-        self.hp = hp
+        self.hp = 1
         self.max_hp = max_hp
         self.path = None
         self.stats = {
@@ -43,10 +43,12 @@ class Hero(ABC):
     def basic_attack(self, *args):
         player, opponent, object_tiles, clicked_pos = args
         distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)]))
-        attacked_hero = player.clicked_opponent_hero(opponent, clicked_pos)
+        attacked_hero = player.clicked_opp_hero(opponent, clicked_pos)
         if attacked_hero and distance <= 1:
             attacking_hero = self
             attacked_hero.hp -= attacking_hero.stats["ATTACK"] - attacked_hero.stats["DEFENSE"]/2
+            if attacked_hero.hp < 0:
+                attacked_hero.hp = 0
             attacked_hero.stats["HP"] = HealthDisplay(attacked_hero)
             opponent.heroes[attacked_hero.hero_id] = attacked_hero
             player.last_action = ["basic_attack", attacking_hero, attacked_hero]
@@ -92,7 +94,7 @@ class Mage(Hero):
 
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args
-        hero_to_attack = player.clicked_opponent_hero(opponent, clicked_pos)
+        hero_to_attack = player.clicked_opp_hero(opponent, clicked_pos)
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
             hero_to_attack.hp -= self.stats["ATTACK"]
             if hero_to_attack.hp < 0:
@@ -112,7 +114,7 @@ class Warrior(Hero):
 
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args
-        hero_to_attack = player.clicked_opponent_hero(opponent, clicked_pos)
+        hero_to_attack = player.clicked_opp_hero(opponent, clicked_pos)
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
             hero_to_attack.hp -= self.powerful_attack
             if hero_to_attack.hp < 0:
@@ -131,7 +133,7 @@ class Archer(Hero):
 
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args
-        hero_to_attack = player.clicked_opponent_hero(opponent, clicked_pos)
+        hero_to_attack = player.clicked_opp_hero(opponent, clicked_pos)
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
             multi = int(sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)])))
             hero_to_attack.hp -= multi * self.stats["ATTACK"]

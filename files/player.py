@@ -9,6 +9,7 @@ class Player:
         self.name = name
         self.player_id = player_id
         self.heroes = self.set_starting_pos()
+        self.death_heroes_pos = []
         self.clicked_hero = None
         self.moved_hero = None
         self.last_action = []
@@ -20,40 +21,46 @@ class Player:
         else:
             return [Healer(0, [0, 1]), Mage(1, [0, 4]),  Warrior(2, [0, 7]),  Archer(3, [0, 10])]
 
-    def check_clicked_hero(self, clicked_pos):
+    def check_clicked_hero(self, pos):
         for hero in self.heroes:
-            if get_tile_pos(clicked_pos) == hero.pos:
+            if get_tile_pos(pos) == hero.pos:
                 self.clicked_hero = hero
 
-    def action(self, opponent, object_tiles, clicked_pos, gui):
-        if box_settings["BOX_WIDTH"] < clicked_pos[0] < box_settings["RIGHT_BOX"]:
-            clicked_pos = get_tile_pos(clicked_pos)
-            action_to_perform = gui.get_radio_value()
-            return self.clicked_hero.actions[action_to_perform](self, opponent, object_tiles, clicked_pos)
-
-    def clicked_own_hero(self, clicked_pos):
+    def clicked_death_hero(self, pos):
         try:
-            return list(filter(lambda hero: clicked_pos == hero.pos, self.heroes))[0]
+            return list(filter(lambda death_hero_pos: death_hero_pos == pos, self.death_heroes_pos))[0]
         except IndexError:
             return False
 
-    def clicked_in_range(self, clicked_pos):
-        distance = sqrt(sum([(i-j)**2 for i, j in zip(clicked_pos, self.clicked_hero.pos)]))
+    def action(self, opponent, object_tiles, pos, gui):
+        if box_settings["BOX_WIDTH"] < pos[0] < box_settings["RIGHT_BOX"]:
+            pos = get_tile_pos(pos)
+            action_to_perform = gui.get_radio_value()
+            return self.clicked_hero.actions[action_to_perform](self, opponent, object_tiles, pos)
+
+    def clicked_own_hero(self, pos):
+        try:
+            return list(filter(lambda hero: pos == hero.pos, self.heroes))[0]
+        except IndexError:
+            return False
+
+    def clicked_in_range(self, pos):
+        distance = sqrt(sum([(i-j)**2 for i, j in zip(pos, self.clicked_hero.pos)]))
         return int(distance) <= self.clicked_hero.stats["RANGE"]
 
     @staticmethod
-    def clicked_object(object_tiles, clicked_pos):
-        return clicked_pos in object_tiles
+    def clicked_object(object_tiles, pos):
+        return pos in object_tiles
 
     @staticmethod
-    def clicked_opponent_hero(opponent, clicked_pos):
+    def clicked_opp_hero(opponent, pos):
         try:
-            return list(filter(lambda hero: clicked_pos == hero.pos, opponent.heroes))[0]
+            return list(filter(lambda hero: pos == hero.pos, opponent.heroes))[0]
         except IndexError:
             return False
 
-    def clicked_another_hero(self, opponent, clicked_pos):
-        return self.clicked_opponent_hero(opponent, clicked_pos) or self.clicked_own_hero(clicked_pos)
+    def clicked_another_hero(self, opponent, pos):
+        return self.clicked_opp_hero(opponent, pos) or self.clicked_own_hero(pos) or self.clicked_death_hero(pos)
 
-    def clicked_not_valid_tile(self, object_tiles, opponent, clicked_pos):
-        return self.clicked_object(object_tiles, clicked_pos) or self.clicked_another_hero(opponent, clicked_pos)
+    def clicked_not_valid_tile(self, object_tiles, opponent, pos):
+        return self.clicked_object(object_tiles, pos) or self.clicked_another_hero(opponent, pos)

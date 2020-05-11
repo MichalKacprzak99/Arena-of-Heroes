@@ -23,16 +23,10 @@ def add_side(list_of_tiles):
 
 def path_finder(player, opponent, object_tiles, new_pos):
     matrix = np.full((12, 12), 1)
-    for hero in opponent.heroes:
-        x, y = hero.pos
-        matrix[y][x] = 0
-    for tile in object_tiles:
-        x, y = tile
-        matrix[y][x] = 0
-    for hero in player.heroes:
-        if hero != player.moved_hero:
-            x, y = hero.pos
-            matrix[y][x] = 0
+    for y in range(matrix.shape[0]):
+        for x in range(matrix.shape[1]):
+            if player.clicked_not_valid_tile(object_tiles, opponent, [x, y]):
+                matrix[y][x] = 0
     grid = Grid(matrix=matrix)
     start = grid.node(player.moved_hero.pos[0], player.moved_hero.pos[1])
     end = grid.node(*new_pos)

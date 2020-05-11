@@ -45,6 +45,7 @@ maps = {
     "2": "map3/map3.tmx",
     "3": "map4/map4.tmx"
 }
+death_image = "death.png"
 hero_images = {
     "HEALER": {
             "north": "HEALER/north.png",

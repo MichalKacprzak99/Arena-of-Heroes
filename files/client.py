@@ -15,6 +15,12 @@ def react_to_event(player, opponent):
     if opponent.last_action[0] in reaction:
         attacked_hero = opponent.last_action[2]
         player.heroes[attacked_hero.hero_id] = attacked_hero
+        if player.heroes[attacked_hero.hero_id].hp == 0:
+            player.death_heroes_pos.append(attacked_hero.pos)
+            del player.heroes[attacked_hero.hero_id]
+            if len(player.heroes):
+                for hero in player.heroes[attacked_hero.hero_id:]:
+                    hero.hero_id -= 1
     opponent.last_action = None
 
 
@@ -64,11 +70,14 @@ def main():
             except EOFError:
                 break
             actual_pos = pg.mouse.get_pos()
+
             if opponent.last_action:
                 react_to_event(player, opponent)
                 n.send(["reset_action", opponent_id])
+                n.send(["death_heroes", player_id, player.heroes, player.death_heroes_pos])
             gui.update_gui(actual_pos, player, opponent)
             move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos)
+
             if move:
                 try:
                     n.send(["update", opponent_id])
@@ -90,6 +99,8 @@ def main():
                             if made_action:
                                 n.send(made_action)
                                 player.clicked_hero = None
+                                # opponent.check_death_heroes()
+                                # n.send(["death_heroes", opponent_id, opponent.death_heroes_pos, opponent.heroes])
                 gui.menu.react(event)
             try:
                 opponent = n.send(["echo", opponent_id])

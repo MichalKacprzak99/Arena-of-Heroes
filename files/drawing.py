@@ -2,6 +2,7 @@ from settings import game_settings, box_settings, hero_images, colors, coordinat
 import pygame as pg
 last_moved_hero_id = None
 last_which_side = ""
+from itertools import zip_longest
 
 
 def draw_player_turn(screen, player_turn):
@@ -21,7 +22,9 @@ def highlight_tile(screen, board, player, opponent, pos):
             color = colors["GRAY"]
         if player.clicked_object(board.object_tiles,  tmp_pos):
             color = colors["BLACK"]
-        if player.clicked_opponent_hero(opponent,  tmp_pos):
+        if player.clicked_death_hero(tmp_pos) or opponent.clicked_death_hero(tmp_pos):
+            color = colors["BLACK"]
+        if player.clicked_opp_hero(opponent,  tmp_pos):
             color = colors["RED"]
         if player.clicked_own_hero(tmp_pos):
             color = colors["BLUE"]
@@ -57,9 +60,21 @@ def draw_hero(screen, hero, tile):
 
 
 def draw_heroes(screen, player):
+
     for hero in player.heroes:
-        if hero is not player.moved_hero:
-            draw_hero(screen, hero, hero.pos)
+        if hero is not None:
+            if hero is not player.moved_hero:
+                draw_hero(screen, hero, hero.pos)
+
+    for death_hero_pos in player.death_heroes_pos:
+        if death_hero_pos is not None:
+            draw_death_hero(screen, death_hero_pos)
+
+
+def draw_death_hero(screen, tile):
+    hero_coordinate = coordinate(tile)
+    hero_image = pg.image.load(load_image("death.png"))
+    screen.blit(hero_image, hero_coordinate)
 
 
 def draw_background(screen, board, player, opponent, player_turn, actual_pos):
@@ -83,7 +98,10 @@ def redraw_window(screen, board, player, opponent, player_turn, actual_pos):
     global last_moved_hero_id, last_which_side
     made_move = False
     if last_moved_hero_id is not None:
-        opponent.heroes[last_moved_hero_id].side = last_which_side
+        try:
+            opponent.heroes[last_moved_hero_id].side = last_which_side
+        except IndexError:
+            pass
     if player.moved_hero:
         for tile, side in player.moved_hero.path:
             player.moved_hero.side = side

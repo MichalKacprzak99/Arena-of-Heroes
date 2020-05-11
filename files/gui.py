@@ -79,6 +79,6 @@ class Gui:
             self.buttons_appearing(1) if player.clicked_hero else self.buttons_appearing(0)
             if player.clicked_own_hero(mouse_pos):
                 self.set_hero_info(player, mouse_pos, len(gui_info) * player.player_id)
-            elif player.clicked_opponent_hero(opponent, mouse_pos):
+            elif player.clicked_opp_hero(opponent, mouse_pos):
                 self.set_hero_info(opponent, mouse_pos, len(gui_info) * opponent.player_id)
         self.background.blit()
