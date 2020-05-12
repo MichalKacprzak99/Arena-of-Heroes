@@ -40,11 +40,10 @@ client_name = {
     "1": "CLIENT B"
 }
 maps = {
-    "0": "map1/map1.tmx",
-    "1": "map2/map2.tmx",
-    "2": "map3/map3.tmx",
-    "3": "map4/map4.tmx",
-    "4": "map5/map5.tmx"
+    "0": "jungle/jungle.tmx",
+    "1": "western/western.tmx",
+    "2": "winter/winter.tmx",
+    "3": "autumn/autumn.tmx"
 }
 death_image = "death.png"
 hero_images = {

@@ -20,28 +20,306 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/dead_tree.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/map5.tmx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/mud.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tiles.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tiles/dead_tree.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tiles/grass.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tiles/ground1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tiles/mud.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tiles/plant1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tiles/plant2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tiles/sign.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tiles/stone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tiles/tree1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tiles/tree2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tiles/tree3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tiles/trunk.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tree1.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tree2.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/maps/map5/tree3.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/autumn.tmx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/bush2.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/dead_tree.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/tiles.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/tiles/bush2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/tiles/dead_tree.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/tiles/grass.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/tiles/ground1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/tiles/plant1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/tiles/sign.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/tiles/stone.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/tiles/tree1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/tiles/tree2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/tiles/trunk.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/tree1.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/autumn/tree2.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/jungle/bones.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/jungle/decor_6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/jungle/greenery_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/jungle/jungle.tmx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/jungle/map1_bones.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/jungle/map1_decor_6.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/jungle/map1_greenery_2.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/jungle/map1_land.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/jungle/map1_land.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/jungle/map1_stone.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/jungle/map1_tree_1.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/jungle/stones_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/jungle/tree_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/cactus1.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/lake.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/cactus1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/cactus2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/fireplace.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/lake.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/land_6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_17.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_19.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_20.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_21.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_22.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_23.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_24.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_25.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_26.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/road_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/sign.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/skull.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/wagon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/tiles/weird_plant.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/wagon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/western/western.tmx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/snowman.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/stones.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/road_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/road_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/road_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/road_20.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/road_21.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/road_22.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/road_24.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/road_25.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/road_26.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/road_27.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/road_28.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/road_29.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/road_30.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/snow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/snowman.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/stones.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/tower.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/tree1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/trunk.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tiles/well.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tower.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/tree1.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/well.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/maps/winter/winter.tmx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/maps/map4/map4.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/files/maps/map4/map4.tmx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/hero.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/hero.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/east.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/east.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/north.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/north.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/south.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/south.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/west.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/west.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map1/bones.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map1/decor_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map1/greenery_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map1/map1.tmx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map1/map1_bones.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map1/map1_decor_6.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map1/map1_greenery_2.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map1/map1_land.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map1/map1_land.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map1/map1_stone.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map1/map1_tree_1.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map1/stones_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map1/tree_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/building2.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/lake.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/map2.tmx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/building1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/building2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/building3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/cactus1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/cactus2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/decor_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/decor_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/fireplace.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/lake.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/land_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_26.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/road_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/sign.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/skull.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/stair1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/stairs2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/tent.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/tree1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/wagon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/tiles/weird_plant.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map2/wagon.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/map3.tmx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/building1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/building2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/building3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/cactus1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/cactus2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/decor_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/decor_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/fireplace.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/lake.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/land_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_26.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/road_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/sign.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/skull.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/stair1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/stairs2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/tent.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/tree1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/wagon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map3/tiles/weird_plant.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/map4.tmx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/stones.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/river1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/river2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_26.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/road_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/snow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/stones.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/tree1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/trunk.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tiles/well.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/tree1.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map4/well.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/bush.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/bush2.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/dead_tree.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/map5.tmx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/mud.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/bush.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/bush2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/dead_tree.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/grass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/ground1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/mud.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/plant1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/plant2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/sign.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/stone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/tree1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/tree2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/tree3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tiles/trunk.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tree1.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tree2.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/maps/map5/tree3.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/files/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -302,7 +580,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589134824312</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="added autumn map">
+      <created>1589222281438</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1589222281438</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -331,7 +616,8 @@
     <MESSAGE value="update" />
     <MESSAGE value="improved action function" />
     <MESSAGE value="added warrior hero and 3 maps" />
-    <option name="LAST_COMMIT_MESSAGE" value="added warrior hero and 3 maps" />
+    <MESSAGE value="added autumn map" />
+    <option name="LAST_COMMIT_MESSAGE" value="added autumn map" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588795789109">
@@ -339,10 +625,10 @@
     </state>
     <state x="223" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1588795789109" />
     <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1588786232074" />
-    <state x="277" y="0" key="CommitChangelistDialog2" timestamp="1589134822717">
+    <state x="277" y="0" key="CommitChangelistDialog2" timestamp="1589222280355">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="277" y="0" key="CommitChangelistDialog2/0.0.1280.720@0.0.1280.720" timestamp="1589134822717" />
+    <state x="277" y="0" key="CommitChangelistDialog2/0.0.1280.720@0.0.1280.720" timestamp="1589222280355" />
     <state x="424" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589110181889" />
     <state x="93" y="89" width="1350" height="678" key="DiffContextDialog" timestamp="1588855671747">
       <screen x="0" y="0" width="1536" height="824" />
@@ -354,30 +640,30 @@
     </state>
     <state x="548" y="178" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588795787585" />
     <state x="548" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1588694590996" />
-    <state width="629" height="108" key="GridCell.Tab.0.bottom" timestamp="1589222150739">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state width="756" height="140" key="GridCell.Tab.0.bottom" timestamp="1589320041568">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="629" height="108" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1589222150739" />
+    <state width="629" height="140" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1589319591477" />
     <state width="757" height="258" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589110510552" />
-    <state width="756" height="108" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589221340997" />
-    <state width="629" height="108" key="GridCell.Tab.0.center" timestamp="1589222150739">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state width="756" height="140" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589320041568" />
+    <state width="756" height="140" key="GridCell.Tab.0.center" timestamp="1589320041568">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="629" height="108" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1589222150739" />
+    <state width="629" height="140" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1589319591477" />
     <state width="757" height="258" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589110510552" />
-    <state width="756" height="108" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1589221340997" />
-    <state width="629" height="108" key="GridCell.Tab.0.left" timestamp="1589222150739">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state width="756" height="140" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1589320041568" />
+    <state width="756" height="140" key="GridCell.Tab.0.left" timestamp="1589320041568">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="629" height="108" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1589222150739" />
+    <state width="629" height="140" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1589319591477" />
     <state width="757" height="258" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589110510552" />
-    <state width="756" height="108" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1589221340997" />
-    <state width="629" height="108" key="GridCell.Tab.0.right" timestamp="1589222150739">
-      <screen x="0" y="0" width="1280" height="720" />
+    <state width="756" height="140" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1589320041568" />
+    <state width="756" height="140" key="GridCell.Tab.0.right" timestamp="1589320041568">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="629" height="108" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1589222150739" />
+    <state width="629" height="140" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1589319591477" />
     <state width="757" height="258" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589110510552" />
-    <state width="756" height="108" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1589221340997" />
+    <state width="756" height="140" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1589320041568" />
     <state width="1515" height="277" key="GridCell.Tab.1.bottom" timestamp="1588701089598">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -398,10 +684,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="135" y="67" key="MergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1588786224366" />
-    <state x="401" y="112" width="742" height="251" key="MultipleFileMergeDialog" timestamp="1589222018315">
+    <state x="401" y="112" width="742" height="251" key="MultipleFileMergeDialog" timestamp="1589308297028">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="401" y="112" width="742" height="251" key="MultipleFileMergeDialog/0.0.1280.720@0.0.1280.720" timestamp="1589222018315" />
+    <state x="401" y="112" width="742" height="251" key="MultipleFileMergeDialog/0.0.1280.720@0.0.1280.720" timestamp="1589308297028" />
     <state x="481" y="128" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1589064770279" />
     <state x="481" y="134" width="890" height="263" key="MultipleFileMergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1588786224373" />
     <state x="553" y="129" key="RollbackChangesDialog" timestamp="1589066347876">
@@ -415,10 +701,10 @@
     <state x="231" y="6" key="SettingsEditor/0.0.1280.720@0.0.1280.720" timestamp="1589222034397" />
     <state x="277" y="73" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1588813786879" />
     <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1588786251856" />
-    <state x="301" y="137" key="Vcs.Push.Dialog.v2" timestamp="1589134939215">
+    <state x="301" y="137" key="Vcs.Push.Dialog.v2" timestamp="1589222293605">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="301" y="137" key="Vcs.Push.Dialog.v2/0.0.1280.720@0.0.1280.720" timestamp="1589134939215" />
+    <state x="301" y="137" key="Vcs.Push.Dialog.v2/0.0.1280.720@0.0.1280.720" timestamp="1589222293605" />
     <state x="361" y="157" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1589110201035" />
     <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1588702696983" />
     <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1588815885521">
@@ -430,10 +716,10 @@
     </state>
     <state x="482" y="287" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.720@0.0.1280.720" timestamp="1589221995776" />
     <state x="578" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1588848256891" />
-    <state x="458" y="109" key="git4idea.branch.GitSmartOperationDialog" timestamp="1589134755034">
+    <state x="458" y="109" key="git4idea.branch.GitSmartOperationDialog" timestamp="1589308288618">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="458" y="109" key="git4idea.branch.GitSmartOperationDialog/0.0.1280.720@0.0.1280.720" timestamp="1589134755034" />
+    <state x="458" y="109" key="git4idea.branch.GitSmartOperationDialog/0.0.1280.720@0.0.1280.720" timestamp="1589308288618" />
     <state x="550" y="125" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.824@0.0.1536.824" timestamp="1589064651026" />
     <state x="550" y="131" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.864@0.0.1536.864" timestamp="1588786748062" />
     <state x="429" y="115" key="git4idea.merge.GitMergeDialog" timestamp="1589134588729">

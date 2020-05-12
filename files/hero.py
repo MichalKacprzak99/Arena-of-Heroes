@@ -110,13 +110,13 @@ class Mage(Hero):
 class Warrior(Hero):
     def __init__(self, hero_id, pos, side="east"):
         super().__init__(hero_id, pos, 10, 10, 5, 100, 100, 1, "WARRIOR", side)
-        self.powerful_attack = 20
+        self.powerful_attack = 2
 
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args
         hero_to_attack = player.clicked_opp_hero(opponent, clicked_pos)
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
-            hero_to_attack.hp -= self.powerful_attack
+            hero_to_attack.hp -= self.stats["ATTACK"] * self.powerful_attack
             if hero_to_attack.hp < 0:
                 hero_to_attack.hp = 0
             hero_to_attack.stats["HP"] = HealthDisplay(hero_to_attack)
