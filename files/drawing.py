@@ -4,22 +4,26 @@ last_moved_hero_id = None
 last_which_side = ""
 
 
+def blit_text_center(screen, text_to_input, font, height):
+    text_width, text_height = font.size(text_to_input)
+    text = font.render(text_to_input, True, colors["RED"])
+    width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
+    screen.blit(text, (width / 2 - text_width / 2, height))
+
+
 def draw_result_of_game(screen, player):
     font = pg.font.SysFont("Arial", 50)
     text_to_input = player.result
-    text_width, text_height = font.size(text_to_input)
-    text = font.render(text_to_input, True, colors["RED"])
-    width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
-    screen.blit(text, (width/2 - text_width/2, 50))
+    blit_text_center(screen, text_to_input, font, 50)
 
 
-def draw_player_turn(screen, player_turn):
+def draw_player_turn(screen, player_id, player_turn):
     font = pg.font.SysFont("Arial", 25)
-    text_to_input = "Player %d turn" % player_turn
-    text_width, text_height = font.size(text_to_input)
-    text = font.render(text_to_input, True, colors["RED"])
-    width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
-    screen.blit(text, (width/2 - text_width/2, 20))
+    if player_id == player_turn:
+        text_to_input = "Your turn"
+    else:
+        text_to_input = "Opponent's turn"
+    blit_text_center(screen, text_to_input, font, 20)
 
 
 def highlight_tile(screen, board, player, opponent, pos):
@@ -40,13 +44,10 @@ def highlight_tile(screen, board, player, opponent, pos):
         pg.draw.rect(screen, color, (*draw_pos, tile_dim["width"], tile_dim["height"]), 1)
 
 
-def draw_if_clicked(screen):
-    font = pg.font.SysFont("Arial", 15)
-    text_to_input = "Clicked"
-    text_width, text_height = font.size(text_to_input)
-    text = font.render(text_to_input, True, colors["RED"])
-    width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
-    screen.blit(text, (width/2 - text_width/2, 50))
+def highlight_clicked_hero(screen, board, player):
+    color = colors["BLUE"]
+    draw_pos = coordinate(player.clicked_hero.pos)
+    pg.draw.rect(screen, color, (*draw_pos, tile_dim["width"], tile_dim["height"]), 1)
 
 
 def draw_health_bar(screen, hero, hero_coordinate):
@@ -89,11 +90,10 @@ def draw_background(screen, board, player, opponent, player_turn, actual_pos):
     highlight_tile(screen, board, player, opponent, actual_pos)
     draw_heroes(screen, player)
     draw_heroes(screen, opponent)
-    draw_player_turn(screen, player_turn)
+    draw_player_turn(screen, player.player_id, player_turn)
     draw_result_of_game(screen, player)
     if player.clicked_hero:
-        draw_if_clicked(screen)
-
+        highlight_clicked_hero(screen, board, player)
 
 def draw_with_moving_hero(screen, board, player, opponent, player_turn, actual_pos, tile):
     draw_background(screen, board, player, opponent, player_turn, actual_pos)

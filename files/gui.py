@@ -20,18 +20,21 @@ class Gui:
         for _ in range(self.gui_info_amount * 2):
             self.elements.append(thorpy.make_text(" ", 12, (0, 0, 0)))
 
-    def create(self, which_map):
-        self.fill_elements_table()
+    def fill_radio_buttons(self):
         for txt in self.button_text:
             rad = thorpy.Checker(txt, type_="radio")
             rad.finish()
             self.radio_buttons.append(rad)
 
+    def create(self, which_map):
+        self.fill_elements_table()
+        self.fill_radio_buttons()
         self.radio_pool = thorpy.RadioPool(self.radio_buttons, first_value=self.radio_buttons[0], always_value=True)
         self.background = thorpy.Background(color=(168, 139, 50), image=backgrounds[str(which_map)],
                                             elements=self.elements + self.radio_buttons)
 
         self.menu = thorpy.Menu(self.background)
+
         for element in self.menu.get_population():
             element.surface = self.window
         thorpy.store(self.background, self.elements[:self.gui_info_amount],
@@ -40,6 +43,7 @@ class Gui:
                      x=box_settings["RIGHT_BOX"] + 10, y=125, align="center")
         thorpy.store(self.background, self.radio_buttons,
                      x=20 + self.p_id * box_settings["RIGHT_BOX"], y=400, align="left")
+
         self.buttons_appearing(0)
         self.background.blit()
         self.background.update()
