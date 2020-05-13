@@ -15,6 +15,12 @@ class HealthDisplay:
         return self.hero.hp / self.hero.max_hp
 
 
+def update_stats(hero):
+    if hero.hp < 0:
+        hero.hp = 0
+    hero.stats["HP"] = HealthDisplay(hero)
+
+
 class Hero(ABC):
     def __init__(self, hero_id, pos, attack, defense, move_range, hp, max_hp, skill_range, name,  side):
         self.hero_id = hero_id
@@ -60,7 +66,10 @@ class Hero(ABC):
         player, opponent, object_tiles, pos = args
         if player.clicked_in_range(pos) and player.clicked_not_valid_tile(object_tiles, opponent, pos) is False:
             player.moved_hero = self
-            self.path = path_finder(player, opponent, object_tiles, pos)
+            try:
+                self.path = path_finder(player, opponent, object_tiles, pos)
+            except IndexError:
+                return False
             player.heroes[self.hero_id].pos = pos
             return ["move", player.player_id, self]
         return False
@@ -95,9 +104,7 @@ class Mage(Hero):
 
     def randomize_damage(self, hero):
         hero.hp -= random.randrange(self.stats["ATTACK"] * 4)
-        if hero.hp < 0:
-            hero.hp = 0
-        hero.stats["HP"] = HealthDisplay(hero)
+        update_stats(hero)
         return hero
 
     def special_skill(self, *args):
@@ -126,9 +133,7 @@ class Warrior(Hero):
         hero_to_attack = player.clicked_opp_hero(opponent, clicked_pos)
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
             hero_to_attack.hp -= self.powerful_attack
-            if hero_to_attack.hp < 0:
-                hero_to_attack.hp = 0
-            hero_to_attack.stats["HP"] = HealthDisplay(hero_to_attack)
+            update_stats(hero_to_attack)
             attacking_hero = player.clicked_hero
             player.last_action = ["special_attack", attacking_hero, hero_to_attack]
             return ["special_attack", player.player_id, player.last_action]
@@ -146,9 +151,7 @@ class Archer(Hero):
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
             multi = int(sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)])))
             hero_to_attack.hp -= multi * self.stats["ATTACK"]
-            if hero_to_attack.hp < 0:
-                hero_to_attack.hp = 0
-            hero_to_attack.stats["HP"] = HealthDisplay(hero_to_attack)
+            update_stats(hero_to_attack)
             attacking_hero = player.clicked_hero
             player.last_action = ["special_attack", attacking_hero, hero_to_attack]
             return ["special_attack", player.player_id, player.last_action]
