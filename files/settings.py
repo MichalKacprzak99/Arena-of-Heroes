@@ -42,8 +42,8 @@ client_name = {
 maps = {
     "0": "jungle/jungle.tmx",
     "1": "western/western.tmx",
-    "2": "winter/winter.tmx",
-    "3": "autumn/autumn.tmx"
+    "2": "autumn/autumn.tmx",
+    "3": "winter/winter.tmx"
 }
 
 backgrounds = {
