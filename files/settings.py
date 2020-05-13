@@ -40,10 +40,10 @@ client_name = {
     "1": "CLIENT B"
 }
 maps = {
-    "0": "map1/map1.tmx",
-    "1": "map2/map2.tmx",
-    "2": "map3/map3.tmx",
-    "3": "map4/map4.tmx"
+    "0": "jungle/jungle.tmx",
+    "1": "western/western.tmx",
+    "2": "autumn/autumn.tmx",
+    "3": "winter/winter.tmx"
 }
 
 backgrounds = {
