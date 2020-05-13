@@ -11,15 +11,17 @@ colors = {
     "BLUE": (0, 0, 255),
     "GRAY": (128, 128, 128)
 }
-# game settings
+
 tile_dim = {
     "width": 64,
     "height": 64,
 }
+
 game_settings = {
     "GAME_SCREEN_WIDTH": 768,
     "GAME_SCREEN_HEIGHT": 768,
 }
+
 mouse_button = {
     "LEFT": 1,
     "MIDDLE": 2,
@@ -27,6 +29,7 @@ mouse_button = {
     "SCROLL_UP": 4,
     "SCROLL_DOWN": 5
 }
+
 box_settings = {
     "BOX_WIDTH": 120,
     "BOX_HEIGHT": 768,
@@ -34,11 +37,11 @@ box_settings = {
     "RIGHT_BOX": 120 + game_settings["GAME_SCREEN_WIDTH"]
 }
 
-
 client_name = {
     "0": "CLIENT A",
     "1": "CLIENT B"
 }
+
 maps = {
     "0": "jungle/jungle.tmx",
     "1": "western/western.tmx",
@@ -53,31 +56,34 @@ backgrounds = {
     "3": "backgrounds/winter_background.png"
 }
 
-death_image = "death.png"
 hero_images = {
     "HEALER": {
             "north": "HEALER/north.png",
             "south": "HEALER/south.png",
             "east": "HEALER/east.png",
-            "west": "HEALER/west.png"
+            "west": "HEALER/west.png",
+            "death": "HEALER/death.png"
     },
     "MAGE": {
         "north": "MAGE/north.png",
         "south": "MAGE/south.png",
         "east": "MAGE/east.png",
-        "west": "MAGE/west.png"
+        "west": "MAGE/west.png",
+        "death": "MAGE/death.png"
     },
     "WARRIOR": {
         "north": "WARRIOR/north.png",
         "south": "WARRIOR/south.png",
         "east": "WARRIOR/east.png",
-        "west": "WARRIOR/west.png"
+        "west": "WARRIOR/west.png",
+        "death": "WARRIOR/death.png"
     },
     "ARCHER": {
         "north": "ARCHER/north.png",
         "south": "ARCHER/south.png",
         "east": "ARCHER/east.png",
-        "west": "ARCHER/west.png"
+        "west": "ARCHER/west.png",
+        "death": "ARCHER/death.png"
     }
 }
 

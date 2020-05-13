@@ -22,7 +22,7 @@ class Player:
                 Warrior(2, next(pos), side), Archer(3, next(pos), side)]
 
     def add_death_hero(self, death_hero):
-        self.death_heroes_pos.append(death_hero.pos)
+        self.death_heroes_pos.append(death_hero)
         del self.heroes[death_hero.hero_id]
         if len(self.heroes):
             for hero in self.heroes[death_hero.hero_id:]:
@@ -69,7 +69,7 @@ class Player:
 
     def clicked_death_hero(self, pos):
         try:
-            return list(filter(lambda death_hero_pos: death_hero_pos == pos, self.death_heroes_pos))[0]
+            return list(filter(lambda death_hero_pos: death_hero_pos.pos == pos, self.death_heroes_pos))[0]
         except IndexError:
             return False
 
