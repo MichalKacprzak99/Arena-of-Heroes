@@ -4,9 +4,9 @@ last_moved_hero_id = None
 last_which_side = ""
 
 
-def blit_text_center(screen, text_to_input, font, height):
+def blit_text_center(screen, text_to_input, font, height, color):
     text_width, text_height = font.size(text_to_input)
-    text = font.render(text_to_input, True, colors["RED"])
+    text = font.render(text_to_input, True, color)
     width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
     screen.blit(text, (width / 2 - text_width / 2, height))
 
@@ -14,7 +14,7 @@ def blit_text_center(screen, text_to_input, font, height):
 def draw_result_of_game(screen, player):
     font = pg.font.SysFont("Arial", 50)
     text_to_input = player.result
-    blit_text_center(screen, text_to_input, font, 50)
+    blit_text_center(screen, text_to_input, font, 50, colors["RED"])
 
 
 def draw_player_turn(screen, player_id, player_turn):
@@ -23,7 +23,7 @@ def draw_player_turn(screen, player_id, player_turn):
         text_to_input = "Your turn"
     else:
         text_to_input = "Opponent's turn"
-    blit_text_center(screen, text_to_input, font, 20)
+    blit_text_center(screen, text_to_input, font, 20, colors["RED"])
 
 
 def highlight_tile(screen, board, player, opponent, pos):
