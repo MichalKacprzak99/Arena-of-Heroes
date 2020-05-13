@@ -15,9 +15,12 @@ class HealthDisplay:
         return self.hero.hp / self.hero.max_hp
 
 
-def update_stats(hero):
+def update_stats(hero, hp_change):
+    hero.hp += hp_change
     if hero.hp < 0:
         hero.hp = 0
+    elif hero.hp > hero.max_hp:
+        hero.hp = hero.max_hp
     hero.stats["HP"] = HealthDisplay(hero)
 
 
@@ -53,10 +56,8 @@ class Hero(ABC):
         attacked_hero = player.clicked_opp_hero(opponent, clicked_pos)
         if attacked_hero and distance < 2:
             attacking_hero = self
-            attacked_hero.hp -= attacking_hero.stats["ATTACK"] - attacked_hero.stats["DEFENSE"]/2
-            if attacked_hero.hp < 0:
-                attacked_hero.hp = 0
-            attacked_hero.stats["HP"] = HealthDisplay(attacked_hero)
+            lose_hp = -attacking_hero.stats["ATTACK"] + attacked_hero.stats["DEFENSE"]/2
+            update_stats(attacked_hero, lose_hp)
             opponent.heroes[attacked_hero.hero_id] = attacked_hero
             player.last_action = ["basic_attack", attacking_hero, attacked_hero]
             return["basic_attack", player.player_id, player.last_action]
@@ -88,10 +89,7 @@ class Healer(Hero):
         player, opponent, object_tiles, clicked_pos = args
         hero_to_heal = player.clicked_own_hero(clicked_pos)
         if hero_to_heal and self.in_range_of_skill(clicked_pos):
-            hero_to_heal.hp += self.healing
-            if hero_to_heal.hp > hero_to_heal.max_hp:
-                hero_to_heal.hp = hero_to_heal.max_hp
-            hero_to_heal.stats["HP"] = HealthDisplay(hero_to_heal)
+            update_stats(hero_to_heal, self.healing)
             player.heroes[hero_to_heal.hero_id] = hero_to_heal
             return ["heal", player.player_id, hero_to_heal]
         else:
@@ -103,8 +101,7 @@ class Mage(Hero):
         super().__init__(hero_id, pos, 14, 7, 2, 50, 50, 10, "MAGE", side)
 
     def randomize_damage(self, hero):
-        hero.hp -= random.randrange(self.stats["ATTACK"] * 4)
-        update_stats(hero)
+        update_stats(hero, -random.randrange(self.stats["ATTACK"] * 4))
         return hero
 
     def special_skill(self, *args):
@@ -116,7 +113,6 @@ class Mage(Hero):
                 heroes_to_attack[index] = self.randomize_damage(heroes_to_attack[index])
         except ValueError:
             heroes_to_attack.append(random.choice(opponent.heroes))
-            print(heroes_to_attack)
             heroes_to_attack[0] = self.randomize_damage(heroes_to_attack)
         attacking_hero = player.clicked_hero
         player.last_action = ["random_spell", attacking_hero, heroes_to_attack]
@@ -132,8 +128,7 @@ class Warrior(Hero):
         player, opponent, object_tiles, clicked_pos = args
         hero_to_attack = player.clicked_opp_hero(opponent, clicked_pos)
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
-            hero_to_attack.hp -= self.powerful_attack
-            update_stats(hero_to_attack)
+            update_stats(hero_to_attack, -self.powerful_attack)
             attacking_hero = player.clicked_hero
             player.last_action = ["special_attack", attacking_hero, hero_to_attack]
             return ["special_attack", player.player_id, player.last_action]
@@ -150,8 +145,7 @@ class Archer(Hero):
         hero_to_attack = player.clicked_opp_hero(opponent, clicked_pos)
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
             multi = int(sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)])))
-            hero_to_attack.hp -= multi * self.stats["ATTACK"]
-            update_stats(hero_to_attack)
+            update_stats(hero_to_attack, -multi * self.stats["ATTACK"])
             attacking_hero = player.clicked_hero
             player.last_action = ["special_attack", attacking_hero, hero_to_attack]
             return ["special_attack", player.player_id, player.last_action]
