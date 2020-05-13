@@ -11,7 +11,6 @@ colors = {
     "BLUE": (0, 0, 255),
     "GRAY": (128, 128, 128)
 }
-# game settings
 tile_dim = {
     "width": 64,
     "height": 64,

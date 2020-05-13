@@ -78,9 +78,9 @@ class Menu:
         self.active = False
         self.help = True
         pg.draw.rect(self.window, (0, 0, 240),
-                     (50, 50, game_settings["GAME_SCREEN_WIDTH"] -100, game_settings["GAME_SCREEN_HEIGHT"]-300))
+                     (50, 50, game_settings["GAME_SCREEN_WIDTH"] - 100, game_settings["GAME_SCREEN_HEIGHT"]-300))
         pg.draw.rect(self.window, (0, 0, 190),
-                     (50, 50, game_settings["GAME_SCREEN_WIDTH"] -100, game_settings["GAME_SCREEN_HEIGHT"]-300), 5)
+                     (50, 50, game_settings["GAME_SCREEN_WIDTH"] - 100, game_settings["GAME_SCREEN_HEIGHT"]-300), 5)
         self.draw_text("Choose your team and battle with them in Arena of Heroes!", 70, 70)
         self.draw_text("Main goal of the game is to defeat all of your opponent heroes before them!", 70, 100)
         self.draw_text("Here's brief description of every class:", 230, 130)

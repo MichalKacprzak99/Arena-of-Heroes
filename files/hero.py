@@ -91,7 +91,6 @@ class Healer(Hero):
         hero_to_heal = player.clicked_own_hero(clicked_pos)
         if hero_to_heal and self.in_range_of_skill(clicked_pos):
             update_stats(hero_to_heal, self.healing)
-            player.heroes[hero_to_heal.hero_id] = hero_to_heal
             return ["heal", player.player_id, hero_to_heal]
         else:
             return False

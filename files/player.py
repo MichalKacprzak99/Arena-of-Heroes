@@ -1,7 +1,6 @@
 from hero import Healer, Mage, Warrior, Archer
-from settings import get_tile_pos
+from settings import get_tile_pos, box_settings
 from math import sqrt
-from settings import box_settings
 
 
 class Player:
