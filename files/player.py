@@ -16,11 +16,10 @@ class Player:
         self.result = ""
 
     def set_starting_pos(self):
-        if self.player_id == 1:
-            side = "west"
-            return [Healer(0, [11, 1], side), Mage(1, [11, 4], side), Warrior(2, [11, 7], side), Archer(3, [11, 10], side)]
-        else:
-            return [Healer(0, [0, 1]), Mage(1, [0, 4]),  Warrior(2, [0, 7]),  Archer(3, [0, 10])]
+        pos = iter([[11*self.player_id, i] for i in range(1, 11, 3)])
+        side = "west" if self.player_id == 1 else "east"
+        return [Healer(0, next(pos), side), Mage(1, next(pos), side),
+                Warrior(2, next(pos), side), Archer(3, next(pos), side)]
 
     def add_death_hero(self, death_hero):
         self.death_heroes_pos.append(death_hero.pos)
@@ -52,7 +51,10 @@ class Player:
             self.result = "lose"
         elif len(opponent.heroes) == 0:
             self.result = "win"
-        n.send(["result", self.player_id, self.result])
+        try:
+            n.send(["result", self.player_id, self.result])
+        except EOFError:
+            pass
 
     def action(self, opponent, object_tiles, pos, gui):
         if box_settings["BOX_WIDTH"] < pos[0] < box_settings["RIGHT_BOX"]:

@@ -16,7 +16,7 @@ class HealthDisplay:
 
 
 class Hero(ABC):
-    def __init__(self, hero_id, pos, attack, defense, move_range, hp, max_hp, skill_range, name,  side="east"):
+    def __init__(self, hero_id, pos, attack, defense, move_range, hp, max_hp, skill_range, name,  side):
         self.hero_id = hero_id
         self.pos = pos
         self.side = side
@@ -71,7 +71,7 @@ class Hero(ABC):
 
 
 class Healer(Hero):
-    def __init__(self, hero_id, pos, side="east"):
+    def __init__(self, hero_id, pos, side):
         super().__init__(hero_id, pos, 5, 5, 3, 75, 75, 2, "HEALER", side)
         self.healing = 30
 
@@ -90,7 +90,7 @@ class Healer(Hero):
 
 
 class Mage(Hero):
-    def __init__(self, hero_id, pos, side="east"):
+    def __init__(self, hero_id, pos, side):
         super().__init__(hero_id, pos, 14, 7, 2, 50, 50, 10, "MAGE", side)
 
     def randomize_damage(self, hero):
@@ -117,7 +117,7 @@ class Mage(Hero):
 
 
 class Warrior(Hero):
-    def __init__(self, hero_id, pos, side="east"):
+    def __init__(self, hero_id, pos, side):
         super().__init__(hero_id, pos, 10, 10, 5, 100, 100, 1, "WARRIOR", side)
         self.powerful_attack = 20
 
@@ -137,7 +137,7 @@ class Warrior(Hero):
 
 
 class Archer(Hero):
-    def __init__(self, hero_id, pos, side="east"):
+    def __init__(self, hero_id, pos, side):
         super().__init__(hero_id, pos, 3, 3, 4, 55, 55, 7, "ARCHER", side)
 
     def special_skill(self, *args):
