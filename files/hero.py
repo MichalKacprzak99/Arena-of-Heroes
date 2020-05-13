@@ -69,10 +69,11 @@ class Hero(ABC):
             player.moved_hero = self
             try:
                 self.path = path_finder(player, opponent, object_tiles, pos)
+                player.heroes[self.hero_id].pos = pos
+                return ["move", player.player_id, self]
             except IndexError:
                 return False
-            player.heroes[self.hero_id].pos = pos
-            return ["move", player.player_id, self]
+
         return False
 
     @abstractmethod
