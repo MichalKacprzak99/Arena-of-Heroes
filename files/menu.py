@@ -64,7 +64,7 @@ class Menu:
         return self.player_ready is True and self.opponent_ready is False
 
     def background_image(self):
-        image = pg.image.load(load_image("background.jpg"))
+        image = pg.image.load(load_image("menu_background.jpg"))
         rect = image.get_rect()
         rect.left, rect.top = 0, 0
         self.window.blit(image, rect)

@@ -48,7 +48,7 @@ def main():
                 height = game_settings["GAME_SCREEN_HEIGHT"]
                 window = pg.display.set_mode((width, height))
 
-                gui = Gui(window, player_id)
+                gui = Gui(window, player, player_id, which_map)
                 gui_start = True
             try:
                 which_player_turn, turns = n.send("get_turn")

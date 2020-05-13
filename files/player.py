@@ -36,9 +36,15 @@ class Player:
             self.heroes[attacked_hero.hero_id] = attacked_hero
             if self.heroes[attacked_hero.hero_id].hp == 0:
                 self.add_death_hero(attacked_hero)
-            n.send(["reset_action", opponent.player_id])
-            n.send(["death_heroes", self.player_id, self.heroes, self.death_heroes_pos])
+        elif opponent.last_action[0] == "random_spell":
+            attacked_heroes = opponent.last_action[2]
+            for attacked_hero in attacked_heroes:
+                self.heroes[attacked_hero.hero_id] = attacked_hero
+                if self.heroes[attacked_hero.hero_id].hp == 0:
+                    self.add_death_hero(attacked_hero)
 
+        n.send(["reset_action", opponent.player_id])
+        n.send(["death_heroes", self.player_id, self.heroes, self.death_heroes_pos])
         opponent.last_action = None
 
     def check_result(self, opponent, n):

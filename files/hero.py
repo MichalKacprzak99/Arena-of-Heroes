@@ -1,6 +1,7 @@
 from math import sqrt
 from pathfinder import path_finder
 from abc import ABC, abstractmethod
+import random
 
 
 class HealthDisplay:
@@ -44,7 +45,7 @@ class Hero(ABC):
         player, opponent, object_tiles, clicked_pos = args
         distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)]))
         attacked_hero = player.clicked_opp_hero(opponent, clicked_pos)
-        if attacked_hero and distance <= 1:
+        if attacked_hero and distance < 2:
             attacking_hero = self
             attacked_hero.hp -= attacking_hero.stats["ATTACK"] - attacked_hero.stats["DEFENSE"]/2
             if attacked_hero.hp < 0:
@@ -92,19 +93,27 @@ class Mage(Hero):
     def __init__(self, hero_id, pos, side="east"):
         super().__init__(hero_id, pos, 14, 7, 2, 50, 50, 10, "MAGE", side)
 
+    def randomize_damage(self, hero):
+        hero.hp -= random.randrange(self.stats["ATTACK"] * 4)
+        if hero.hp < 0:
+            hero.hp = 0
+        hero.stats["HP"] = HealthDisplay(hero)
+        return hero
+
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args
-        hero_to_attack = player.clicked_opp_hero(opponent, clicked_pos)
-        if hero_to_attack and self.in_range_of_skill(clicked_pos):
-            hero_to_attack.hp -= self.stats["ATTACK"]
-            if hero_to_attack.hp < 0:
-                hero_to_attack.hp = 0
-            hero_to_attack.stats["HP"] = HealthDisplay(hero_to_attack)
-            attacking_hero = player.clicked_hero
-            player.last_action = ["special_attack", attacking_hero, hero_to_attack]
-            return ["special_attack", player.player_id, player.last_action]
-        else:
-            return False
+        heroes_to_attack = []
+        try:
+            heroes_to_attack = random.sample(opponent.heroes, 2)
+            for index in range(len(heroes_to_attack)):
+                heroes_to_attack[index] = self.randomize_damage(heroes_to_attack[index])
+        except ValueError:
+            heroes_to_attack.append(random.choice(opponent.heroes))
+            print(heroes_to_attack)
+            heroes_to_attack[0] = self.randomize_damage(heroes_to_attack)
+        attacking_hero = player.clicked_hero
+        player.last_action = ["random_spell", attacking_hero, heroes_to_attack]
+        return ["random_spell", player.player_id, player.last_action]
 
 
 class Warrior(Hero):

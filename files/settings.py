@@ -45,6 +45,14 @@ maps = {
     "2": "map3/map3.tmx",
     "3": "map4/map4.tmx"
 }
+
+backgrounds = {
+    "0": "backgrounds/jungle_background.png",
+    "1": "backgrounds/wild_west_background.png",
+    "2": "backgrounds/arena_background.png",
+    "3": "backgrounds/winter_background.png"
+}
+
 death_image = "death.png"
 hero_images = {
     "HEALER": {
