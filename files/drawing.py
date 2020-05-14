@@ -93,7 +93,6 @@ def draw_background(screen, board, player, opponent, player_turn, actual_pos):
         highlight_clicked_hero(screen, player)
 
 
-
 def draw_with_moving_hero(screen, board, player, opponent, player_turn, actual_pos, tile):
     draw_background(screen, board, player, opponent, player_turn, actual_pos)
     draw_hero(screen, player.moved_hero, tile)
