@@ -52,7 +52,7 @@ def main():
                 gui_start = True
             try:
                 which_player_turn, turns = n.send("get_turn")
-            except EOFError:
+            except TypeError:
                 break
             actual_pos = pg.mouse.get_pos()
 
@@ -61,7 +61,7 @@ def main():
 
             gui.update_gui(actual_pos, player, opponent)
             player.check_result(opponent, n)
-            move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos)
+            move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos, n)
             try:
                 end = n.send(["end", player.player_id])
             except EOFError:
