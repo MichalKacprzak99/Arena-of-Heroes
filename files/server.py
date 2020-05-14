@@ -6,7 +6,7 @@ from _thread import start_new_thread
 import logging
 
 server = '127.0.0.1'
-port = 5555
+port = 5556
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -76,6 +76,8 @@ def threaded_client(connection, p_id, g_id):
                         reply = game.is_ready[which_player_take_action]
                     if data == "get_turn":
                         reply = [game.player_turn, game.turns]
+                    if data[0] == "update_opponent":
+                        game.players[abs(which_player_take_action-1)] = data[2]
                     if data[0] == "update":
                         game.players[which_player_take_action].moved_hero = None
                     if data[0] == "reset_action":
