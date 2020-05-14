@@ -107,13 +107,11 @@ class Mage(Hero):
 
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args
-        clicked_opponent = player.clicked_opp_hero(opponent, clicked_pos)
-        heroes_to_attack = [clicked_opponent]
-        if clicked_opponent and self.in_range_of_skill(clicked_pos):
+        heroes_to_attack = [player.clicked_opp_hero(opponent, clicked_pos)]
+        if player.clicked_opp_hero(opponent, clicked_pos) and self.in_range_of_skill(clicked_pos):
             if len(opponent.heroes) > 1:
                 heroes_to_attack.append(random.choice(opponent.heroes))
-                for index in range(len(heroes_to_attack)):
-                    heroes_to_attack[index] = self.randomize_damage(heroes_to_attack[index])
+                heroes_to_attack = list(map(self.randomize_damage, heroes_to_attack))
             else:
                 heroes_to_attack[0] = self.randomize_damage(heroes_to_attack[0])
             attacking_hero = player.clicked_hero

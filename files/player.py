@@ -42,8 +42,8 @@ class Player:
             attacked_heroes = opponent.last_action[2]
             for attacked_hero in attacked_heroes:
                 self.heroes[attacked_hero.hero_id] = attacked_hero
-                if self.heroes[attacked_hero.hero_id].hp == 0:
-                    dead_heroes.append(self.heroes[attacked_hero.hero_id])
+                if attacked_hero.hp == 0:
+                    dead_heroes.append(attacked_hero)
         self.add_death_heroes(dead_heroes)
 
         n.send(["reset_action", opponent.player_id])
