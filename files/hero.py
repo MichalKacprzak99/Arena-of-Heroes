@@ -102,7 +102,7 @@ class Mage(Hero):
         super().__init__(hero_id, pos, 14, 7, 2, 50, 50, 10, "MAGE", side)
 
     def randomize_damage(self, hero):
-        hero = update_stats(hero, -random.randrange(15, self.stats["ATTACK"] * 4))
+        hero = update_stats(hero, -random.randrange(120, self.stats["ATTACK"]*15))
         return hero
 
     def special_skill(self, *args):
