@@ -124,13 +124,13 @@ class Mage(Hero):
 class Warrior(Hero):
     def __init__(self, hero_id, pos, side):
         super().__init__(hero_id, pos, 10, 10, 5, 100, 100, 1, "WARRIOR", side)
-        self.powerful_attack = 20
+        self.powerful_attack = 3
 
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args
         hero_to_attack = player.clicked_opp_hero(opponent, clicked_pos)
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
-            hero_to_attack = update_stats(hero_to_attack, -self.powerful_attack)
+            hero_to_attack = update_stats(hero_to_attack, -self.powerful_attack * self.stats["ATTACK"])
             attacking_hero = player.clicked_hero
             player.last_action = ["special_attack", attacking_hero, hero_to_attack]
             return ["special_attack", player.player_id, player.last_action]
