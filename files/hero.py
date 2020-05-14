@@ -83,7 +83,7 @@ class Hero(ABC):
 
 class Healer(Hero):
     def __init__(self, hero_id, pos, side):
-        super().__init__(hero_id, pos, 5, 5, 3, 75, 75, 2, "HEALER", side)
+        super().__init__(hero_id, pos, 5, 3, 4, 75, 75, 4, "HEALER", side)
         self.healing = 30
 
     def special_skill(self, *args):
@@ -99,10 +99,10 @@ class Healer(Hero):
 
 class Mage(Hero):
     def __init__(self, hero_id, pos, side):
-        super().__init__(hero_id, pos, 14, 7, 2, 50, 50, 10, "MAGE", side)
+        super().__init__(hero_id, pos, 14, 7, 3, 50, 50, 8, "MAGE", side)
 
     def randomize_damage(self, hero):
-        hero = update_stats(hero, -random.randrange(120, self.stats["ATTACK"]*15))
+        hero = update_stats(hero, -random.randrange(10, self.stats["ATTACK"] * 4))
         return hero
 
     def special_skill(self, *args):
@@ -140,7 +140,7 @@ class Warrior(Hero):
 
 class Archer(Hero):
     def __init__(self, hero_id, pos, side):
-        super().__init__(hero_id, pos, 3, 3, 4, 55, 55, 7, "ARCHER", side)
+        super().__init__(hero_id, pos, 12, 5, 4, 55, 55, 7, "ARCHER", side)
 
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args

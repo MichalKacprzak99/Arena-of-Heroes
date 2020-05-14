@@ -67,7 +67,7 @@ def main():
             except EOFError:
                 break
             if end:
-                pg.time.delay(2000)
+                pg.time.delay(3000)
                 pg.quit()
                 run = False
             else:
