@@ -23,7 +23,7 @@ def main():
     menu = Menu(window)
 
     while run:
-        clock.tick(60)
+        clock.tick(30)
         if not menu.both_ready():
             try:
                 opponent, which_map, menu.opponent_ready = n.send(["get_info", opponent_id])
@@ -52,7 +52,7 @@ def main():
                 gui_start = True
             try:
                 which_player_turn, turns = n.send("get_turn")
-            except TypeError:
+            except (TypeError, EOFError):
                 break
             actual_pos = pg.mouse.get_pos()
 

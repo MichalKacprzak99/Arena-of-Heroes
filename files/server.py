@@ -5,7 +5,7 @@ from player import Player
 from _thread import start_new_thread
 import logging
 
-server = '127.0.0.1'
+server = ''
 port = 5556
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
