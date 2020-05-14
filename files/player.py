@@ -46,7 +46,6 @@ class Player:
                 if attacked_hero.hp == 0 and attacked_hero not in dead_heroes:
                     if self.moved_hero == attacked_hero:
                         self.moved_hero = None
-                        n.send(["not_moved", self.player_id])
                     dead_heroes.append(attacked_hero)
         self.add_death_heroes(dead_heroes)
 
