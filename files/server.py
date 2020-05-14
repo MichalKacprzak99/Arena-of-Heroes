@@ -57,13 +57,6 @@ def threaded_client(connection, p_id, g_id):
                         game.players[which_player_take_action].last_action = last_action
                         game.players[abs(which_player_take_action-1)].heroes[attacked_hero.hero_id] = attacked_hero
                         game.get_next_turn()
-                    if data[0] == "random_spell":
-                        last_action = data[2]
-                        attacked_heroes = last_action[2]
-                        game.players[which_player_take_action].last_action = last_action
-                        for attacked_hero in attacked_heroes:
-                            game.players[abs(which_player_take_action-1)].heroes[attacked_hero.hero_id] = attacked_hero
-                        game.get_next_turn()
                     if data[0] == "heal":
                         hero_to_heal = data[2]
                         game.players[which_player_take_action].heroes[hero_to_heal.hero_id] = hero_to_heal
