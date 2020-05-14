@@ -73,12 +73,12 @@ def draw_heroes(screen, player):
 
     for death_hero_pos in player.death_heroes_pos:
         if death_hero_pos is not None:
-            draw_death_hero(screen, death_hero_pos)
+            draw_death_hero(screen, death_hero_pos, death_hero_pos.pos)
 
 
-def draw_death_hero(screen, tile):
+def draw_death_hero(screen, hero, tile):
     hero_coordinate = coordinate(tile)
-    hero_image = pg.image.load(load_image("death.png"))
+    hero_image = pg.image.load(load_image(hero_images[hero.stats["NAME"]]["death"]))
     screen.blit(hero_image, hero_coordinate)
 
 
@@ -91,6 +91,7 @@ def draw_background(screen, board, player, opponent, player_turn, actual_pos):
     draw_result_of_game(screen, player)
     if player.clicked_hero:
         highlight_clicked_hero(screen, player)
+
 
 
 def draw_with_moving_hero(screen, board, player, opponent, player_turn, actual_pos, tile):

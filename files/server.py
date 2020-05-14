@@ -62,7 +62,8 @@ def threaded_client(connection, p_id, g_id):
                         attacked_heroes = last_action[2]
                         game.players[which_player_take_action].last_action = last_action
                         for attacked_hero in attacked_heroes:
-                            game.players[abs(which_player_take_action-1)].heroes[attacked_hero.hero_id] = attacked_hero
+                            game.players[abs(which_player_take_action - 1)].heroes[
+                                attacked_hero.hero_id] = attacked_hero
                         game.get_next_turn()
                     if data[0] == "heal":
                         hero_to_heal = data[2]
