@@ -1,6 +1,7 @@
 from hero import Healer, Mage, Warrior, Archer
-from settings import get_tile_pos, box_settings
+from settings import get_tile_pos
 from math import sqrt
+from settings import box_settings
 
 
 class Player:
@@ -20,20 +21,31 @@ class Player:
         return [Healer(0, next(pos), side), Mage(1, next(pos), side),
                 Warrior(2, next(pos), side), Archer(3, next(pos), side)]
 
-    def add_death_hero(self, death_hero):
-        self.death_heroes_pos.append(death_hero)
-        del self.heroes[death_hero.hero_id]
-        if len(self.heroes):
-            for hero in self.heroes[death_hero.hero_id:]:
-                hero.hero_id -= 1
+    def add_death_heroes(self, death_heroes):
+        death_heroes = sorted(death_heroes, key=lambda sorted_hero: sorted_hero.hero_id, reverse=True)
+        for death_hero in death_heroes:
+            if death_hero not in self.death_heroes_pos:
+                self.death_heroes_pos.append(death_hero)
+                del self.heroes[death_hero.hero_id]
+                if len(self.heroes):
+                    for hero in self.heroes[death_hero.hero_id:]:
+                        hero.hero_id -= 1
 
     def react_to_event(self, opponent, n):
         reaction = ["basic_attack", "special_attack"]
+        dead_heroes = []
         if opponent.last_action[0] in reaction:
             attacked_hero = opponent.last_action[2]
             self.heroes[attacked_hero.hero_id] = attacked_hero
             if self.heroes[attacked_hero.hero_id].hp == 0:
-                self.add_death_hero(attacked_hero)
+                dead_heroes.append(self.heroes[attacked_hero.hero_id])
+        elif opponent.last_action[0] == "random_spell":
+            attacked_heroes = opponent.last_action[2]
+            for attacked_hero in attacked_heroes:
+                self.heroes[attacked_hero.hero_id] = attacked_hero
+                if attacked_hero.hp == 0:
+                    dead_heroes.append(attacked_hero)
+        self.add_death_heroes(dead_heroes)
 
         n.send(["reset_action", opponent.player_id])
         n.send(["death_heroes", self.player_id, self.heroes, self.death_heroes_pos])
