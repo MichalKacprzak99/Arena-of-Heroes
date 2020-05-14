@@ -2,6 +2,7 @@ from settings import game_settings, box_settings, hero_images, colors, coordinat
 import pygame as pg
 last_moved_hero_id = None
 last_which_side = ""
+last_moved_hero = None
 
 
 def blit_text_center(screen, text_to_input, font, height, color):
@@ -101,11 +102,12 @@ def draw_with_moving_hero(screen, board, player, opponent, player_turn, actual_p
 
 
 def redraw_window(screen, board, player, opponent, player_turn, actual_pos):
-    global last_moved_hero_id, last_which_side
+    global last_moved_hero_id, last_which_side, last_moved_hero
     made_move = False
     if last_moved_hero_id is not None:
         try:
-            opponent.heroes[last_moved_hero_id].side = last_which_side
+            if opponent.heroes[last_moved_hero_id] == last_moved_hero:
+                opponent.heroes[last_moved_hero_id].side = last_which_side
         except IndexError:
             pass
     if player.moved_hero:
@@ -120,6 +122,7 @@ def redraw_window(screen, board, player, opponent, player_turn, actual_pos):
             draw_with_moving_hero(screen, board, opponent, player, player_turn, actual_pos, tile)
         last_which_side = opponent.moved_hero.side
         last_moved_hero_id = opponent.moved_hero.hero_id
+        last_moved_hero = opponent.moved_hero
         made_move = True
     else:
         draw_background(screen, board, player, opponent, player_turn, actual_pos)
