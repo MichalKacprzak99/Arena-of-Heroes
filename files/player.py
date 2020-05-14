@@ -24,12 +24,11 @@ class Player:
     def add_death_heroes(self, death_heroes):
         death_heroes = sorted(death_heroes, key=lambda sorted_hero: sorted_hero.hero_id, reverse=True)
         for death_hero in death_heroes:
-            if death_hero not in self.death_heroes_pos:
-                self.death_heroes_pos.append(death_hero)
-                del self.heroes[death_hero.hero_id]
-                if len(self.heroes):
-                    for hero in self.heroes[death_hero.hero_id:]:
-                        hero.hero_id -= 1
+            self.death_heroes_pos.append(death_hero)
+            del self.heroes[death_hero.hero_id]
+            if len(self.heroes):
+                for hero in self.heroes[death_hero.hero_id:]:
+                    hero.hero_id -= 1
 
     def react_to_event(self, opponent, n):
         reaction = ["basic_attack", "special_attack"]
@@ -43,7 +42,7 @@ class Player:
             attacked_heroes = opponent.last_action[2]
             for attacked_hero in attacked_heroes:
                 self.heroes[attacked_hero.hero_id] = attacked_hero
-                if attacked_hero.hp == 0:
+                if attacked_hero.hp == 0 and attacked_hero not in dead_heroes:
                     dead_heroes.append(attacked_hero)
         self.add_death_heroes(dead_heroes)
 
