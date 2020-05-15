@@ -64,7 +64,7 @@ class Menu:
         return self.player_ready is True and self.opponent_ready is False
 
     def background_image(self):
-        image = pg.image.load(load_image("background.jpg"))
+        image = pg.image.load(load_image("menu_background.jpg"))
         rect = image.get_rect()
         rect.left, rect.top = 0, 0
         self.window.blit(image, rect)
@@ -77,22 +77,7 @@ class Menu:
     def instructions(self):
         self.active = False
         self.help = True
-        pg.draw.rect(self.window, (0, 0, 240),
-                     (50, 50, game_settings["GAME_SCREEN_WIDTH"] -100, game_settings["GAME_SCREEN_HEIGHT"]-300))
-        pg.draw.rect(self.window, (0, 0, 190),
-                     (50, 50, game_settings["GAME_SCREEN_WIDTH"] -100, game_settings["GAME_SCREEN_HEIGHT"]-300), 5)
-        self.draw_text("Choose your team and battle with them in Arena of Heroes!", 70, 70)
-        self.draw_text("Main goal of the game is to defeat all of your opponent heroes before them!", 70, 100)
-        self.draw_text("Here's brief description of every class:", 230, 130)
-        self.draw_image("ARCHER\south.png", 70, 160)
-        self.draw_text("Archer can move fast and attack from far distance with arrows.", 130, 180)
-        self.draw_image("HEALER\south.png", 70, 230)
-        self.draw_text("Healer can keep your characters alive when needed.", 130, 250)
-        self.draw_image("MAGE\south.png", 70, 300)
-        self.draw_text("Mage can cast strong magic spells on your enemies.", 130, 320)
-        self.draw_image("WARRIOR\south.png", 70, 370)
-        self.draw_text("Warrior can dish out heavy damage in close range attacks.", 130, 390)
-        self.draw_text("Click anywhere to go back", 300, 450)
+        self.draw_image("instructions.png", 50, 50)
         pg.display.update()
 
     def draw_text(self, text_to_input, pos_x, pos_y, size=15):

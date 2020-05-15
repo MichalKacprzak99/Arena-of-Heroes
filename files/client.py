@@ -48,11 +48,11 @@ def main():
                 height = game_settings["GAME_SCREEN_HEIGHT"]
                 window = pg.display.set_mode((width, height))
 
-                gui = Gui(window, player_id)
+                gui = Gui(window, player, player_id, which_map)
                 gui_start = True
             try:
-                which_player_turn, turns = n.send("get_turn")
-            except EOFError:
+                which_player_turn, turns = n.send(["get_turn"])
+            except TypeError:
                 break
             actual_pos = pg.mouse.get_pos()
 
@@ -61,13 +61,13 @@ def main():
 
             gui.update_gui(actual_pos, player, opponent)
             player.check_result(opponent, n)
-            move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos)
+            move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos, n)
             try:
                 end = n.send(["end", player.player_id])
             except EOFError:
                 break
             if end:
-                pg.time.delay(2000)
+                pg.time.delay(3000)
                 pg.quit()
                 run = False
             else:

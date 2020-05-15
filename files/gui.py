@@ -1,51 +1,49 @@
 import thorpy
-from settings import box_settings, get_tile_pos
-
-gui_info = {
-    "HERO_NAME": 0,
-    "HP_VALUE": 1,
-    "ATTACK_VALUE": 2,
-    "DEFENSE_VALUE": 3,
-    "RANGE_VALUE": 4,
-    "SKILL_RANGE": 5,
-    "OPPONENT_HERO": 6}
+from settings import box_settings, get_tile_pos, backgrounds
 
 
 class Gui:
-    def __init__(self, screen, p_id):
+    def __init__(self, screen, player, p_id, which_map):
         self.window = screen
         self.radio_buttons = []
         self.button_text = ["Move", "Basic", "Special"]
+        self.gui_info_amount = len(player.heroes[0].stats)
         self.menu = None
         self.background = None
         self.elements = []
         self.radio_pool = None
         self.buttons_update_flag = 1
         self.p_id = p_id
-        self.create()
+        self.create(which_map)
 
     def fill_elements_table(self):
-        for _ in range(len(gui_info) * 2):
+        for _ in range(self.gui_info_amount * 2):
             self.elements.append(thorpy.make_text(" ", 12, (0, 0, 0)))
 
-    def create(self):
-        self.fill_elements_table()
+    def fill_radio_buttons(self):
         for txt in self.button_text:
             rad = thorpy.Checker(txt, type_="radio")
             rad.finish()
             self.radio_buttons.append(rad)
+
+    def create(self, which_map):
+        self.fill_elements_table()
+        self.fill_radio_buttons()
         self.radio_pool = thorpy.RadioPool(self.radio_buttons, first_value=self.radio_buttons[0], always_value=True)
-        self.background = thorpy.Background(color=(168, 139, 50), elements=self.elements + self.radio_buttons)
-        thorpy.set_theme("round")
+        self.background = thorpy.Background(color=(168, 139, 50), image=backgrounds[str(which_map)],
+                                            elements=self.elements + self.radio_buttons)
+
         self.menu = thorpy.Menu(self.background)
+
         for element in self.menu.get_population():
             element.surface = self.window
-        thorpy.store(self.background, self.elements[gui_info["HERO_NAME"]:gui_info["OPPONENT_HERO"]],
-                     x=10, y=100, align="center")
-        thorpy.store(self.background, self.elements[gui_info["OPPONENT_HERO"]:],
-                     x=box_settings["RIGHT_BOX"] + 10, y=100, align="center")
+        thorpy.store(self.background, self.elements[:self.gui_info_amount],
+                     x=10, y=125, align="center")
+        thorpy.store(self.background, self.elements[self.gui_info_amount:],
+                     x=box_settings["RIGHT_BOX"] + 10, y=125, align="center")
         thorpy.store(self.background, self.radio_buttons,
                      x=20 + self.p_id * box_settings["RIGHT_BOX"], y=400, align="left")
+
         self.buttons_appearing(0)
         self.background.blit()
         self.background.update()
@@ -55,6 +53,7 @@ class Gui:
         for index, attribute in enumerate(chosen_hero.stats):
             value = str(chosen_hero.stats[attribute])
             self.elements[index + opponent_info_index].set_text(attribute + ": " + value)
+            self.elements[index + opponent_info_index].set_visible(1)
 
     def get_radio_value(self):
         for index in range(len(self.radio_buttons)):
@@ -63,7 +62,7 @@ class Gui:
 
     def reset_gui(self):
         for element_id in range(len(self.elements)):
-            self.elements[element_id].set_text(" ")
+            self.elements[element_id].set_visible(0)
 
     def buttons_appearing(self, appear_value):
         if self.buttons_update_flag != appear_value:
@@ -78,7 +77,7 @@ class Gui:
             mouse_pos = get_tile_pos(mouse_pos)
             self.buttons_appearing(1) if player.clicked_hero else self.buttons_appearing(0)
             if player.clicked_own_hero(mouse_pos):
-                self.set_hero_info(player, mouse_pos, len(gui_info) * player.player_id)
+                self.set_hero_info(player, mouse_pos, self.gui_info_amount * player.player_id)
             elif player.clicked_opp_hero(opponent, mouse_pos):
-                self.set_hero_info(opponent, mouse_pos, len(gui_info) * opponent.player_id)
+                self.set_hero_info(opponent, mouse_pos, self.gui_info_amount * opponent.player_id)
         self.background.blit()

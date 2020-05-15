@@ -1,25 +1,24 @@
 from settings import game_settings, box_settings, hero_images, colors, coordinate, load_image, get_tile_pos, tile_dim
 import pygame as pg
-last_moved_hero_id = None
-last_which_side = ""
+
+
+def blit_text_center(screen, text_to_input, font, height, color):
+    text_width, text_height = font.size(text_to_input)
+    text = font.render(text_to_input, True, color)
+    width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
+    screen.blit(text, (width / 2 - text_width / 2, height))
 
 
 def draw_result_of_game(screen, player):
     font = pg.font.SysFont("Arial", 50)
     text_to_input = player.result
-    text_width, text_height = font.size(text_to_input)
-    text = font.render(text_to_input, True, colors["RED"])
-    width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
-    screen.blit(text, (width/2 - text_width/2, 50))
+    blit_text_center(screen, text_to_input, font, 50, colors["RED"])
 
 
-def draw_player_turn(screen, player_turn):
+def draw_player_turn(screen, player_id, player_turn):
     font = pg.font.SysFont("Arial", 25)
-    text_to_input = "Player %d turn" % player_turn
-    text_width, text_height = font.size(text_to_input)
-    text = font.render(text_to_input, True, colors["RED"])
-    width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
-    screen.blit(text, (width/2 - text_width/2, 20))
+    text_to_input = "Your turn" if player_id == player_turn else "Opponent's turn"
+    blit_text_center(screen, text_to_input, font, 20, colors["RED"])
 
 
 def highlight_tile(screen, board, player, opponent, pos):
@@ -40,13 +39,10 @@ def highlight_tile(screen, board, player, opponent, pos):
         pg.draw.rect(screen, color, (*draw_pos, tile_dim["width"], tile_dim["height"]), 1)
 
 
-def draw_if_clicked(screen):
-    font = pg.font.SysFont("Arial", 15)
-    text_to_input = "Clicked"
-    text_width, text_height = font.size(text_to_input)
-    text = font.render(text_to_input, True, colors["RED"])
-    width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
-    screen.blit(text, (width/2 - text_width/2, 50))
+def highlight_clicked_hero(screen, player):
+    color = colors["BLUE"]
+    draw_pos = coordinate(player.clicked_hero.pos)
+    pg.draw.rect(screen, color, (*draw_pos, tile_dim["width"], tile_dim["height"]), 1)
 
 
 def draw_health_bar(screen, hero, hero_coordinate):
@@ -75,12 +71,12 @@ def draw_heroes(screen, player):
 
     for death_hero_pos in player.death_heroes_pos:
         if death_hero_pos is not None:
-            draw_death_hero(screen, death_hero_pos)
+            draw_death_hero(screen, death_hero_pos, death_hero_pos.pos)
 
 
-def draw_death_hero(screen, tile):
+def draw_death_hero(screen, hero, tile):
     hero_coordinate = coordinate(tile)
-    hero_image = pg.image.load(load_image("death.png"))
+    hero_image = pg.image.load(load_image(hero_images[hero.stats["NAME"]]["death"]))
     screen.blit(hero_image, hero_coordinate)
 
 
@@ -89,10 +85,10 @@ def draw_background(screen, board, player, opponent, player_turn, actual_pos):
     highlight_tile(screen, board, player, opponent, actual_pos)
     draw_heroes(screen, player)
     draw_heroes(screen, opponent)
-    draw_player_turn(screen, player_turn)
+    draw_player_turn(screen, player.player_id, player_turn)
     draw_result_of_game(screen, player)
     if player.clicked_hero:
-        draw_if_clicked(screen)
+        highlight_clicked_hero(screen, player)
 
 
 def draw_with_moving_hero(screen, board, player, opponent, player_turn, actual_pos, tile):
@@ -102,14 +98,8 @@ def draw_with_moving_hero(screen, board, player, opponent, player_turn, actual_p
     pg.time.delay(500)
 
 
-def redraw_window(screen, board, player, opponent, player_turn, actual_pos):
-    global last_moved_hero_id, last_which_side
+def redraw_window(screen, board, player, opponent, player_turn, actual_pos, n):
     made_move = False
-    if last_moved_hero_id is not None:
-        try:
-            opponent.heroes[last_moved_hero_id].side = last_which_side
-        except IndexError:
-            pass
     if player.moved_hero:
         for tile, side in player.moved_hero.path:
             player.moved_hero.side = side
@@ -120,10 +110,10 @@ def redraw_window(screen, board, player, opponent, player_turn, actual_pos):
         for tile, side in opponent.moved_hero.path:
             opponent.moved_hero.side = side
             draw_with_moving_hero(screen, board, opponent, player, player_turn, actual_pos, tile)
-        last_which_side = opponent.moved_hero.side
-        last_moved_hero_id = opponent.moved_hero.hero_id
+        opponent.heroes[opponent.moved_hero.hero_id].side = opponent.moved_hero.side
+        opponent.moved_hero = None
+        n.send(["update_opponent", player.player_id, opponent])
         made_move = True
-        return made_move
     else:
         draw_background(screen, board, player, opponent, player_turn, actual_pos)
         pg.display.update()

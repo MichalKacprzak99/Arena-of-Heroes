@@ -5,119 +5,163 @@ from player import Player
 from _thread import start_new_thread
 import logging
 
-server = '127.0.0.1'
-port = 5555
-
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-try:
-    s.bind((server, port))
-except socket.error as e:
-    str(e)
-
-s.listen()
-
 fmt_str = '[%(asctime)s] %(levelname)s @ line %(lineno)d: %(message)s'
 logging.basicConfig(level=logging.DEBUG, format=fmt_str)
 logger = logging.getLogger(__name__)
-logger.info('Waiting for a connection, Server Started')
 
-games = {}
 id_count = 0
 
 
-def threaded_client(connection, p_id, g_id):
-    global id_count
-    games[g_id].players[p_id] = Player(name="df", player_id=p_id)
-    connection.send(pickle.dumps(games[g_id].players[p_id]))
-    reply = []
-
-    while True:
+class Server:
+    def __init__(self):
+        self.server = '127.0.0.1'
+        self.port = 5556
+        self.games = {}
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
-            data = pickle.loads(connection.recv(4096))
+            self.s.bind((self.server, self.port))
+        except socket.error as e:
+            str(e)
+        self.s.listen()
+        logger.info('Waiting for a connection, Server Started')
 
-            if g_id in games:
-                game = games[g_id]
-
-                if not data:
-                    break
-                else:
-                    which_player_take_action = data[1]
-                    if data[0] == "get_info":
-                        opponent_ready = game.is_ready[abs(which_player_take_action-1)]
-                        reply = [game.players[which_player_take_action], game.which_map, opponent_ready]
-                    if data[0] == "move":
-                        moved_hero = data[2]
-                        game.players[which_player_take_action].heroes[moved_hero.hero_id] = moved_hero
-                        game.players[which_player_take_action].moved_hero = moved_hero
-                        game.get_next_turn()
-                    if data[0] == "basic_attack" or data[0] == "special_attack":
-                        last_action = data[2]
-                        attacked_hero = last_action[2]
-                        game.players[which_player_take_action].last_action = last_action
-                        game.players[abs(which_player_take_action-1)].heroes[attacked_hero.hero_id] = attacked_hero
-                        game.get_next_turn()
-                    if data[0] == "heal":
-                        hero_to_heal = data[2]
-                        game.players[which_player_take_action].heroes[hero_to_heal.hero_id] = hero_to_heal
-                        game.get_next_turn()
-                    if data[0] == "echo":
-                        reply = game.players[which_player_take_action]
-                    if data[0] == "is_ready":
-                        game.is_ready[abs(which_player_take_action-1)] = data[2]
-                        reply = game.is_ready[which_player_take_action]
-                    if data == "get_turn":
-                        reply = [game.player_turn, game.turns]
-                    if data[0] == "update":
-                        game.players[which_player_take_action].moved_hero = None
-                    if data[0] == "reset_action":
-                        game.players[which_player_take_action].last_action = None
-                    if data[0] == "death_heroes":
-                        game.players[which_player_take_action].heroes = data[2]
-                        game.players[which_player_take_action].death_heroes_pos = data[3]
-                    if data[0] == "result":
-                        if data[2] == "lose":
-                            game.loser = data[1]
-                        elif data[2] == "win":
-                            game.winner = data[1]
-                    if data[0] == "end":
-                        if game.winner is not None and game.loser is not None:
-                            reply = True
-                        else:
-                            reply = False
-
-                    logger.info("Received: " + str(data))
-                    logger.info("Sending: " + str(reply))
-                    connection.sendall(pickle.dumps(reply))
-                    reply = None
+    def start(self):
+        global id_count
+        while True:
+            conn, adr = self.s.accept()
+            logger.info("Connected to: " + str(adr))
+            id_count += 1
+            player_id = 0
+            game_id = (id_count - 1) // 2
+            if id_count % 2 == 1:
+                self.games[game_id] = Game(game_id)
+                logger.info("Creating a new game ...")
             else:
-                break
-        except EOFError:
-            break
-
-    logger.info("Lost connection")
-    try:
-        del games[game_id]
-        logger.info("Closing Game " + str(game_id))
-    except KeyError:
-        pass
-    id_count -= 1
-    connection.close()
+                player_id = 1
+            start_new_thread(ThreadedClient().run, (conn, self.games, player_id, game_id))
 
 
-player_id = 0
-if __name__ == '__main__':
-    while True:
-        conn, adr = s.accept()
-        logger.info("Connected to: " + str(adr))
-        id_count += 1
-        player_id = 0
-        game_id = (id_count - 1) // 2
-        if id_count % 2 == 1:
-            games[game_id] = Game(game_id)
+class ThreadedClient:
+    def __init__(self):
+        self.reactions = {
+            "get_info": self.get_info,
+            "move": self.move,
+            "basic_attack": self.attack,
+            "special_attack": self.attack,
+            "random_spell": self.random_spell,
+            "heal": self.heal,
+            "echo": self.echo,
+            "is_ready": self.is_ready,
+            "get_turn": self.get_turn,
+            "update": self.update,
+            "update_opponent": self.update_opponent,
+            "reset_action": self.reset_action,
+            "death_heroes": self.death_heroes,
+            "result": self.result,
+            "end": self.end
+        }
+        self.reply = []
+        self.data = []
+        self.game = None
 
-            logger.info("Creating a new game ...")
+    def get_info(self):
+        opponent_ready = self.game.is_ready[abs(self.data[1] - 1)]
+        return [self.game.players[self.data[1]], self.game.which_map, opponent_ready]
+
+    def echo(self):
+        return self.game.players[self.data[1]]
+
+    def is_ready(self):
+        self.game.is_ready[abs(self.data[1] - 1)] = self.data[2]
+        return self.game.is_ready[self.data[1]]
+
+    def get_turn(self):
+        return [self.game.player_turn, self.game.turns]
+
+    def end(self):
+        if self.game.winner is not None and self.game.loser is not None:
+            return True
         else:
-            player_id = 1
+            return False
 
-        start_new_thread(threaded_client, (conn, player_id, game_id))
+    def death_heroes(self):
+        self.game.players[self.data[1]].heroes = self.data[2]
+        self.game.players[self.data[1]].death_heroes_pos = self.data[3]
+
+    def reset_action(self):
+        self.game.players[self.data[1]].last_action = None
+
+    def update(self):
+        self.game.players[self.data[1]].moved_hero = None
+
+    def result(self):
+        if self.data[2] == "lose":
+            self.game.loser = self.data[1]
+        elif self.data[2] == "win":
+            self.game.winner = self.data[1]
+
+    def update_opponent(self):
+        self.game.players[abs(self.data[1] - 1)] = self.data[2]
+
+    def random_spell(self):
+        last_action = self.data[2]
+        attacked_heroes = last_action[2]
+        self.game.players[self.data[1]].last_action = last_action
+        for attacked_hero in attacked_heroes:
+            self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
+        self.game.get_next_turn()
+
+    def attack(self):
+        last_action = self.data[2]
+        attacked_hero = last_action[2]
+        self.game.players[self.data[1]].last_action = last_action
+        self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
+        self.game.get_next_turn()
+
+    def heal(self):
+        hero_to_heal = self.data[2]
+        self.game.players[self.data[1]].heroes[hero_to_heal.hero_id] = hero_to_heal
+        self.game.get_next_turn()
+
+    def move(self):
+        moved_hero = self.data[2]
+        self.game.players[self.data[1]].heroes[moved_hero.hero_id] = moved_hero
+        self.game.players[self.data[1]].moved_hero = moved_hero
+        self.game.get_next_turn()
+
+    def run(self, connection, games, p_id, g_id):
+        global id_count
+        games[g_id].players[p_id] = Player(name="df", player_id=p_id)
+        connection.send(pickle.dumps(games[g_id].players[p_id]))
+        while True:
+            try:
+                self.data = pickle.loads(connection.recv(4096))
+
+                if g_id in games:
+                    self.game = games[g_id]
+                    if not self.data:
+                        break
+                    else:
+                        if self.data[0] in self.reactions:
+                            self.reply = self.reactions[self.data[0]]()
+                        logger.info("Received: " + str(self.data))
+                        logger.info("Sending: " + str(self.reply))
+                        connection.sendall(pickle.dumps(self.reply))
+                        self.reply = None
+                else:
+                    break
+            except EOFError:
+                break
+        logger.info("Lost connection")
+        try:
+            del games[g_id]
+            logger.info("Closing Game " + str(g_id))
+        except KeyError:
+            pass
+        id_count -= 1
+        connection.close()
+
+
+if __name__ == '__main__':
+    server = Server()
+    server.start()
