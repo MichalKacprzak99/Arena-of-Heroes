@@ -51,7 +51,7 @@ def main():
                 gui = Gui(window, player, player_id, which_map)
                 gui_start = True
             try:
-                which_player_turn, turns = n.send("get_turn")
+                which_player_turn, turns = n.send(["get_turn"])
             except TypeError:
                 break
             actual_pos = pg.mouse.get_pos()
