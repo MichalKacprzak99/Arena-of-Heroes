@@ -86,6 +86,7 @@ def main():
                         player.clicked_hero = None
                     if event.type == pg.MOUSEBUTTONUP and event.button == mouse_button["LEFT"]:
                         if which_player_turn == player_id:
+                            gui.click(actual_pos, n, player_id)
                             if not player.clicked_hero:
                                 player.check_clicked_hero(actual_pos)
                             else:

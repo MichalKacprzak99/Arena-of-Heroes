@@ -1,11 +1,12 @@
 from random import randint
+import datetime
 
 
 class Game:
     def __init__(self, game_id):
+        self.time_start = datetime.datetime.now().strftime("%c")
         self.player_turn = 0
         self.turns = 0
-        self.game_id = game_id
         self.players = [None, None]
         self.which_map = randint(0, 3)
         self.is_ready = [False, False]

@@ -1,13 +1,16 @@
 import thorpy
 from settings import box_settings, get_tile_pos, backgrounds
+import pygame as pg
 
 
 class Gui:
     def __init__(self, screen, player, p_id, which_map):
         self.window = screen
         self.radio_buttons = []
-        self.button_text = ["Move", "Basic", "Special"]
+        self.radio_butt_text = ["Move", "Basic", "Special"]
         self.gui_info_amount = len(player.heroes[0].stats)
+        self.buttons = []
+        self.butt_text = ["Save", "Quit"]
         self.menu = None
         self.background = None
         self.elements = []
@@ -21,22 +24,29 @@ class Gui:
             self.elements.append(thorpy.make_text(" ", 12, (0, 0, 0)))
 
     def fill_radio_buttons(self):
-        for txt in self.button_text:
+        for txt in self.radio_butt_text:
             rad = thorpy.Checker(txt, type_="radio")
             rad.finish()
             self.radio_buttons.append(rad)
 
+    def make_buttons(self):
+        self.buttons = [thorpy.make_button(txt) for txt in self.butt_text]
+        [button.set_font_size(20) for button in self.buttons]
+        [button.scale_to_title() for button in self.buttons]
+
     def create(self, which_map):
         self.fill_elements_table()
         self.fill_radio_buttons()
+        self.make_buttons()
         self.radio_pool = thorpy.RadioPool(self.radio_buttons, first_value=self.radio_buttons[0], always_value=True)
         self.background = thorpy.Background(color=(168, 139, 50), image=backgrounds[str(which_map)],
-                                            elements=self.elements + self.radio_buttons)
+                                            elements=self.elements + self.radio_buttons+self.buttons)
 
         self.menu = thorpy.Menu(self.background)
 
         for element in self.menu.get_population():
             element.surface = self.window
+        thorpy.store(self.background, self.buttons, x=50+self.p_id * box_settings["RIGHT_BOX"], y=500, align="center")
         thorpy.store(self.background, self.elements[:self.gui_info_amount],
                      x=10, y=125, align="center")
         thorpy.store(self.background, self.elements[self.gui_info_amount:],
@@ -58,7 +68,7 @@ class Gui:
     def get_radio_value(self):
         for index in range(len(self.radio_buttons)):
             if self.radio_buttons[index].get_value() == 1:
-                return self.button_text[index].lower()
+                return self.radio_butt_text[index].lower()
 
     def reset_gui(self):
         for element_id in range(len(self.elements)):
@@ -81,3 +91,12 @@ class Gui:
             elif player.clicked_opp_hero(opponent, mouse_pos):
                 self.set_hero_info(opponent, mouse_pos, self.gui_info_amount * opponent.player_id)
         self.background.blit()
+
+    def click(self, mouse, network, p_id):
+        for button in self.buttons:
+            if button.get_rect().collidepoint(mouse):
+                if button.get_full_txt() == "Save":
+                    network.send(["save"])
+                elif button.get_full_txt() == "Quit":
+                    pg.quit()
+

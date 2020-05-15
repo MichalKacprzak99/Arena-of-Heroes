@@ -1,6 +1,6 @@
 import thorpy
 import pygame as pg
-from settings import load_image, game_settings
+from settings import load_image
 
 
 class Menu:
@@ -22,7 +22,6 @@ class Menu:
         self.buttons = [thorpy.make_button(txt) for txt in self.b_text]
         [button.set_font_size(30) for button in self.buttons]
         [button.scale_to_title() for button in self.buttons]
-        self.buttons[1].active = False
         self.box = thorpy.Box(self.buttons)
         menu = thorpy.Menu(self.box)
         self.box.set_main_color((0, 0, 0, 0))
@@ -47,15 +46,18 @@ class Menu:
             for element in self.menu.get_population():
                 if element.get_rect().collidepoint(mouse) and self.player_ready is False:
                     if element.get_full_txt() == "Start Game":
-                        network.send(["is_ready", p_id, True])
-                        self.player_ready = True
-                        self.active = False
+                        self.start_game(network, p_id)
                     elif element.get_full_txt() == "Load Game":
-                        pass
+                        self.load_game()
                     elif element.get_full_txt() == "Instructions":
                         self.instructions()
                     elif element.get_full_txt() == "Quit":
                         pg.quit()
+
+    def start_game(self, network, p_id):
+        network.send(["is_ready", p_id, True])
+        self.player_ready = True
+        self.active = False
 
     def both_ready(self):
         return self.player_ready and self.opponent_ready
@@ -90,3 +92,6 @@ class Menu:
         rect = image.get_rect()
         rect.left, rect.top = pos_x, pos_y
         self.window.blit(image, rect)
+
+    def load_game(self):
+        pass

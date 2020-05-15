@@ -1,22 +1,27 @@
+import json
 import socket
 import pickle
+import logging
+import jsonpickle
 from game import Game
 from player import Player
 from _thread import start_new_thread
-import logging
+from pymongo import MongoClient
 
 fmt_str = '[%(asctime)s] %(levelname)s @ line %(lineno)d: %(message)s'
 logging.basicConfig(level=logging.DEBUG, format=fmt_str)
 logger = logging.getLogger(__name__)
 
 id_count = 0
+root = MongoClient("localhost", 27017)
+aof_db = root['games_db']
+games = aof_db['games']
 
 
 class Server:
     def __init__(self):
         self.server = '127.0.0.1'
         self.port = 5556
-        self.games = {}
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
             self.s.bind((self.server, self.port))
@@ -32,13 +37,13 @@ class Server:
             logger.info("Connected to: " + str(adr))
             id_count += 1
             player_id = 0
-            game_id = (id_count - 1) // 2
             if id_count % 2 == 1:
-                self.games[game_id] = Game(game_id)
+                game = Game()
+                games.insert_one(json.loads(jsonpickle.encode(game)))
                 logger.info("Creating a new game ...")
             else:
                 player_id = 1
-            start_new_thread(ThreadedClient().run, (conn, self.games, player_id, game_id))
+            start_new_thread(ThreadedClient().run, (conn, game, player_id))
 
 
 class ThreadedClient:
@@ -58,11 +63,43 @@ class ThreadedClient:
             "reset_action": self.reset_action,
             "death_heroes": self.death_heroes,
             "result": self.result,
-            "end": self.end
+            "end": self.end,
+            "save": self.save
         }
         self.reply = []
         self.data = []
         self.game = None
+
+    def run(self, connection, game, p_id):
+        global id_count
+        game.players[p_id] = Player(name="df", player_id=p_id)
+        connection.send(pickle.dumps(game.players[p_id]))
+        self.game = game
+        while True:
+            if games.find_one({'time_start': self.game.time_start}):
+                try:
+                    self.data = pickle.loads(connection.recv(4096))
+                    if not self.data:
+                        break
+                    else:
+                        if self.data[0] in self.reactions:
+                            self.reply = self.reactions[self.data[0]]()
+                        logger.info("Received: " + str(self.data))
+                        logger.info("Sending: " + str(self.reply))
+                        connection.sendall(pickle.dumps(self.reply))
+                        self.reply = None
+                except EOFError:
+                    break
+            else:
+                break
+        logger.info("Lost connection")
+        try:
+            logger.info("Closing Game " + str(game.game_id))
+            games.delete_one({'time_start': self.game.time_start})
+        except KeyError:
+            pass
+        id_count -= 1
+        connection.close()
 
     def get_info(self):
         opponent_ready = self.game.is_ready[abs(self.data[1] - 1)]
@@ -129,37 +166,9 @@ class ThreadedClient:
         self.game.players[self.data[1]].moved_hero = moved_hero
         self.game.get_next_turn()
 
-    def run(self, connection, games, p_id, g_id):
-        global id_count
-        games[g_id].players[p_id] = Player(name="df", player_id=p_id)
-        connection.send(pickle.dumps(games[g_id].players[p_id]))
-        while True:
-            try:
-                self.data = pickle.loads(connection.recv(4096))
-
-                if g_id in games:
-                    self.game = games[g_id]
-                    if not self.data:
-                        break
-                    else:
-                        if self.data[0] in self.reactions:
-                            self.reply = self.reactions[self.data[0]]()
-                        logger.info("Received: " + str(self.data))
-                        logger.info("Sending: " + str(self.reply))
-                        connection.sendall(pickle.dumps(self.reply))
-                        self.reply = None
-                else:
-                    break
-            except EOFError:
-                break
-        logger.info("Lost connection")
-        try:
-            del games[g_id]
-            logger.info("Closing Game " + str(g_id))
-        except KeyError:
-            pass
-        id_count -= 1
-        connection.close()
+    def save(self):
+        version_to_save = json.loads(jsonpickle.encode(self.game))
+        logger.info(games.find_one_and_replace({'time_start': self.game.time_start}, version_to_save))
 
 
 if __name__ == '__main__':

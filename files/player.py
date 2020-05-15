@@ -1,4 +1,4 @@
-from hero import Healer, Mage, Warrior, Archer
+from hero import Healer, Mage, Warrior, Archer, action
 from settings import get_tile_pos, box_settings
 from math import sqrt
 
@@ -63,7 +63,7 @@ class Player:
         if box_settings["BOX_WIDTH"] < pos[0] < box_settings["RIGHT_BOX"]:
             pos = get_tile_pos(pos)
             action_to_perform = gui.get_radio_value()
-            return self.clicked_hero.actions[action_to_perform](self, opponent, object_tiles, pos)
+            return action(self.clicked_hero, action_to_perform)(self, opponent, object_tiles, pos)
 
     def check_clicked_hero(self, pos):
         for hero in self.heroes:
