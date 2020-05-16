@@ -3,6 +3,7 @@ import socket
 import pickle
 import logging
 import jsonpickle
+import datetime
 from game import Game
 from player import Player
 from _thread import start_new_thread
@@ -87,6 +88,9 @@ class ThreadedClient:
                         logger.info("Received: " + str(self.data))
                         logger.info("Sending: " + str(self.reply))
                         connection.sendall(pickle.dumps(self.reply))
+                        if self.data[0] == "end" and self.reply is True:
+                            logger.info("End of Game ")
+                            games.delete_one({'time_start': self.game.time_start})
                         self.reply = None
                 except EOFError:
                     break
@@ -94,7 +98,7 @@ class ThreadedClient:
                 break
         logger.info("Lost connection")
         try:
-            logger.info("Closing Game " + str(game.game_id))
+            logger.info("Closing Game ")
             games.delete_one({'time_start': self.game.time_start})
         except KeyError:
             pass
@@ -167,6 +171,7 @@ class ThreadedClient:
         self.game.get_next_turn()
 
     def save(self):
+        self.game.last_saved = datetime.datetime.now().strftime("%c")
         version_to_save = json.loads(jsonpickle.encode(self.game))
         logger.info(games.find_one_and_replace({'time_start': self.game.time_start}, version_to_save))
 

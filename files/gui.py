@@ -66,9 +66,9 @@ class Gui:
             self.elements[index + opponent_info_index].set_visible(1)
 
     def get_radio_value(self):
-        for index in range(len(self.radio_buttons)):
-            if self.radio_buttons[index].get_value() == 1:
-                return self.radio_butt_text[index].lower()
+        for button in self.radio_buttons:
+            if button.get_value() == 1:
+                return button.get_text().lower()
 
     def reset_gui(self):
         for element_id in range(len(self.elements)):

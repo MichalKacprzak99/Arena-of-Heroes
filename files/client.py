@@ -5,9 +5,14 @@ from settings import game_settings, box_settings, client_name, maps, mouse_butto
 from drawing import redraw_window
 from menu import Menu
 from gui import Gui
+from pymongo import MongoClient
 
 pg.init()
 pg.font.init()
+
+root = MongoClient("localhost", 27017)
+aof_db = root['games_db']
+games = aof_db['games']
 
 
 def main():
@@ -32,7 +37,10 @@ def main():
                 break
             for event in pg.event.get():
                 if menu.active:
-                    menu.menu.react(event)
+                    try:
+                        menu.menu.react(event)
+                    except AttributeError:
+                        pass
                 if event.type == pg.QUIT:
                     run = False
                     pg.quit()
@@ -68,6 +76,7 @@ def main():
                 break
             if end:
                 pg.time.delay(3000)
+
                 pg.quit()
                 run = False
             else:
