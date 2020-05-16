@@ -31,8 +31,7 @@ def main():
             except EOFError:
                 break
             for event in pg.event.get():
-                if menu.active:
-                    menu.menu.react(event)
+                menu.highlight_buttons(event)
                 if event.type == pg.QUIT:
                     run = False
                     pg.quit()
