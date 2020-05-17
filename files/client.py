@@ -36,11 +36,7 @@ def main():
             except EOFError:
                 break
             for event in pg.event.get():
-                if menu.active:
-                    try:
-                        menu.menu.react(event)
-                    except AttributeError:
-                        pass
+                menu.highlight_buttons(event)
                 if event.type == pg.QUIT:
                     run = False
                     pg.quit()
@@ -59,8 +55,8 @@ def main():
                 gui = Gui(window, player, player_id, which_map)
                 gui_start = True
             try:
-                which_player_turn, turns = n.send(["get_turn"])
-            except TypeError:
+                which_player_turn, turns = n.send("get_turn")
+            except EOFError:
                 break
             actual_pos = pg.mouse.get_pos()
 
