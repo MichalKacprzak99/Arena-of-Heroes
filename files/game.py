@@ -15,6 +15,7 @@ class Game:
         self.loser = None
         self.add = False
         self.is_saved = False
+        self.click = [None,None]
 
     def get_next_turn(self):
         self.player_turn = abs(self.player_turn - 1)

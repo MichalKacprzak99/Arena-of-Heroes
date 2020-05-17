@@ -17,7 +17,7 @@ id_count = 0
 root = MongoClient("localhost", 27017)
 aof_db = root['games_db']
 games = aof_db['games']
-
+game = None
 #uporzadkowac server
 class Server:
     def __init__(self):
@@ -32,7 +32,7 @@ class Server:
         logger.info('Waiting for a connection, Server Started')
 
     def start(self):
-        global id_count
+        global id_count, game
         while True:
             conn, adr = self.s.accept()
             logger.info("Connected to: " + str(adr))
@@ -44,9 +44,10 @@ class Server:
                 logger.info("Creating a new game ...")
             else:
                 player_id = 1
-            start_new_thread(ThreadedClient().run, (conn, game, player_id))
-            for g in games.find({}):
-                print(g)
+            g = {
+                "game": game
+            }
+            start_new_thread(ThreadedClient().run, (conn, g, player_id))
 
 
 class ThreadedClient:
@@ -70,7 +71,8 @@ class ThreadedClient:
             "save": self.save,
             "get_games_to_load": self.get_games_to_load,
             "load": self.load,
-            "was_loaded": self.was_loaded
+            "was_loaded": self.was_loaded,
+            "space": self.space
         }
         self.reply = []
         self.data = []
@@ -79,7 +81,7 @@ class ThreadedClient:
 
     def run(self, connection, g, p_id):
         global id_count
-        self.game = g
+        self.game = g["game"]
         self.game.players[p_id] = Player(name="df", player_id=p_id)
 
         connection.send(pickle.dumps(self.game.players[p_id]))
@@ -87,7 +89,6 @@ class ThreadedClient:
         while True:
             if games.find_one({'time_start': self.game.time_start}):
                 if all(self.game.players) and self.game.add is False:
-                    print("ala")
                     version_to_save = json.loads(jsonpickle.encode(self.game))
                     games.find_one_and_replace({'time_start': self.game.time_start}, version_to_save)
                     self.game.add = True
@@ -101,9 +102,10 @@ class ThreadedClient:
                         logger.info("Received: " + str(self.data))
                         logger.info("Sending: " + str(self.reply))
                         connection.sendall(pickle.dumps(self.reply))
+                        g["game"] = self.game
                         if self.data[0] == "end" and self.reply is True:
                             logger.info("End of Game ")
-                            games.delete_one({'time_start': self.game.time_start})
+                            break
                         self.reply = None
                 except EOFError:
                     break
@@ -114,11 +116,15 @@ class ThreadedClient:
             logger.info("Closing Game ")
             if self.game.is_saved is False:
                 logger.info("Delete")
-                # games.delete_one({'time_start': self.game.time_start})
+                games.delete_one({'time_start': self.game.time_start})
         except KeyError:
             pass
         id_count -= 1
         connection.close()
+
+    def space(self):
+        self.game.click[self.data[1]] = True
+        return self.game.click[abs(self.data[1]-1)]
 
     def get_info(self):
         opponent_ready = self.game.is_ready[abs(self.data[1] - 1)]
@@ -193,7 +199,7 @@ class ThreadedClient:
 
     @staticmethod
     def get_games_to_load():
-        find_games = games.find(filter=None, limit=2)
+        find_games = games.find(filter={"last_saved": {"$ne": None}}, limit=2)
         real_game = []
         for find_game in find_games:
             sliced_game = dict(islice(find_game.items(), 1, len(find_game)))
@@ -208,7 +214,7 @@ class ThreadedClient:
     def was_loaded(self):
         if self.to_load:
             self.to_load = False
-            return [True, self.game.players]
+            return [True, self.game.players, self.game.time_start]
         return [False]
 
 

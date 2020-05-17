@@ -44,7 +44,6 @@ def main():
         else:
             need_to_update = n.send(["was_loaded"])
             if need_to_update[0]:
-                # przeniesc do servera
                 if player_id == 0:
                     player, opponent = need_to_update[1]
                 else:
@@ -58,14 +57,13 @@ def main():
                 gui = Gui(window, player, player_id, which_map)
                 gui_start = True
             try:
-                which_player_turn, turns = n.send(["get_turn"])
+                which_player_turn, turns = n.send(["get_turn", player_id])
             except TypeError:
                 break
             actual_pos = pg.mouse.get_pos()
 
             if opponent.last_action:
                 player.react_to_event(opponent, n)
-
 
             gui.update_gui(actual_pos, player, opponent)
             player.check_result(opponent, n)
@@ -91,6 +89,8 @@ def main():
                         run = False
                         pg.quit()
                         break
+                    if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
+                        print(n.send(["space", player_id]))
                     if event.type == pg.MOUSEBUTTONUP and event.button == mouse_button["RIGHT"]:
                         player.clicked_hero = None
                     if event.type == pg.MOUSEBUTTONUP and event.button == mouse_button["LEFT"]:
@@ -100,7 +100,7 @@ def main():
                                 player.check_clicked_hero(actual_pos)
                             else:
                                 made_action = player.action(opponent, board.object_tiles, actual_pos, gui)
-                                if made_action:
+                                if made_action is not None:
                                     n.send(made_action)
                                     player.clicked_hero = None
                     gui.menu.react(event)
