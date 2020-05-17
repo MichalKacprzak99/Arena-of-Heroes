@@ -2,16 +2,26 @@ import thorpy
 import pygame as pg
 from settings import load_image
 
-
+#dorobic czekanie na zaladowanie
 class Menu:
-    def __init__(self, window):
+    def __init__(self, window, network, p_id):
+        self.p_id = p_id
+        self.network = network
         self.window = window
         self.buttons = []
         self.b_text = ["Start Game", "Load Game", "Instructions", "Quit"]
-        self.load_text = ["Option1", "Option2", "Option3", "Quit"]
-        self.box = None
+        self.menu_func = {
+            "Start Game": self.start_game,
+            "Load Game": self.load_menu,
+            "Instructions": self.instructions,
+            "Quit": self.quit
+        }
+        self.load_buttons = []
+        self.menu_box = None
+        self.load_games = []
         self.menu = self.create()
         self.load_submenu = None
+        self.instructions_menu = None
         self.player_ready = False
         self.opponent_ready = False
         self.active = True
@@ -22,44 +32,65 @@ class Menu:
         self.background_image()
 
         thorpy.set_theme("round")
-        self.buttons = [thorpy.make_button(txt) for txt in self.b_text]
+        self.buttons = [thorpy.make_button(txt, func=self.menu_func[txt]) for txt in self.b_text]
         [button.set_font_size(30) for button in self.buttons]
         [button.scale_to_title() for button in self.buttons]
-        self.box = thorpy.Box(self.buttons)
-        menu = thorpy.Menu(self.box)
-        self.box.set_main_color((0, 0, 0, 0))
+        self.menu_box = thorpy.Box(self.buttons)
+        menu = thorpy.Menu(self.menu_box)
+        self.menu_box.set_main_color((0, 0, 0, 0))
         for element in menu.get_population():
             element.surface = self.window
-        self.box.center()
-        self.box.blit()
-
+        self.menu_box.center()
+        self.menu_box.blit()
         pg.display.update()
-
         return menu
 
-    def click(self, mouse, network, p_id):
-        if self.help is True:
+    def instructions(self):
+        self.active = False
+        self.load = False
+        self.help = True
+        self.draw_image("instructions.png", 50, 50)
+        back = thorpy.Background(color=(0, 0, 0, 0))
+        my_reaction = thorpy.Reaction(reacts_to=pg.KEYDOWN, reac_func=self.exit_instructions)
+        back.add_reaction(my_reaction)
+        self.instructions_menu = thorpy.Menu(back)
+        pg.display.update()
+
+    def load_menu(self):
+        self.active = False
+        self.load = True
+        self.help = False
+        self.background_image()
+        self.load_games = self.network.send(["get_games_to_load"])
+        self.load_buttons = [thorpy.make_button(str(game), func=self.load_game, params={"which_game": i})
+                             for i, game in enumerate(self.load_games)]
+        quit_button = thorpy.make_button("Quit", func=self.quit_submenu)
+        self.load_buttons.append(quit_button)
+        [button.set_font_size(20) for button in self.load_buttons]
+        [button.scale_to_title() for button in self.load_buttons]
+        box = thorpy.Box(self.load_buttons)
+        self.load_submenu = thorpy.Menu(box)
+        box.set_main_color((0, 0, 0, 0))
+        for element in self.load_submenu.get_population():
+            element.surface = self.window
+        box.center()
+        box.blit()
+        pg.display.update()
+
+    def load_game(self, which_game):
+        self.network.send(["load", self.load_games[which_game]])
+        self.start_game()
+
+    def exit_instructions(self, event):
+        if event.key == pg.K_SPACE:
             self.help = False
             self.active = True
             self.background_image()
-            self.box.blit()
+            self.menu_box.blit()
             pg.display.update()
-        elif self.load is True:
-            self.react_load(mouse)
-        else:
-            for element in self.menu.get_population():
-                if element.get_rect().collidepoint(mouse) and self.player_ready is False:
-                    if element.get_full_txt() == "Start Game":
-                        self.start_game(network, p_id)
-                    elif element.get_full_txt() == "Load Game":
-                        self.load_game()
-                    elif element.get_full_txt() == "Instructions":
-                        self.instructions()
-                    elif element.get_full_txt() == "Quit":
-                        pg.quit()
 
-    def start_game(self, network, p_id):
-        network.send(["is_ready", p_id, True])
+    def start_game(self):
+        self.network.send(["is_ready", self.p_id, True])
         self.player_ready = True
         self.active = False
 
@@ -75,15 +106,13 @@ class Menu:
         rect.left, rect.top = 0, 0
         self.window.blit(image, rect)
 
+    @staticmethod
+    def quit():
+        pg.quit()
+
     def loading_screen(self):
         self.background_image()
         self.draw_text("Game will start soon", 300, 200, 23)
-        pg.display.update()
-
-    def instructions(self):
-        self.active = False
-        self.help = True
-        self.draw_image("instructions.png", 50, 50)
         pg.display.update()
 
     def draw_text(self, text_to_input, pos_x, pos_y, size=15):
@@ -97,42 +126,17 @@ class Menu:
         rect.left, rect.top = pos_x, pos_y
         self.window.blit(image, rect)
 
-    def load_menu(self):
-        self.active = False
-        self.load = True
-        buttons = [thorpy.make_button(txt) for txt in self.load_text]
-
-        box = thorpy.Box(buttons)
-        self.load_submenu = thorpy.Menu(box)
-        box.set_main_color((0, 0, 0))
-        for element in self.load_submenu.get_population():
-            element.surface = self.window
-        box.center()
-        box.blit()
-        pg.display.update()
-
     def quit_submenu(self):
         self.active = True
+        self.load = False
         self.background_image()
-        self.box.blit()
+        self.menu_box.blit()
         pg.display.update()
-
-    def react_load(self, mouse):
-        for element in self.load_submenu.get_population():
-            if element.get_rect().collidepoint(mouse) and self.player_ready is False:
-                if element.get_full_txt() == "Option1":
-                    print('First option')
-                elif element.get_full_txt() == "Option2":
-                    print('Second option')
-                    pass
-                elif element.get_full_txt() == "Option3":
-                    pass
-                elif element.get_full_txt() == "Quit":
-                    self.load = False
-                    self.quit_submenu()
 
     def highlight_buttons(self, event):
         if self.active is True:
             self.menu.react(event)
         elif self.load is True:
             self.load_submenu.react(event)
+        elif self.help is True:
+            self.instructions_menu.react(event)
