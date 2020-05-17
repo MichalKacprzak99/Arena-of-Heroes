@@ -9,6 +9,7 @@ from player import Player
 from _thread import start_new_thread
 from pymongo import MongoClient
 from itertools import islice
+
 fmt_str = '[%(asctime)s] %(levelname)s @ line %(lineno)d: %(message)s'
 logging.basicConfig(level=logging.DEBUG, format=fmt_str)
 logger = logging.getLogger(__name__)
@@ -72,20 +73,20 @@ class ThreadedClient:
             "save": self.save,
             "get_games_to_load": self.get_games_to_load,
             "load": self.load,
-            "was_loaded": self.was_loaded,
-            "space": self.space
         }
         self.reply = []
         self.data = []
         self.game = None
         self.to_load = False
+        self.p_id = None
 
     def run(self, connection, g, p_id):
         global id_count
+        self.p_id = p_id
         self.game = g["game"]
-        self.game.players[p_id] = Player(name="df", player_id=p_id)
+        self.game.players[self.p_id] = Player(name="df", player_id=self.p_id)
 
-        connection.send(pickle.dumps(self.game.players[p_id]))
+        connection.send(pickle.dumps(self.p_id))
 
         while True:
             if games.find_one({'time_start': self.game.time_start}):
@@ -128,7 +129,7 @@ class ThreadedClient:
 
     def get_info(self):
         opponent_ready = self.game.is_ready[abs(self.data[1] - 1)]
-        return [self.game.players[self.data[1]], self.game.which_map, opponent_ready]
+        return [self.game.players[self.p_id], self.game.players[self.data[1]], self.game.which_map, opponent_ready]
 
     def echo(self):
         return self.game.players[self.data[1]]
@@ -141,10 +142,7 @@ class ThreadedClient:
         return [self.game.player_turn, self.game.turns]
 
     def end(self):
-        if self.game.winner is not None and self.game.loser is not None:
-            return True
-        else:
-            return False
+        return self.game.winner is not None and self.game.loser is not None
 
     def death_heroes(self):
         self.game.players[self.data[1]].heroes = self.data[2]
@@ -208,13 +206,8 @@ class ThreadedClient:
 
     def load(self):
         self.game.__dict__.update(self.data[1].__dict__)
+        self.game.is_ready = [False, False]
         self.to_load = True
-
-    def was_loaded(self):
-        if self.to_load:
-            self.to_load = False
-            return [True, self.game.players, self.game.time_start]
-        return [False]
 
 
 if __name__ == '__main__':

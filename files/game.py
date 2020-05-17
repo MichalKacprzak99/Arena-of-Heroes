@@ -21,9 +21,8 @@ class Game:
         self.turns += 1
 
     def __str__(self):
-        if all(self.players):
-            description = "The game is between {0} and {1}.\nStarted: {2}.\nLast saved: {3}."\
+
+        description = "The game is between {0} and {1}.\nStarted: {2}.\nLast saved: {3}."\
                 .format(self.players[0].name, self.players[0].name, self.time_start, self.last_saved)
-        else:
-            description = "The game"
+
         return description

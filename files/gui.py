@@ -92,7 +92,7 @@ class Gui:
                 self.set_hero_info(opponent, mouse_pos, self.gui_info_amount * opponent.player_id)
         self.background.blit()
 
-    def click(self, mouse, network, p_id):
+    def click(self, mouse, network):
         for button in self.buttons:
             if button.get_rect().collidepoint(mouse):
                 if button.get_full_txt() == "Save":

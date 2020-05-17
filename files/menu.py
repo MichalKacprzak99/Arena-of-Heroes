@@ -51,7 +51,7 @@ class Menu:
         self.help = True
         self.draw_image("instructions.png", 50, 50)
         back = thorpy.Background(color=(0, 0, 0, 0))
-        my_reaction = thorpy.Reaction(reacts_to=pg.KEYDOWN, reac_func=self.exit_instructions)
+        my_reaction = thorpy.Reaction(reacts_to=pg.MOUSEBUTTONUP, reac_func=self.exit_instructions)
         back.add_reaction(my_reaction)
         self.instructions_menu = thorpy.Menu(back)
         pg.display.update()
@@ -81,18 +81,17 @@ class Menu:
         self.network.send(["load", self.load_games[which_game]])
         self.start_game()
 
-    def exit_instructions(self, event):
-        if event.key == pg.K_SPACE:
-            self.help = False
-            self.active = True
-            self.background_image()
-            self.menu_box.blit()
-            pg.display.update()
+    def exit_instructions(self):
+        self.help = False
+        self.active = True
+        self.background_image()
+        self.menu_box.blit()
+        pg.display.update()
 
     def start_game(self):
         self.network.send(["is_ready", self.p_id, True])
         self.player_ready = True
-        self.active = False
+        self.active = self.help = self.load = False
 
     def both_ready(self):
         return self.player_ready and self.opponent_ready
