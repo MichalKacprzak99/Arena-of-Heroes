@@ -79,6 +79,7 @@ def main():
                 run = False
             else:
                 if move:
+                    # print("ala")
                     try:
                         n.send(["update", opponent_id])
                     except EOFError:
@@ -89,8 +90,6 @@ def main():
                         run = False
                         pg.quit()
                         break
-                    if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
-                        print(n.send(["space", player_id]))
                     if event.type == pg.MOUSEBUTTONUP and event.button == mouse_button["RIGHT"]:
                         player.clicked_hero = None
                     if event.type == pg.MOUSEBUTTONUP and event.button == mouse_button["LEFT"]:

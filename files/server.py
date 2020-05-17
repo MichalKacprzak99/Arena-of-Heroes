@@ -208,7 +208,7 @@ class ThreadedClient:
 
     def load(self):
         # games.delete_one({'time_start': self.game.time_start})
-        self.game = self.data[1]
+        self.game.__dict__.update(self.data[1].__dict__)
         self.to_load = True
 
     def was_loaded(self):

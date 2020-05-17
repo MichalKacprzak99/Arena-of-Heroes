@@ -2,7 +2,7 @@ import thorpy
 import pygame as pg
 from settings import load_image
 
-#dorobic czekanie na zaladowanie
+
 class Menu:
     def __init__(self, window, network, p_id):
         self.p_id = p_id
