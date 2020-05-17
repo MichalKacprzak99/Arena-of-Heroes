@@ -18,7 +18,8 @@ root = MongoClient("localhost", 27017)
 aof_db = root['games_db']
 games = aof_db['games']
 game = None
-#uporzadkowac server
+
+
 class Server:
     def __init__(self):
         self.server = '127.0.0.1'
@@ -114,9 +115,8 @@ class ThreadedClient:
         logger.info("Lost connection")
         try:
             logger.info("Closing Game ")
-            if self.game.is_saved is False:
-                logger.info("Delete")
-                games.delete_one({'time_start': self.game.time_start})
+            logger.info("Delete")
+            games.delete_many({'is_saved': False})
         except KeyError:
             pass
         id_count -= 1
@@ -207,7 +207,6 @@ class ThreadedClient:
         return real_game
 
     def load(self):
-        # games.delete_one({'time_start': self.game.time_start})
         self.game.__dict__.update(self.data[1].__dict__)
         self.to_load = True
 
