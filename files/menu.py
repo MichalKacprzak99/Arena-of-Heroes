@@ -14,10 +14,11 @@ class Menu:
             "Instructions": self.load_instructions,
             "Quit": self.quit
         }
+        self.was_loaded = False
+        self.load_box = None
         self.menu_box = None
-
-        self.menu = self.create_menu()
         self.load_submenu = self.create_load_menu()
+        self.menu = self.create_menu()
         self.instructions_menu = self.create_instructions()
         self.player_ready = False
         self.opponent_ready = False
@@ -49,6 +50,7 @@ class Menu:
 
     def create_load_menu(self):
         self.background_image()
+        thorpy.set_theme("round")
         games = self.network.send(["get_games_to_load"])
         load_buttons = [thorpy.make_button(str(game), func=self.load_game, params={"which_game": i, "games": games})
                         for i, game in enumerate(games)]
@@ -56,9 +58,8 @@ class Menu:
         load_buttons.append(quit_button)
         [button.set_font_size(20) for button in load_buttons]
         [button.scale_to_title() for button in load_buttons]
-        box = thorpy.Box(load_buttons)
-        load_submenu = thorpy.Menu(box)
-        self.proper_display(load_submenu, box)
+        self.load_box = thorpy.Box(load_buttons)
+        load_submenu = thorpy.Menu(self.load_box)
         return load_submenu
 
     def load_instructions(self):
@@ -67,8 +68,10 @@ class Menu:
         pg.display.update()
 
     def load_menu(self):
-        self.change_display("load")
         self.background_image()
+        self.change_display("load")
+        self.proper_display(self.load_submenu, self.load_box, self.was_loaded)
+        self.was_loaded = True
         pg.display.update()
 
     def load_game(self, which_game, games):
@@ -96,6 +99,7 @@ class Menu:
         for con in self.control:
             if self.control[con][0]:
                 self.control[con][1].react(event)
+                break
 
     def change_display(self, change=""):
         for key, value in self.control.items():
@@ -104,8 +108,9 @@ class Menu:
             else:
                 self.control[key][0] = False
 
-    def proper_display(self, menu, box):
-        box.set_main_color((0, 0, 0, 0))
+    def proper_display(self, menu, box, flag=False):
+        if flag is False:
+            box.set_main_color((0, 0, 0, 0))
         for element in menu.get_population():
             element.surface = self.window
         box.center()

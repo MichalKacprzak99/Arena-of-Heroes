@@ -107,6 +107,7 @@ class ThreadedClient:
                         g["game"] = self.game
                         if self.data[0] == "end" and self.reply is True:
                             logger.info("End of Game ")
+                            games.delete_one({'last_saved': self.game.last_saved})
                             break
                         self.reply = None
                 except EOFError:
