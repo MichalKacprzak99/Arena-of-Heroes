@@ -18,7 +18,6 @@ id_count = 0
 root = MongoClient("localhost", 27017)
 aof_db = root['games_db']
 games = aof_db['games']
-game = None
 
 
 class Server:
@@ -34,7 +33,7 @@ class Server:
         logger.info('Waiting for a connection, Server Started')
 
     def start(self):
-        global id_count, game
+        global id_count
         while True:
             conn, adr = self.s.accept()
             logger.info("Connected to: " + str(adr))
@@ -46,33 +45,30 @@ class Server:
                 logger.info("Creating a new game ...")
             else:
                 player_id = 1
-            g = {
-                "game": game
-            }
-            start_new_thread(ThreadedClient().run, (conn, g, player_id))
+            start_new_thread(ThreadedClient().run, (conn, {"game": game}, player_id))
 
 
 class ThreadedClient:
     def __init__(self):
         self.reactions = {
             "get_info": self.get_info,
-            "move": self.move,
-            "basic_attack": self.attack,
-            "special_attack": self.attack,
-            "random_spell": self.random_spell,
-            "heal": self.heal,
-            "echo": self.echo,
             "is_ready": self.is_ready,
             "get_turn": self.get_turn,
-            "update": self.update,
-            "update_opponent": self.update_opponent,
-            "reset_action": self.reset_action,
-            "death_heroes": self.death_heroes,
             "result": self.result,
             "end": self.end,
             "save": self.save,
             "get_games_to_load": self.get_games_to_load,
             "load": self.load,
+            "echo": self.echo,
+            "update": self.update,
+            "update_opponent": self.update_opponent,
+            "reset_action": self.reset_action,
+            "death_heroes": self.death_heroes,
+            "move": self.move,
+            "basic_attack": self.attack,
+            "special_attack": self.attack,
+            "random_spell": self.random_spell,
+            "heal": self.heal
         }
         self.reply = []
         self.data = []
@@ -124,16 +120,9 @@ class ThreadedClient:
         id_count -= 1
         connection.close()
 
-    def space(self):
-        self.game.click[self.data[1]] = True
-        return self.game.click[abs(self.data[1]-1)]
-
     def get_info(self):
         opponent_ready = self.game.is_ready[abs(self.data[1] - 1)]
         return [self.game.players[self.p_id], self.game.players[self.data[1]], self.game.which_map, opponent_ready]
-
-    def echo(self):
-        return self.game.players[self.data[1]]
 
     def is_ready(self):
         self.game.is_ready[abs(self.data[1] - 1)] = self.data[2]
@@ -142,53 +131,14 @@ class ThreadedClient:
     def get_turn(self):
         return [self.game.player_turn, self.game.turns]
 
-    def end(self):
-        return self.game.winner is not None and self.game.loser is not None
-
-    def death_heroes(self):
-        self.game.players[self.data[1]].heroes = self.data[2]
-        self.game.players[self.data[1]].death_heroes_pos = self.data[3]
-
-    def reset_action(self):
-        self.game.players[self.data[1]].last_action = None
-
-    def update(self):
-        self.game.players[self.data[1]].moved_hero = None
-
     def result(self):
         if self.data[2] == "lose":
             self.game.loser = self.data[1]
         elif self.data[2] == "win":
             self.game.winner = self.data[1]
 
-    def update_opponent(self):
-        self.game.players[abs(self.data[1] - 1)] = self.data[2]
-
-    def random_spell(self):
-        last_action = self.data[2]
-        attacked_heroes = last_action[2]
-        self.game.players[self.data[1]].last_action = last_action
-        for attacked_hero in attacked_heroes:
-            self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
-        self.game.get_next_turn()
-
-    def attack(self):
-        last_action = self.data[2]
-        attacked_hero = last_action[2]
-        self.game.players[self.data[1]].last_action = last_action
-        self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
-        self.game.get_next_turn()
-
-    def heal(self):
-        hero_to_heal = self.data[2]
-        self.game.players[self.data[1]].heroes[hero_to_heal.hero_id] = hero_to_heal
-        self.game.get_next_turn()
-
-    def move(self):
-        moved_hero = self.data[2]
-        self.game.players[self.data[1]].heroes[moved_hero.hero_id] = moved_hero
-        self.game.players[self.data[1]].moved_hero = moved_hero
-        self.game.get_next_turn()
+    def end(self):
+        return self.game.winner is not None and self.game.loser is not None
 
     def save(self):
         self.game.last_saved = datetime.datetime.now().strftime("%c")
@@ -209,6 +159,48 @@ class ThreadedClient:
         self.game.__dict__.update(self.data[1].__dict__)
         self.game.is_ready = [False, False]
         self.to_load = True
+
+    def echo(self):
+        return self.game.players[self.data[1]]
+
+    def update(self):
+        self.game.players[self.data[1]].moved_hero = None
+
+    def update_opponent(self):
+        self.game.players[abs(self.data[1] - 1)] = self.data[2]
+
+    def death_heroes(self):
+        self.game.players[self.data[1]].heroes = self.data[2]
+        self.game.players[self.data[1]].death_heroes_pos = self.data[3]
+
+    def reset_action(self):
+        self.game.players[self.data[1]].last_action = None
+
+    def move(self):
+        moved_hero = self.data[2]
+        self.game.players[self.data[1]].heroes[moved_hero.hero_id] = moved_hero
+        self.game.players[self.data[1]].moved_hero = moved_hero
+        self.game.get_next_turn()
+
+    def attack(self):
+        last_action = self.data[2]
+        attacked_hero = last_action[2]
+        self.game.players[self.data[1]].last_action = last_action
+        self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
+        self.game.get_next_turn()
+
+    def random_spell(self):
+        last_action = self.data[2]
+        attacked_heroes = last_action[2]
+        self.game.players[self.data[1]].last_action = last_action
+        for attacked_hero in attacked_heroes:
+            self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
+        self.game.get_next_turn()
+
+    def heal(self):
+        hero_to_heal = self.data[2]
+        self.game.players[self.data[1]].heroes[hero_to_heal.hero_id] = hero_to_heal
+        self.game.get_next_turn()
 
 
 if __name__ == '__main__':
