@@ -20,7 +20,7 @@ users = aof_db['users']
 class Server:
     def __init__(self):
         self.server = '127.0.0.1'
-        self.port = 5556
+        self.port = 555
         self.games = {}
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
