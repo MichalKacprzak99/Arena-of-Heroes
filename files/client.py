@@ -5,6 +5,7 @@ from settings import game_settings, box_settings, client_name, maps, mouse_butto
 from drawing import redraw_window
 from menu import Menu
 from gui import Gui
+from login import LoginScreen
 
 pg.init()
 pg.font.init()
@@ -20,6 +21,8 @@ def main():
     pg.display.set_caption(client_name[str(player_id)])
     opponent_id = abs(player_id - 1)
     window = pg.display.set_mode((game_settings["GAME_SCREEN_WIDTH"], game_settings["GAME_SCREEN_HEIGHT"]))
+    login = LoginScreen(window, n)
+    login.run(clock)
     menu = Menu(window)
 
     while run:
