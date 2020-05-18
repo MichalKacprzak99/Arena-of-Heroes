@@ -95,8 +95,7 @@ class ThreadedClient:
                     if not self.data:
                         break
                     else:
-                        if self.data[0] in self.reactions:
-                            self.reply = self.reactions[self.data[0]]()
+                        self.reply = self.reactions[self.data[0]]()
                         logger.info("Received: " + str(self.data))
                         logger.info("Sending: " + str(self.reply))
                         connection.sendall(pickle.dumps(self.reply))

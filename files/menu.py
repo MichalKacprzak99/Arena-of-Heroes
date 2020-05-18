@@ -102,7 +102,7 @@ class Menu:
                 break
 
     def change_display(self, change=""):
-        for key, value in self.control.items():
+        for key in self.control.keys():
             if key == change:
                 self.control[key][0] = True
             else:
