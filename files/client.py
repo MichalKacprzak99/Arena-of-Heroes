@@ -31,16 +31,14 @@ def main():
             except EOFError:
                 break
             for event in pg.event.get():
-                if menu.active:
-                    menu.menu.react(event)
+                menu.highlight_buttons(event)
                 if event.type == pg.QUIT:
                     run = False
                     pg.quit()
                 if event.type == pg.MOUSEBUTTONUP:
                     actual_pos = pg.mouse.get_pos()
                     menu.click(actual_pos, n, player_id)
-            if menu.player_ready:
-                menu.loading_screen()
+
         else:
             if not gui_start:
                 board.screen.fill((168, 139, 50))
