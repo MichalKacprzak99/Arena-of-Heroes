@@ -27,7 +27,10 @@ def main():
         if not menu.both_ready():
             try:
                 player, opponent, which_map, menu.opponent_ready = n.send(["get_info", opponent_id])
-                board = TiledMap(maps[str(which_map)], window)
+                try:
+                    board = TiledMap(maps[str(which_map)], window)
+                except pg.error:
+                    break
             except (EOFError, TypeError):
                 break
             for event in pg.event.get():
@@ -43,7 +46,6 @@ def main():
                 width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
                 height = game_settings["GAME_SCREEN_HEIGHT"]
                 window = pg.display.set_mode((width, height))
-
                 gui = Gui(window, player, player_id, which_map)
                 gui_start = True
             try:
@@ -56,7 +58,6 @@ def main():
                 break
             if opponent.last_action:
                 player.react_to_event(opponent, n)
-
             gui.update_gui(actual_pos, player, opponent)
             player.check_result(opponent, n)
             move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos, n)
@@ -66,7 +67,6 @@ def main():
                 break
             if end:
                 pg.time.delay(3000)
-
                 pg.quit()
                 run = False
             else:
@@ -75,7 +75,6 @@ def main():
                         n.send(["update", opponent_id])
                     except EOFError:
                         break
-
                 for event in pg.event.get():
                     if event.type == pg.QUIT:
                         run = False
@@ -90,7 +89,7 @@ def main():
                                 player.check_clicked_hero(actual_pos)
                             else:
                                 made_action = player.action(opponent, board.object_tiles, actual_pos, gui)
-                                if made_action is not None:
+                                if made_action:
                                     n.send(made_action)
                                     player.clicked_hero = None
                     try:
