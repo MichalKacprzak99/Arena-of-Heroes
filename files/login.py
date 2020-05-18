@@ -55,7 +55,6 @@ class LoginScreen:
         elif len(login) == 0 or len(password) == 0:
             self.texts[1].set_text("It seems you didn't provide any input. Please try again.")
         else:
-            print(current_login_window)
             reply = self.network.send([current_login_window, login, password])
             if reply:
                 if current_login_window == "login":
@@ -83,6 +82,7 @@ class LoginScreen:
         self.buttons[1].set_visible(1)
         self.buttons[0].set_active(1)
         self.buttons[1].set_active(1)
+        self.texts[1].set_text("")
 
         self.background.blit()
         self.background.update()
@@ -119,45 +119,49 @@ class LoginScreen:
     def hide_inserters(self):
         for inserter in self.inserters:
             inserter.set_visible(0)
-        for cover_box in self.cover_boxes:
-            cover_box.set_visible(1)
 
     def reset_inserter_value(self):
-        for inserter in self.inserters:
-            inserter._value = ""
-            inserter._inserted = ""
+        for index in range(0, len(self.inserters), 2):
+            self.inserters[index+1].set_value("", refresh_draw=True)
 
     def show_inserters(self):
         for inserter in self.inserters:
             inserter.set_visible(1)
-        for cover_box in self.cover_boxes:
-            cover_box.set_visible(0)
 
-    def create(self):
-        self.state.append("main_menu")
+    def fill_buttons_list(self):
         for text, button_function in self.b_info.items():
             self.buttons.append(thorpy.make_button(text, button_function))
+
+    def fill_text_list(self):
         for text in self.text_info:
             self.texts.append(thorpy.make_text(text))
+
+    def fill_inserters(self):
         for index in range(0, len(self.inserters), 2):
             text_to_add = self.inserters[index]
             self.inserters[index] = thorpy.make_text(text_to_add)
-            self.inserters[index+1] = (thorpy.Inserter(value="", size=(200, 20), quit_on_click=False, finish=True))
-            self.cover_boxes    .append(thorpy.Image(path = None, color = (168, 139, 50)))
-        self.background = thorpy.Background(color=(168, 139, 50), image=None,
-                                            elements=self.buttons+self.texts+self.inserters+self.cover_boxes)
-        thorpy.store(self.background, self.buttons[0:2], x=game_settings["GAME_SCREEN_WIDTH"]/2,
-                     y=game_settings["GAME_SCREEN_HEIGHT"]/2 - 150, align="center")
-        thorpy.store(self.background, self.buttons[2:4], x=game_settings["GAME_SCREEN_WIDTH"]/2,
-                     y=game_settings["GAME_SCREEN_HEIGHT"]/2, align="center")
-        thorpy.store(self.background, self.inserters, x=game_settings["GAME_SCREEN_WIDTH"]/2,
-                     y=game_settings["GAME_SCREEN_HEIGHT"]/2 - 100, align="center")
+            self.inserters[index + 1] = (thorpy.Inserter(value="", size=(200, 20), quit_on_click=False, finish=True))
+
+    def place_elements_on_background(self):
+        thorpy.store(self.background, self.buttons[0:2], x=game_settings["GAME_SCREEN_WIDTH"] / 2,
+                     y=game_settings["GAME_SCREEN_HEIGHT"] / 2 - 150, align="center")
+        thorpy.store(self.background, self.buttons[2:4], x=game_settings["GAME_SCREEN_WIDTH"] / 2,
+                     y=game_settings["GAME_SCREEN_HEIGHT"] / 2, align="center")
+        thorpy.store(self.background, self.inserters, x=game_settings["GAME_SCREEN_WIDTH"] / 2,
+                     y=game_settings["GAME_SCREEN_HEIGHT"] / 2 - 100, align="center")
         thorpy.store(self.background, [self.texts[0]], x=game_settings["GAME_SCREEN_WIDTH"] / 2,
                      y=game_settings["GAME_SCREEN_HEIGHT"] / 2 - 200, align="center")
         thorpy.store(self.background, [self.texts[1]], x=game_settings["GAME_SCREEN_WIDTH"] / 2 - 200,
                      y=game_settings["GAME_SCREEN_HEIGHT"] / 2 + 100, align="left")
-        thorpy.store(self.background, self.cover_boxes, x=game_settings["GAME_SCREEN_WIDTH"] / 2 - 60,
-                     y=game_settings["GAME_SCREEN_HEIGHT"] / 2 - 77, align="center")
+
+    def create(self):
+        self.state.append("main_menu")
+        self.fill_buttons_list()
+        self.fill_text_list()
+        self.fill_inserters()
+        self.background = thorpy.Background(color=(168, 139, 50), image=None,
+                                            elements=self.buttons+self.texts+self.inserters+self.cover_boxes)
+        self.place_elements_on_background()
         self.menu = thorpy.Menu(self.background)
         for element in self.menu.get_population():
             element.surface = self.window
