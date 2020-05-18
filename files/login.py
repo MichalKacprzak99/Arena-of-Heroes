@@ -18,9 +18,8 @@ class LoginScreen:
         }
         self.text_info = ["Welcome to Arena of Heroes!", " "]
         self.texts = []
-        self.cover_boxes = []
-        self.inserter_move_flag = False
-        self.inserters = ["login", 0, "password", 0]
+        self.inserter_text = ["login", "password"]
+        self.inserters = []
         self.state = []
         self.background = None
         self.player_logged_in = False
@@ -76,23 +75,15 @@ class LoginScreen:
 
     def main_menu(self):
         self.reset_inserter_value()
-        self.hide_buttons()
         self.hide_inserters()
-        self.buttons[0].set_visible(1)
-        self.buttons[1].set_visible(1)
-        self.buttons[0].set_active(1)
-        self.buttons[1].set_active(1)
+        self.enable_return_enter_buttons(0, 1)
         self.texts[1].set_text("")
 
         self.background.blit()
         self.background.update()
 
     def login_menu(self):
-        self.hide_buttons()
-        self.buttons[2].set_visible(1)
-        self.buttons[3].set_visible(1)
-        self.buttons[2].set_active(1)
-        self.buttons[3].set_active(1)
+        self.enable_return_enter_buttons(2, 3)
         self.texts[0].set_text("Login")
         self.show_inserters()
 
@@ -100,16 +91,21 @@ class LoginScreen:
         self.background.update()
 
     def sign_up_menu(self):
-        self.hide_buttons()
-        self.buttons[2].set_visible(1)
-        self.buttons[3].set_visible(1)
-        self.buttons[2].set_active(1)
-        self.buttons[3].set_active(1)
+        self.enable_return_enter_buttons(2, 3)
         self.texts[0].set_text("Create a new account!")
         self.show_inserters()
 
         self.background.blit()
         self.background.update()
+
+    def enable_return_enter_buttons(self, index_start, index_end):
+        for index in range(len(self.buttons)):
+            if index_start <= index <= index_end:
+                self.buttons[index].set_visible(1)
+                self.buttons[index].set_active(1)
+            else:
+                self.buttons[index].set_visible(0)
+                self.buttons[index].set_active(0)
 
     def hide_buttons(self):
         for button in self.buttons:
@@ -137,11 +133,9 @@ class LoginScreen:
             self.texts.append(thorpy.make_text(text))
 
     def fill_inserters(self):
-        for index in range(0, len(self.inserters), 2):
-            text_to_add = self.inserters[index]
-            self.inserters[index] = thorpy.make_text(text_to_add)
-            self.inserters[index + 1] = (thorpy.Inserter(value="", size=(200, 20), quit_on_click=False, finish=True))
-
+        for text in self.inserter_text:
+            self.inserters.append(thorpy.make_text(text))
+            self.inserters.append(thorpy.Inserter(value="", size=(200, 20), quit_on_click=False, finish=True))
     def place_elements_on_background(self):
         thorpy.store(self.background, self.buttons[0:2], x=game_settings["GAME_SCREEN_WIDTH"] / 2,
                      y=game_settings["GAME_SCREEN_HEIGHT"] / 2 - 150, align="center")
@@ -160,7 +154,7 @@ class LoginScreen:
         self.fill_text_list()
         self.fill_inserters()
         self.background = thorpy.Background(color=(168, 139, 50), image=None,
-                                            elements=self.buttons+self.texts+self.inserters+self.cover_boxes)
+                                            elements=self.buttons+self.texts+self.inserters)
         self.place_elements_on_background()
         self.menu = thorpy.Menu(self.background)
         for element in self.menu.get_population():
