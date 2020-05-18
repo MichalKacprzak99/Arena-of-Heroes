@@ -1,7 +1,5 @@
 from settings import game_settings, box_settings, hero_images, colors, coordinate, load_image, get_tile_pos, tile_dim
 import pygame as pg
-last_moved_hero_id = None
-last_which_side = ""
 
 
 def blit_text_center(screen, text_to_input, font, height, color):
@@ -100,14 +98,8 @@ def draw_with_moving_hero(screen, board, player, opponent, player_turn, actual_p
     pg.time.delay(500)
 
 
-def redraw_window(screen, board, player, opponent, player_turn, actual_pos):
-    global last_moved_hero_id, last_which_side
+def redraw_window(screen, board, player, opponent, player_turn, actual_pos, n):
     made_move = False
-    if last_moved_hero_id is not None:
-        try:
-            opponent.heroes[last_moved_hero_id].side = last_which_side
-        except IndexError:
-            pass
     if player.moved_hero:
         for tile, side in player.moved_hero.path:
             player.moved_hero.side = side
@@ -118,8 +110,9 @@ def redraw_window(screen, board, player, opponent, player_turn, actual_pos):
         for tile, side in opponent.moved_hero.path:
             opponent.moved_hero.side = side
             draw_with_moving_hero(screen, board, opponent, player, player_turn, actual_pos, tile)
-        last_which_side = opponent.moved_hero.side
-        last_moved_hero_id = opponent.moved_hero.hero_id
+        opponent.heroes[opponent.moved_hero.hero_id].side = opponent.moved_hero.side
+        opponent.moved_hero = None
+        n.send(["update_opponent", player.player_id, opponent])
         made_move = True
     else:
         draw_background(screen, board, player, opponent, player_turn, actual_pos)
