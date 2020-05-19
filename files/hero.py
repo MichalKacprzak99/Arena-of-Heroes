@@ -39,7 +39,7 @@ class Hero(ABC):
         self.hero_id = hero_id
         self.pos = pos
         self.side = side
-        self.hp = 1
+        self.hp = hp
         self.max_hp = max_hp
         self.path = None
         self.stats = {
