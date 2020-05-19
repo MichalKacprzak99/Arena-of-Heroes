@@ -5,3 +5,4 @@ pathfinding~=0.0.4
 thorpy
 pymongo~=3.9.0
 jsonpickle~=1.4.1
+pytz~=2020.1
