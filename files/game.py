@@ -1,10 +1,11 @@
 from random import randint
 import datetime
+import pytz
 
 
 class Game:
     def __init__(self):
-        self.time_start = datetime.datetime.now().strftime("%c")
+        self.time_start = datetime.datetime.now(pytz.timezone('Poland')).strftime("%c")
         self.last_saved = None
         self.player_turn = 0
         self.turns = 0
