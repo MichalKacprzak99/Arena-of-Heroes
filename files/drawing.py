@@ -1,18 +1,19 @@
-from settings import game_settings, box_settings, hero_images, colors, coordinate, load_image, get_tile_pos, tile_dim
+from settings import game_sets, box_sets, hero_images, colors, coordinate, load_image, get_tile_pos, tile_dim, result
 import pygame as pg
 
 
 def blit_text_center(screen, text_to_input, font, height, color):
     text_width, text_height = font.size(text_to_input)
     text = font.render(text_to_input, True, color)
-    width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
+    width = game_sets["GAME_SCREEN_WIDTH"] + box_sets["BOX_WIDTH"] * 2
     screen.blit(text, (width / 2 - text_width / 2, height))
 
 
 def draw_result_of_game(screen, player):
-    font = pg.font.SysFont("Arial", 50)
-    text_to_input = player.result
-    blit_text_center(screen, text_to_input, font, 50, colors["RED"])
+    if player.result is not None:
+        result_image = pg.image.load(load_image(result[str(player.result)]))
+        screen.blit(result_image, [350, 150])
+    # blit_text_center(screen, text_to_input, font, 50, colors["RED"])
 
 
 def draw_player_turn(screen, player_id, player_turn):
@@ -22,7 +23,7 @@ def draw_player_turn(screen, player_id, player_turn):
 
 
 def highlight_tile(screen, board, player, opponent, pos):
-    if box_settings["BOX_WIDTH"] < pos[0] < box_settings["RIGHT_BOX"]:
+    if box_sets["BOX_WIDTH"] < pos[0] < box_sets["RIGHT_BOX"]:
         color = colors["GREEN"]
         tmp_pos = get_tile_pos(pos)
         if player.clicked_hero and player.clicked_in_range(tmp_pos) is False:

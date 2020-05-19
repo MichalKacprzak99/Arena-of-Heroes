@@ -25,6 +25,15 @@ def update_stats(hero, hp_change):
     return hero
 
 
+def action(hero, action_to_perform):
+    actions = {
+        "move": hero.move,
+        "basic": hero.basic_attack,
+        "special": hero.special_skill
+    }
+    return actions[action_to_perform]
+
+
 class Hero(ABC):
     def __init__(self, hero_id, pos, attack, defense, move_range, hp, max_hp, skill_range, name,  side):
         self.hero_id = hero_id
@@ -40,11 +49,6 @@ class Hero(ABC):
             "DEFENSE": defense,
             "RANGE": move_range,
             "SKILL_RANGE": skill_range
-        }
-        self.actions = {
-            "move": self.move,
-            "basic": self.basic_attack,
-            "special": self.special_skill
         }
 
     def in_range_of_skill(self, clicked_pos):
