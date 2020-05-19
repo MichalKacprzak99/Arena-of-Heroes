@@ -3,3 +3,5 @@ pytmx~=3.21.7
 numpy~=1.18.1
 pathfinding~=0.0.4
 thorpy
+pymongo~=3.9.0
+jsonpickle~=1.4.1
