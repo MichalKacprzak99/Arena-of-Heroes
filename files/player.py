@@ -1,5 +1,5 @@
 from hero import Healer, Mage, Warrior, Archer, action
-from settings import get_tile_pos, box_settings
+from settings import get_tile_pos, box_sets
 from math import sqrt
 
 
@@ -12,7 +12,7 @@ class Player:
         self.clicked_hero = None
         self.moved_hero = None
         self.last_action = []
-        self.result = ""
+        self.result = None
 
     def set_starting_pos(self):
         pos = iter([[11*self.player_id, i] for i in range(1, 11, 3)])
@@ -51,16 +51,16 @@ class Player:
 
     def check_result(self, opponent, n):
         if len(self.heroes) == 0:
-            self.result = "lose"
+            self.result = 0
         elif len(opponent.heroes) == 0:
-            self.result = "win"
+            self.result = len(self.heroes)
         try:
             n.send(["result", self.player_id, self.result])
         except EOFError:
             pass
 
     def action(self, opponent, object_tiles, pos, gui):
-        if box_settings["BOX_WIDTH"] < pos[0] < box_settings["RIGHT_BOX"]:
+        if box_sets["BOX_WIDTH"] < pos[0] < box_sets["RIGHT_BOX"]:
             pos = get_tile_pos(pos)
             action_to_perform = gui.get_radio_value()
             return action(self.clicked_hero, action_to_perform)(self, opponent, object_tiles, pos)

@@ -17,7 +17,7 @@ tile_dim = {
     "height": 64,
 }
 
-game_settings = {
+game_sets = {
     "GAME_SCREEN_WIDTH": 768,
     "GAME_SCREEN_HEIGHT": 768,
 }
@@ -30,11 +30,11 @@ mouse_button = {
     "SCROLL_DOWN": 5
 }
 
-box_settings = {
+box_sets = {
     "BOX_WIDTH": 120,
     "BOX_HEIGHT": 768,
     "LEFT_BOX_CENTER": 60,
-    "RIGHT_BOX": 120 + game_settings["GAME_SCREEN_WIDTH"]
+    "RIGHT_BOX": 120 + game_sets["GAME_SCREEN_WIDTH"]
 }
 
 client_name = {
@@ -86,6 +86,13 @@ hero_images = {
         "death": "ARCHER/death.png"
     }
 }
+result = {
+    "4": "RESULT/star_1.png",
+    "3": "RESULT/star_1.png",
+    "2": "RESULT/star_2.png",
+    "1": "RESULT/star_3.png",
+    "0": "RESULT/star_4.png"
+}
 
 
 def load_image(filename):
@@ -95,8 +102,8 @@ def load_image(filename):
 
 
 def get_tile_pos(pos):
-    return [(pos[0]-box_settings["BOX_WIDTH"])//tile_dim["width"], pos[1]//tile_dim["height"]]
+    return [(pos[0] - box_sets["BOX_WIDTH"]) // tile_dim["width"], pos[1] // tile_dim["height"]]
 
 
 def coordinate(tile_pos):
-    return [tile_pos[0]*tile_dim["width"] + box_settings["BOX_WIDTH"], tile_pos[1]*tile_dim["height"]]
+    return [tile_pos[0] * tile_dim["width"] + box_sets["BOX_WIDTH"], tile_pos[1] * tile_dim["height"]]

@@ -1,16 +1,17 @@
 import thorpy
-from settings import box_settings, get_tile_pos, backgrounds
+from settings import box_sets, get_tile_pos, backgrounds
 import pygame as pg
 
 
 class Gui:
-    def __init__(self, screen, player, p_id, which_map):
+    def __init__(self, screen, player, p_id, which_map, network):
+        self.player = player
         self.window = screen
         self.radio_buttons = []
         self.radio_butt_text = ["Move", "Basic", "Special"]
         self.gui_info_amount = len(player.heroes[0].stats)
         self.buttons = []
-        self.butt_text = ["Save", "Quit"]
+        self.network = network
         self.menu = None
         self.background = None
         self.elements = []
@@ -30,7 +31,9 @@ class Gui:
             self.radio_buttons.append(rad)
 
     def make_buttons(self):
-        self.buttons = [thorpy.make_button(txt) for txt in self.butt_text]
+        save_button = thorpy.make_button("Save", func=self.network.send, params={"data": ["save"]})
+        quit_button = thorpy.make_button("Quit", func=pg.quit)
+        self.buttons = [save_button, quit_button]
         [button.set_font_size(20) for button in self.buttons]
         [button.scale_to_title() for button in self.buttons]
 
@@ -43,16 +46,15 @@ class Gui:
                                             elements=self.elements + self.radio_buttons+self.buttons)
 
         self.menu = thorpy.Menu(self.background)
-
         for element in self.menu.get_population():
             element.surface = self.window
-        thorpy.store(self.background, self.buttons, x=50+self.p_id * box_settings["RIGHT_BOX"], y=500, align="center")
+        thorpy.store(self.background, self.buttons, x=50 + self.p_id * box_sets["RIGHT_BOX"], y=500, align="center")
         thorpy.store(self.background, self.elements[:self.gui_info_amount],
                      x=10, y=125, align="center")
         thorpy.store(self.background, self.elements[self.gui_info_amount:],
-                     x=box_settings["RIGHT_BOX"] + 10, y=125, align="center")
+                     x=box_sets["RIGHT_BOX"] + 10, y=125, align="center")
         thorpy.store(self.background, self.radio_buttons,
-                     x=20 + self.p_id * box_settings["RIGHT_BOX"], y=400, align="left")
+                     x=20 + self.p_id * box_sets["RIGHT_BOX"], y=400, align="left")
 
         self.buttons_appearing(0)
         self.background.blit()
@@ -83,7 +85,7 @@ class Gui:
 
     def update_gui(self, mouse_pos, player, opponent):
         self.reset_gui()
-        if box_settings["BOX_WIDTH"] < mouse_pos[0] < box_settings["RIGHT_BOX"]:
+        if box_sets["BOX_WIDTH"] < mouse_pos[0] < box_sets["RIGHT_BOX"]:
             mouse_pos = get_tile_pos(mouse_pos)
             self.buttons_appearing(1) if player.clicked_hero else self.buttons_appearing(0)
             if player.clicked_own_hero(mouse_pos):
@@ -92,11 +94,5 @@ class Gui:
                 self.set_hero_info(opponent, mouse_pos, self.gui_info_amount * opponent.player_id)
         self.background.blit()
 
-    def click(self, mouse, network):
-        for button in self.buttons:
-            if button.get_rect().collidepoint(mouse):
-                if button.get_full_txt() == "Save":
-                    network.send(["save"])
-                elif button.get_full_txt() == "Quit":
-                    pg.quit()
-
+    def click(self, event):
+        self.menu.react(event)

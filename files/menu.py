@@ -12,7 +12,7 @@ class Menu:
             "Start Game": self.start_game,
             "Load Game": self.load_menu,
             "Instructions": self.load_instructions,
-            "Quit": self.quit
+            "Quit": pg.quit
         }
         self.was_loaded = False
         self.load_box = None
@@ -127,10 +127,6 @@ class Menu:
         rect = image.get_rect()
         rect.left, rect.top = 0, 0
         self.window.blit(image, rect)
-
-    @staticmethod
-    def quit():
-        pg.quit()
 
     def loading_screen(self):
         self.background_image()
