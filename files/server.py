@@ -15,6 +15,7 @@ logging.basicConfig(level=logging.DEBUG, format=fmt_str)
 logger = logging.getLogger(__name__)
 
 id_count = 0
+
 root = MongoClient("localhost", 27017)
 aof_db = root['games_db']
 games = aof_db['games']
@@ -22,7 +23,7 @@ games = aof_db['games']
 
 class Server:
     def __init__(self):
-        self.server = '127.0.0.1'
+        self.server = ''
         self.port = 556
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
