@@ -125,6 +125,8 @@ class ThreadedClient:
 
     def is_ready(self):
         self.game.is_ready[abs(self.data[1] - 1)] = self.data[2]
+        if len(self.data) > 3:
+            self.game.players[self.data[1]].heroes = self.data[3]
         return self.game.is_ready[self.data[1]]
 
     def get_turn(self):

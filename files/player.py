@@ -7,18 +7,12 @@ class Player:
     def __init__(self, name="", player_id=0):
         self.name = name
         self.player_id = player_id
-        self.heroes = self.set_starting_pos()
+        self.heroes = None
         self.death_heroes_pos = []
         self.clicked_hero = None
         self.moved_hero = None
         self.last_action = []
         self.result = ""
-
-    def set_starting_pos(self):
-        pos = iter([[11*self.player_id, i] for i in range(1, 11, 3)])
-        side = "west" if self.player_id == 1 else "east"
-        return [Healer(0, next(pos), side), Mage(1, next(pos), side),
-                Warrior(2, next(pos), side), Archer(3, next(pos), side)]
 
     def add_death_heroes(self, death_heroes):
         death_heroes = sorted(death_heroes, key=lambda sorted_hero: sorted_hero.hero_id, reverse=True)

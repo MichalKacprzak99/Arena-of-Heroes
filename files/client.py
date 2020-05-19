@@ -21,10 +21,10 @@ def main():
     opponent_id = abs(player_id - 1)
     window = pg.display.set_mode((game_settings["GAME_SCREEN_WIDTH"], game_settings["GAME_SCREEN_HEIGHT"]))
     menu = Menu(window, n, player_id)
-
+    opponent = None
     while run:
         clock.tick(60)
-        if not menu.both_ready():
+        if not menu.both_ready() or opponent is None or opponent.heroes is None or player.heroes is None:
             try:
                 player, opponent, which_map, menu.opponent_ready = n.send(["get_info", opponent_id])
                 try:
@@ -39,7 +39,7 @@ def main():
                     run = False
                     pg.quit()
             if menu.player_ready:
-                menu.loading_screen()
+                menu.waiting_screen()
         else:
             if not gui_start:
                 board.screen.fill((168, 139, 50))

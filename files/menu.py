@@ -1,6 +1,7 @@
 import thorpy
 import pygame as pg
 from settings import load_image
+from team_creator import TeamCreator
 
 
 class Menu:
@@ -9,7 +10,7 @@ class Menu:
         self.network = network
         self.window = window
         self.menu_func = {
-            "Start Game": self.start_game,
+            "Start Game": self.almost_start_game,
             "Load Game": self.load_menu,
             "Instructions": self.load_instructions,
             "Quit": self.quit
@@ -27,6 +28,7 @@ class Menu:
             "help": [False, self.instructions_menu],
             "load": [False, self.load_submenu]
         }
+        self.tc = TeamCreator(self.window, self.network, self.p_id, self)
 
     def create_menu(self):
         self.background_image()
@@ -100,6 +102,8 @@ class Menu:
             if self.control[con][0]:
                 self.control[con][1].react(event)
                 break
+        if self.tc.active:
+            self.tc.highlight_on_hover(event)
 
     def change_display(self, change=""):
         for key in self.control.keys():
@@ -147,3 +151,18 @@ class Menu:
         rect = image.get_rect()
         rect.left, rect.top = pos_x, pos_y
         self.window.blit(image, rect)
+
+    def almost_start_game(self):
+        self.player_ready = True
+        self.tc.active = True
+        self.change_display()
+
+    def team_screen(self):
+        self.tc.creator_background()
+        pg.display.update()
+
+    def waiting_screen(self):
+        if self.tc.active:
+            self.team_screen()
+        else:
+            self.loading_screen()
