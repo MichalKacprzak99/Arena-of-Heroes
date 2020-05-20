@@ -17,14 +17,16 @@ class TeamCreator:
             "Warrior": Warrior,
             "Archer": Archer
         }
-        self.buttons = [thorpy.make_button(txt, func=self.show_hero, params={"name": txt})
-                        for txt in self.classes.keys()]
-        self.box = thorpy.Box(self.buttons)
+        self.heroes = [thorpy.make_button(txt, func=self.show_hero, params={"name": txt})
+                       for txt in self.classes.keys()]
+        self.box = thorpy.Box(self.heroes)
         self.menu = thorpy.Menu(self.box)
         self.chosen = "Healer"
         self.team = []
-        self.add = thorpy.make_button("ADD TO TEAM", func=self.add_hero)
-        self.ready_button = thorpy.make_button("READY", func=self.start_game)
+        self.buttons = {
+            "add": thorpy.make_button("ADD TO TEAM", func=self.add_hero),
+            "ready": thorpy.make_button("READY", func=self.start_game)
+        }
         self.prepare_menu()
 
     def start_game(self):
@@ -38,39 +40,36 @@ class TeamCreator:
         self.box.center(-200, 160)
         for element in self.menu.get_population():
             element.surface = self.window
-        self.add.surface = self.window
-        self.add.center(-200, -120)
-        self.ready_button.active = False
-        self.ready_button.surface = self.window
-        self.ready_button.set_main_color((230, 255, 0, 100))
-        self.ready_button.center(200, 200)
+        self.buttons["add"].surface = self.window
+        self.buttons["add"].center(-200, -120)
+        self.buttons["ready"].active = False
+        self.buttons["ready"].surface = self.window
+        self.buttons["ready"].set_main_color((230, 255, 0, 100))
+        self.buttons["ready"].center(200, 200)
 
     def picker_view(self):
         self.draw_image('picker_background.png', 0, 0)
         self.box.blit()
-        self.add.blit()
-        self.ready_button.blit()
+        [button.blit() for button in self.buttons.values()]
         self.draw_text(self.chosen, 125, 60, 70)
         self.show_hero(self.chosen, 130, 170)
         x = 400
         for hero in self.team:
             self.show_hero(hero, x, 460)
-            x+=64
+            x += 64
         self.draw_text("Choose class", 100, 400, 30)
         self.draw_text("Your team", 500, 400, 30)
         pg.display.update()
 
     def react(self, event):
-        if self.menu is not None:
-            self.menu.react(event)
-            self.add.react(event)
-            self.ready_button.react(event)
+        self.menu.react(event)
+        [button.react(event) for button in self.buttons.values()]
 
     def add_hero(self):
         if len(self.team) < 4:
             self.team.append(self.chosen)
         if len(self.team) == 4:
-            self.ready_button.active = True
+            self.buttons["ready"].active = True
 
     def show_hero(self, name, x=100, y=100):
         self.chosen = name
