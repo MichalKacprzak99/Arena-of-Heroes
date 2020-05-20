@@ -8,7 +8,7 @@ def index_error_handler(func):
         try:
             return func(*args)
         except IndexError:
-            return None
+            return False
     return wrapper
 
 
