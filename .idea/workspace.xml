@@ -19,8 +19,23 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="">
+    <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="Revert &quot;drawing error&quot;&#10;&#10;This reverts commit 944eb021">
+      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_000.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_001.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_002.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_003.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_004.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_005.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_006.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_007.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_008.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_009.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_010.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_011.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/drawing.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/drawing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -302,7 +317,28 @@
       <option name="project" value="LOCAL" />
       <updated>1589453677922</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="updated master">
+      <created>1589459401560</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1589459401560</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Revert &quot;drawing error&quot;&#10;&#10;This reverts commit 944eb021">
+      <created>1589459617152</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1589459617152</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Revert &quot;fix drawing error&quot;&#10;&#10;This reverts commit 01e42ed8">
+      <created>1589460047704</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1589460047704</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -334,7 +370,10 @@
     <MESSAGE value="merged branches" />
     <MESSAGE value="fixed bugs" />
     <MESSAGE value="updated deaths and mage" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated deaths and mage" />
+    <MESSAGE value="updated master" />
+    <MESSAGE value="Revert &quot;drawing error&quot;&#10;&#10;This reverts commit 944eb021" />
+    <MESSAGE value="Revert &quot;fix drawing error&quot;&#10;&#10;This reverts commit 01e42ed8" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;fix drawing error&quot;&#10;&#10;This reverts commit 01e42ed8" />
   </component>
   <component name="WindowStateProjectService">
     <state x="198" y="38" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589127815922">
@@ -343,9 +382,10 @@
     <state x="198" y="38" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1589127815922" />
     <state x="223" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1588795789109" />
     <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1588786232074" />
-    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1589453676737">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="353" y="0" key="CommitChangelistDialog2" timestamp="1589998643375">
+      <screen x="0" y="0" width="1280" height="720" />
     </state>
+    <state x="353" y="0" key="CommitChangelistDialog2/0.0.1280.720@0.0.1280.720" timestamp="1589998643375" />
     <state x="377" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1589206648754" />
     <state x="424" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589451794841" />
     <state x="424" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1589453676737" />
@@ -359,34 +399,34 @@
     </state>
     <state x="548" y="178" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588795787585" />
     <state x="548" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1588694590996" />
-    <state width="720" height="230" key="GridCell.Tab.0.bottom" timestamp="1589459345449">
+    <state width="717" height="200" key="GridCell.Tab.0.bottom" timestamp="1589998543587">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="720" height="230" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1589459345449" />
+    <state width="717" height="200" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1589998543587" />
     <state width="1345" height="176" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1589222773716" />
     <state width="1515" height="258" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589451924866" />
-    <state width="866" height="230" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589458247604" />
-    <state width="720" height="230" key="GridCell.Tab.0.center" timestamp="1589459345449">
+    <state width="865" height="148" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589460880564" />
+    <state width="717" height="200" key="GridCell.Tab.0.center" timestamp="1589998543586">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="720" height="230" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1589459345449" />
+    <state width="717" height="200" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1589998543586" />
     <state width="1345" height="176" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1589222773716" />
     <state width="1515" height="258" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589451924866" />
-    <state width="866" height="230" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1589458247603" />
-    <state width="720" height="230" key="GridCell.Tab.0.left" timestamp="1589459345449">
+    <state width="865" height="148" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1589460880564" />
+    <state width="717" height="200" key="GridCell.Tab.0.left" timestamp="1589998543586">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="720" height="230" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1589459345449" />
+    <state width="717" height="200" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1589998543586" />
     <state width="1345" height="176" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1589222773716" />
     <state width="1515" height="258" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589451924866" />
-    <state width="866" height="230" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1589458247603" />
-    <state width="720" height="230" key="GridCell.Tab.0.right" timestamp="1589459345449">
+    <state width="865" height="148" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1589460880563" />
+    <state width="717" height="200" key="GridCell.Tab.0.right" timestamp="1589998543586">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="720" height="230" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1589459345449" />
+    <state width="717" height="200" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1589998543586" />
     <state width="1345" height="176" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1589222773716" />
     <state width="1515" height="258" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589451924866" />
-    <state width="866" height="230" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1589458247603" />
+    <state width="865" height="148" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1589460880564" />
     <state width="1515" height="277" key="GridCell.Tab.1.bottom" timestamp="1588701089598">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -403,14 +443,16 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1515" height="277" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1588701089598" />
-    <state x="135" y="67" key="MergeDialog" timestamp="1589452939760">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="113" y="56" key="MergeDialog" timestamp="1589790861713">
+      <screen x="0" y="0" width="1280" height="720" />
     </state>
+    <state x="113" y="56" key="MergeDialog/0.0.1280.720@0.0.1280.720" timestamp="1589790861713" />
     <state x="120" y="56" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1589126551135" />
     <state x="135" y="67" key="MergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1589452939760" />
-    <state x="481" y="134" width="792" height="252" key="MultipleFileMergeDialog" timestamp="1589452939772">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="401" y="112" width="660" height="250" key="MultipleFileMergeDialog" timestamp="1589790861726">
+      <screen x="0" y="0" width="1280" height="720" />
     </state>
+    <state x="401" y="112" width="660" height="250" key="MultipleFileMergeDialog/0.0.1280.720@0.0.1280.720" timestamp="1589790861726" />
     <state x="428" y="113" width="792" height="252" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1589128004222" />
     <state x="481" y="128" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1589415650628" />
     <state x="481" y="134" width="890" height="263" key="MultipleFileMergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1589452939772" />
@@ -425,20 +467,22 @@
     </state>
     <state x="277" y="73" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1589415697344" />
     <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1589452033954" />
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1589453707598">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="301" y="138" key="Vcs.Push.Dialog.v2" timestamp="1589459673293">
+      <screen x="0" y="0" width="1280" height="720" />
     </state>
+    <state x="301" y="138" key="Vcs.Push.Dialog.v2/0.0.1280.720@0.0.1280.720" timestamp="1589459673293" />
     <state x="321" y="139" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1589206661888" />
     <state x="361" y="157" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1589451809405" />
     <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1589453707598" />
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1589415195945">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="388" y="206" key="com.intellij.ide.util.TipDialog" timestamp="1589790793196">
+      <screen x="0" y="0" width="1280" height="720" />
     </state>
+    <state x="388" y="206" key="com.intellij.ide.util.TipDialog/0.0.1280.720@0.0.1280.720" timestamp="1589790793196" />
     <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1589415195945" />
-    <state x="578" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589458233262">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="482" y="288" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589790825394">
+      <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="482" y="288" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.720@0.0.1280.720" timestamp="1589457902198" />
+    <state x="482" y="288" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.720@0.0.1280.720" timestamp="1589790825394" />
     <state x="514" y="291" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1589222629396" />
     <state x="578" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1589415220202" />
     <state x="578" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1589458233262" />
