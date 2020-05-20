@@ -6,11 +6,11 @@ class Network:
     def __init__(self):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server = '127.0.0.1'
-        self.port = 555
+        self.port = 556 #555
         self.adr = (self.server, self.port)
         self.p = self.connect()
 
-    def get_player(self):
+    def get_player_id(self):
         return self.p
 
     def connect(self):
