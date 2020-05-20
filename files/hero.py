@@ -60,20 +60,24 @@ class Hero(ABC):
         distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)]))
         attacked_hero = player.clicked_opp_hero(opponent, clicked_pos)
         if attacked_hero and distance < 2:
-            lose_hp = -self.stats["ATTACK"] + attacked_hero.stats["DEFENSE"]/2
+            attacking_hero = self
+            lose_hp = -attacking_hero.stats["ATTACK"] + attacked_hero.stats["DEFENSE"]/2
             attacked_hero = update_stats(attacked_hero, lose_hp)
             opponent.heroes[attacked_hero.hero_id] = attacked_hero
-            player.last_action = ["basic_attack", self, attacked_hero]
-            return["basic_attack", player.p_id, player.last_action]
+            player.last_action = ["basic_attack", attacking_hero, attacked_hero]
+            return["basic_attack", player.player_id, player.last_action]
         return False
 
     def move(self, *args):
         player, opponent, object_tiles, pos = args
         if player.clicked_in_range(pos) and player.clicked_not_valid_tile(object_tiles, opponent, pos) is False:
             player.moved_hero = self
-            self.path = path_finder(player, opponent, object_tiles, pos)
+            try:
+                self.path = path_finder(player, opponent, object_tiles, pos)
+            except IndexError:
+                return False
             player.heroes[self.hero_id].pos = pos
-            return ["move", player.p_id, self]
+            return ["move", player.player_id, self]
         return False
 
     @abstractmethod
@@ -92,8 +96,9 @@ class Healer(Hero):
         if hero_to_heal and self.in_range_of_skill(clicked_pos):
             hero_to_heal = update_stats(hero_to_heal, self.healing)
             player.heroes[hero_to_heal.hero_id] = hero_to_heal
-            return ["heal", player.p_id, hero_to_heal]
-        return False
+            return ["heal", player.player_id, hero_to_heal]
+        else:
+            return False
 
 
 class Mage(Hero):
@@ -115,8 +120,9 @@ class Mage(Hero):
                 heroes_to_attack[0] = self.randomize_damage(heroes_to_attack[0])
             attacking_hero = player.clicked_hero
             player.last_action = ["random_spell", attacking_hero, heroes_to_attack]
-            return ["random_spell", player.p_id, player.last_action]
-        return False
+            return ["random_spell", player.player_id, player.last_action]
+        else:
+            return False
 
 
 class Warrior(Hero):
@@ -131,8 +137,9 @@ class Warrior(Hero):
             hero_to_attack = update_stats(hero_to_attack, -self.powerful_attack * self.stats["ATTACK"])
             attacking_hero = player.clicked_hero
             player.last_action = ["special_attack", attacking_hero, hero_to_attack]
-            return ["special_attack", player.p_id, player.last_action]
-        return False
+            return ["special_attack", player.player_id, player.last_action]
+        else:
+            return False
 
 
 class Archer(Hero):
@@ -147,5 +154,6 @@ class Archer(Hero):
             hero_to_attack = update_stats(hero_to_attack, -multi * self.stats["ATTACK"])
             attacking_hero = player.clicked_hero
             player.last_action = ["special_attack", attacking_hero, hero_to_attack]
-            return ["special_attack", player.p_id, player.last_action]
-        return False
+            return ["special_attack", player.player_id, player.last_action]
+        else:
+            return False
