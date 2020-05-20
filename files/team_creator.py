@@ -11,34 +11,21 @@ class TeamCreator:
         self.p_id = p_id
         self.parent_menu = parent_menu
         self.active = False
-        self.classes_text = ["Healer", "Mage", "Warrior", "Archer"]
-        self.functions = {
-            "Healer": self.healer,
-            "Mage": self.mage,
-            "Warrior": self.warrior,
-            "Archer": self.archer
+        self.classes = {
+            "Healer": Healer,
+            "Mage": Mage,
+            "Warrior": Warrior,
+            "Archer": Archer
         }
-        self.buttons = [thorpy.make_button(txt, func=self.functions[txt]) for txt in self.classes_text]
-
+        self.buttons = [thorpy.make_button(txt, func=self.show_hero, params={"name": txt})
+                        for txt in self.classes.keys()]
         self.box = thorpy.Box(self.buttons)
         self.menu = thorpy.Menu(self.box)
         self.chosen = "Healer"
         self.team = []
-        self.add = thorpy.make_button("ADD TO TEAM", func= self.add_hero)
-        self.ready_button = thorpy.make_button("READY", func = self.start_game)
+        self.add = thorpy.make_button("ADD TO TEAM", func=self.add_hero)
+        self.ready_button = thorpy.make_button("READY", func=self.start_game)
         self.prepare_menu()
-
-    def healer(self):
-        self.chosen = "Healer"
-
-    def mage(self):
-        self.chosen = "Mage"
-
-    def warrior(self):
-        self.chosen = "Warrior"
-
-    def archer(self):
-        self.chosen = "Archer"
 
     def start_game(self):
         team = self.make_team(self.p_id)
@@ -58,7 +45,7 @@ class TeamCreator:
         self.ready_button.set_main_color((230, 255, 0, 100))
         self.ready_button.center(200, 200)
 
-    def creator_background(self):
+    def picker_view(self):
         self.draw_image('picker_background.png', 0, 0)
         self.box.blit()
         self.add.blit()
@@ -73,12 +60,11 @@ class TeamCreator:
         self.draw_text("Your team", 500, 400, 30)
         pg.display.update()
 
-    def highlight_on_hover(self, event):
+    def react(self, event):
         if self.menu is not None:
             self.menu.react(event)
             self.add.react(event)
             self.ready_button.react(event)
-            self.show_hero(self.chosen)
 
     def add_hero(self):
         if len(self.team) < 4:
@@ -86,7 +72,8 @@ class TeamCreator:
         if len(self.team) == 4:
             self.ready_button.active = True
 
-    def show_hero(self, name="Archer", x=100, y=100):
+    def show_hero(self, name, x=100, y=100):
+        self.chosen = name
         name = name.upper()
         path = name + "\south.png"
         self.draw_image(path, x, y)
@@ -111,11 +98,4 @@ class TeamCreator:
         return table
 
     def make_hero(self, id, name, pos, side):
-        if name is "Healer":
-            return Healer(id, pos, side)
-        elif name is "Mage":
-            return Mage(id, pos, side)
-        elif name is "Warrior":
-            return Warrior(id, pos, side)
-        elif name is "Archer":
-            return Archer(id, pos, side)
+        return self.classes[name](id, pos, side)

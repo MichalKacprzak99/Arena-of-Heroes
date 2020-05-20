@@ -103,7 +103,7 @@ class Menu:
                 self.control[con][1].react(event)
                 break
         if self.tc.active:
-            self.tc.highlight_on_hover(event)
+            self.tc.react(event)
 
     def change_display(self, change=""):
         for key in self.control.keys():
@@ -158,7 +158,7 @@ class Menu:
         self.change_display()
 
     def team_screen(self):
-        self.tc.creator_background()
+        self.tc.picker_view()
         pg.display.update()
 
     def waiting_screen(self):
