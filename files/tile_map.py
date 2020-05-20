@@ -37,6 +37,7 @@ class TiledMap:
 
     def render(self, surface):
         ti = self.tmx_data.get_tile_image_by_gid
+
         for layer in self.tmx_data.visible_layers:
             if isinstance(layer, pytmx.TiledTileLayer):
                 for x, y, gid, in layer:
