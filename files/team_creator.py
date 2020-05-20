@@ -17,7 +17,7 @@ class TeamCreator:
             "Warrior": Warrior,
             "Archer": Archer
         }
-        self.heroes = [thorpy.make_button(txt, func=self.show_hero, params={"name": txt})
+        self.heroes = [thorpy.make_button(txt, func=self.change_hero, params={"name": txt})
                        for txt in self.classes.keys()]
         self.box = thorpy.Box(self.heroes)
         self.menu = thorpy.Menu(self.box)
@@ -70,7 +70,6 @@ class TeamCreator:
             self.buttons["ready"].active = True
 
     def show_hero(self, name, x=100, y=100):
-        self.chosen = name
         name = name.upper()
         path = name + "\south.png"
         self.draw_image(path, x, y)
@@ -96,3 +95,6 @@ class TeamCreator:
 
     def make_hero(self, id, name, pos, side):
         return self.classes[name](id, pos, side)
+
+    def change_hero(self, name):
+        self.chosen = name
