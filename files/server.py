@@ -67,6 +67,8 @@ class ThreadedClient:
             "reset_action": self.reset_action,
             "death_heroes": self.death_heroes,
             "move": self.move,
+            "login": self.login,
+            "sign up": self.sign_up,
             "basic_attack": self.attack,
             "special_attack": self.attack,
             "random_spell": self.random_spell,

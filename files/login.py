@@ -1,7 +1,7 @@
 from menu import Menu
 import thorpy
 import pygame as pg
-from settings import game_settings, colors
+from settings import game_sets, colors
 from network import Network
 
 
@@ -42,10 +42,8 @@ class LoginScreen:
     def send_info(self):
         login_box = self.inserters[1]
         password_box = self.inserters[3]
-        login = login_box._inserted
-        password = password_box._inserted
-        print(login)
-        print(password)
+        login = login_box.get_value()
+        password = password_box.get_value()
         reply = None
         current_login_window = self.state[-1]
         if len(login) > 15 or len(password) > 15:
@@ -77,6 +75,7 @@ class LoginScreen:
         self.reset_inserter_value()
         self.hide_inserters()
         self.enable_return_enter_buttons(0, 1)
+        self.texts[0].set_text("Welcome to Arena Of Heroes!")
         self.texts[1].set_text("")
 
         self.background.blit()
@@ -136,17 +135,18 @@ class LoginScreen:
         for text in self.inserter_text:
             self.inserters.append(thorpy.make_text(text))
             self.inserters.append(thorpy.Inserter(value="", size=(200, 20), quit_on_click=False, finish=True))
+
     def place_elements_on_background(self):
-        thorpy.store(self.background, self.buttons[0:2], x=game_settings["GAME_SCREEN_WIDTH"] / 2,
-                     y=game_settings["GAME_SCREEN_HEIGHT"] / 2 - 150, align="center")
-        thorpy.store(self.background, self.buttons[2:4], x=game_settings["GAME_SCREEN_WIDTH"] / 2,
-                     y=game_settings["GAME_SCREEN_HEIGHT"] / 2, align="center")
-        thorpy.store(self.background, self.inserters, x=game_settings["GAME_SCREEN_WIDTH"] / 2,
-                     y=game_settings["GAME_SCREEN_HEIGHT"] / 2 - 100, align="center")
-        thorpy.store(self.background, [self.texts[0]], x=game_settings["GAME_SCREEN_WIDTH"] / 2,
-                     y=game_settings["GAME_SCREEN_HEIGHT"] / 2 - 200, align="center")
-        thorpy.store(self.background, [self.texts[1]], x=game_settings["GAME_SCREEN_WIDTH"] / 2 - 200,
-                     y=game_settings["GAME_SCREEN_HEIGHT"] / 2 + 100, align="left")
+        thorpy.store(self.background, self.buttons[0:2], x=game_sets["GAME_SCREEN_WIDTH"] / 2,
+                     y=game_sets["GAME_SCREEN_HEIGHT"] / 2 - 150, align="center")
+        thorpy.store(self.background, self.buttons[2:4], x=game_sets["GAME_SCREEN_WIDTH"] / 2,
+                     y=game_sets["GAME_SCREEN_HEIGHT"] / 2, align="center")
+        thorpy.store(self.background, self.inserters, x=game_sets["GAME_SCREEN_WIDTH"] / 2,
+                     y=game_sets["GAME_SCREEN_HEIGHT"] / 2 - 100, align="center")
+        thorpy.store(self.background, [self.texts[0]], x=game_sets["GAME_SCREEN_WIDTH"] / 2,
+                     y=game_sets["GAME_SCREEN_HEIGHT"] / 2 - 200, align="center")
+        thorpy.store(self.background, [self.texts[1]], x=game_sets["GAME_SCREEN_WIDTH"] / 2 - 200,
+                     y=game_sets["GAME_SCREEN_HEIGHT"] / 2 + 100, align="left")
 
     def create(self):
         self.state.append("main_menu")
