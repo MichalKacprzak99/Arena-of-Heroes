@@ -33,7 +33,7 @@ class TeamCreator:
         team = self.make_team(self.p_id)
         self.network.send(["is_ready", self.p_id, True, team])
         self.parent_menu.player_ready = True
-        self.active = False
+        self.parent_menu.control["creator"][0] = False
 
     def prepare_menu(self):
         self.box.set_main_color((0, 0, 0))
@@ -47,16 +47,14 @@ class TeamCreator:
         self.buttons["ready"].set_main_color((230, 255, 0, 100))
         self.buttons["ready"].center(200, 200)
 
-    def picker_view(self):
+    def creator_view(self):
         self.draw_image('picker_background.png', 0, 0)
         self.box.blit()
         [button.blit() for button in self.buttons.values()]
         self.draw_text(self.chosen, 125, 60, 70)
         self.show_hero(self.chosen, 130, 170)
-        x = 400
-        for hero in self.team:
-            self.show_hero(hero, x, 460)
-            x += 64
+        pos = iter((400 + i*64) for i in range(len(self.team)))
+        [self.show_hero(hero, next(pos), 460) for hero in self.team]
         self.draw_text("Choose class", 100, 400, 30)
         self.draw_text("Your team", 500, 400, 30)
         pg.display.update()

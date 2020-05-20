@@ -23,12 +23,13 @@ class Menu:
         self.instructions_menu = self.create_instructions()
         self.player_ready = False
         self.opponent_ready = False
+        self.tc = TeamCreator(self.window, self.network, self.p_id, self)
         self.control = {
             "active": [True, self.menu],
             "help": [False, self.instructions_menu],
-            "load": [False, self.load_submenu]
+            "load": [False, self.load_submenu],
+            "creator": [False, self.tc]
         }
-        self.tc = TeamCreator(self.window, self.network, self.p_id, self)
 
     def create_menu(self):
         self.background_image()
@@ -102,8 +103,6 @@ class Menu:
             if self.control[con][0]:
                 self.control[con][1].react(event)
                 break
-        if self.tc.active:
-            self.tc.react(event)
 
     def change_display(self, change=""):
         for key in self.control.keys():
@@ -154,15 +153,12 @@ class Menu:
 
     def almost_start_game(self):
         self.player_ready = True
-        self.tc.active = True
-        self.change_display()
+        self.control["creator"][0] = True
+        self.change_display("creator")
 
     def team_screen(self):
-        self.tc.picker_view()
+        self.tc.creator_view()
         pg.display.update()
 
     def waiting_screen(self):
-        if self.tc.active:
-            self.team_screen()
-        else:
-            self.loading_screen()
+        self.team_screen() if self.control["creator"][0] else self.loading_screen()
