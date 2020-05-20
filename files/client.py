@@ -16,7 +16,7 @@ def main():
     gui_start = False
     clock = pg.time.Clock()
     net = Network()
-    player_id = net.get_player()
+    player_id = net.get_player_id()
     pg.display.set_caption(client_name[str(player_id)])
     opponent_id = abs(player_id - 1)
     window = pg.display.set_mode((game_sets["GAME_SCREEN_WIDTH"], game_sets["GAME_SCREEN_HEIGHT"]))
@@ -27,11 +27,8 @@ def main():
         if not menu.both_ready():
             try:
                 player, opponent, which_map, menu.opponent_ready = net.send(["get_info", opponent_id])
-                try:
-                    board = TiledMap(maps[str(which_map)], window)
-                except pg.error:
-                    break
-            except (EOFError, TypeError):
+                board = TiledMap(maps[str(which_map)], window)
+            except (EOFError, TypeError, pg.error):
                 break
             for event in pg.event.get():
                 menu.highlight_buttons(event)
@@ -46,7 +43,7 @@ def main():
                 width = game_sets["GAME_SCREEN_WIDTH"] + box_sets["BOX_WIDTH"] * 2
                 height = game_sets["GAME_SCREEN_HEIGHT"]
                 window = pg.display.set_mode((width, height))
-                gui = Gui(window, player, player_id, which_map, net)
+                gui = Gui(window, player, which_map, net)
                 gui_start = True
             try:
                 which_player_turn, turns = net.send(["get_turn", player_id])
@@ -62,7 +59,7 @@ def main():
             player.check_result(opponent, net)
             move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos, net)
             try:
-                end = net.send(["end", player.player_id])
+                end = net.send(["end", player.p_id])
             except EOFError:
                 break
             if end:
@@ -87,7 +84,7 @@ def main():
                         if which_player_turn == player_id:
 
                             if not player.clicked_hero:
-                                player.check_clicked_hero(actual_pos)
+                                player.clicked_hero = player.check_clicked_hero(actual_pos)
                             else:
                                 made_action = player.action(opponent, board.object_tiles, actual_pos, gui)
                                 if made_action:
