@@ -10,7 +10,7 @@ class Network:
         self.adr = (self.server, self.port)
         self.p = self.connect()
 
-    def get_player(self):
+    def get_player_id(self):
         return self.p
 
     def connect(self):

@@ -25,7 +25,7 @@ def path_finder(player, opponent, object_tiles, new_pos):
     matrix = np.full((12, 12), 1)
     for index, value in np.ndenumerate(matrix):
         x, y = index
-        if player.clicked_not_valid_tile(object_tiles, opponent, [x,y]):
+        if player.clicked_not_valid_tile(object_tiles, opponent, [x, y]):
             matrix[y][x] = 0
     grid = Grid(matrix=matrix)
     start = grid.node(player.moved_hero.pos[0], player.moved_hero.pos[1])
