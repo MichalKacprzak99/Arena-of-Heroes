@@ -18,12 +18,14 @@ id_count = 0
 root = MongoClient("localhost", 27017)
 aof_db = root['games_db']
 games = aof_db['games']
+users = aof_db['users']
+
 
 
 class Server:
     def __init__(self):
         self.server = '127.0.0.1'
-        self.port = 556
+        self.port = 556 #555
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
             self.s.bind((self.server, self.port))
@@ -65,6 +67,8 @@ class ThreadedClient:
             "reset_action": self.reset_action,
             "death_heroes": self.death_heroes,
             "move": self.move,
+            "login": self.login,
+            "sign up": self.sign_up,
             "basic_attack": self.attack,
             "special_attack": self.attack,
             "random_spell": self.random_spell,
@@ -118,6 +122,30 @@ class ThreadedClient:
             pass
         id_count -= 1
         connection.close()
+
+    def login(self):
+        login_to_search = self.data[1]
+        password_to_search = self.data[2]
+        logger.info("SEARCHING FOR USER: " + login_to_search + " WITH PASSWORD: " + password_to_search )
+        if users.find_one({"login": login_to_search, "password": password_to_search}):
+            return True
+        else:
+            return False
+
+    def sign_up(self):
+        login_to_add = self.data[1]
+        password_to_add = self.data[2]
+        logger.info("ADDING USER: " + login_to_add + " WITH PASSWORD: " + password_to_add + "ID: " + str(users.count_documents({}) + 1))
+        if users.find_one({"login": login_to_add}):
+            return False
+        else:
+            post = {
+                "_id": users.count_documents({}) + 1,
+                "login": login_to_add,
+                "password": password_to_add
+            }
+            users.insert_one(post)
+            return True
 
     def get_info(self):
         opponent_ready = self.game.is_ready[abs(self.data[1] - 1)]
