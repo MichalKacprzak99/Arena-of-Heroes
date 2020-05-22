@@ -56,6 +56,8 @@ class LoginScreen:
             if reply:
                 if current_login_window == "login":
                     self.texts[1].set_text("Congratulations! You managed to log in!")
+                    self.background.blit()
+                    self.background.update()
                     pg.time.delay(500)
                     self.player_logged_in = True
                 elif current_login_window == "sign up":
@@ -79,6 +81,7 @@ class LoginScreen:
         self.enable_return_enter_buttons(0, 1)
         self.texts[0].set_text("Welcome to Arena Of Heroes!")
         self.texts[1].set_text("")
+        self.texts[2].set_text("")
 
         self.background.blit()
         self.background.update()
