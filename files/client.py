@@ -25,7 +25,6 @@ def main():
     login.run(clock)
     menu = Menu(window, net, player_id)
 
-
     while run:
         clock.tick(60)
         if not menu.both_ready():

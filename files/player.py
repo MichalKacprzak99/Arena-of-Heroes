@@ -22,6 +22,7 @@ class Player:
         self.moved_hero = None
         self.last_action = []
         self.result = None
+        self.login = None
 
     def set_starting_pos(self):
         pos = iter([[11 * self.p_id, i] for i in range(1, 11, 3)])

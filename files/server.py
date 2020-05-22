@@ -19,7 +19,7 @@ root = MongoClient("localhost", 27017)
 aof_db = root['games_db']
 games = aof_db['games']
 users = aof_db['users']
-
+users.delete_many({})
 
 
 class Server:
@@ -115,6 +115,7 @@ class ThreadedClient:
                 break
         logger.info("Lost connection")
         try:
+            self.log_out_user()
             logger.info("Closing Game ")
             logger.info("Delete")
             games.delete_many({'is_saved': False})
@@ -127,7 +128,14 @@ class ThreadedClient:
         login_to_search = self.data[1]
         password_to_search = self.data[2]
         logger.info("SEARCHING FOR USER: " + login_to_search + " WITH PASSWORD: " + password_to_search )
-        if users.find_one({"login": login_to_search, "password": password_to_search}):
+        if users.find_one({"login": login_to_search, "password": password_to_search, "logged_in": 0}):
+            post = {
+                "login": login_to_search,
+                "password": password_to_search,
+                "logged_in": 1
+            }
+            self.game.players[self.p_id].login = login_to_search
+            users.find_one_and_replace({"login": login_to_search}, post)
             return True
         else:
             return False
@@ -135,17 +143,29 @@ class ThreadedClient:
     def sign_up(self):
         login_to_add = self.data[1]
         password_to_add = self.data[2]
-        logger.info("ADDING USER: " + login_to_add + " WITH PASSWORD: " + password_to_add + "ID: " + str(users.count_documents({}) + 1))
+        logger.info("ADDING USER: " + login_to_add + " WITH PASSWORD: " + password_to_add + "ID: " +
+                    str(users.count_documents({}) + 1))
         if users.find_one({"login": login_to_add}):
             return False
         else:
             post = {
-                "_id": users.count_documents({}) + 1,
                 "login": login_to_add,
-                "password": password_to_add
+                "password": password_to_add,
+                "logged_in": 0
             }
             users.insert_one(post)
             return True
+
+    def log_out_user(self):
+        player_to_log_out = self.game.players[self.p_id]
+        player_login_data = users.find_one({"login": player_to_log_out.login})
+        post = {
+            "login": player_login_data["login"],
+            "password": player_login_data["password"],
+            "logged_in": 0
+        }
+        users.find_one_and_replace({"login": player_login_data["login"]}, post)
+        logger.info("LOGGING OUT USER WITH LOGIN: " + player_login_data["login"])
 
     def get_info(self):
         opponent_ready = self.game.is_ready[abs(self.data[1] - 1)]

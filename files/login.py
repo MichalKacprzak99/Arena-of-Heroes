@@ -47,8 +47,8 @@ class LoginScreen:
         reply = None
         current_login_window = self.state[-1]
         if len(login) > 15 or len(password) > 15:
-            self.texts[1].set_text("It seems your login or password are too long. Please don't input more than 15 "
-                                   "characters.")
+            self.texts[1].set_text("It seems your login or password are too long.")
+            self.texts[2].set_text("Please don't input more than 15 characters.")
         elif len(login) == 0 or len(password) == 0:
             self.texts[1].set_text("It seems you didn't provide any input. Please try again.")
         else:
@@ -59,10 +59,12 @@ class LoginScreen:
                     pg.time.delay(500)
                     self.player_logged_in = True
                 elif current_login_window == "sign up":
-                    self.texts[1].set_text("Congratulations! You managed to create an account!")
+                    self.texts[1].set_text("Congratulations!")
+                    self.texts[2].set_text("You managed to create an account!")
             elif reply is False:
                 if current_login_window == "login":
-                    self.texts[1].set_text("Your login and/or password are incorrect. Try again.")
+                    self.texts[1].set_text("Your data are incorrect or somebody is logged in on this account.")
+                    self.texts[2].set_text(" Try again.")
                 elif current_login_window == "sign up":
                     self.texts[1].set_text("There exists an account with this username")
             else:
@@ -124,36 +126,50 @@ class LoginScreen:
             inserter.set_visible(1)
 
     def fill_buttons_list(self):
+        thorpy.set_theme("round")
         for text, button_function in self.b_info.items():
-            self.buttons.append(thorpy.make_button(text, button_function))
+            button_to_add = thorpy.make_button(text, button_function)
+            button_to_add.set_font_size(20)
+            button_to_add.scale_to_title()
+            self.buttons.append(button_to_add)
 
     def fill_text_list(self):
+        text_to_add = thorpy.make_text(self.text_info[0])
+        text_to_add.set_font_size(20)
+        text_to_add.set_font_color(colors["BUMBLEBEE"])
+        self.texts.append(text_to_add)
         for text in self.text_info:
-            self.texts.append(thorpy.make_text(text))
+            info_text = thorpy.make_text("")
+            info_text.set_font_size(20)
+            info_text.set_font_color(colors["RED"])
+            self.texts.append(info_text)
 
     def fill_inserters(self):
         for text in self.inserter_text:
-            self.inserters.append(thorpy.make_text(text))
-            self.inserters.append(thorpy.Inserter(value="", size=(200, 20), quit_on_click=False, finish=True))
+            text_to_add = thorpy.make_text(text)
+            text_to_add.set_font_size(20)
+            text_to_add.set_font_color(colors["BUMBLEBEE"])
+            self.inserters.append(text_to_add)
+            self.inserters.append(thorpy.Inserter(value="", size=(300, 30), quit_on_click=False, finish=True))
 
     def place_elements_on_background(self):
         thorpy.store(self.background, self.buttons[0:2], x=game_sets["GAME_SCREEN_WIDTH"] / 2,
-                     y=game_sets["GAME_SCREEN_HEIGHT"] / 2 - 150, align="center")
+                     y=game_sets["GAME_SCREEN_HEIGHT"] / 2 - 100, align="center")
         thorpy.store(self.background, self.buttons[2:4], x=game_sets["GAME_SCREEN_WIDTH"] / 2,
-                     y=game_sets["GAME_SCREEN_HEIGHT"] / 2, align="center")
+                     y=game_sets["GAME_SCREEN_HEIGHT"] / 2 + 100, align="center")
         thorpy.store(self.background, self.inserters, x=game_sets["GAME_SCREEN_WIDTH"] / 2,
                      y=game_sets["GAME_SCREEN_HEIGHT"] / 2 - 100, align="center")
         thorpy.store(self.background, [self.texts[0]], x=game_sets["GAME_SCREEN_WIDTH"] / 2,
                      y=game_sets["GAME_SCREEN_HEIGHT"] / 2 - 200, align="center")
-        thorpy.store(self.background, [self.texts[1]], x=game_sets["GAME_SCREEN_WIDTH"] / 2 - 200,
-                     y=game_sets["GAME_SCREEN_HEIGHT"] / 2 + 100, align="left")
+        thorpy.store(self.background, self.texts[1:3], x=game_sets["GAME_SCREEN_WIDTH"] / 2 - 225,
+                     y=game_sets["GAME_SCREEN_HEIGHT"] / 2 + 200, align="left")
 
     def create(self):
         self.state.append("main_menu")
         self.fill_buttons_list()
         self.fill_text_list()
         self.fill_inserters()
-        self.background = thorpy.Background(color=(168, 139, 50), image=None,
+        self.background = thorpy.Background(color=None, image="backgrounds/login_background.png",
                                             elements=self.buttons+self.texts+self.inserters)
         self.place_elements_on_background()
         self.menu = thorpy.Menu(self.background)
