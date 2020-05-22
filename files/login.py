@@ -65,7 +65,7 @@ class LoginScreen:
                     self.texts[2].set_text("You managed to create an account!")
             elif reply is False:
                 if current_login_window == "login":
-                    self.texts[1].set_text("Your data are incorrect or somebody is logged in on this account.")
+                    self.texts[1].set_text("Your data is incorrect or somebody is logged in on this account.")
                     self.texts[2].set_text(" Try again.")
                 elif current_login_window == "sign up":
                     self.texts[1].set_text("There exists an account with this username")
