@@ -23,7 +23,10 @@ def main():
     window = pg.display.set_mode((game_sets["GAME_SCREEN_WIDTH"], game_sets["GAME_SCREEN_HEIGHT"]))
     login = LoginScreen(window, net)
     login.run(clock)
-    menu = Menu(window, net, player_id)
+    try:
+        menu = Menu(window, net, player_id)
+    except pg.error:
+        quit()
 
     while run:
         clock.tick(60)

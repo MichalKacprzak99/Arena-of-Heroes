@@ -1,8 +1,6 @@
-from menu import Menu
 import thorpy
 import pygame as pg
 from settings import game_sets, colors
-from network import Network
 
 
 class LoginScreen:
@@ -20,6 +18,7 @@ class LoginScreen:
         self.texts = []
         self.inserter_text = ["login", "password"]
         self.inserters = []
+
         self.state = []
         self.background = None
         self.player_logged_in = False
@@ -44,7 +43,6 @@ class LoginScreen:
         password_box = self.inserters[3]
         login = login_box.get_value()
         password = password_box.get_value()
-        reply = None
         current_login_window = self.state[-1]
         if len(login) > 15 or len(password) > 15:
             self.texts[1].set_text("It seems your login or password are too long.")
@@ -186,14 +184,11 @@ class LoginScreen:
         while not self.player_logged_in:
             clock.tick(60)
             current_login_window = self.state[-1]
-            self.draw_window[current_login_window]()
+            try:
+                self.draw_window[current_login_window]()
+            except pg.error:
+                break
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
                 self.menu.react(event)
-
-
-
-
-
-

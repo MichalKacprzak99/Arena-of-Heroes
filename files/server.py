@@ -19,13 +19,12 @@ root = MongoClient("localhost", 27017)
 aof_db = root['games_db']
 games = aof_db['games']
 users = aof_db['users']
-users.delete_many({})
 
 
 class Server:
     def __init__(self):
         self.server = '127.0.0.1'
-        self.port = 556 #555
+        self.port = 556
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
             self.s.bind((self.server, self.port))
@@ -127,7 +126,7 @@ class ThreadedClient:
     def login(self):
         login_to_search = self.data[1]
         password_to_search = self.data[2]
-        logger.info("SEARCHING FOR USER: " + login_to_search + " WITH PASSWORD: " + password_to_search )
+        logger.info("SEARCHING FOR USER: " + login_to_search + " WITH PASSWORD: " + password_to_search)
         if users.find_one({"login": login_to_search, "password": password_to_search, "logged_in": 0}):
             post = {
                 "login": login_to_search,
