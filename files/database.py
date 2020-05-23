@@ -3,9 +3,14 @@ from pymongo import MongoClient
 root = MongoClient("localhost", 27017)
 aof_db = root['games_db']
 games = aof_db['games']
+users = aof_db['users']
 #
-for game in games.find({}):
-    games.delete_one(game)
+# for game in games.find({}):
+#     games.delete_one(game)
+#
+# for game in games.find({}):
+#     print(game)
+# for user in users.find({}):
+#     print(user)
+#     users.delete_one(user)
 
-for game in games.find({}):
-    print(game)

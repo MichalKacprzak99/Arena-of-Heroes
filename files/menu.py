@@ -1,6 +1,7 @@
 import thorpy
 import pygame as pg
 from settings import load_image
+import time
 
 
 class Menu:
@@ -17,6 +18,7 @@ class Menu:
         self.was_loaded = False
         self.load_box = None
         self.menu_box = None
+        self.load_buttons = []
         self.load_submenu = self.create_load_menu()
         self.menu = self.create_menu()
         self.instructions_menu = self.create_instructions()
@@ -52,13 +54,13 @@ class Menu:
         self.background_image()
         thorpy.set_theme("round")
         games = self.network.send(["get_games_to_load"])
-        load_buttons = [thorpy.make_button(str(game), func=self.load_game, params={"which_game": i, "games": games})
-                        for i, game in enumerate(games)]
-        quit_button = thorpy.make_button("Quit", func=self.quit_submenu)
-        load_buttons.append(quit_button)
-        [button.set_font_size(20) for button in load_buttons]
-        [button.scale_to_title() for button in load_buttons]
-        self.load_box = thorpy.Box(load_buttons)
+        self.load_buttons = [
+            thorpy.make_button(str(game), func=self.load_game, params={"which_game": i, "games": games})
+            for i, game in enumerate(games)]
+        self.load_buttons.append(thorpy.make_button("Quit", func=self.quit_submenu))
+        [button.set_font_size(20) for button in self.load_buttons]
+        [button.scale_to_title() for button in self.load_buttons]
+        self.load_box = thorpy.Box(self.load_buttons)
         load_submenu = thorpy.Menu(self.load_box)
         return load_submenu
 
@@ -68,8 +70,8 @@ class Menu:
         pg.display.update()
 
     def load_menu(self):
-        self.background_image()
         self.change_display("load")
+        self.background_image()
         self.proper_display(self.load_submenu, self.load_box, self.was_loaded)
         self.was_loaded = True
         pg.display.update()

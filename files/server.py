@@ -19,7 +19,7 @@ root = MongoClient("localhost", 27017)
 aof_db = root['games_db']
 games = aof_db['games']
 users = aof_db['users']
-users.delete_many({})
+
 
 
 class Server:
@@ -134,6 +134,7 @@ class ThreadedClient:
                 "password": password_to_search,
                 "logged_in": 1
             }
+            self.game.players[self.p_id].name = login_to_search
             self.game.players[self.p_id].login = login_to_search
             users.find_one_and_replace({"login": login_to_search}, post)
             return True
@@ -193,9 +194,9 @@ class ThreadedClient:
         version_to_save = json.loads(jsonpickle.encode(self.game))
         games.find_one_and_replace({'time_start': self.game.time_start}, version_to_save)
 
-    @staticmethod
-    def get_games_to_load():
-        find_games = games.find(filter={"last_saved": {"$ne": None}}, limit=2)
+    def get_games_to_load(self):
+        name_of_player = self.game.players[self.p_id].name
+        find_games = games.find(filter={"last_saved": {"$ne": None}, "players.name": name_of_player}, limit=2)
         real_game = []
         for find_game in find_games:
             sliced_game = dict(islice(find_game.items(), 1, len(find_game)))
