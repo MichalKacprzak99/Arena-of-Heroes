@@ -1,7 +1,7 @@
 import thorpy
 import pygame as pg
 from settings import load_image
-from hero import Healer, Mage, Warrior, Archer, Hero
+from hero import Healer, Mage, Warrior, Archer
 
 
 class TeamCreator:
@@ -36,16 +36,15 @@ class TeamCreator:
         self.menu_down = thorpy.Menu(self.box_down)
         self.lore={
             "Healer": ["Imma heal all of you",
-                       "That all"],
+                       "That's all folks"],
             "Mage": ["I cant be ever balanced"],
             "Warrior": ["Arrrgh"],
             "Archer": ["Archer was peaceful and calm person training his skills for good cause ... ",
                        "... but when one day his pet duck Carlos was kidnapped, he changed drastically!",
                        "Now his goal is to kill everyone who stands in his way of reuniting with his buddy",
-                       " ",
-                        "This hero centers around quick movement and sneaky attacks.",
+                       " ", "This hero centers around quick movement and sneaky attacks.",
                        "It's special attack hits harder when enemy is far away from you",
-                       "Make sure to posision this hero well on board to take advantage of this skill efect"]
+                       "Make sure to position this hero well on board to take advantage of this skill effect"]
         }
         self.remove = [None, None, None, None]
         self.prepare_menu()
@@ -148,8 +147,6 @@ class TeamCreator:
         self.show_hero(self.chosen, 100, 170)
         self.draw_text(self.chosen, 85, 120, 30)
         self.show_stats()
-        bg = pg.Rect(5, 355, 530, 240)
-        pg.draw.rect(self.window, (255, 255, 255, 200), bg)
         pos = iter((360 + i*24) for i in range(len(self.lore[self.chosen])))
         for line in self.lore[self.chosen]:
             self.draw_text(line, 10, next(pos))
