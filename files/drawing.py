@@ -104,7 +104,7 @@ def draw_attacking_hero_animation(screen, hero, tile, frame_counter, total_frame
 def draw_heroes(screen, player):
     for hero in player.heroes:
         if hero is not None:
-            if hero is not player.moved_hero:
+            if hero is not player.moved_hero and hero is not player.attacking_hero:
                 draw_hero(screen, hero, hero.pos)
 
     for death_hero_pos in player.death_heroes_pos:
