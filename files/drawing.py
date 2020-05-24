@@ -87,6 +87,20 @@ def draw_animated_hero(screen, hero, tile, frame_counter, total_frames):
     draw_health_bar(screen, hero, hero_coordinate)
 
 
+def draw_attacking_hero_animation(screen, hero, tile, frame_counter, total_frames):
+    current_image_counter = total_frames - frame_counter
+    if current_image_counter < 10:
+        current_hero_image = hero_images[hero.stats["NAME"]]["attacking"][hero.side] + \
+                             "0" + str(current_image_counter) + ".png"
+    else:
+        current_hero_image = hero_images[hero.stats["NAME"]]["attacking"][hero.side] + \
+                             str(current_image_counter) + ".png"
+    hero_image = pg.image.load(load_image(current_hero_image))
+    tile_coordinates = coordinate(tile)
+    screen.blit(hero_image, tile_coordinates)
+    draw_health_bar(screen, hero, tile_coordinates)
+
+
 def draw_heroes(screen, player):
     for hero in player.heroes:
         if hero is not None:
@@ -134,6 +148,20 @@ def draw_with_animation_hero(screen, board, player, opponent, player_turn, actua
     pg.display.update()
 
 
+def draw_attacking_hero(screen, board, player, opponent, player_turn, actual_pos):
+    if player.attacking_hero.stats["NAME"] == "MAGE":
+        animation_counter, total_frames = 8, 8
+    else:
+        animation_counter, total_frames = 14, 14
+    while animation_counter >= 0:
+        draw_background(screen, board, player, opponent, player_turn, actual_pos)
+        draw_attacking_hero_animation(screen, player.attacking_hero, actual_pos, animation_counter, total_frames)
+        pg.display.update()
+        pg.time.delay(30)
+        animation_counter -= 1
+    pg.display.update()
+
+
 def redraw_window(screen, board, player, opponent, player_turn, actual_pos, n):
     made_move = False
     if player.moved_hero:
@@ -150,6 +178,11 @@ def redraw_window(screen, board, player, opponent, player_turn, actual_pos, n):
         opponent.moved_hero = None
         n.send(["update_opponent", player.player_id, opponent])
         made_move = True
+    if player.attacking_hero and player.attacking_hero.stats["NAME"] == "HEALER":
+        player.attacking_hero = None
+    elif player.attacking_hero:
+        draw_attacking_hero(screen, board, player, opponent, player_turn, player.attacking_hero.pos)
+        player.attacking_hero = None
     else:
         draw_background(screen, board, player, opponent, player_turn, actual_pos)
         pg.display.update()

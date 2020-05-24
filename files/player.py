@@ -11,6 +11,7 @@ class Player:
         self.death_heroes_pos = []
         self.clicked_hero = None
         self.moved_hero = None
+        self.attacking_hero = None
         self.last_action = []
         self.result = ""
 
