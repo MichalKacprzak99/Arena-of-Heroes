@@ -19,22 +19,253 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="Revert &quot;drawing error&quot;&#10;&#10;This reverts commit 944eb021">
-      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_000.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_001.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_002.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_003.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_004.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_005.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_006.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_007.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_008.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_009.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_010.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/image/MAGE/mage_walking/right_run/Right - Running_011.png" afterDir="false" />
+    <list default="true" id="14b61751-c981-44f5-bd6e-aafa2a5255ab" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/drawing.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/drawing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_000.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_000.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_001.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_002.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_003.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_004.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_004.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_005.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_005.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_006.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_006.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_007.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_007.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_008.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_008.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_009.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_009.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_010.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_010.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_011.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_011.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_012.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_012.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_013.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_013.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_014.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_014.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_015.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_015.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_016.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_016.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_017.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_017.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_018.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_018.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_019.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_019.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_020.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_020.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_021.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_021.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_022.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_022.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_023.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_023.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_024.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_024.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_025.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_025.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_026.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_026.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_027.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_027.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_028.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_028.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_029.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/back_walking/0_Archer_Walk_029.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_000.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_000.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_001.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_002.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_003.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_004.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_004.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_005.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_005.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_006.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_006.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_007.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_007.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_008.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_008.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_009.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_009.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_010.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_010.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_011.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_011.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_012.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_012.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_013.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_013.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_014.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_014.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_015.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_015.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_016.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_016.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_017.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_017.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_018.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_018.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_019.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_019.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_020.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_020.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_021.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_021.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_022.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_022.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_023.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_023.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_024.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_024.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_025.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_025.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_026.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_026.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_027.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_027.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_028.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_028.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_029.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/front_walking/0_Archer_Walk_029.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_000.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_000.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_001.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_002.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_003.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_004.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_004.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_005.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_005.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_006.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_006.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_007.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_007.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_008.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_008.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_009.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_009.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_010.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_010.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_011.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_011.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_012.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_012.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_013.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_013.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_014.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_014.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_015.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_015.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_016.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_016.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_017.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_017.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_018.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_018.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_019.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_019.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_020.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_020.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_021.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_021.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_022.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_022.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_023.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_023.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_024.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_024.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_025.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_025.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_026.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_026.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_027.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_027.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_028.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_028.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_029.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/left_walking/0_Archer_Walk_029.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_000.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_000.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_001.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_002.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_003.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_004.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_004.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_005.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_005.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_006.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_006.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_007.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_007.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_008.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_008.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_009.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_009.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_010.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_010.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_011.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_011.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_012.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_012.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_013.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_013.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_014.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_014.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_015.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_015.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_016.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_016.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_017.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_017.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_018.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_018.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_019.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_019.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_020.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_020.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_021.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_021.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_022.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_022.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_023.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_023.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_024.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_024.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_025.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_025.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_026.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_026.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_027.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_027.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_028.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_028.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_029.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/ARCHER/archer_walking/right_walking/0_Archer_Walk_029.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/east.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/east.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/north.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/north.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/south.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/south.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_000.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_000.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_001.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_002.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_003.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_004.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_004.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_005.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_005.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_006.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_006.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_007.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_007.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_008.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_008.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_009.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_009.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_010.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_010.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_011.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_011.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_012.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_012.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_013.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_013.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_014.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_014.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_015.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_015.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_016.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_016.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_017.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_017.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_018.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_018.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_019.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_019.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_020.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_020.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_021.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_021.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_022.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_022.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_023.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_023.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_024.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_024.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_025.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_025.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_026.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_026.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_027.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_027.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_028.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_028.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_029.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_029.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_000.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_000.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_001.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_002.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_003.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_004.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_004.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_005.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_005.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_006.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_006.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_007.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_007.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_008.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_008.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_009.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_009.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_010.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_010.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_011.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_011.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_012.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_012.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_013.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_013.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_014.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_014.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_015.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_015.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_016.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_016.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_017.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_017.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_018.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_018.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_019.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_019.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_020.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_020.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_021.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_021.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_022.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_022.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_023.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_023.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_024.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_024.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_025.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_025.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_026.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_026.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_027.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_027.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_028.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_028.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_029.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_029.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_000.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_000.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_001.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_002.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_003.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_004.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_004.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_005.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_005.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_006.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_006.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_007.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_007.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_008.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_008.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_009.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_009.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_010.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_010.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_011.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_011.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_012.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_012.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_013.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_013.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_014.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_014.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_015.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_015.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_016.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_016.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_017.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_017.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_018.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_018.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_019.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_019.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_020.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_020.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_021.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_021.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_022.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_022.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_023.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_023.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_024.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_024.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_025.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_025.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_026.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_026.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_027.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_027.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_028.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_028.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_029.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_029.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_000.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_000.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_001.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_001.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_002.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_002.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_003.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_003.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_004.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_004.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_005.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_005.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_006.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_006.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_007.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_007.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_008.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_008.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_009.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_009.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_010.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_010.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_011.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_011.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_012.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_012.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_013.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_013.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_014.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_014.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_015.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_015.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_016.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_016.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_017.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_017.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_018.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_018.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_019.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_019.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_020.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_020.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_021.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_021.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_022.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_022.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_023.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_023.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_024.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_024.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_025.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_025.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_026.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_026.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_027.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_027.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_028.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_028.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_029.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_029.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/image/WARRIOR/west.png" beforeDir="false" afterPath="$PROJECT_DIR$/files/image/WARRIOR/west.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,6 +318,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/files/client.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="images" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Arena-of-Heroes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/files" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/files/images.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -185,7 +437,13 @@
       <item itemvalue="Python.player" />
       <item itemvalue="Python.server" />
       <item itemvalue="Python.tmp" />
+      <item itemvalue="Python.images" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.images" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -338,7 +596,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589460047704</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="add walking animation">
+      <created>1589998657670</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1589998657670</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -373,7 +638,8 @@
     <MESSAGE value="updated master" />
     <MESSAGE value="Revert &quot;drawing error&quot;&#10;&#10;This reverts commit 944eb021" />
     <MESSAGE value="Revert &quot;fix drawing error&quot;&#10;&#10;This reverts commit 01e42ed8" />
-    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;fix drawing error&quot;&#10;&#10;This reverts commit 01e42ed8" />
+    <MESSAGE value="add walking animation" />
+    <option name="LAST_COMMIT_MESSAGE" value="add walking animation" />
   </component>
   <component name="WindowStateProjectService">
     <state x="198" y="38" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589127815922">
@@ -382,10 +648,10 @@
     <state x="198" y="38" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1589127815922" />
     <state x="223" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1588795789109" />
     <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1588786232074" />
-    <state x="353" y="0" key="CommitChangelistDialog2" timestamp="1589998643375">
+    <state x="353" y="0" key="CommitChangelistDialog2" timestamp="1590325087771">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="353" y="0" key="CommitChangelistDialog2/0.0.1280.720@0.0.1280.720" timestamp="1589998643375" />
+    <state x="353" y="0" key="CommitChangelistDialog2/0.0.1280.720@0.0.1280.720" timestamp="1590325087771" />
     <state x="377" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1589206648754" />
     <state x="424" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589451794841" />
     <state x="424" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1589453676737" />
@@ -399,34 +665,34 @@
     </state>
     <state x="548" y="178" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588795787585" />
     <state x="548" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1588694590996" />
-    <state width="717" height="200" key="GridCell.Tab.0.bottom" timestamp="1589998543587">
+    <state width="716" height="200" key="GridCell.Tab.0.bottom" timestamp="1590324756990">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="717" height="200" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1589998543587" />
+    <state width="716" height="200" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1590324756990" />
     <state width="1345" height="176" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1589222773716" />
     <state width="1515" height="258" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589451924866" />
-    <state width="865" height="148" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1589460880564" />
-    <state width="717" height="200" key="GridCell.Tab.0.center" timestamp="1589998543586">
+    <state width="862" height="200" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1590292217071" />
+    <state width="716" height="200" key="GridCell.Tab.0.center" timestamp="1590324756989">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="717" height="200" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1589998543586" />
+    <state width="716" height="200" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1590324756989" />
     <state width="1345" height="176" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1589222773716" />
     <state width="1515" height="258" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589451924866" />
-    <state width="865" height="148" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1589460880564" />
-    <state width="717" height="200" key="GridCell.Tab.0.left" timestamp="1589998543586">
+    <state width="862" height="200" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1590292217071" />
+    <state width="716" height="200" key="GridCell.Tab.0.left" timestamp="1590324756989">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="717" height="200" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1589998543586" />
+    <state width="716" height="200" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1590324756989" />
     <state width="1345" height="176" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1589222773716" />
     <state width="1515" height="258" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589451924866" />
-    <state width="865" height="148" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1589460880563" />
-    <state width="717" height="200" key="GridCell.Tab.0.right" timestamp="1589998543586">
+    <state width="862" height="200" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1590292217071" />
+    <state width="716" height="200" key="GridCell.Tab.0.right" timestamp="1590324756989">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="717" height="200" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1589998543586" />
+    <state width="716" height="200" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1590324756989" />
     <state width="1345" height="176" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1589222773716" />
     <state width="1515" height="258" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589451924866" />
-    <state width="865" height="148" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1589460880564" />
+    <state width="862" height="200" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1590292217071" />
     <state width="1515" height="277" key="GridCell.Tab.1.bottom" timestamp="1588701089598">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -467,17 +733,17 @@
     </state>
     <state x="277" y="73" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1589415697344" />
     <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1589452033954" />
-    <state x="301" y="138" key="Vcs.Push.Dialog.v2" timestamp="1589459673293">
+    <state x="301" y="138" key="Vcs.Push.Dialog.v2" timestamp="1589998693374">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="301" y="138" key="Vcs.Push.Dialog.v2/0.0.1280.720@0.0.1280.720" timestamp="1589459673293" />
+    <state x="301" y="138" key="Vcs.Push.Dialog.v2/0.0.1280.720@0.0.1280.720" timestamp="1589998693374" />
     <state x="321" y="139" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1589206661888" />
     <state x="361" y="157" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1589451809405" />
     <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1589453707598" />
-    <state x="388" y="206" key="com.intellij.ide.util.TipDialog" timestamp="1589790793196">
+    <state x="388" y="206" key="com.intellij.ide.util.TipDialog" timestamp="1590243264622">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="388" y="206" key="com.intellij.ide.util.TipDialog/0.0.1280.720@0.0.1280.720" timestamp="1589790793196" />
+    <state x="388" y="206" key="com.intellij.ide.util.TipDialog/0.0.1280.720@0.0.1280.720" timestamp="1590243264622" />
     <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1589415195945" />
     <state x="482" y="288" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589790825394">
       <screen x="0" y="0" width="1280" height="720" />

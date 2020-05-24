@@ -64,7 +64,7 @@ hero_images = {
             "west": "HEALER/west.png",
             "death": "HEALER/death.png",
             "walking": {
-                "east": "HEALER/healer_walking/left_walking/0_Astrologer_Walk_0",
+                "east": "HEALER/healer_walking/right_walking/0_Astrologer_Walk_0",
                 "west": "HEALER/healer_walking/left_walking/0_Astrologer_Walk_0",
                 "south": "HEALER/healer_walking/front_walking/0_Astrologer_Walk_0",
                 "north": "HEALER/healer_walking/back_walking/0_Astrologer_Walk_0"

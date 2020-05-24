@@ -66,9 +66,11 @@ def draw_hero(screen, hero, tile):
 def draw_animated_hero(screen, hero, tile, frame_counter, total_frames):
     current_image_counter = total_frames - frame_counter
     if current_image_counter < 10:
-        current_hero_image = hero_images[hero.stats["NAME"]]["walking"][hero.side] + "0" + str(current_image_counter) + ".png"
+        current_hero_image = hero_images[hero.stats["NAME"]]["walking"][hero.side] + \
+                             "0" + str(current_image_counter) + ".png"
     else:
-        current_hero_image = hero_images[hero.stats["NAME"]]["walking"][hero.side] + str(current_image_counter) + ".png"
+        current_hero_image = hero_images[hero.stats["NAME"]]["walking"][hero.side] + \
+                             str(current_image_counter) + ".png"
 
     hero_image = pg.image.load(load_image(current_hero_image))
     tile_coordinates = coordinate(tile)
@@ -113,24 +115,21 @@ def draw_background(screen, board, player, opponent, player_turn, actual_pos):
         highlight_clicked_hero(screen, player)
 
 
-def draw_with_moving_hero(screen, board, player, opponent, player_turn, actual_pos, tile):
-    draw_background(screen, board, player, opponent, player_turn, actual_pos)
-    draw_hero(screen, player.moved_hero, tile)
-    pg.display.update()
-    pg.time.delay(500)
-
-
 def draw_with_animation_hero(screen, board, player, opponent, player_turn, actual_pos, tile):
-
+    mage = False
     if player.moved_hero.stats["NAME"] == "MAGE":
         animation_counter, total_frames = 17, 17
+        mage = True
     else:
         animation_counter, total_frames = 29, 29
     while animation_counter >= 0:
         draw_background(screen, board, player, opponent, player_turn, actual_pos)
         draw_animated_hero(screen, player.moved_hero, tile, animation_counter, total_frames)
         pg.display.update()
-        pg.time.delay(15)
+        if mage:
+            pg.time.delay(30)
+        else:
+            pg.time.delay(15)
         animation_counter -= 1
     pg.display.update()
 
@@ -141,13 +140,11 @@ def redraw_window(screen, board, player, opponent, player_turn, actual_pos, n):
         for tile, side in player.moved_hero.path:
             player.moved_hero.side = side
             draw_with_animation_hero(screen, board, player, opponent, player_turn, actual_pos, tile)
-            # draw_with_moving_hero(screen, board, player, opponent, player_turn, actual_pos, tile)
         player.heroes[player.moved_hero.hero_id].side = player.moved_hero.side
         player.moved_hero = None
     if opponent.moved_hero:
         for tile, side in opponent.moved_hero.path:
             opponent.moved_hero.side = side
-            # draw_with_moving_hero(screen, board, opponent, player, player_turn, actual_pos, tile)
             draw_with_animation_hero(screen, board, opponent, player, player_turn, actual_pos, tile)
         opponent.heroes[opponent.moved_hero.hero_id].side = opponent.moved_hero.side
         opponent.moved_hero = None
