@@ -58,6 +58,8 @@ class TeamCreator:
     def prepare_menu(self):
         self.prepare_menu_buttons(self.heroes, self.box, self.menu, 160, 10)
         self.prepare_menu_buttons(self.opt_buttons, self.box_down, self.menu_down, 160, 660)
+
+        self.opt_buttons[2].active = False
         self.opt_buttons[3].active = False
 
     def prepare_menu_buttons(self, buttons, box,  menu, x, y):
@@ -91,6 +93,8 @@ class TeamCreator:
             self.count += 1
         if self.count == 4:
             self.opt_buttons[3].active = True
+        if self.count > 0:
+            self.opt_buttons[2].active = True
 
     def show_hero(self, name, x=100, y=100):
         if name is not None:
@@ -124,7 +128,10 @@ class TeamCreator:
         self.chosen = name
 
     def delete_hero(self):
-        pass
+        self.team[self.count-1] = None
+        self.count -= 1
+        if self.count <= 0:
+            self.opt_buttons[2].active = False
     
     def back_to_menu(self):
         pass
