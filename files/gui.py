@@ -63,11 +63,11 @@ class Gui:
         thorpy.store(self.background, [self.elements[0]],
                      x=10, y=120, align="center")
         thorpy.store(self.background, self.elements[1:self.gui_info_amount],
-                     x=35, y=145, align="center")
+                     x=37, y=145, align="center")
         thorpy.store(self.background, [self.elements[self.gui_info_amount]],
                      x=box_sets["RIGHT_BOX"] + 10, y=120, align="center")
         thorpy.store(self.background, self.elements[self.gui_info_amount + 1:],
-                     x=box_sets["RIGHT_BOX"] + 35, y=145, align="center")
+                     x=box_sets["RIGHT_BOX"] + 37, y=145, align="center")
         thorpy.store(self.background, self.radio_buttons,
                      x=20 + self.player.p_id * box_sets["RIGHT_BOX"], y=400, align="left")
 
