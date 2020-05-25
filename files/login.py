@@ -29,6 +29,10 @@ class LoginScreen:
         }
         self.menu = self.create()
 
+    def update_background(self):
+        self.background.blit()
+        self.background.update()
+
     def login_button_function(self):
         self.state.append("login")
 
@@ -54,8 +58,7 @@ class LoginScreen:
             if reply:
                 if current_login_window == "login":
                     self.texts[1].set_text("Congratulations! You managed to log in!")
-                    self.background.blit()
-                    self.background.update()
+                    self.update_background()
                     pg.time.delay(500)
                     self.player_logged_in = True
                 elif current_login_window == "sign up":
@@ -81,24 +84,19 @@ class LoginScreen:
         self.texts[1].set_text("")
         self.texts[2].set_text("")
 
-        self.background.blit()
-        self.background.update()
+        self.update_background()
 
     def login_menu(self):
         self.enable_return_enter_buttons(2, 3)
         self.texts[0].set_text("Login")
         self.show_inserters()
-
-        self.background.blit()
-        self.background.update()
+        self.update_background()
 
     def sign_up_menu(self):
         self.enable_return_enter_buttons(2, 3)
         self.texts[0].set_text("Create a new account!")
         self.show_inserters()
-
-        self.background.blit()
-        self.background.update()
+        self.update_background()
 
     def enable_return_enter_buttons(self, index_start, index_end):
         for index in range(len(self.buttons)):
@@ -115,16 +113,14 @@ class LoginScreen:
             button.set_active(0)
 
     def hide_inserters(self):
-        for inserter in self.inserters:
-            inserter.set_visible(0)
+        [inserter.set_visible(0) for inserter in self.inserters]
 
     def reset_inserter_value(self):
         for index in range(0, len(self.inserters), 2):
             self.inserters[index+1].set_value("", refresh_draw=True)
 
     def show_inserters(self):
-        for inserter in self.inserters:
-            inserter.set_visible(1)
+        [inserter.set_visible(1) for inserter in self.inserters]
 
     def fill_buttons_list(self):
         thorpy.set_theme("round")
@@ -176,8 +172,7 @@ class LoginScreen:
         self.menu = thorpy.Menu(self.background)
         for element in self.menu.get_population():
             element.surface = self.window
-        self.background.blit()
-        self.background.update()
+        self.update_background()
         return self.menu
 
     def run(self, clock):
