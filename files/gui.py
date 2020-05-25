@@ -75,13 +75,13 @@ class Gui:
             self.icons.append(image_to_add)
 
     def set_hero_info(self, player, mouse_pos, opponent_info_index):
-        if opponent_info_index != self.icons_move_flag * 6:
-            self.icons_move_flag = opponent_info_index % 5
+        if opponent_info_index != self.icons_move_flag * self.gui_info_amount:
+            self.icons_move_flag = opponent_info_index % (self.gui_info_amount - 1)
             print(self.icons_move_flag)
             if self.icons_move_flag == 0:
-                [icon.move((-game_sets["GAME_SCREEN_WIDTH"] - 120, 0)) for icon in self.icons]
+                [icon.move((-game_sets["GAME_SCREEN_WIDTH"] - box_sets["BOX_WIDTH"], 0)) for icon in self.icons]
             if self.icons_move_flag == 1:
-                [icon.move((game_sets["GAME_SCREEN_WIDTH"] + 120, 0)) for icon in self.icons]
+                [icon.move((game_sets["GAME_SCREEN_WIDTH"] + box_sets["BOX_WIDTH"], 0)) for icon in self.icons]
         chosen_hero = list(filter(lambda hero: hero.pos == mouse_pos, player.heroes))[0]
         for index, attribute in enumerate(chosen_hero.stats):
             value = str(chosen_hero.stats[attribute])
@@ -106,8 +106,7 @@ class Gui:
         if self.buttons_update_flag != appear_value:
             self.buttons_update_flag = appear_value
             self.radio_pool.refresh(self.radio_buttons[0])
-        for rad in self.radio_buttons:
-            rad.set_visible(appear_value)
+        [rad.set_visible(appear_value) for rad in self.radio_buttons]
 
     def update_gui(self, mouse_pos, player, opponent):
         self.reset_gui()

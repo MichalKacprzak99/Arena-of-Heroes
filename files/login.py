@@ -18,7 +18,6 @@ class LoginScreen:
         self.texts = []
         self.inserter_text = ["login", "password"]
         self.inserters = []
-
         self.state = []
         self.background = None
         self.player_logged_in = False
@@ -79,26 +78,31 @@ class LoginScreen:
     def main_menu(self):
         self.reset_inserter_value()
         self.hide_inserters()
-        self.enable_return_enter_buttons(0, 1)
+        login_button_index = 0
+        sign_up_button_index = 1
+        self.enable_buttons(login_button_index, sign_up_button_index)
         self.texts[0].set_text("Welcome to Arena Of Heroes!")
         self.texts[1].set_text("")
         self.texts[2].set_text("")
-
         self.update_background()
 
-    def login_menu(self):
-        self.enable_return_enter_buttons(2, 3)
-        self.texts[0].set_text("Login")
+    def create_login_signup_menu(self):
+        return_button_index = 2
+        enter_button_index = 3
+        self.enable_buttons(return_button_index, enter_button_index)
         self.show_inserters()
+
+    def login_menu(self):
+        self.create_login_signup_menu()
+        self.texts[0].set_text("Login")
         self.update_background()
 
     def sign_up_menu(self):
-        self.enable_return_enter_buttons(2, 3)
+        self.create_login_signup_menu()
         self.texts[0].set_text("Create a new account!")
-        self.show_inserters()
         self.update_background()
 
-    def enable_return_enter_buttons(self, index_start, index_end):
+    def enable_buttons(self, index_start, index_end):
         for index in range(len(self.buttons)):
             if index_start <= index <= index_end:
                 self.buttons[index].set_visible(1)
