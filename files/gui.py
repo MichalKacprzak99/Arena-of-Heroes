@@ -22,7 +22,10 @@ class Gui:
 
     def fill_elements_table(self):
         for _ in range(self.gui_info_amount * 2):
-            self.elements.append(thorpy.make_text(" ", 12, (0, 0, 0)))
+            if _ == 0 or _ == self.gui_info_amount:
+                self.elements.append(thorpy.make_text(" ", 12, (0, 0, 0)))
+            else:
+                self.elements.append(thorpy.make_text(" ", 19, (0, 0, 0)))
 
     def fill_radio_buttons(self):
         for txt in self.radio_butt_text:
@@ -56,15 +59,15 @@ class Gui:
 
     def place_elements(self, buttons):
         thorpy.store(self.background, buttons, x=50 + self.player.p_id * box_sets["RIGHT_BOX"], y=500, align="center")
-        thorpy.store(self.background, self.icons, x=20, y=140, align="center")
+        thorpy.store(self.background, self.icons, x=17, y=145, align="center")
         thorpy.store(self.background, [self.elements[0]],
                      x=10, y=120, align="center")
         thorpy.store(self.background, self.elements[1:self.gui_info_amount],
-                     x=40, y=145, align="center")
+                     x=35, y=145, align="center")
         thorpy.store(self.background, [self.elements[self.gui_info_amount]],
                      x=box_sets["RIGHT_BOX"] + 10, y=120, align="center")
         thorpy.store(self.background, self.elements[self.gui_info_amount + 1:],
-                     x=box_sets["RIGHT_BOX"] + 40, y=145, align="center")
+                     x=box_sets["RIGHT_BOX"] + 35, y=145, align="center")
         thorpy.store(self.background, self.radio_buttons,
                      x=20 + self.player.p_id * box_sets["RIGHT_BOX"], y=400, align="left")
 

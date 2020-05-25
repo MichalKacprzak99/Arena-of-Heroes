@@ -52,11 +52,13 @@ class LoginScreen:
             self.texts[2].set_text("Please don't input more than 15 characters.")
         elif len(login) == 0 or len(password) == 0:
             self.texts[1].set_text("It seems you didn't provide any input. Please try again.")
+            self.texts[2].set_text("")
         else:
             reply = self.network.send([current_login_window, login, password])
             if reply:
                 if current_login_window == "login":
                     self.texts[1].set_text("Congratulations! You managed to log in!")
+                    self.texts[2].set_text("")
                     self.update_background()
                     pg.time.delay(500)
                     self.player_logged_in = True
@@ -69,11 +71,14 @@ class LoginScreen:
                     self.texts[2].set_text("is logged in on this account. Try again.")
                 elif current_login_window == "sign up":
                     self.texts[1].set_text("There exists an account with this username")
+                    self.texts[2].set_text("")
             else:
                 if current_login_window == "login":
                     self.texts[1].set_text("Something wrong happened when trying to log in. Try again.")
+                    self.texts[2].set_text("")
                 elif current_login_window == "sign up":
                     self.texts[1].set_text("Something wrong happened when trying to create your account. Try again.")
+                    self.texts[2].set_text("")
 
     def main_menu(self):
         self.reset_inserter_value()
