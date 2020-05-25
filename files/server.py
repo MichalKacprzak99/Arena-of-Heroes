@@ -8,13 +8,17 @@ from game import Game
 from player import Player
 from _thread import start_new_thread
 from itertools import islice
-from database import users, games
+from pymongo import MongoClient
 
 fmt_str = '[%(asctime)s] %(levelname)s @ line %(lineno)d: %(message)s'
 logging.basicConfig(level=logging.DEBUG, format=fmt_str)
 logger = logging.getLogger(__name__)
 
 id_count = 0
+root = MongoClient("localhost", 27017)
+aof_db = root['games_db']
+games = aof_db['games']
+users = aof_db['users']
 
 
 class Server:

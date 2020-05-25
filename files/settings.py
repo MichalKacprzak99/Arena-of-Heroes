@@ -58,6 +58,15 @@ backgrounds = {
     "3": "backgrounds/winter_background.png"
 }
 
+icons = {
+    "hp": "image/icons/hp_icon_resized.png",
+    "attack": "image/icons/attack_icon_resized.png",
+    "defense": "image/icons/defense_icon_resized.png",
+    "range": "image/icons/range_icon_resized.png",
+    "special": "image/icons/special_icon_resized.png"
+}
+
+
 hero_images = {
     "HEALER": {
             "north": "HEALER/north.png",

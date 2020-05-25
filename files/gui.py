@@ -1,5 +1,5 @@
 import thorpy
-from settings import box_sets, get_tile_pos, backgrounds
+from settings import box_sets, get_tile_pos, backgrounds, icons, game_sets
 import pygame as pg
 
 
@@ -15,6 +15,8 @@ class Gui:
         self.background = None
         self.elements = []
         self.radio_pool = None
+        self.icons = []
+        self.icons_move_flag = 0
         self.buttons_update_flag = 1
         self.create(which_map)
 
@@ -39,32 +41,56 @@ class Gui:
     def create(self, which_map):
         self.fill_elements_table()
         self.fill_radio_buttons()
+        self.fill_icons_table()
         buttons = self.make_buttons()
         self.radio_pool = thorpy.RadioPool(self.radio_buttons, first_value=self.radio_buttons[0], always_value=True)
         self.background = thorpy.Background(color=(168, 139, 50), image=backgrounds[str(which_map)],
-                                            elements=self.elements + self.radio_buttons+buttons)
-
+                                            elements=self.elements + self.radio_buttons+buttons + self.icons)
         self.menu = thorpy.Menu(self.background)
         for element in self.menu.get_population():
             element.surface = self.window
-        thorpy.store(self.background, buttons, x=50 + self.player.p_id * box_sets["RIGHT_BOX"], y=500, align="center")
-        thorpy.store(self.background, self.elements[:self.gui_info_amount],
-                     x=10, y=125, align="center")
-        thorpy.store(self.background, self.elements[self.gui_info_amount:],
-                     x=box_sets["RIGHT_BOX"] + 10, y=125, align="center")
-        thorpy.store(self.background, self.radio_buttons,
-                     x=20 + self.player.p_id * box_sets["RIGHT_BOX"], y=400, align="left")
-
+        self.place_elements(buttons)
         self.buttons_appearing(0)
         self.background.blit()
         self.background.update()
 
+    def place_elements(self, buttons):
+        thorpy.store(self.background, buttons, x=50 + self.player.p_id * box_sets["RIGHT_BOX"], y=500, align="center")
+        thorpy.store(self.background, self.icons, x=20, y=140, align="center")
+        thorpy.store(self.background, [self.elements[0]],
+                     x=10, y=120, align="center")
+        thorpy.store(self.background, self.elements[1:self.gui_info_amount],
+                     x=40, y=145, align="center")
+        thorpy.store(self.background, [self.elements[self.gui_info_amount]],
+                     x=box_sets["RIGHT_BOX"] + 10, y=120, align="center")
+        thorpy.store(self.background, self.elements[self.gui_info_amount + 1:],
+                     x=box_sets["RIGHT_BOX"] + 40, y=145, align="center")
+        thorpy.store(self.background, self.radio_buttons,
+                     x=20 + self.player.p_id * box_sets["RIGHT_BOX"], y=400, align="left")
+
+    def fill_icons_table(self):
+        for icon in icons.values():
+            image_to_add = thorpy.Image(path=icon, finish=True)
+            image_to_add.finish()
+            self.icons.append(image_to_add)
+
     def set_hero_info(self, player, mouse_pos, opponent_info_index):
+        if opponent_info_index != self.icons_move_flag * 6:
+            self.icons_move_flag = opponent_info_index % 5
+            print(self.icons_move_flag)
+            if self.icons_move_flag == 0:
+                [icon.move((-game_sets["GAME_SCREEN_WIDTH"] - 120, 0)) for icon in self.icons]
+            if self.icons_move_flag == 1:
+                [icon.move((game_sets["GAME_SCREEN_WIDTH"] + 120, 0)) for icon in self.icons]
         chosen_hero = list(filter(lambda hero: hero.pos == mouse_pos, player.heroes))[0]
         for index, attribute in enumerate(chosen_hero.stats):
             value = str(chosen_hero.stats[attribute])
-            self.elements[index + opponent_info_index].set_text(attribute + ": " + value)
+            if attribute == "NAME":
+                self.elements[index + opponent_info_index].set_text(attribute + ": " + value)
+            else:
+                self.elements[index + opponent_info_index].set_text(value)
             self.elements[index + opponent_info_index].set_visible(1)
+        [icon.set_visible(1) for icon in self.icons]
 
     def get_radio_value(self):
         for button in self.radio_buttons:
@@ -74,6 +100,7 @@ class Gui:
     def reset_gui(self):
         for element_id in range(len(self.elements)):
             self.elements[element_id].set_visible(0)
+        [icon.set_visible(0) for icon in self.icons]
 
     def buttons_appearing(self, appear_value):
         if self.buttons_update_flag != appear_value:
