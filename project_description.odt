@@ -77,8 +77,8 @@ STAGE 3 - WEEK 3/5
     During this stage, we plan to implement the following elements:
     
     • Team creator (3-4 week);
-    • add login and registration process (4-5 week);
-    • enable player to save/load a game (4-5 week);
+    • add login and registration process (DONE);
+    • enable player to save/load a game (DONE);
     • implement some "animation" of attack/defense etc (4 week);
     • add some content to maps for example traps,chest other typical stuff for RPG games (5 week);
 
