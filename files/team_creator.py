@@ -146,11 +146,11 @@ class TeamCreator:
             self.draw_text(str(item) + ": " + str(stats[item]), 300, next(pos))
 
     def draw_outlines(self):
-        pg.draw.line(self.window, (0, 0, 0), (0, 75), (800, 75), 5)
-        pg.draw.line(self.window, (0, 0, 0), (0, 645), (800, 645), 5)
-        pg.draw.line(self.window, (0, 0, 0), (540, 75), (540, 645), 5)
-        pg.draw.line(self.window, (0, 0, 0), (0, 345), (540, 345), 5)
-        pg.draw.line(self.window, (0, 0, 0), (270, 75), (270, 345), 5)
+        pg.draw.line(self.window, (139, 69, 19), (0, 75), (800, 75), 3)
+        pg.draw.line(self.window, (139, 69, 19), (0, 645), (800, 645), 3)
+        pg.draw.line(self.window, (139, 69, 19), (540, 75), (540, 645), 3)
+        pg.draw.line(self.window, (139, 69, 19), (0, 345), (540, 345), 3)
+        pg.draw.line(self.window, (139, 69, 19), (270, 75), (270, 345), 3)
 
     def display_hero(self):
         self.show_hero(self.chosen, 100, 170)

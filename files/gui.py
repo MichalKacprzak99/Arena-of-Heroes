@@ -80,7 +80,6 @@ class Gui:
     def set_hero_info(self, player, mouse_pos, opponent_info_index):
         if opponent_info_index != self.icons_move_flag * self.gui_info_amount:
             self.icons_move_flag = opponent_info_index % (self.gui_info_amount - 1)
-            print(self.icons_move_flag)
             if self.icons_move_flag == 0:
                 [icon.move((-game_sets["GAME_SCREEN_WIDTH"] - box_sets["BOX_WIDTH"], 0)) for icon in self.icons]
             if self.icons_move_flag == 1:
