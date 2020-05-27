@@ -1,24 +1,28 @@
-from hero import Healer, Mage, Warrior, Archer
-from settings import get_tile_pos, box_settings
+from hero import Healer, Mage, Warrior, Archer, action
+from settings import get_tile_pos, box_sets
 from math import sqrt
+
+
+def index_error_handler(func):
+    def wrapper(*args):
+        try:
+            return func(*args)
+        except IndexError:
+            return False
+    return wrapper
 
 
 class Player:
     def __init__(self, name="", player_id=0):
         self.name = name
-        self.player_id = player_id
-        self.heroes = self.set_starting_pos()
+        self.p_id = player_id
+        self.heroes = None
         self.death_heroes_pos = []
         self.clicked_hero = None
         self.moved_hero = None
         self.last_action = []
-        self.result = ""
-
-    def set_starting_pos(self):
-        pos = iter([[11*self.player_id, i] for i in range(1, 11, 3)])
-        side = "west" if self.player_id == 1 else "east"
-        return [Healer(0, next(pos), side), Mage(1, next(pos), side),
-                Warrior(2, next(pos), side), Archer(3, next(pos), side)]
+        self.result = None
+        self.login = None
 
     def add_death_heroes(self, death_heroes):
         death_heroes = sorted(death_heroes, key=lambda sorted_hero: sorted_hero.hero_id, reverse=True)
@@ -45,42 +49,37 @@ class Player:
                     dead_heroes.append(attacked_hero)
         self.add_death_heroes(dead_heroes)
 
-        n.send(["reset_action", opponent.player_id])
-        n.send(["death_heroes", self.player_id, self.heroes, self.death_heroes_pos])
+        n.send(["reset_action", opponent.p_id])
+        n.send(["death_heroes", self.p_id, self.heroes, self.death_heroes_pos])
         opponent.last_action = None
 
     def check_result(self, opponent, n):
         if len(self.heroes) == 0:
-            self.result = "lose"
+            self.result = 0
         elif len(opponent.heroes) == 0:
-            self.result = "win"
+            self.result = len(self.heroes)
         try:
-            n.send(["result", self.player_id, self.result])
+            n.send(["result", self.p_id, self.result])
         except EOFError:
             pass
 
     def action(self, opponent, object_tiles, pos, gui):
-        if box_settings["BOX_WIDTH"] < pos[0] < box_settings["RIGHT_BOX"]:
+        if box_sets["BOX_WIDTH"] < pos[0] < box_sets["RIGHT_BOX"]:
             pos = get_tile_pos(pos)
             action_to_perform = gui.get_radio_value()
-            return self.clicked_hero.actions[action_to_perform](self, opponent, object_tiles, pos)
+            return action(self.clicked_hero, action_to_perform)(self, opponent, object_tiles, pos)
 
+    @index_error_handler
     def check_clicked_hero(self, pos):
-        for hero in self.heroes:
-            if get_tile_pos(pos) == hero.pos:
-                self.clicked_hero = hero
+        return list(filter(lambda hero: hero.pos == get_tile_pos(pos), self.heroes))[0]
 
+    @index_error_handler
     def clicked_death_hero(self, pos):
-        try:
-            return list(filter(lambda death_hero_pos: death_hero_pos.pos == pos, self.death_heroes_pos))[0]
-        except IndexError:
-            return False
+        return list(filter(lambda death_hero_pos: death_hero_pos.pos == pos, self.death_heroes_pos))[0]
 
+    @index_error_handler
     def clicked_own_hero(self, pos):
-        try:
-            return list(filter(lambda hero: pos == hero.pos, self.heroes))[0]
-        except IndexError:
-            return False
+        return list(filter(lambda hero: pos == hero.pos, self.heroes))[0]
 
     def clicked_in_range(self, pos):
         distance = sqrt(sum([(i-j)**2 for i, j in zip(pos, self.clicked_hero.pos)]))
@@ -91,11 +90,9 @@ class Player:
         return pos in object_tiles
 
     @staticmethod
+    @index_error_handler
     def clicked_opp_hero(opponent, pos):
-        try:
-            return list(filter(lambda hero: pos == hero.pos, opponent.heroes))[0]
-        except IndexError:
-            return False
+        return list(filter(lambda hero: pos == hero.pos, opponent.heroes))[0]
 
     def clicked_another_hero(self, opponent, pos):
         return self.clicked_opp_hero(opponent, pos) or self.clicked_own_hero(pos) or self.clicked_death_hero(pos)

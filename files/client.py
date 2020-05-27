@@ -1,10 +1,12 @@
 import pygame as pg
 from network import Network
 from tile_map import TiledMap
-from settings import game_settings, box_settings, client_name, maps, mouse_button
+from settings import game_sets, box_sets, client_name, maps, mouse_button
 from drawing import redraw_window
 from menu import Menu
 from gui import Gui
+from login import LoginScreen
+
 
 pg.init()
 pg.font.init()
@@ -14,70 +16,71 @@ def main():
     run = True
     gui_start = False
     clock = pg.time.Clock()
-    n = Network()
-    player = n.get_player()
-    player_id = player.player_id
+    net = Network()
+    player_id = net.get_player_id()
     pg.display.set_caption(client_name[str(player_id)])
     opponent_id = abs(player_id - 1)
-    window = pg.display.set_mode((game_settings["GAME_SCREEN_WIDTH"], game_settings["GAME_SCREEN_HEIGHT"]))
-    menu = Menu(window)
+    window = pg.display.set_mode((game_sets["GAME_SCREEN_WIDTH"], game_sets["GAME_SCREEN_HEIGHT"]))
+    login = LoginScreen(window, net)
+    login.run(clock)
+    try:
+        menu = Menu(window, net, player_id)
+        opponent = None
+    except pg.error:
+        quit()
 
     while run:
         clock.tick(60)
-        if not menu.both_ready():
+        if not menu.both_ready() or opponent is None or opponent.heroes is None or player.heroes is None:
             try:
-                opponent, which_map, menu.opponent_ready = n.send(["get_info", opponent_id])
+                player, opponent, which_map, menu.opponent_ready = net.send(["get_info", opponent_id])
                 board = TiledMap(maps[str(which_map)], window)
-            except EOFError:
+            except (EOFError, TypeError, pg.error):
                 break
             for event in pg.event.get():
-                if menu.active:
-                    menu.menu.react(event)
+                menu.highlight_buttons(event)
                 if event.type == pg.QUIT:
                     run = False
                     pg.quit()
-                if event.type == pg.MOUSEBUTTONUP:
-                    actual_pos = pg.mouse.get_pos()
-                    menu.click(actual_pos, n, player_id)
             if menu.player_ready:
-                menu.loading_screen()
+                menu.waiting_screen()
         else:
             if not gui_start:
                 board.screen.fill((168, 139, 50))
-                width = game_settings["GAME_SCREEN_WIDTH"] + box_settings["BOX_WIDTH"] * 2
-                height = game_settings["GAME_SCREEN_HEIGHT"]
+                width = game_sets["GAME_SCREEN_WIDTH"] + box_sets["BOX_WIDTH"] * 2
+                height = game_sets["GAME_SCREEN_HEIGHT"]
                 window = pg.display.set_mode((width, height))
-
-                gui = Gui(window, player, player_id, which_map)
+                gui = Gui(window, player, which_map, net)
                 gui_start = True
             try:
-                which_player_turn, turns = n.send(["get_turn"])
+                which_player_turn, turns = net.send(["get_turn", player_id])
             except TypeError:
                 break
-            actual_pos = pg.mouse.get_pos()
-
-            if opponent.last_action:
-                player.react_to_event(opponent, n)
-
-            gui.update_gui(actual_pos, player, opponent)
-            player.check_result(opponent, n)
-            move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos, n)
             try:
-                end = n.send(["end", player.player_id])
+                actual_pos = pg.mouse.get_pos()
+            except pg.error:
+                break
+            if opponent.last_action:
+                player.react_to_event(opponent, net)
+            gui.update_gui(actual_pos, player, opponent)
+            player.check_result(opponent, net)
+            move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos, net)
+            try:
+                end = net.send(["end", player.p_id])
             except EOFError:
                 break
             if end:
-                pg.time.delay(3000)
+                pg.time.delay(10000)
                 pg.quit()
                 run = False
             else:
                 if move:
                     try:
-                        n.send(["update", opponent_id])
+                        net.send(["update", opponent_id])
                     except EOFError:
                         break
-
                 for event in pg.event.get():
+                    gui.click(event)
                     if event.type == pg.QUIT:
                         run = False
                         pg.quit()
@@ -86,16 +89,20 @@ def main():
                         player.clicked_hero = None
                     if event.type == pg.MOUSEBUTTONUP and event.button == mouse_button["LEFT"]:
                         if which_player_turn == player_id:
+
                             if not player.clicked_hero:
-                                player.check_clicked_hero(actual_pos)
+                                player.clicked_hero = player.check_clicked_hero(actual_pos)
                             else:
                                 made_action = player.action(opponent, board.object_tiles, actual_pos, gui)
                                 if made_action:
-                                    n.send(made_action)
+                                    net.send(made_action)
                                     player.clicked_hero = None
-                    gui.menu.react(event)
+                    try:
+                        gui.menu.react(event)
+                    except pg.error:
+                        break
                 try:
-                    opponent = n.send(["echo", opponent_id])
+                    opponent = net.send(["echo", opponent_id])
                 except EOFError:
                     break
 
