@@ -132,6 +132,8 @@ class TeamCreator:
         self.count -= 1
         if self.count <= 0:
             self.opt_buttons[2].active = False
+        if self.count < 4:
+            self.opt_buttons[3].active = False
     
     def back_to_menu(self):
         pass
