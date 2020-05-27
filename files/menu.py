@@ -1,7 +1,7 @@
 import thorpy
 import pygame as pg
 from settings import load_image
-import time
+from team_creator import TeamCreator
 
 
 class Menu:
@@ -10,7 +10,7 @@ class Menu:
         self.network = network
         self.window = window
         self.menu_func = {
-            "Start Game": self.start_game,
+            "Start Game": self.almost_start_game,
             "Load Game": self.load_menu,
             "Instructions": self.load_instructions,
             "Quit": pg.quit
@@ -24,10 +24,12 @@ class Menu:
         self.instructions_menu = self.create_instructions()
         self.player_ready = False
         self.opponent_ready = False
+        self.tc = TeamCreator(self.window, self.network, self.p_id, self)
         self.control = {
             "active": [True, self.menu],
             "help": [False, self.instructions_menu],
-            "load": [False, self.load_submenu]
+            "load": [False, self.load_submenu],
+            "creator": [False, self.tc]
         }
 
     def create_menu(self):
@@ -70,8 +72,8 @@ class Menu:
         pg.display.update()
 
     def load_menu(self):
-        self.change_display("load")
         self.background_image()
+        self.change_display("load")
         self.proper_display(self.load_submenu, self.load_box, self.was_loaded)
         self.was_loaded = True
         pg.display.update()
@@ -145,3 +147,15 @@ class Menu:
         rect = image.get_rect()
         rect.left, rect.top = pos_x, pos_y
         self.window.blit(image, rect)
+
+    def almost_start_game(self):
+        self.player_ready = True
+        self.control["creator"][0] = True
+        self.change_display("creator")
+
+    def team_screen(self):
+        self.tc.creator_view()
+        pg.display.update()
+
+    def waiting_screen(self):
+        self.team_screen() if self.control["creator"][0] else self.loading_screen()

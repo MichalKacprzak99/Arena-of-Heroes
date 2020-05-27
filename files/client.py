@@ -25,12 +25,13 @@ def main():
     login.run(clock)
     try:
         menu = Menu(window, net, player_id)
+        opponent = None
     except pg.error:
         quit()
 
     while run:
         clock.tick(60)
-        if not menu.both_ready():
+        if not menu.both_ready() or opponent is None or opponent.heroes is None or player.heroes is None:
             try:
                 player, opponent, which_map, menu.opponent_ready = net.send(["get_info", opponent_id])
                 board = TiledMap(maps[str(which_map)], window)
@@ -42,7 +43,7 @@ def main():
                     run = False
                     pg.quit()
             if menu.player_ready:
-                menu.loading_screen()
+                menu.waiting_screen()
         else:
             if not gui_start:
                 board.screen.fill((168, 139, 50))
