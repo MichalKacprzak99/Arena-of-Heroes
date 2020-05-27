@@ -58,6 +58,7 @@ class Hero(ABC):
         if attacked_hero and distance < 2:
             attacking_hero = self
             player.attacking_hero = self # change from attacking animation
+            player.attacked_hero = attacked_hero # sides update
             lose_hp = -attacking_hero.stats["ATTACK"] + attacked_hero.stats["DEFENSE"]/2
             attacked_hero = update_stats(attacked_hero, lose_hp)
             opponent.heroes[attacked_hero.hero_id] = attacked_hero

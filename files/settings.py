@@ -68,6 +68,12 @@ hero_images = {
                 "west": "HEALER/healer_walking/left_walking/0_Astrologer_Walk_0",
                 "south": "HEALER/healer_walking/front_walking/0_Astrologer_Walk_0",
                 "north": "HEALER/healer_walking/back_walking/0_Astrologer_Walk_0"
+            },
+            "attacking": {
+                "east": "HEALER/healer_attacking/right_attacking/0_astrologer_Attack_0",
+                "west": "HEALER/healer_attacking/left_attacking/0_astrologer_Attack_0",
+                "south": "HEALER/healer_attacking/front_attacking/0_astrologer_Attack_0",
+                "north": "HEALER/healer_attacking/back_attacking/0_astrologer_Attack_0"
         }
     },
     "MAGE": {

@@ -149,15 +149,26 @@ def draw_with_animation_hero(screen, board, player, opponent, player_turn, actua
 
 
 def draw_attacking_hero(screen, board, player, opponent, player_turn, actual_pos):
+    mage = False
+    healer = False
     if player.attacking_hero.stats["NAME"] == "MAGE":
         animation_counter, total_frames = 8, 8
+        mage = True
+    if player.attacking_hero.stats["NAME"] == "HEALER":
+        animation_counter, total_frames = 29, 29
+        healer = True
     else:
         animation_counter, total_frames = 14, 14
     while animation_counter >= 0:
         draw_background(screen, board, player, opponent, player_turn, actual_pos)
         draw_attacking_hero_animation(screen, player.attacking_hero, actual_pos, animation_counter, total_frames)
         pg.display.update()
-        pg.time.delay(30)
+        if mage:
+            pg.time.delay(30)
+        elif healer:
+            pg.time.delay(10)
+        else:
+            pg.time.delay(20)
         animation_counter -= 1
     pg.display.update()
 
@@ -178,9 +189,15 @@ def redraw_window(screen, board, player, opponent, player_turn, actual_pos, n):
         opponent.moved_hero = None
         n.send(["update_opponent", player.player_id, opponent])
         made_move = True
-    if player.attacking_hero and player.attacking_hero.stats["NAME"] == "HEALER":
-        player.attacking_hero = None
-    elif player.attacking_hero:
+    if player.attacking_hero:
+        if player.attacked_hero.pos[0] > player.attacking_hero.pos[0]:
+            player.heroes[player.attacking_hero.hero_id].side = "east"
+        if player.attacked_hero.pos[0] < player.attacking_hero.pos[0]:
+            player.heroes[player.attacking_hero.hero_id].side = "west"
+        if player.attacked_hero.pos[1] > player.attacking_hero.pos[1]:
+            player.heroes[player.attacking_hero.hero_id].side = "south"
+        if player.attacked_hero.pos[1] < player.attacking_hero.pos[1]:
+            player.heroes[player.attacking_hero.hero_id].side = "north"
         draw_attacking_hero(screen, board, player, opponent, player_turn, player.attacking_hero.pos)
         player.attacking_hero = None
     else:

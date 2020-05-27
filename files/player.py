@@ -12,6 +12,7 @@ class Player:
         self.clicked_hero = None
         self.moved_hero = None
         self.attacking_hero = None
+        self.attacked_hero = None # sides update
         self.last_action = []
         self.result = ""
 
