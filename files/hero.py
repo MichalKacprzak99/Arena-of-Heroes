@@ -60,7 +60,10 @@ class Hero(ABC):
         distance = sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)]))
         attacked_hero = player.clicked_opp_hero(opponent, clicked_pos)
         if attacked_hero and distance < 2:
-            lose_hp = -self.stats["ATTACK"] + attacked_hero.stats["DEFENSE"]/2
+            attacking_hero = self
+            player.attacking_hero = self # change from attacking animation
+            player.attacked_hero = attacked_hero # sides update
+            lose_hp = -attacking_hero.stats["ATTACK"] + attacked_hero.stats["DEFENSE"]/2
             attacked_hero = update_stats(attacked_hero, lose_hp)
             opponent.heroes[attacked_hero.hero_id] = attacked_hero
             player.last_action = ["basic_attack", self, attacked_hero]

@@ -73,28 +73,76 @@ hero_images = {
             "south": "HEALER/south.png",
             "east": "HEALER/east.png",
             "west": "HEALER/west.png",
-            "death": "HEALER/death.png"
+            "death": "HEALER/death.png",
+            "walking": {
+                "east": "HEALER/healer_walking/right_walking/0_Astrologer_Walk_0",
+                "west": "HEALER/healer_walking/left_walking/0_Astrologer_Walk_0",
+                "south": "HEALER/healer_walking/front_walking/0_Astrologer_Walk_0",
+                "north": "HEALER/healer_walking/back_walking/0_Astrologer_Walk_0"
+            },
+            "attacking": {
+                "east": "HEALER/healer_attacking/right_attacking/0_astrologer_Attack_0",
+                "west": "HEALER/healer_attacking/left_attacking/0_astrologer_Attack_0",
+                "south": "HEALER/healer_attacking/front_attacking/0_astrologer_Attack_0",
+                "north": "HEALER/healer_attacking/back_attacking/0_astrologer_Attack_0"
+        }
     },
     "MAGE": {
         "north": "MAGE/north.png",
         "south": "MAGE/south.png",
         "east": "MAGE/east.png",
         "west": "MAGE/west.png",
-        "death": "MAGE/death.png"
+        "death": "MAGE/death.png",
+        "walking": {
+            "east": "MAGE/mage_walking/right_walking/Right - Walking_0",
+            "west": "MAGE/mage_walking/left_walking/Left - Walking_0",
+            "south": "MAGE/mage_walking/front_walking/Front - Walking_0",
+            "north": "MAGE/mage_walking/back_walking/Back - Walking_0"
+        },
+        "attacking": {
+            "east": "MAGE/mage_attacking/right_attacking/0_mage_Attack_0",
+            "west": "MAGE/mage_attacking/left_attacking/0_mage_Attack_0",
+            "south": "MAGE/mage_attacking/front_attacking/0_mage_Attack_0",
+            "north": "MAGE/mage_attacking/back_attacking/0_mage_Attack_0"
+        }
     },
     "WARRIOR": {
         "north": "WARRIOR/north.png",
         "south": "WARRIOR/south.png",
         "east": "WARRIOR/east.png",
         "west": "WARRIOR/west.png",
-        "death": "WARRIOR/death.png"
+        "death": "WARRIOR/death.png",
+        "walking": {
+            "east": "WARRIOR/warrior_walking/right_walking/0_Warrior_Walk_0",
+            "west": "WARRIOR/warrior_walking/left_walking/0_Warrior_Walk_0",
+            "south": "WARRIOR/warrior_walking/front_walking/0_Warrior_Walk_0",
+            "north": "WARRIOR/warrior_walking/back_walking/0_Warrior_Walk_0"
+        },
+        "attacking": {
+            "east": "WARRIOR/warrior_attacking/right_attacking/0_warrior_Attack_0",
+            "west": "WARRIOR/warrior_attacking/left_attacking/0_warrior_Attack_0",
+            "south": "WARRIOR/warrior_attacking/front_attacking/0_warrior_Attack_0",
+            "north": "WARRIOR/warrior_attacking/back_attacking/0_warrior_Attack_0"
+        }
     },
     "ARCHER": {
         "north": "ARCHER/north.png",
         "south": "ARCHER/south.png",
         "east": "ARCHER/east.png",
         "west": "ARCHER/west.png",
-        "death": "ARCHER/death.png"
+        "death": "ARCHER/death.png",
+        "walking": {
+            "east": "ARCHER/archer_walking/right_walking/0_Archer_Walk_0",
+            "west": "ARCHER/archer_walking/left_walking/0_Archer_Walk_0",
+            "south": "ARCHER/archer_walking/front_walking/0_Archer_Walk_0",
+            "north": "ARCHER/archer_walking/back_walking/0_Archer_Walk_0"
+        },
+        "attacking": {
+            "east": "ARCHER/archer_attacking/right_attacking/0_archer_Attack_0",
+            "west": "ARCHER/archer_attacking/left_attacking/0_archer_Attack_0",
+            "south": "ARCHER/archer_attacking/front_attacking/0_archer_Attack_0",
+            "north": "ARCHER/archer_attacking/back_attacking/0_archer_Attack_0"
+        }
     }
 }
 result = {

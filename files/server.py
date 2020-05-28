@@ -25,7 +25,7 @@ id_count = 0
 class Server:
     def __init__(self):
         self.server = '127.0.0.1'
-        self.port = 556
+        self.port = 8080
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
             self.s.bind((self.server, self.port))
