@@ -19,3 +19,5 @@ Full description available [here](project_description.odt)
 ## Demo:
 ### Attacking:
 ![test_gif](demo/attack.gif)
+### Walking:
+![test_gif](demo/move.gif)
