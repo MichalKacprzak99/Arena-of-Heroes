@@ -1,7 +1,7 @@
-from moviepy.editor import *
+from moviepy.editor import VideoFileClip, CompositeVideoClip
 
 clip = (VideoFileClip("D:\Documents\studia\semestr4\Arena-of-Heroes\demo\\attack.mp4")
-        .subclip((0, 6), (0, 7))
+        .subclip((0, 6.1), (0, 6.8))
         .speedx(0.4)
         .crop(x1=611, y1=485, x2=800, y2=660)
         )

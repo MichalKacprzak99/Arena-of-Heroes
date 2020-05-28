@@ -17,5 +17,5 @@ Full description available [here](project_description.odt)
 - possibility to play against the computer to improve skills
 - randomly generated map
 ## Demo:
-### Walking:
+### Attacking:
 ![test_gif](demo/attack.gif)
