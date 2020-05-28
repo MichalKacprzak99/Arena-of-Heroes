@@ -18,4 +18,4 @@ Full description available [here](project_description.odt)
 - randomly generated map
 ## Demo:
 ### Walking:
-![test_gif](demo/test.gif)
+![test_gif](demo/attack.gif)
