@@ -23,7 +23,7 @@ class Gui:
     def fill_elements_table(self):
         for _ in range(self.gui_info_amount * 2):
             if _ == 0 or _ == self.gui_info_amount:
-                self.elements.append(thorpy.make_text(" ", 12, (0, 0, 0)))
+                self.elements.append(thorpy.make_text(" ", 23, (0, 0, 0)))
             else:
                 self.elements.append(thorpy.make_text(" ", 19, (0, 0, 0)))
 
@@ -61,11 +61,11 @@ class Gui:
         thorpy.store(self.background, buttons, x=50 + self.player.p_id * box_sets["RIGHT_BOX"], y=500, align="center")
         thorpy.store(self.background, self.icons, x=17, y=145, align="center")
         thorpy.store(self.background, [self.elements[0]],
-                     x=10, y=120, align="center")
+                     x=10, y=115, align="center")
         thorpy.store(self.background, self.elements[1:self.gui_info_amount],
                      x=37, y=145, align="center")
         thorpy.store(self.background, [self.elements[self.gui_info_amount]],
-                     x=box_sets["RIGHT_BOX"] + 10, y=120, align="center")
+                     x=box_sets["RIGHT_BOX"] + 10, y=115, align="center")
         thorpy.store(self.background, self.elements[self.gui_info_amount + 1:],
                      x=box_sets["RIGHT_BOX"] + 37, y=145, align="center")
         thorpy.store(self.background, self.radio_buttons,
@@ -88,7 +88,7 @@ class Gui:
         for index, attribute in enumerate(chosen_hero.stats):
             value = str(chosen_hero.stats[attribute])
             if attribute == "NAME":
-                self.elements[index + opponent_info_index].set_text(attribute + ": " + value)
+                self.elements[index + opponent_info_index].set_text(value)
             else:
                 self.elements[index + opponent_info_index].set_text(value)
             self.elements[index + opponent_info_index].set_visible(1)
