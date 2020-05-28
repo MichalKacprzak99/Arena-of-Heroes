@@ -16,3 +16,5 @@ Full description available [here](project_description.odt)
 - 1 vs 1 
 - possibility to play against the computer to improve skills
 - randomly generated map
+## Demo:
+### Walking:
