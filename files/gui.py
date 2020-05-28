@@ -87,10 +87,7 @@ class Gui:
         chosen_hero = list(filter(lambda hero: hero.pos == mouse_pos, player.heroes))[0]
         for index, attribute in enumerate(chosen_hero.stats):
             value = str(chosen_hero.stats[attribute])
-            if attribute == "NAME":
-                self.elements[index + opponent_info_index].set_text(value)
-            else:
-                self.elements[index + opponent_info_index].set_text(value)
+            self.elements[index + opponent_info_index].set_text(value)
             self.elements[index + opponent_info_index].set_visible(1)
         [icon.set_visible(1) for icon in self.icons]
 
