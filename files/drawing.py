@@ -154,7 +154,7 @@ def draw_attacking_hero(screen, board, player, opponent, player_turn, actual_pos
     if player.attacking_hero.stats["NAME"] == "MAGE":
         animation_counter, total_frames = 8, 8
         mage = True
-    if player.attacking_hero.stats["NAME"] == "HEALER":
+    elif player.attacking_hero.stats["NAME"] == "HEALER":
         animation_counter, total_frames = 29, 29
         healer = True
     else:
