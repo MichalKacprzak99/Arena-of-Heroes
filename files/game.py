@@ -1,14 +1,17 @@
 from random import randint
 import datetime
 import pytz
-from potions import HealthPotion
+from potions import HealthPotion, SpeedPotion, AttackPotion
+import random
 
 
 def create_potions():
-    tmp = []
-    for _ in range(2):
-        tmp.append(HealthPotion())
-    return tmp
+    potion = {
+        "HEALTH": HealthPotion(),
+        "SPEED": SpeedPotion(),
+        "ATTACK": AttackPotion()
+    }
+    return random.choices(list(potion.values()), k=3)
 
 
 class Game:

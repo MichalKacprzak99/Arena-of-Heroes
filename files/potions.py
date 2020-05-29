@@ -30,14 +30,34 @@ class Potion(ABC):
 class HealthPotion(Potion):
     def __init__(self):
         super().__init__("HEALTH")
-        self.value = random.randint(10, 40)
-        self.value = 30
+        self.heal_value = random.randint(10, 40)
 
     def affect(self, hero):
-        hero.hp += self.value
+        hero.hp += self.heal_value
         if hero.hp > hero.max_hp:
             hero.hp = hero.max_hp
         hero.stats["HP"] = HealthDisplay(hero)
+        return hero
+
+
+class AttackPotion(Potion):
+    def __init__(self):
+        super().__init__("ATTACK")
+        self.attack_increase = random.randint(20, 40)
+
+    def affect(self, hero):
+        hero.stats["ATTACK"] *= self.attack_increase/100
+        return hero
+
+
+class SpeedPotion(Potion):
+    def __init__(self):
+        super().__init__("SPEED")
+        self.range_increase = random.randint(1, 3)
+
+    def affect(self, hero):
+        hero.stats["RANGE"] += self.range_increase
+        hero.stats["SKILL_RANGE"] += self.range_increase
         return hero
 
 

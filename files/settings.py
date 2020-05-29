@@ -154,6 +154,8 @@ result = {
 }
 potion_img = {
     "HEALTH": "POTION/east.png",
+    "SPEED": "POTION/east.png",
+    "ATTACK": "POTION/east.png"
 }
 
 
