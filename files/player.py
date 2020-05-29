@@ -1,4 +1,4 @@
-from hero import Healer, Mage, Warrior, Archer, action
+from hero import action
 from settings import get_tile_pos, box_sets
 from math import sqrt
 

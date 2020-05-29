@@ -152,6 +152,9 @@ result = {
     "1": "RESULT/star_3.png",
     "0": "RESULT/star_4.png"
 }
+potion_img = {
+    "HEALTH": "POTION/east.png",
+}
 
 
 def load_image(filename):

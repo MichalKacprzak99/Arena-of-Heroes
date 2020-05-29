@@ -1,6 +1,14 @@
 from random import randint
 import datetime
 import pytz
+from potions import HealthPotion
+
+
+def create_potions():
+    tmp = []
+    for _ in range(2):
+        tmp.append(HealthPotion())
+    return tmp
 
 
 class Game:
@@ -9,6 +17,7 @@ class Game:
         self.last_saved = None
         self.player_turn = 0
         self.turns = 0
+        self.potions = create_potions()
         self.players = [None, None]
         self.which_map = randint(0, 3)
         self.is_ready = [False, False]
