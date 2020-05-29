@@ -8,7 +8,7 @@ import numpy as np
 def create_potions(potions, player, opponent, object_tiles, net, seed):
     random.seed(seed)
     matrix = create_matrix(player, opponent, object_tiles)
-    free_pos_x, free_pos_y = np.where(matrix == 0)
+    free_pos_y, free_pos_x = np.where(matrix == 1)
     free_pos = list(zip(free_pos_x, free_pos_y))
     positions = random.sample(free_pos, k=len(potions))
     for potion, cord in zip(potions, positions):
