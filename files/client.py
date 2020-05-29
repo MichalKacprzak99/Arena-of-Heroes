@@ -34,7 +34,6 @@ def main():
             try:
                 player, opponent, which_map, menu.opponent_ready, potions, seed = net.send(["get_info", opponent_id])
                 board = TiledMap(maps[str(which_map)], window)
-
             except (EOFError, TypeError, pg.error):
                 break
             for event in pg.event.get():
@@ -46,7 +45,6 @@ def main():
                 menu.waiting_screen()
         else:
             if not gui_start:
-
                 potions = create_potions(potions, player, opponent, board.object_tiles, net, seed)
                 board.screen.fill((168, 139, 50))
                 width = game_sets["GAME_SCREEN_WIDTH"] + box_sets["BOX_WIDTH"] * 2

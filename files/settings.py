@@ -171,3 +171,12 @@ def get_tile_pos(pos):
 
 def coordinate(tile_pos):
     return [tile_pos[0] * tile_dim["width"] + box_sets["BOX_WIDTH"], tile_pos[1] * tile_dim["height"]]
+
+
+def index_error_handler(func):
+    def wrapper(*args):
+        try:
+            return func(*args)
+        except IndexError:
+            return False
+    return wrapper

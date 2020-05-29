@@ -1,15 +1,9 @@
 from settings import game_sets, box_sets, hero_images, potion_img,\
-    colors, coordinate, load_image, get_tile_pos, tile_dim, result
+    colors, coordinate, load_image, get_tile_pos, tile_dim, result, index_error_handler
 import pygame as pg
 
 
-def index_error_handler(func):
-    def wrapper(*args):
-        try:
-            return func(*args)
-        except IndexError:
-            return False
-    return wrapper
+
 
 
 def blit_text_center(screen, text_to_input, font, height, color):
