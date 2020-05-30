@@ -1,6 +1,7 @@
 import thorpy
 import pygame as pg
 from settings import load_image
+from team_creator import TeamCreator
 
 
 class Menu:
@@ -9,7 +10,7 @@ class Menu:
         self.network = network
         self.window = window
         self.menu_func = {
-            "Start Game": self.start_game,
+            "Start Game": self.almost_start_game,
             "Load Game": self.load_menu,
             "Instructions": self.load_instructions,
             "Quit": pg.quit
@@ -17,15 +18,18 @@ class Menu:
         self.was_loaded = False
         self.load_box = None
         self.menu_box = None
+        self.load_buttons = []
         self.load_submenu = self.create_load_menu()
         self.menu = self.create_menu()
         self.instructions_menu = self.create_instructions()
         self.player_ready = False
         self.opponent_ready = False
+        self.tc = TeamCreator(self.window, self.network, self.p_id, self)
         self.control = {
             "active": [True, self.menu],
             "help": [False, self.instructions_menu],
-            "load": [False, self.load_submenu]
+            "load": [False, self.load_submenu],
+            "creator": [False, self.tc]
         }
 
     def create_menu(self):
@@ -52,13 +56,13 @@ class Menu:
         self.background_image()
         thorpy.set_theme("round")
         games = self.network.send(["get_games_to_load"])
-        load_buttons = [thorpy.make_button(str(game), func=self.load_game, params={"which_game": i, "games": games})
-                        for i, game in enumerate(games)]
-        quit_button = thorpy.make_button("Quit", func=self.quit_submenu)
-        load_buttons.append(quit_button)
-        [button.set_font_size(20) for button in load_buttons]
-        [button.scale_to_title() for button in load_buttons]
-        self.load_box = thorpy.Box(load_buttons)
+        self.load_buttons = [
+            thorpy.make_button(str(game), func=self.load_game, params={"which_game": i, "games": games})
+            for i, game in enumerate(games)]
+        self.load_buttons.append(thorpy.make_button("Quit", func=self.quit_submenu))
+        [button.set_font_size(20) for button in self.load_buttons]
+        [button.scale_to_title() for button in self.load_buttons]
+        self.load_box = thorpy.Box(self.load_buttons)
         load_submenu = thorpy.Menu(self.load_box)
         return load_submenu
 
@@ -143,3 +147,15 @@ class Menu:
         rect = image.get_rect()
         rect.left, rect.top = pos_x, pos_y
         self.window.blit(image, rect)
+
+    def almost_start_game(self):
+        self.player_ready = True
+        self.control["creator"][0] = True
+        self.change_display("creator")
+
+    def team_screen(self):
+        self.tc.creator_view()
+        pg.display.update()
+
+    def waiting_screen(self):
+        self.team_screen() if self.control["creator"][0] else self.loading_screen()

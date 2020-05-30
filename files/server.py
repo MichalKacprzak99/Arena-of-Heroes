@@ -7,18 +7,19 @@ import datetime
 from game import Game
 from player import Player
 from _thread import start_new_thread
-from pymongo import MongoClient
 from itertools import islice
+from pymongo import MongoClient
+
+root = MongoClient("localhost", 27017)
+aof_db = root['games_db']
+games = aof_db['games']
+users = aof_db['users']
 
 fmt_str = '[%(asctime)s] %(levelname)s @ line %(lineno)d: %(message)s'
 logging.basicConfig(level=logging.DEBUG, format=fmt_str)
 logger = logging.getLogger(__name__)
 
 id_count = 0
-
-root = MongoClient("localhost", 27017)
-aof_db = root['games_db']
-games = aof_db['games']
 
 
 class Server:
@@ -66,6 +67,8 @@ class ThreadedClient:
             "reset_action": self.reset_action,
             "death_heroes": self.death_heroes,
             "move": self.move,
+            "login": self.login,
+            "sign up": self.sign_up,
             "basic_attack": self.attack,
             "special_attack": self.attack,
             "random_spell": self.random_spell,
@@ -112,6 +115,7 @@ class ThreadedClient:
                 break
         logger.info("Lost connection")
         try:
+            self.log_out_user()
             logger.info("Closing Game ")
             logger.info("Delete")
             games.delete_many({'is_saved': False})
@@ -120,12 +124,58 @@ class ThreadedClient:
         id_count -= 1
         connection.close()
 
+    def login(self):
+        login_to_search = self.data[1]
+        password_to_search = self.data[2]
+        logger.info("SEARCHING FOR USER: " + login_to_search + " WITH PASSWORD: " + password_to_search)
+        if users.find_one({"login": login_to_search, "password": password_to_search, "logged_in": 0}):
+            post = {
+                "login": login_to_search,
+                "password": password_to_search,
+                "logged_in": 1
+            }
+            self.game.players[self.p_id].name = login_to_search
+            self.game.players[self.p_id].login = login_to_search
+            users.find_one_and_replace({"login": login_to_search}, post)
+            return True
+        else:
+            return False
+
+    def sign_up(self):
+        login_to_add = self.data[1]
+        password_to_add = self.data[2]
+        logger.info("ADDING USER: " + login_to_add + " WITH PASSWORD: " + password_to_add + "ID: " +
+                    str(users.count_documents({}) + 1))
+        if users.find_one({"login": login_to_add}):
+            return False
+        else:
+            post = {
+                "login": login_to_add,
+                "password": password_to_add,
+                "logged_in": 0
+            }
+            users.insert_one(post)
+            return True
+
+    def log_out_user(self):
+        player_to_log_out = self.game.players[self.p_id]
+        player_login_data = users.find_one({"login": player_to_log_out.login})
+        post = {
+            "login": player_login_data["login"],
+            "password": player_login_data["password"],
+            "logged_in": 0
+        }
+        users.find_one_and_replace({"login": player_login_data["login"]}, post)
+        logger.info("LOGGING OUT USER WITH LOGIN: " + player_login_data["login"])
+
     def get_info(self):
         opponent_ready = self.game.is_ready[abs(self.data[1] - 1)]
         return [self.game.players[self.p_id], self.game.players[self.data[1]], self.game.which_map, opponent_ready]
 
     def is_ready(self):
         self.game.is_ready[abs(self.data[1] - 1)] = self.data[2]
+        if len(self.data) > 3:
+            self.game.players[self.data[1]].heroes = self.data[3]
         return self.game.is_ready[self.data[1]]
 
     def get_turn(self):
@@ -146,9 +196,9 @@ class ThreadedClient:
         version_to_save = json.loads(jsonpickle.encode(self.game))
         games.find_one_and_replace({'time_start': self.game.time_start}, version_to_save)
 
-    @staticmethod
-    def get_games_to_load():
-        find_games = games.find(filter={"last_saved": {"$ne": None}}, limit=2)
+    def get_games_to_load(self):
+        name_of_player = self.game.players[self.p_id].name
+        find_games = games.find(filter={"last_saved": {"$ne": None}, "players.name": name_of_player}, limit=2)
         real_game = []
         for find_game in find_games:
             sliced_game = dict(islice(find_game.items(), 1, len(find_game)))

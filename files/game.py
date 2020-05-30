@@ -1,10 +1,11 @@
 from random import randint
 import datetime
+import pytz
 
 
 class Game:
     def __init__(self):
-        self.time_start = datetime.datetime.now().strftime("%c")
+        self.time_start = datetime.datetime.now(pytz.timezone('Poland')).strftime("%c")
         self.last_saved = None
         self.player_turn = 0
         self.turns = 0
@@ -23,6 +24,6 @@ class Game:
     def __str__(self):
 
         description = "The game is between {0} and {1}.\nStarted: {2}.\nLast saved: {3}."\
-                .format(self.players[0].name, self.players[0].name, self.time_start, self.last_saved)
+                .format(self.players[0].name, self.players[1].name, self.time_start, self.last_saved)
 
         return description
