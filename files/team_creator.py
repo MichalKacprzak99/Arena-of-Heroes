@@ -1,7 +1,8 @@
 import thorpy
 import pygame as pg
-from settings import load_image
+from settings import load_image, icons
 from hero import Healer, Mage, Warrior, Archer
+from os import path
 
 
 class TeamCreator:
@@ -54,6 +55,7 @@ class TeamCreator:
         self.network.send(["is_ready", self.p_id, True, team])
         self.parent_menu.player_ready = True
         self.parent_menu.control["creator"][0] = False
+
 
     def prepare_menu(self):
         self.prepare_menu_buttons(self.heroes, self.box, self.menu, 160, 10)
@@ -113,6 +115,11 @@ class TeamCreator:
         rect.left, rect.top = pos_x, pos_y
         self.window.blit(image, rect)
 
+    def load_icon(self, filename):
+        game_folder = path.dirname(__file__)
+        image_folder = path.join(game_folder)
+        return path.join(image_folder, str(filename))
+
     def make_team(self, p_id):
         pos = iter([[11*p_id, i] for i in range(1, 11, 3)])
         side = "west" if p_id == 1 else "east"
@@ -138,12 +145,21 @@ class TeamCreator:
     def back_to_menu(self):
         pass
 
+    def draw_icons(self, stats):
+        pos = iter((150 + i*25) for i in range(len(stats)))
+        for item in icons.keys():
+            image = pg.image.load(self.load_icon(icons[item]))
+            rect = image.get_rect()
+            rect.left, rect.top = 300, next(pos)
+            self.window.blit(image, rect)
+
     def show_stats(self):
         self.draw_text("Stats", 300, 100, 24)
         stats = self.classes[self.chosen](-1, -1, -1).stats
-        pos = iter((130 + i*20) for i in range(len(stats)))
+        self.draw_icons(stats)
+        pos = iter((130 + i*25) for i in range(len(stats)))
         for item in stats.keys():
-            self.draw_text(str(item) + ": " + str(stats[item]), 300, next(pos))
+            self.draw_text(str(stats[item]), 330, next(pos))
 
     def draw_outlines(self):
         pg.draw.line(self.window, (139, 69, 19), (0, 75), (800, 75), 3)
