@@ -1,6 +1,17 @@
 from random import randint
 import datetime
 import pytz
+from potions import HealthPotion, SpeedPotion, AttackPotion
+import random
+
+
+def create_potions():
+    potion = {
+        "HEALTH": HealthPotion(),
+        "SPEED": SpeedPotion(),
+        "ATTACK": AttackPotion()
+    }
+    return random.choices(list(potion.values()), k=3)
 
 
 class Game:
@@ -9,6 +20,7 @@ class Game:
         self.last_saved = None
         self.player_turn = 0
         self.turns = 0
+        self.potions = create_potions()
         self.players = [None, None]
         self.which_map = randint(0, 3)
         self.is_ready = [False, False]

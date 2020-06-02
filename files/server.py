@@ -9,7 +9,7 @@ from player import Player
 from _thread import start_new_thread
 from itertools import islice
 from pymongo import MongoClient
-
+import random
 root = MongoClient("localhost", 27017)
 aof_db = root['games_db']
 games = aof_db['games']
@@ -36,6 +36,7 @@ class Server:
 
     def start(self):
         global id_count
+        seed = random.randint(0, 1000000)
         while True:
             conn, adr = self.s.accept()
             logger.info("Connected to: " + str(adr))
@@ -47,7 +48,7 @@ class Server:
                 logger.info("Creating a new game ...")
             else:
                 player_id = 1
-            start_new_thread(ThreadedClient().run, (conn, {"game": game}, player_id))
+            start_new_thread(ThreadedClient().run, (conn, {"game": game}, player_id, seed))
 
 
 class ThreadedClient:
@@ -72,20 +73,23 @@ class ThreadedClient:
             "basic_attack": self.attack,
             "special_attack": self.attack,
             "random_spell": self.random_spell,
-            "heal": self.heal
+            "heal": self.heal,
+            "update_potions": self.update_potions
         }
+        self.seed = 0
         self.reply = []
         self.data = []
         self.game = None
         self.to_load = False
         self.p_id = None
 
-    def run(self, connection, g, p_id):
+    def run(self, connection, g, p_id, seed):
+
         global id_count
         self.p_id = p_id
         self.game = g["game"]
         self.game.players[self.p_id] = Player(name="df", player_id=self.p_id)
-
+        self.seed = seed
         connection.send(pickle.dumps(self.p_id))
 
         while True:
@@ -170,7 +174,8 @@ class ThreadedClient:
 
     def get_info(self):
         opponent_ready = self.game.is_ready[abs(self.data[1] - 1)]
-        return [self.game.players[self.p_id], self.game.players[self.data[1]], self.game.which_map, opponent_ready]
+        return [self.game.players[self.p_id], self.game.players[self.data[1]],
+                self.game.which_map, opponent_ready, self.game.potions, self.seed]
 
     def is_ready(self):
         self.game.is_ready[abs(self.data[1] - 1)] = self.data[2]
@@ -251,6 +256,12 @@ class ThreadedClient:
         hero_to_heal = self.data[2]
         self.game.players[self.data[1]].heroes[hero_to_heal.hero_id] = hero_to_heal
         self.game.get_next_turn()
+
+    def update_potions(self):
+        self.game.potions = self.data[1]
+        if len(self.data) > 2:
+            affected_hero = self.data[2]
+            self.game.players[self.data[3]].heroes[affected_hero.hero_id] = affected_hero
 
 
 if __name__ == '__main__':

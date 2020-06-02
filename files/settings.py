@@ -152,6 +152,11 @@ result = {
     "1": "RESULT/star_3.png",
     "0": "RESULT/star_4.png"
 }
+potion_img = {
+    "HEALTH": "POTION/hp_potion.png",
+    "SPEED": "POTION/speed_potion.png",
+    "ATTACK": "POTION/attack_potion.png"
+}
 
 
 def load_image(filename):
@@ -166,3 +171,12 @@ def get_tile_pos(pos):
 
 def coordinate(tile_pos):
     return [tile_pos[0] * tile_dim["width"] + box_sets["BOX_WIDTH"], tile_pos[1] * tile_dim["height"]]
+
+
+def index_error_handler(func):
+    def wrapper(*args):
+        try:
+            return func(*args)
+        except IndexError:
+            return False
+    return wrapper

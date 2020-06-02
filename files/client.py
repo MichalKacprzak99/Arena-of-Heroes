@@ -6,8 +6,7 @@ from drawing import redraw_window
 from menu import Menu
 from gui import Gui
 from login import LoginScreen
-
-
+from potions import create_potions
 pg.init()
 pg.font.init()
 
@@ -33,7 +32,7 @@ def main():
         clock.tick(60)
         if not menu.both_ready() or opponent is None or opponent.heroes is None or player.heroes is None:
             try:
-                player, opponent, which_map, menu.opponent_ready = net.send(["get_info", opponent_id])
+                player, opponent, which_map, menu.opponent_ready, potions, seed = net.send(["get_info", opponent_id])
                 board = TiledMap(maps[str(which_map)], window)
             except (EOFError, TypeError, pg.error):
                 break
@@ -46,6 +45,7 @@ def main():
                 menu.waiting_screen()
         else:
             if not gui_start:
+                potions = create_potions(potions, player, opponent, board.object_tiles, net, seed)
                 board.screen.fill((168, 139, 50))
                 width = game_sets["GAME_SCREEN_WIDTH"] + box_sets["BOX_WIDTH"] * 2
                 height = game_sets["GAME_SCREEN_HEIGHT"]
@@ -64,7 +64,7 @@ def main():
                 player.react_to_event(opponent, net)
             gui.update_gui(actual_pos, player, opponent)
             player.check_result(opponent, net)
-            move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos, net)
+            move = redraw_window(window, board, player, opponent, which_player_turn, actual_pos, net, potions)
             try:
                 end = net.send(["end", player.p_id])
             except EOFError:

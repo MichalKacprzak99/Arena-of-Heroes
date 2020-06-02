@@ -1,15 +1,6 @@
-from hero import Healer, Mage, Warrior, Archer, action
-from settings import get_tile_pos, box_sets
+from hero import action
+from settings import get_tile_pos, box_sets, index_error_handler
 from math import sqrt
-
-
-def index_error_handler(func):
-    def wrapper(*args):
-        try:
-            return func(*args)
-        except IndexError:
-            return False
-    return wrapper
 
 
 class Player:
@@ -21,7 +12,7 @@ class Player:
         self.clicked_hero = None
         self.moved_hero = None
         self.attacking_hero = None
-        self.attacked_hero = None # sides update
+        self.attacked_hero = None
         self.last_action = []
         self.result = None
         self.login = None
