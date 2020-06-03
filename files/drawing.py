@@ -29,9 +29,9 @@ def check_hero_side(attacked, attacking):
     return side
 
 
-def draw_player_turn(screen, player_id, player_turn):
+def draw_player_turn(screen, p_id, player_turn):
     font = pg.font.SysFont("Arial", 25)
-    text_to_input = "Your turn" if player_id == player_turn else "Opponent's turn"
+    text_to_input = "Your turn" if p_id == player_turn else "Opponent's turn"
     blit_text_center(screen, text_to_input, font, 20, colors["RED"])
 
 
@@ -222,7 +222,7 @@ def draw_attacking_hero(screen, board, player, opponent, player_turn, actual_pos
             animation_counter, total_frames = 14, 14
 
     while animation_counter >= 0:
-        draw_background(screen, board, player, opponent, player_turn, actual_pos)
+        draw_background(screen, board, player, opponent, player_turn, actual_pos, potions)
         if player.attacking_hero:
             which_attack = "basic"
             draw_attacking_hero_animation(screen, player.attacking_hero, actual_pos, animation_counter, total_frames,
@@ -278,50 +278,49 @@ def react_to_potion(potions, tile, player, net):
         net.send(["update_potions", potions, player.moved_hero, player.p_id])
 
 
+def moved(screen, board, player, opponent, player_turn, actual_pos, n, potions):
+    for tile, side in player.moved_hero.path:
+        player.moved_hero.side = side
+        react_to_potion(potions, tile, player, n)
+        draw_with_animation_hero(screen, board, player, opponent, player_turn, actual_pos, tile, potions)
+    player.heroes[player.moved_hero.hero_id].side = player.moved_hero.side
+    player.moved_hero = None
+
+
+def special_attack(screen, board, player, opponent, player_turn, potions):
+    if player.special_attack.stats["NAME"] != "MAGE":
+        side = check_hero_side(player.attacked_with_special, player.special_attack)
+        player.heroes[player.special_attack.hero_id].side = side
+    draw_attacking_hero(screen, board, player, opponent, player_turn, player.special_attack.pos, potions)
+    player.special_attack = None
+    player.attacked_with_special = None
+
+
 def redraw_window(screen, board, player, opponent, player_turn, actual_pos, n, potions):
     made_move = False
+
     if player.moved_hero:
-        for tile, side in player.moved_hero.path:
-            player.moved_hero.side = side
-            react_to_potion(potions, tile, player, n)
-            draw_with_animation_hero(screen, board, player, opponent, player_turn, actual_pos, tile, potions)
-        player.heroes[player.moved_hero.hero_id].side = player.moved_hero.side
-        player.moved_hero = None
+        moved(screen, board, player, opponent, player_turn, actual_pos, n, potions)
     if opponent.moved_hero:
-        for tile, side in opponent.moved_hero.path:
-            opponent.moved_hero.side = side
-            react_to_potion(potions, tile, opponent, n)
-            draw_with_animation_hero(screen, board, opponent, player, player_turn, actual_pos, tile, potions)
-        opponent.heroes[opponent.moved_hero.hero_id].side = opponent.moved_hero.side
-        opponent.moved_hero = None
+        moved(screen, board, opponent, player, player_turn, actual_pos, n, potions)
         n.send(["update_opponent", player.p_id, opponent])
         made_move = True
     if player.special_attack:
-        if player.special_attack.stats["NAME"] != "MAGE":
-            side = check_hero_side(player.attacked_with_special, player.special_attack)
-            player.heroes[player.special_attack.hero_id].side = side
-        draw_attacking_hero(screen, board, player, opponent, player_turn, player.special_attack.pos)
-        player.special_attack = None
-        player.attacked_with_special = None
+        special_attack(screen, board, player, opponent, player_turn, potions)
     if opponent.special_attack:
-        if opponent.special_attack.stats["NAME"] != "MAGE":
-            side = check_hero_side(opponent.attacked_with_special, opponent.special_attack)
-            opponent.heroes[opponent.special_attack.hero_id].side = side
-        draw_attacking_hero(screen, board, opponent, player, player_turn, opponent.special_attack.pos)
-        opponent.special_attack = None
-        opponent.attacked_with_special = None
-        n.send(["update_opponent", player.player_id, opponent])
+        special_attack(screen, board, opponent, player, player_turn, potions)
+        n.send(["update_opponent", player.p_id, opponent])
     if player.attacking_hero:
         side = check_hero_side(player.attacked_hero, player.attacking_hero)
         player.heroes[player.attacking_hero.hero_id].side = side
-        draw_attacking_hero(screen, board, player, opponent, player_turn, player.attacking_hero.pos)
+        draw_attacking_hero(screen, board, player, opponent, player_turn, player.attacking_hero.pos, potions)
         player.attacking_hero = None
     if opponent.attacking_hero:
         side = check_hero_side(opponent.attacked_hero, opponent.attacking_hero)
         opponent.heroes[opponent.attacking_hero.hero_id].side = side
-        draw_attacking_hero(screen, board, opponent, player, player_turn, opponent.attacking_hero.pos)
+        draw_attacking_hero(screen, board, opponent, player, player_turn, opponent.attacking_hero.pos, potions)
         opponent.attacking_hero = None
-        n.send(["update_opponent", player.player_id, opponent])
+        n.send(["update_opponent", player.p_id, opponent])
         made_move = True
     else:
         draw_background(screen, board, player, opponent, player_turn, actual_pos, potions)
