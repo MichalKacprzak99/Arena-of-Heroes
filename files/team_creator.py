@@ -153,7 +153,11 @@ class TeamCreator:
             self.opt_two[1].active = False
     
     def back_to_menu(self):
-        pass
+        self.active = False
+        self.parent_menu.player_ready = False
+        self.parent_menu.control["creator"][0] = False
+        self.parent_menu.quit_submenu()
+
 
     def draw_icons(self, stats):
         pos = iter((150 + i*25) for i in range(len(stats)))
