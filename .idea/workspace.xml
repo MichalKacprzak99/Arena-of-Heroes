@@ -490,10 +490,10 @@
     <state x="198" y="38" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1591214250405" />
     <state x="223" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1589820054060" />
     <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1588786232074" />
-    <state x="377" y="0" key="CommitChangelistDialog2" timestamp="1591192008017">
+    <state x="377" y="0" key="CommitChangelistDialog2" timestamp="1591219935710">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="377" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1591192008017" />
+    <state x="377" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1591219935710" />
     <state x="345" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1591139290241" />
     <state x="424" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1589453676737" />
     <state x="93" y="89" width="1228" height="687" key="DiffContextDialog" timestamp="1591120353122">
@@ -586,10 +586,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="VCS.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1589818791666" />
-    <state x="321" y="139" key="Vcs.Push.Dialog.v2" timestamp="1591192563948">
+    <state x="321" y="139" key="Vcs.Push.Dialog.v2" timestamp="1591220009145">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="321" y="139" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1591192563948" />
+    <state x="321" y="139" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1591220009145" />
     <state x="94" y="171" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1591139312945" />
     <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1589453707598" />
     <state x="117" y="54" width="1182" height="544" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1591191154980">
