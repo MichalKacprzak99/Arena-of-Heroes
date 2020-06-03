@@ -27,14 +27,21 @@ class TeamCreator:
         self.count = 0
         self.options = {
             "Back": self.back_to_menu,
-            "Add": self.add_hero,
-            "Delete": self.delete_hero,
             "Ready": self.start_game
+        }
+
+        self.options_dos = {
+            "Add": self.add_hero,
+            "Delete": self.delete_hero
         }
 
         self.opt_buttons = [thorpy.make_button(txt, func=self.options[txt]) for txt in self.options.keys()]
         self.box_down = thorpy.Box(self.opt_buttons)
         self.menu_down = thorpy.Menu(self.box_down)
+
+        self.opt_two = [thorpy.make_button(txt, func=self.options_dos[txt]) for txt in self.options_dos.keys()]
+        self.box_mid = thorpy.Box(self.opt_two)
+        self.menu_mid = thorpy.Menu(self.box_mid)
         self.lore={
             "Healer": ["Imma heal all of you",
                        "That's all folks"],
@@ -58,26 +65,28 @@ class TeamCreator:
 
 
     def prepare_menu(self):
-        self.prepare_menu_buttons(self.heroes, self.box, self.menu, 160, 10)
-        self.prepare_menu_buttons(self.opt_buttons, self.box_down, self.menu_down, 160, 660)
+        self.prepare_menu_buttons(self.heroes, self.box, self.menu, 160, 10, 20)
+        self.prepare_menu_buttons(self.opt_two, self.box_mid, self.menu_mid, 460, 580, 60)
 
-        self.opt_buttons[2].active = False
-        self.opt_buttons[3].active = False
+        self.prepare_menu_buttons(self.opt_buttons, self.box_down, self.menu_down, 160, 660, 300)
+        self.opt_two[1].active = False
+        self.opt_buttons[1].active = False
 
-    def prepare_menu_buttons(self, buttons, box,  menu, x, y):
+    def prepare_menu_buttons(self, buttons, box,  menu, x, y, g):
         [button.set_font_size(30) for button in buttons]
         [button.scale_to_title() for button in buttons]
         box.set_main_color((0, 0, 0, 0))
-        thorpy.store(box, mode="h")
+        thorpy.store(box, mode="h",  gap=g)
         box.fit_children()
         box.set_topleft((x, y))
         for element in menu.get_population():
             element.surface = self.window
 
     def creator_view(self):
-        self.draw_image('picker_background.png', 0, 0)
+        self.draw_image('picker_background.jpg', 0, 0)
         self.box.blit()
         self.box_down.blit()
+        self.box_mid.blit()
         self.draw_outlines()
         self.display_hero()
 
@@ -88,15 +97,16 @@ class TeamCreator:
     def react(self, event):
         self.menu.react(event)
         self.menu_down.react(event)
+        self.menu_mid.react(event)
 
     def add_hero(self):
         if self.count < 4:
             self.team[self.count] = self.chosen
             self.count += 1
         if self.count == 4:
-            self.opt_buttons[3].active = True
+            self.opt_buttons[1].active = True
         if self.count > 0:
-            self.opt_buttons[2].active = True
+            self.opt_two[1].active = True
 
     def show_hero(self, name, x=100, y=100):
         if name is not None:
@@ -138,9 +148,9 @@ class TeamCreator:
         self.team[self.count-1] = None
         self.count -= 1
         if self.count <= 0:
-            self.opt_buttons[2].active = False
+            self.opt_two[0].active = False
         if self.count < 4:
-            self.opt_buttons[3].active = False
+            self.opt_two[1].active = False
     
     def back_to_menu(self):
         pass
