@@ -58,23 +58,25 @@ backgrounds = {
 
 hero_images = {
     "HEALER": {
-            "north": "HEALER/north.png",
-            "south": "HEALER/south.png",
-            "east": "HEALER/east.png",
-            "west": "HEALER/west.png",
-            "death": "HEALER/death.png",
-            "walking": {
-                "east": "HEALER/healer_walking/right_walking/0_Astrologer_Walk_0",
-                "west": "HEALER/healer_walking/left_walking/0_Astrologer_Walk_0",
-                "south": "HEALER/healer_walking/front_walking/0_Astrologer_Walk_0",
-                "north": "HEALER/healer_walking/back_walking/0_Astrologer_Walk_0"
-            },
-            "attacking": {
-                "east": "HEALER/healer_attacking/right_attacking/0_astrologer_Attack_0",
-                "west": "HEALER/healer_attacking/left_attacking/0_astrologer_Attack_0",
-                "south": "HEALER/healer_attacking/front_attacking/0_astrologer_Attack_0",
-                "north": "HEALER/healer_attacking/back_attacking/0_astrologer_Attack_0"
-        }
+        "north": "HEALER/north.png",
+        "south": "HEALER/south.png",
+        "east": "HEALER/east.png",
+        "west": "HEALER/west.png",
+        "death": "HEALER/death.png",
+        "walking": {
+            "east": "HEALER/healer_walking/right_walking/0_Astrologer_Walk_0",
+            "west": "HEALER/healer_walking/left_walking/0_Astrologer_Walk_0",
+            "south": "HEALER/healer_walking/front_walking/0_Astrologer_Walk_0",
+            "north": "HEALER/healer_walking/back_walking/0_Astrologer_Walk_0"
+        },
+        "attacking": {
+            "east": "HEALER/healer_attacking/right_attacking/0_astrologer_Attack_0",
+            "west": "HEALER/healer_attacking/left_attacking/0_astrologer_Attack_0",
+            "south": "HEALER/healer_attacking/front_attacking/0_astrologer_Attack_0",
+            "north": "HEALER/healer_attacking/back_attacking/0_astrologer_Attack_0"
+        },
+        "special_attack": "HEALER/special_attack/heal/",
+        "special_lightning": "MAGE/special_attack/get_lightning/"
     },
     "MAGE": {
         "north": "MAGE/north.png",
@@ -93,7 +95,10 @@ hero_images = {
             "west": "MAGE/mage_attacking/left_attacking/0_mage_Attack_0",
             "south": "MAGE/mage_attacking/front_attacking/0_mage_Attack_0",
             "north": "MAGE/mage_attacking/back_attacking/0_mage_Attack_0"
-        }
+        },
+        "special_attack": "MAGE/special_attack/lighting/",
+        "special_lightning": "MAGE/special_attack/get_lightning/"
+        # "special_attack": "MAGE/special_attack/01/"
     },
     "WARRIOR": {
         "north": "WARRIOR/north.png",
@@ -112,7 +117,8 @@ hero_images = {
             "west": "WARRIOR/warrior_attacking/left_attacking/0_warrior_Attack_0",
             "south": "WARRIOR/warrior_attacking/front_attacking/0_warrior_Attack_0",
             "north": "WARRIOR/warrior_attacking/back_attacking/0_warrior_Attack_0"
-        }
+        },
+        "special_lightning": "MAGE/special_attack/get_lightning/"
     },
     "ARCHER": {
         "north": "ARCHER/north.png",
@@ -131,7 +137,8 @@ hero_images = {
             "west": "ARCHER/archer_attacking/left_attacking/0_archer_Attack_0",
             "south": "ARCHER/archer_attacking/front_attacking/0_archer_Attack_0",
             "north": "ARCHER/archer_attacking/back_attacking/0_archer_Attack_0"
-        }
+        },
+        "special_lightning": "MAGE/special_attack/get_lightning/"
     }
 }
 

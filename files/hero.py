@@ -59,10 +59,13 @@ class Hero(ABC):
             attacking_hero = self
             player.attacking_hero = self # change from attacking animation
             player.attacked_hero = attacked_hero # sides update
+            # opponent.attacking_hero = self # new change
+            # opponent.attacked_hero = attacked_hero # new change
             lose_hp = -attacking_hero.stats["ATTACK"] + attacked_hero.stats["DEFENSE"]/2
             attacked_hero = update_stats(attacked_hero, lose_hp)
             opponent.heroes[attacked_hero.hero_id] = attacked_hero
             player.last_action = ["basic_attack", attacking_hero, attacked_hero]
+            # player.last_action = ["basic_attack", player.attacking_hero, player.attacked_hero]
             return["basic_attack", player.player_id, player.last_action]
         return False
 
@@ -91,10 +94,14 @@ class Healer(Hero):
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args
         hero_to_heal = player.clicked_own_hero(clicked_pos)
+        player.attacked_with_special = hero_to_heal
         if hero_to_heal and self.in_range_of_skill(clicked_pos):
             hero_to_heal = update_stats(hero_to_heal, self.healing)
+            healing_hero = self
+            player.special_attack = self  # update_sp
             player.heroes[hero_to_heal.hero_id] = hero_to_heal
-            return ["heal", player.player_id, hero_to_heal]
+            player.last_action = ["heal", healing_hero, hero_to_heal] # animation
+            return ["heal", player.player_id, player.last_action]
         else:
             return False
 
@@ -110,13 +117,21 @@ class Mage(Hero):
     def special_skill(self, *args):
         player, opponent, object_tiles, clicked_pos = args
         heroes_to_attack = [player.clicked_opp_hero(opponent, clicked_pos)]
+        player.attacked_with_special = [player.clicked_opp_hero(opponent, clicked_pos)]
         if player.clicked_opp_hero(opponent, clicked_pos) and self.in_range_of_skill(clicked_pos):
             if len(opponent.heroes) > 1:
-                heroes_to_attack.append(random.choice(opponent.heroes))
+                # which_hero = 1
+                random_opponent = random.choice(opponent.heroes)
+                heroes_to_attack.append(random_opponent)
+                player.attacked_with_special.append(random_opponent)
+                # heroes_to_attack.append(random.choice(opponent.heroes))
+                # player.attacked_with_special.append(heroes_to_attack[which_hero])
+                # which_hero += 1
                 heroes_to_attack = list(map(self.randomize_damage, heroes_to_attack))
             else:
                 heroes_to_attack[0] = self.randomize_damage(heroes_to_attack[0])
             attacking_hero = player.clicked_hero
+            player.special_attack = attacking_hero # update_sp
             player.last_action = ["random_spell", attacking_hero, heroes_to_attack]
             return ["random_spell", player.player_id, player.last_action]
         else:
