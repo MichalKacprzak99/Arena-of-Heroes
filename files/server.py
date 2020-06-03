@@ -47,7 +47,6 @@ class ThreadedClient:
             "get_info": self.get_info,
             "move": self.move,
             "basic_attack": self.attack,
-            # "special_attack": self.attack,
             "special_attack": self.special_attack,
             "random_spell": self.random_spell,
             "heal": self.heal,
@@ -110,18 +109,18 @@ class ThreadedClient:
         self.game.players[self.data[1]].last_action = last_action
         for attacked_hero in attacked_heroes:
             self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
-        self.game.players[self.data[1]].special_attack = last_action[1]  # animation special
-        self.game.players[self.data[1]].attacked_with_special = attacked_heroes  # animation special
+        self.game.players[self.data[1]].special_attack = last_action[1]
+        self.game.players[self.data[1]].attacked_with_special = attacked_heroes
         self.game.get_next_turn()
 
     def attack(self):
         last_action = self.data[2]
         attacked_hero = last_action[2]
-        attacking_hero = last_action[1] # animation
+        attacking_hero = last_action[1]
         self.game.players[self.data[1]].last_action = last_action
         self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
-        self.game.players[self.data[1]].attacking_hero = attacking_hero  # animation
-        self.game.players[self.data[1]].attacked_hero = attacked_hero  # animation
+        self.game.players[self.data[1]].attacking_hero = attacking_hero
+        self.game.players[self.data[1]].attacked_hero = attacked_hero
         self.game.get_next_turn()
 
     def special_attack(self):
@@ -130,16 +129,16 @@ class ThreadedClient:
         attacking_hero = last_action[1]
         self.game.players[self.data[1]].last_action = last_action
         self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
-        self.game.players[self.data[1]].special_attack = attacking_hero  # animation special
-        self.game.players[self.data[1]].attacked_with_special = attacked_hero  # animation special
+        self.game.players[self.data[1]].special_attack = attacking_hero
+        self.game.players[self.data[1]].attacked_with_special = attacked_hero
         self.game.get_next_turn()
 
     def heal(self):
         last_action = self.data[2]
         healing_hero = last_action[1]
         hero_to_heal = last_action[2]
-        self.game.players[self.data[1]].special_attack = healing_hero  # animation special
-        self.game.players[self.data[1]].attacked_with_special = hero_to_heal  # animation special
+        self.game.players[self.data[1]].special_attack = healing_hero
+        self.game.players[self.data[1]].attacked_with_special = hero_to_heal
         self.game.players[self.data[1]].heroes[hero_to_heal.hero_id] = hero_to_heal
         self.game.get_next_turn()
 

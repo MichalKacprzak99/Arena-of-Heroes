@@ -98,7 +98,6 @@ hero_images = {
         },
         "special_attack": "MAGE/special_attack/lighting/",
         "special_lightning": "MAGE/special_attack/get_lightning/"
-        # "special_attack": "MAGE/special_attack/01/"
     },
     "WARRIOR": {
         "north": "WARRIOR/north.png",

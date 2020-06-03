@@ -13,7 +13,7 @@ class Player:
         self.moved_hero = None
         self.attacking_hero = None
         self.attacked_hero = None
-        self.special_attack = None # update_sp
+        self.special_attack = None
         self.attacked_with_special = None
         self.last_action = []
         self.result = ""

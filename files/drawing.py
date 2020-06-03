@@ -15,6 +15,19 @@ def draw_result_of_game(screen, player):
     blit_text_center(screen, text_to_input, font, 50, colors["RED"])
 
 
+def check_hero_side(attacked, attacking):
+    side = attacking.side
+    if attacked.pos[0] > attacking.pos[0]:
+        side = "east"
+    if attacked.pos[0] < attacking.pos[0]:
+        side = "west"
+    if attacked.pos[1] > attacking.pos[1]:
+        side = "south"
+    if attacked.pos[1] < attacking.pos[1]:
+        side = "north"
+    return side
+
+
 def draw_player_turn(screen, player_id, player_turn):
     font = pg.font.SysFont("Arial", 25)
     text_to_input = "Your turn" if player_id == player_turn else "Opponent's turn"
@@ -97,20 +110,13 @@ def draw_attacking_hero_animation(screen, hero, tile, frame_counter, total_frame
         else:
             current_hero_image = hero_images[hero.stats["NAME"]]["attacking"][hero.side] + \
                                  str(current_image_counter) + ".png"
-    elif type_of_attack == "special":
+    elif type_of_attack == "special_attack":
         if current_image_counter < 10:
             current_hero_image = hero_images[hero.stats["NAME"]]["special_attack"] + \
                                  str(current_image_counter) + ".png"
         else:
             current_hero_image = hero_images[hero.stats["NAME"]]["special_attack"] + \
                                  str(current_image_counter) + ".png"
-    # elif type_of_attack == "special_hit":
-    #     if current_image_counter < 10:
-    #         current_hero_image = hero_images[hero.stats["NAME"]]["special_hit"] + \
-    #                              str(current_image_counter) + ".png"
-    #     else:
-    #         current_hero_image = hero_images[hero.stats["NAME"]]["special_hit"] + \
-    #                              str(current_image_counter) + ".png"
     elif type_of_attack == "special_shoot":
         if current_image_counter < 10:
             current_hero_image = hero_images[hero.stats["NAME"]]["special_shoot"] + \
@@ -118,7 +124,7 @@ def draw_attacking_hero_animation(screen, hero, tile, frame_counter, total_frame
         else:
             current_hero_image = hero_images[hero.stats["NAME"]]["special_shoot"] + \
                                  str(current_image_counter) + ".png"
-    elif type_of_attack == "special_opponents":
+    elif type_of_attack == "special_lightning":
         if current_image_counter < 10:
             current_hero_image = hero_images[hero.stats["NAME"]]["special_lightning"] + \
                                  str(current_image_counter) + ".png"
@@ -133,21 +139,6 @@ def draw_attacking_hero_animation(screen, hero, tile, frame_counter, total_frame
 
 
 def draw_heroes(screen, player):
-    # heroes_not_to_draw = []
-    # if player.special_attack:
-    #     for heroes in player.attacked_with_special: # zmienic na przypisywanie z player.heroes[hero_id]
-    #         heroes_not_to_draw.append(heroes)
-    # if player.attacking_hero:
-    #     heroes_not_to_draw.append(player.attacking_hero)
-    # if player.moved_hero:
-    #     heroes_not_to_draw.append(player.moved_hero)
-    #
-    # for hero in player.heroes:
-    #     if hero is not None:
-    #         # if hero is not player.moved_hero and hero is not player.attacking_hero:
-    #         if hero not in heroes_not_to_draw:
-    #             draw_hero(screen, hero, hero.pos)
-
     for hero in player.heroes:
         if hero is not None:
             if hero is not player.moved_hero and hero is not player.attacking_hero:
@@ -228,7 +219,7 @@ def draw_attacking_hero(screen, board, player, opponent, player_turn, actual_pos
             draw_attacking_hero_animation(screen, player.attacking_hero, actual_pos, animation_counter, total_frames,
                                           which_attack)
         else:
-            which_attack = "special"
+            which_attack = "special_attack"
             if player.special_attack.stats["NAME"] == "HEALER":
                 draw_attacking_hero_animation(screen, player.special_attack, player.attacked_with_special.pos,
                                               animation_counter, total_frames, which_attack)
@@ -246,7 +237,7 @@ def draw_attacking_hero(screen, board, player, opponent, player_turn, actual_pos
                 draw_attacking_hero_animation(screen, player.special_attack, actual_pos, animation_counter,
                                               total_frames, which_attack)
                 pg.time.delay(30)
-                which_attack = "special_opponents"
+                which_attack = "special_lightning"
                 for heroes in player.attacked_with_special:
                     draw_attacking_hero_animation(screen, heroes, heroes.pos, opp_animation_counter,
                                                   opp_total_frames, which_attack)
@@ -282,56 +273,28 @@ def redraw_window(screen, board, player, opponent, player_turn, actual_pos, n):
         n.send(["update_opponent", player.player_id, opponent])
         made_move = True
     if player.special_attack:
-        if player.special_attack.stats["NAME"] == "WARRIOR" or player.special_attack.stats["NAME"] == "HEALER":
-            if player.attacked_with_special.pos[0] > player.special_attack.pos[0]:
-                player.special_attack.side = "east"
-            if player.attacked_with_special.pos[0] < player.special_attack.pos[0]:
-                player.special_attack.side = "west"
-            if player.attacked_with_special.pos[1] > player.special_attack.pos[1]:
-                player.special_attack.side = "south"
-            if player.attacked_with_special.pos[1] < player.special_attack.pos[1]:
-                player.special_attack.side = "north"
-        player.heroes[player.special_attack.hero_id].side = player.special_attack.side
+        if player.special_attack.stats["NAME"] != "MAGE":
+            side = check_hero_side(player.attacked_with_special, player.special_attack)
+            player.heroes[player.special_attack.hero_id].side = side
         draw_attacking_hero(screen, board, player, opponent, player_turn, player.special_attack.pos)
         player.special_attack = None
         player.attacked_with_special = None
     if opponent.special_attack:
-        if opponent.special_attack.stats["NAME"] == "WARRIOR" or opponent.special_attack.stats["NAME"] == "HEALER":
-            if opponent.attacked_with_special.pos[0] > opponent.special_attack.pos[0]:
-                opponent.special_attack.side = "east"
-            if opponent.attacked_with_special.pos[0] < opponent.special_attack.pos[0]:
-                opponent.special_attack.side = "west"
-            if opponent.attacked_with_special.pos[1] > opponent.special_attack.pos[1]:
-                opponent.special_attack.side = "south"
-            if opponent.attacked_with_special.pos[1] < opponent.special_attack.pos[1]:
-                opponent.special_attack.side = "north"
-        opponent.heroes[opponent.special_attack.hero_id].side = opponent.special_attack.side
+        if opponent.special_attack.stats["NAME"] != "MAGE":
+            side = check_hero_side(opponent.attacked_with_special, opponent.special_attack)
+            opponent.heroes[opponent.special_attack.hero_id].side = side
         draw_attacking_hero(screen, board, opponent, player, player_turn, opponent.special_attack.pos)
         opponent.special_attack = None
         opponent.attacked_with_special = None
         n.send(["update_opponent", player.player_id, opponent])
     if player.attacking_hero:
-        if player.attacked_hero.pos[0] > player.attacking_hero.pos[0]:
-            player.attacking_hero.side = "east"
-        if player.attacked_hero.pos[0] < player.attacking_hero.pos[0]:
-            player.attacking_hero.side = "west"
-        if player.attacked_hero.pos[1] > player.attacking_hero.pos[1]:
-            player.attacking_hero.side = "south"
-        if player.attacked_hero.pos[1] < player.attacking_hero.pos[1]:
-            player.attacking_hero.side = "north"
-        player.heroes[player.attacking_hero.hero_id].side = player.attacking_hero.side
+        side = check_hero_side(player.attacked_hero, player.attacking_hero)
+        player.heroes[player.attacking_hero.hero_id].side = side
         draw_attacking_hero(screen, board, player, opponent, player_turn, player.attacking_hero.pos)
         player.attacking_hero = None
     if opponent.attacking_hero:
-        if opponent.attacked_hero.pos[0] > opponent.attacking_hero.pos[0]:
-            opponent.attacking_hero.side = "east"
-        if opponent.attacked_hero.pos[0] < opponent.attacking_hero.pos[0]:
-            opponent.attacking_hero.side = "west"
-        if opponent.attacked_hero.pos[1] > opponent.attacking_hero.pos[1]:
-            opponent.attacking_hero.side = "south"
-        if opponent.attacked_hero.pos[1] < opponent.attacking_hero.pos[1]:
-            opponent.attacking_hero.side = "north"
-        opponent.heroes[opponent.attacking_hero.hero_id].side = opponent.attacking_hero.side
+        side = check_hero_side(opponent.attacked_hero, opponent.attacking_hero)
+        opponent.heroes[opponent.attacking_hero.hero_id].side = side
         draw_attacking_hero(screen, board, opponent, player, player_turn, opponent.attacking_hero.pos)
         opponent.attacking_hero = None
         n.send(["update_opponent", player.player_id, opponent])
