@@ -59,13 +59,10 @@ class Hero(ABC):
             attacking_hero = self
             player.attacking_hero = self # change from attacking animation
             player.attacked_hero = attacked_hero # sides update
-            # opponent.attacking_hero = self # new change
-            # opponent.attacked_hero = attacked_hero # new change
             lose_hp = -attacking_hero.stats["ATTACK"] + attacked_hero.stats["DEFENSE"]/2
             attacked_hero = update_stats(attacked_hero, lose_hp)
             opponent.heroes[attacked_hero.hero_id] = attacked_hero
             player.last_action = ["basic_attack", attacking_hero, attacked_hero]
-            # player.last_action = ["basic_attack", player.attacking_hero, player.attacked_hero]
             return["basic_attack", player.player_id, player.last_action]
         return False
 
@@ -120,13 +117,9 @@ class Mage(Hero):
         player.attacked_with_special = [player.clicked_opp_hero(opponent, clicked_pos)]
         if player.clicked_opp_hero(opponent, clicked_pos) and self.in_range_of_skill(clicked_pos):
             if len(opponent.heroes) > 1:
-                # which_hero = 1
                 random_opponent = random.choice(opponent.heroes)
                 heroes_to_attack.append(random_opponent)
                 player.attacked_with_special.append(random_opponent)
-                # heroes_to_attack.append(random.choice(opponent.heroes))
-                # player.attacked_with_special.append(heroes_to_attack[which_hero])
-                # which_hero += 1
                 heroes_to_attack = list(map(self.randomize_damage, heroes_to_attack))
             else:
                 heroes_to_attack[0] = self.randomize_damage(heroes_to_attack[0])

@@ -119,20 +119,16 @@ class ThreadedClient:
         attacking_hero = last_action[1] # animation
         self.game.players[self.data[1]].last_action = last_action
         self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
-        # self.game.players[abs(self.data[1] - 1)].attacking_hero = attacking_hero # animation
-        # self.game.players[abs(self.data[1] - 1)].attacked_hero = attacked_hero  # animation
         self.game.players[self.data[1]].attacking_hero = attacking_hero  # animation
         self.game.players[self.data[1]].attacked_hero = attacked_hero  # animation
-        # self.game.players[self.data[1]].special_attack = special_attack  # animation special
-        # self.game.players[self.data[1]].attacked_with_special = attacked_with_special  # animation special
         self.game.get_next_turn()
 
     def heal(self):
         last_action = self.data[2]
-        hero_to_heal = last_action[1]
-        healing_hero = last_action[2]
-        # self.game.players[self.data[1]].special_attack = healing_hero  # animation special
-        # self.game.players[self.data[1]].attacked_with_special = hero_to_heal  # animation special
+        healing_hero = last_action[1]
+        hero_to_heal = last_action[2]
+        self.game.players[self.data[1]].special_attack = healing_hero  # animation special
+        self.game.players[self.data[1]].attacked_with_special = hero_to_heal  # animation special
         self.game.players[self.data[1]].heroes[hero_to_heal.hero_id] = hero_to_heal
         self.game.get_next_turn()
 

@@ -96,10 +96,6 @@ def draw_attacking_hero_animation(screen, hero, tile, frame_counter, total_frame
         else:
             current_hero_image = hero_images[hero.stats["NAME"]]["attacking"][hero.side] + \
                                  str(current_image_counter) + ".png"
-        # hero_image = pg.image.load(load_image(current_hero_image))
-        # tile_coordinates = coordinate(tile)
-        # screen.blit(hero_image, tile_coordinates)
-        # draw_health_bar(screen, hero, tile_coordinates)
     elif type_of_attack == "special":
         if current_image_counter < 10:
             current_hero_image = hero_images[hero.stats["NAME"]]["special_attack"] + \
@@ -107,10 +103,6 @@ def draw_attacking_hero_animation(screen, hero, tile, frame_counter, total_frame
         else:
             current_hero_image = hero_images[hero.stats["NAME"]]["special_attack"] + \
                                  str(current_image_counter) + ".png"
-        # hero_image = pg.image.load(load_image(current_hero_image))
-        # tile_coordinates = coordinate(tile)
-        # screen.blit(hero_image, tile_coordinates)
-        # draw_health_bar(screen, hero, tile_coordinates)
     elif type_of_attack == "special_opponents":
         if current_image_counter < 10:
             current_hero_image = hero_images[hero.stats["NAME"]]["special_lightning"] + \
