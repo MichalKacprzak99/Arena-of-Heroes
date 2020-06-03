@@ -140,7 +140,7 @@ hero_images = {
             "north": "ARCHER/archer_attacking/back_attacking/0_archer_Attack_0"
         },
         "special_lightning": "MAGE/special_attack/get_lightning/",
-        "special_poison": "ARCHER/special_attack/poison/"
+        "special_shoot": "ARCHER/special_attack/shoot/"
     }
 }
 
