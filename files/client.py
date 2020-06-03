@@ -45,7 +45,7 @@ def main():
                 menu.waiting_screen()
         else:
             if not gui_start:
-                potions = create_potions(potions, player, opponent, board.object_tiles, net, seed)
+                create_potions(potions, player, opponent, board.object_tiles, net, seed)
                 board.screen.fill((168, 139, 50))
                 width = game_sets["GAME_SCREEN_WIDTH"] + box_sets["BOX_WIDTH"] * 2
                 height = game_sets["GAME_SCREEN_HEIGHT"]

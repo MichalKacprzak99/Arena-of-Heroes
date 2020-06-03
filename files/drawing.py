@@ -3,9 +3,6 @@ from settings import game_sets, box_sets, hero_images, potion_img,\
 import pygame as pg
 
 
-
-
-
 def blit_text_center(screen, text_to_input, font, height, color):
     text_width, text_height = font.size(text_to_input)
     text = font.render(text_to_input, True, color)
@@ -193,7 +190,7 @@ def check_if_reach_potion(potions, tile):
 def react_to_potion(potions, tile, player, net):
     potion = check_if_reach_potion(potions, tile)
     if potion:
-        player.moved_hero = potion.affect(player.moved_hero)
+        potion.affect(player.moved_hero)
         del potions[potions.index(potion)]
         net.send(["update_potions", potions, player.moved_hero, player.p_id])
 

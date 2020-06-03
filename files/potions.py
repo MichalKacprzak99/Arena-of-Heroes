@@ -14,7 +14,6 @@ def create_potions(potions, player, opponent, object_tiles, net, seed):
     for potion, cord in zip(potions, positions):
         potion.pos = cord
     net.send(["update_potions", potions])
-    return potions
 
 
 class Potion(ABC):
@@ -37,7 +36,6 @@ class HealthPotion(Potion):
         if hero.hp > hero.max_hp:
             hero.hp = hero.max_hp
         hero.stats["HP"] = HealthDisplay(hero)
-        return hero
 
 
 class AttackPotion(Potion):
@@ -46,8 +44,7 @@ class AttackPotion(Potion):
         self.attack_increase = random.randint(20, 40)
 
     def affect(self, hero):
-        hero.stats["ATTACK"] *= self.attack_increase/100
-        return hero
+        hero.stats["ATTACK"] += hero.stats["ATTACK"]*self.attack_increase/100
 
 
 class SpeedPotion(Potion):
@@ -58,6 +55,3 @@ class SpeedPotion(Potion):
     def affect(self, hero):
         hero.stats["RANGE"] += self.range_increase
         hero.stats["SKILL_RANGE"] += self.range_increase
-        return hero
-
-

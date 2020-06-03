@@ -6,12 +6,12 @@ import random
 
 
 def create_potions():
-    potion = {
-        "HEALTH": HealthPotion(),
-        "SPEED": SpeedPotion(),
-        "ATTACK": AttackPotion()
+    potions = {
+        "HEALTH": HealthPotion,
+        "SPEED": SpeedPotion,
+        "ATTACK": AttackPotion
     }
-    return random.choices(list(potion.values()), k=3)
+    return [potion() for potion in random.choices(list(potions.values()), k=3)]
 
 
 class Game:
