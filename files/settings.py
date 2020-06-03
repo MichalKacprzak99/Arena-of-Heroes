@@ -118,7 +118,8 @@ hero_images = {
             "south": "WARRIOR/warrior_attacking/front_attacking/0_warrior_Attack_0",
             "north": "WARRIOR/warrior_attacking/back_attacking/0_warrior_Attack_0"
         },
-        "special_lightning": "MAGE/special_attack/get_lightning/"
+        "special_lightning": "MAGE/special_attack/get_lightning/",
+        "special_hit": "WARRIOR/special_attack/hit/"
     },
     "ARCHER": {
         "north": "ARCHER/north.png",
@@ -138,7 +139,8 @@ hero_images = {
             "south": "ARCHER/archer_attacking/front_attacking/0_archer_Attack_0",
             "north": "ARCHER/archer_attacking/back_attacking/0_archer_Attack_0"
         },
-        "special_lightning": "MAGE/special_attack/get_lightning/"
+        "special_lightning": "MAGE/special_attack/get_lightning/",
+        "special_poison": "ARCHER/special_attack/poison/"
     }
 }
 

@@ -27,11 +27,11 @@ def highlight_tile(screen, board, player, opponent, pos):
         tmp_pos = get_tile_pos(pos)
         if player.clicked_hero and player.clicked_in_range(tmp_pos) is False:
             color = colors["GRAY"]
-        if player.clicked_object(board.object_tiles,  tmp_pos):
+        if player.clicked_object(board.object_tiles, tmp_pos):
             color = colors["BLACK"]
         if player.clicked_death_hero(tmp_pos) or opponent.clicked_death_hero(tmp_pos):
             color = colors["BLACK"]
-        if player.clicked_opp_hero(opponent,  tmp_pos):
+        if player.clicked_opp_hero(opponent, tmp_pos):
             color = colors["RED"]
         if player.clicked_own_hero(tmp_pos):
             color = colors["BLUE"]
@@ -89,6 +89,7 @@ def draw_animated_hero(screen, hero, tile, frame_counter, total_frames):
 
 def draw_attacking_hero_animation(screen, hero, tile, frame_counter, total_frames, type_of_attack):
     current_image_counter = total_frames - frame_counter
+
     if type_of_attack == "basic":
         if current_image_counter < 10:
             current_hero_image = hero_images[hero.stats["NAME"]]["attacking"][hero.side] + \
@@ -102,6 +103,20 @@ def draw_attacking_hero_animation(screen, hero, tile, frame_counter, total_frame
                                  str(current_image_counter) + ".png"
         else:
             current_hero_image = hero_images[hero.stats["NAME"]]["special_attack"] + \
+                                 str(current_image_counter) + ".png"
+    elif type_of_attack == "special_hit":
+        if current_image_counter < 10:
+            current_hero_image = hero_images[hero.stats["NAME"]]["special_hit"] + \
+                                 str(current_image_counter) + ".png"
+        else:
+            current_hero_image = hero_images[hero.stats["NAME"]]["special_hit"] + \
+                                 str(current_image_counter) + ".png"
+    elif type_of_attack == "special_poison":
+        if current_image_counter < 10:
+            current_hero_image = hero_images[hero.stats["NAME"]]["special_poison"] + \
+                                 str(current_image_counter) + ".png"
+        else:
+            current_hero_image = hero_images[hero.stats["NAME"]]["special_poison"] + \
                                  str(current_image_counter) + ".png"
     elif type_of_attack == "special_opponents":
         if current_image_counter < 10:
@@ -191,6 +206,10 @@ def draw_attacking_hero(screen, board, player, opponent, player_turn, actual_pos
             opp_animation_counter, opp_total_frames = 8, 8
         elif player.special_attack.stats["NAME"] == "HEALER":
             animation_counter, total_frames = 6, 6
+        elif player.special_attack.stats["NAME"] == "WARRIOR":
+            animation_counter, total_frames = 6, 6
+        elif player.special_attack.stats["NAME"] == "ARCHER":
+            animation_counter, total_frames = 11, 11
 
     if player.attacking_hero:
         if player.attacking_hero.stats["NAME"] == "MAGE":
@@ -206,21 +225,35 @@ def draw_attacking_hero(screen, board, player, opponent, player_turn, actual_pos
         draw_background(screen, board, player, opponent, player_turn, actual_pos)
         if player.attacking_hero:
             which_attack = "basic"
-            draw_attacking_hero_animation(screen, player.attacking_hero, actual_pos, animation_counter, total_frames, which_attack)
+            draw_attacking_hero_animation(screen, player.attacking_hero, actual_pos, animation_counter, total_frames,
+                                          which_attack)
         else:
             which_attack = "special"
             if player.special_attack.stats["NAME"] == "HEALER":
-                draw_attacking_hero_animation(screen, player.special_attack, actual_pos, animation_counter, total_frames, which_attack)
+                draw_attacking_hero_animation(screen, player.special_attack, actual_pos, animation_counter,
+                                              total_frames, which_attack)
+            elif player.special_attack.stats["NAME"] == "WARRIOR":
+                which_attack = "special_hit"
+                draw_attacking_hero_animation(screen, player.special_attack, player.attacked_with_special.pos,
+                                              animation_counter, total_frames, which_attack)
+                pg.time.delay(30)
+            elif player.special_attack.stats["NAME"] == "ARCHER":
+                which_attack = "special_poison"
+                draw_attacking_hero_animation(screen, player.special_attack, player.attacked_with_special.pos,
+                                              animation_counter, total_frames, which_attack)
+                pg.time.delay(30)
             elif player.special_attack.stats["NAME"] == "MAGE":
                 draw_attacking_hero_animation(screen, player.special_attack, actual_pos, animation_counter,
                                               total_frames, which_attack)
+                pg.time.delay(30)
                 which_attack = "special_opponents"
                 for heroes in player.attacked_with_special:
                     draw_attacking_hero_animation(screen, heroes, heroes.pos, opp_animation_counter,
                                                   opp_total_frames, which_attack)
-                    pg.time.delay(5)
+                    pg.time.delay(20)
             else:
-                draw_attacking_hero_animation(screen, player.special_attack, actual_pos, animation_counter, total_frames, which_attack)
+                draw_attacking_hero_animation(screen, player.special_attack, actual_pos, animation_counter,
+                                              total_frames, which_attack)
         pg.display.update()
         if mage:
             pg.time.delay(30)
@@ -249,10 +282,30 @@ def redraw_window(screen, board, player, opponent, player_turn, actual_pos, n):
         n.send(["update_opponent", player.player_id, opponent])
         made_move = True
     if player.special_attack:
+        if player.special_attack.stats["NAME"] == "WARRIOR" or player.special_attack.stats["NAME"] == "HEALER":
+            if player.attacked_with_special.pos[0] > player.special_attack.pos[0]:
+                player.special_attack.side = "east"
+            if player.attacked_with_special.pos[0] < player.special_attack.pos[0]:
+                player.special_attack.side = "west"
+            if player.attacked_with_special.pos[1] > player.special_attack.pos[1]:
+                player.special_attack.side = "south"
+            if player.attacked_with_special.pos[1] < player.special_attack.pos[1]:
+                player.special_attack.side = "north"
+        player.heroes[player.special_attack.hero_id].side = player.special_attack.side
         draw_attacking_hero(screen, board, player, opponent, player_turn, player.special_attack.pos)
         player.special_attack = None
         player.attacked_with_special = None
     if opponent.special_attack:
+        if opponent.special_attack.stats["NAME"] == "WARRIOR" or opponent.special_attack.stats["NAME"] == "HEALER":
+            if opponent.attacked_with_special.pos[0] > opponent.special_attack.pos[0]:
+                opponent.special_attack.side = "east"
+            if opponent.attacked_with_special.pos[0] < opponent.special_attack.pos[0]:
+                opponent.special_attack.side = "west"
+            if opponent.attacked_with_special.pos[1] > opponent.special_attack.pos[1]:
+                opponent.special_attack.side = "south"
+            if opponent.attacked_with_special.pos[1] < opponent.special_attack.pos[1]:
+                opponent.special_attack.side = "north"
+        opponent.heroes[opponent.special_attack.hero_id].side = opponent.special_attack.side
         draw_attacking_hero(screen, board, opponent, player, player_turn, opponent.special_attack.pos)
         opponent.special_attack = None
         opponent.attacked_with_special = None

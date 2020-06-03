@@ -142,6 +142,8 @@ class Warrior(Hero):
         if hero_to_attack and self.in_range_of_skill(clicked_pos):
             hero_to_attack = update_stats(hero_to_attack, -self.powerful_attack * self.stats["ATTACK"])
             attacking_hero = player.clicked_hero
+            player.special_attack = attacking_hero
+            player.attacked_with_special = hero_to_attack
             player.last_action = ["special_attack", attacking_hero, hero_to_attack]
             return ["special_attack", player.player_id, player.last_action]
         else:
@@ -159,6 +161,8 @@ class Archer(Hero):
             multi = int(sqrt(sum([(i - j) ** 2 for i, j in zip(clicked_pos, self.pos)])))
             hero_to_attack = update_stats(hero_to_attack, -multi * self.stats["ATTACK"])
             attacking_hero = player.clicked_hero
+            player.special_attack = attacking_hero
+            player.attacked_with_special = hero_to_attack
             player.last_action = ["special_attack", attacking_hero, hero_to_attack]
             return ["special_attack", player.player_id, player.last_action]
         else:
