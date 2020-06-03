@@ -114,12 +114,12 @@ class TeamCreator:
     def show_hero(self, name, x=100, y=100, mode=2):
         if name is not None:
             name = name.upper()
-            path = name
+            img_path = name
             if mode is 2:
-                path +="\south.png"
+                img_path +="\south.png"
             else:
-                path += "\portrait.png"
-            self.draw_image(path, x, y, mode)
+                img_path += "\portrait.png"
+            self.draw_image(img_path, x, y, mode)
 
     def draw_text(self, text_to_input, pos_x, pos_y, size=15):
         font = pg.font.SysFont("Arial", size)
