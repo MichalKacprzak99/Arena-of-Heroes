@@ -11,9 +11,9 @@ def blit_text_center(screen, text_to_input, font, height, color):
 
 
 def draw_result_of_game(screen, player):
-    if player.result is not None:
-        result_image = pg.image.load(load_image(result[str(player.result)]))
-        screen.blit(result_image, [350, 150])
+    result_image = pg.image.load(load_image(result[str(len(player.heroes))]))
+    screen.blit(result_image, [350, 150])
+    pg.display.update()
 
 
 def check_hero_side(attacked, attacking):
@@ -169,7 +169,7 @@ def draw_background(screen, board, player, opponent, player_turn, actual_pos, po
     draw_heroes(screen, player)
     draw_heroes(screen, opponent)
     draw_player_turn(screen, player.p_id, player_turn)
-    draw_result_of_game(screen, player)
+    # draw_result_of_game(screen, player)
     draw_potions(screen, potions)
     if player.clicked_hero:
         highlight_clicked_hero(screen, player)
@@ -284,7 +284,7 @@ def redraw_window(screen, board, player, opponent, player_turn, actual_pos, n, p
     def moved(p1, p2):
         for tile, face_to in p1.moved_hero.path:
             p1.moved_hero.side = face_to
-            react_to_potion(potions, tile, player, n)
+            react_to_potion(potions, tile, p1, n)
             draw_with_animation_hero(screen, board, p1, p2, player_turn, actual_pos, tile, potions)
         p1.heroes[p1.moved_hero.hero_id].side = p1.moved_hero.side
         p1.moved_hero = None

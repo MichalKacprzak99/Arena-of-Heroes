@@ -61,6 +61,7 @@ class ThreadedClient:
             "get_turn": self.get_turn,
             "result": self.result,
             "end": self.end,
+            "get_end": self.end,
             "save": self.save,
             "get_games_to_load": self.get_games_to_load,
             "load": self.load,
@@ -189,13 +190,12 @@ class ThreadedClient:
         return [self.game.player_turn, self.game.turns]
 
     def result(self):
-        if self.data[2] == "lose":
+        if self.data[2] == 0:
             self.game.loser = self.data[1]
-        elif self.data[2] == "win":
-            self.game.winner = self.data[1]
+            self.game.winner = abs(self.data[1] - 1)
 
     def end(self):
-        return self.game.winner is not None and self.game.loser is not None
+        return self.game.winner + self.game.loser == 1
 
     def save(self):
         self.game.last_saved = datetime.datetime.now().strftime("%c")
