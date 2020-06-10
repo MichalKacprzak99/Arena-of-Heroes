@@ -17,7 +17,8 @@ Full description available [here](project_description.odt).
 - 4 different map
 - possibility to play against the computer to improve skills(in future)
 ## Demo:
-Full demo available [here](demo/demo.mp4).
+Full demo available [here](demo/demo.mp4).</br>
+Check out our demo video: </br>
 [![Video demo](https://img.youtube.com/vi/V_6LN6bUNa0/0.jpg)](https://www.youtube.com/watch?v=V_6LN6bUNa0)
 ### Attacking:
  ![here](demo/attack.gif)
