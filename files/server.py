@@ -24,8 +24,10 @@ id_count = 0
 
 class Server:
     def __init__(self):
+        # if you wanna play online uncomment 28 line and comment 29 and do the same in network.py
+        # self.server = ''
         self.server = '127.0.0.1'
-        self.port = 666
+        self.port = 556
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
             self.s.bind((self.server, self.port))
