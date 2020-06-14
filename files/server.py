@@ -167,13 +167,14 @@ class ThreadedClient:
     def log_out_user(self):
         player_to_log_out = self.game.players[self.p_id]
         player_login_data = users.find_one({"login": player_to_log_out.login})
-        post = {
-            "login": player_login_data["login"],
-            "password": player_login_data["password"],
-            "logged_in": 0
-        }
-        users.find_one_and_replace({"login": player_login_data["login"]}, post)
-        logger.info("LOGGING OUT USER WITH LOGIN: " + player_login_data["login"])
+        if player_login_data is not None:
+            post = {
+                "login": player_login_data["login"],
+                "password": player_login_data["password"],
+                "logged_in": 0
+            }
+            users.find_one_and_replace({"login": player_login_data["login"]}, post)
+            logger.info("LOGGING OUT USER WITH LOGIN: " + player_login_data["login"])
 
     def get_info(self):
         opponent_ready = self.game.is_ready[abs(self.data[1] - 1)]
