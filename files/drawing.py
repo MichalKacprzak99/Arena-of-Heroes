@@ -88,15 +88,16 @@ def draw_animated_hero(screen, hero, tile, frame_counter, total_frames):
 
     hero_image = pg.image.load(load_image(current_hero_image))
     tile_coordinates = coordinate(tile)
-    if hero.side == "east":
-        hero_coordinate = [tile_coordinates[0] - int((frame_counter * (64 / (total_frames + 1)))), tile_coordinates[1]]
-    elif hero.side == "west":
-        hero_coordinate = [tile_coordinates[0] + int((frame_counter * (64 / (total_frames + 1)))), tile_coordinates[1]]
-    elif hero.side == "south":
-        hero_coordinate = [tile_coordinates[0], tile_coordinates[1] - int((frame_counter * (64 / (total_frames + 1))))]
-    else:
-        hero_coordinate = [tile_coordinates[0], tile_coordinates[1] + int((frame_counter * (64 / (total_frames + 1))))]
+    movement = int((frame_counter * (64 / (total_frames + 1))))
 
+    if hero.side == "east":
+        hero_coordinate = [tile_coordinates[0] - movement, tile_coordinates[1]]
+    elif hero.side == "west":
+        hero_coordinate = [tile_coordinates[0] + movement, tile_coordinates[1]]
+    elif hero.side == "south":
+        hero_coordinate = [tile_coordinates[0], tile_coordinates[1] - movement]
+    else:
+        hero_coordinate = [tile_coordinates[0], tile_coordinates[1] + movement]
     screen.blit(hero_image, hero_coordinate)
     draw_health_bar(screen, hero, hero_coordinate)
 
@@ -111,26 +112,12 @@ def draw_attacking_hero_animation(screen, hero, tile, frame_counter, total_frame
         else:
             current_hero_image = hero_images[hero.stats["NAME"]]["attacking"][hero.side] + \
                                  str(current_image_counter) + ".png"
-    elif type_of_attack == "special_attack":
+    else:
         if current_image_counter < 10:
-            current_hero_image = hero_images[hero.stats["NAME"]]["special_attack"] + \
+            current_hero_image = hero_images[hero.stats["NAME"]][type_of_attack] + \
                                  str(current_image_counter) + ".png"
         else:
-            current_hero_image = hero_images[hero.stats["NAME"]]["special_attack"] + \
-                                 str(current_image_counter) + ".png"
-    elif type_of_attack == "special_shoot":
-        if current_image_counter < 10:
-            current_hero_image = hero_images[hero.stats["NAME"]]["special_shoot"] + \
-                                 str(current_image_counter) + ".png"
-        else:
-            current_hero_image = hero_images[hero.stats["NAME"]]["special_shoot"] + \
-                                 str(current_image_counter) + ".png"
-    elif type_of_attack == "special_lightning":
-        if current_image_counter < 10:
-            current_hero_image = hero_images[hero.stats["NAME"]]["special_lightning"] + \
-                                 str(current_image_counter) + ".png"
-        else:
-            current_hero_image = hero_images[hero.stats["NAME"]]["special_lightning"] + \
+            current_hero_image = hero_images[hero.stats["NAME"]][type_of_attack] + \
                                  str(current_image_counter) + ".png"
 
     hero_image = pg.image.load(load_image(current_hero_image))
@@ -204,11 +191,7 @@ def draw_attacking_hero(screen, board, player, opponent, player_turn, actual_pos
         if player.special_attack.stats["NAME"] == "MAGE":
             animation_counter, total_frames = 4, 4
             opp_animation_counter, opp_total_frames = 8, 8
-        elif player.special_attack.stats["NAME"] == "HEALER":
-            animation_counter, total_frames = 6, 6
-        elif player.special_attack.stats["NAME"] == "WARRIOR":
-            animation_counter, total_frames = 6, 6
-        elif player.special_attack.stats["NAME"] == "ARCHER":
+        else:
             animation_counter, total_frames = 6, 6
 
     if player.attacking_hero:
