@@ -1,15 +1,6 @@
-from hero import Healer, Mage, Warrior, Archer, action
-from settings import get_tile_pos, box_sets
+from hero import action
+from settings import get_tile_pos, box_sets, index_error_handler
 from math import sqrt
-
-
-def index_error_handler(func):
-    def wrapper(*args):
-        try:
-            return func(*args)
-        except IndexError:
-            return False
-    return wrapper
 
 
 class Player:
@@ -21,7 +12,9 @@ class Player:
         self.clicked_hero = None
         self.moved_hero = None
         self.attacking_hero = None
-        self.attacked_hero = None # sides update
+        self.attacked_hero = None
+        self.special_attack = None
+        self.attacked_with_special = None
         self.last_action = []
         self.result = None
         self.login = None
@@ -56,14 +49,11 @@ class Player:
         opponent.last_action = None
 
     def check_result(self, opponent, n):
-        if len(self.heroes) == 0:
-            self.result = 0
-        elif len(opponent.heroes) == 0:
-            self.result = len(self.heroes)
-        try:
-            n.send(["result", self.p_id, self.result])
-        except EOFError:
-            pass
+        if len(self.heroes) == 0 or len(opponent.heroes) == 0:
+            try:
+                n.send(["result", self.p_id, len(self.heroes)])
+            except EOFError:
+                pass
 
     def action(self, opponent, object_tiles, pos, gui):
         if box_sets["BOX_WIDTH"] < pos[0] < box_sets["RIGHT_BOX"]:

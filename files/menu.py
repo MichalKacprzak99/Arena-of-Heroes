@@ -15,6 +15,11 @@ class Menu:
             "Instructions": self.load_instructions,
             "Quit": pg.quit
         }
+        self.ins_func = {
+            "Previous": self.prev_image,
+            "QUIT": self.quit_submenu,
+            "Next": self.next_image
+        }
         self.was_loaded = False
         self.load_box = None
         self.menu_box = None
@@ -31,6 +36,11 @@ class Menu:
             "load": [False, self.load_submenu],
             "creator": [False, self.tc]
         }
+        self.ins_buttons = None
+        self.ins_box = None
+        self.ins_image = 0
+        self.ins_max = 7
+
 
     def create_menu(self):
         self.background_image()
@@ -46,11 +56,15 @@ class Menu:
         return menu
 
     def create_instructions(self):
-        self.background_image()
-        back = thorpy.Background(color=(0, 0, 0, 0))
-        my_reaction = thorpy.ConstantReaction(reacts_to=pg.MOUSEBUTTONDOWN, reac_func=self.exit_instructions)
-        back.add_reaction(my_reaction)
-        return thorpy.Menu(back)
+        self.ins_buttons = [thorpy.make_button(txt, func=self.ins_func[txt])for txt in self.ins_func.keys()]
+        [button.set_font_size(30) for button in self.ins_buttons]
+        [button.scale_to_title() for button in self.ins_buttons]
+        self.ins_box = thorpy.Box(self.ins_buttons)
+        self.ins_box.set_main_color((0, 0, 0, 0))
+        thorpy.store(self.ins_box, mode="h", gap=40)
+        self.ins_box.set_topleft((170, 540))
+        self.ins_box.fit_children()
+        return thorpy.Menu(self.ins_box)
 
     def create_load_menu(self):
         self.background_image()
@@ -64,11 +78,13 @@ class Menu:
         [button.scale_to_title() for button in self.load_buttons]
         self.load_box = thorpy.Box(self.load_buttons)
         load_submenu = thorpy.Menu(self.load_box)
+
         return load_submenu
 
     def load_instructions(self):
         self.change_display("help")
-        self.draw_image("instructions.png", 50, 50)
+        self.draw_image("INSTRUCTIONS\ins"+str(self.ins_image)+".png", 50, 50)
+        self.instructions_menu.blit_and_update()
         pg.display.update()
 
     def load_menu(self):
@@ -97,6 +113,7 @@ class Menu:
         self.change_display("active")
         self.background_image()
         self.menu_box.blit()
+        self.ins_image = 0
         pg.display.update()
 
     def highlight_buttons(self, event):
@@ -159,3 +176,15 @@ class Menu:
 
     def waiting_screen(self):
         self.team_screen() if self.control["creator"][0] else self.loading_screen()
+
+    def prev_image(self):
+        self.ins_image-=1
+        if self.ins_image < 0:
+            self.ins_image += self.ins_max
+        self.load_instructions()
+
+    def next_image(self):
+        self.ins_image+=1
+        if self.ins_image == self.ins_max:
+            self.ins_image = 0
+        self.load_instructions()

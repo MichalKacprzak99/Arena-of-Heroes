@@ -9,7 +9,7 @@ from player import Player
 from _thread import start_new_thread
 from itertools import islice
 from pymongo import MongoClient
-
+import random
 root = MongoClient("localhost", 27017)
 aof_db = root['games_db']
 games = aof_db['games']
@@ -24,8 +24,10 @@ id_count = 0
 
 class Server:
     def __init__(self):
+        # if you wanna play online uncomment 28 line and comment 29 and do the same in network.py
+        # self.server = ''
         self.server = '127.0.0.1'
-        self.port = 8080
+        self.port = 556
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
             self.s.bind((self.server, self.port))
@@ -36,6 +38,7 @@ class Server:
 
     def start(self):
         global id_count
+        seed = random.randint(0, 1000000)
         while True:
             conn, adr = self.s.accept()
             logger.info("Connected to: " + str(adr))
@@ -47,7 +50,7 @@ class Server:
                 logger.info("Creating a new game ...")
             else:
                 player_id = 1
-            start_new_thread(ThreadedClient().run, (conn, {"game": game}, player_id))
+            start_new_thread(ThreadedClient().run, (conn, {"game": game}, player_id, seed))
 
 
 class ThreadedClient:
@@ -58,6 +61,7 @@ class ThreadedClient:
             "get_turn": self.get_turn,
             "result": self.result,
             "end": self.end,
+            "get_end": self.end,
             "save": self.save,
             "get_games_to_load": self.get_games_to_load,
             "load": self.load,
@@ -72,20 +76,23 @@ class ThreadedClient:
             "basic_attack": self.attack,
             "special_attack": self.attack,
             "random_spell": self.random_spell,
-            "heal": self.heal
+            "heal": self.heal,
+            "update_potions": self.update_potions
         }
+        self.seed = 0
         self.reply = []
         self.data = []
         self.game = None
         self.to_load = False
         self.p_id = None
 
-    def run(self, connection, g, p_id):
+    def run(self, connection, g, p_id, seed):
+
         global id_count
         self.p_id = p_id
         self.game = g["game"]
         self.game.players[self.p_id] = Player(name="df", player_id=self.p_id)
-
+        self.seed = seed
         connection.send(pickle.dumps(self.p_id))
 
         while True:
@@ -160,17 +167,19 @@ class ThreadedClient:
     def log_out_user(self):
         player_to_log_out = self.game.players[self.p_id]
         player_login_data = users.find_one({"login": player_to_log_out.login})
-        post = {
-            "login": player_login_data["login"],
-            "password": player_login_data["password"],
-            "logged_in": 0
-        }
-        users.find_one_and_replace({"login": player_login_data["login"]}, post)
-        logger.info("LOGGING OUT USER WITH LOGIN: " + player_login_data["login"])
+        if player_login_data is not None:
+            post = {
+                "login": player_login_data["login"],
+                "password": player_login_data["password"],
+                "logged_in": 0
+            }
+            users.find_one_and_replace({"login": player_login_data["login"]}, post)
+            logger.info("LOGGING OUT USER WITH LOGIN: " + player_login_data["login"])
 
     def get_info(self):
         opponent_ready = self.game.is_ready[abs(self.data[1] - 1)]
-        return [self.game.players[self.p_id], self.game.players[self.data[1]], self.game.which_map, opponent_ready]
+        return [self.game.players[self.p_id], self.game.players[self.data[1]],
+                self.game.which_map, opponent_ready, self.game.potions, self.seed]
 
     def is_ready(self):
         self.game.is_ready[abs(self.data[1] - 1)] = self.data[2]
@@ -182,13 +191,12 @@ class ThreadedClient:
         return [self.game.player_turn, self.game.turns]
 
     def result(self):
-        if self.data[2] == "lose":
+        if self.data[2] == 0:
             self.game.loser = self.data[1]
-        elif self.data[2] == "win":
-            self.game.winner = self.data[1]
+            self.game.winner = abs(self.data[1] - 1)
 
     def end(self):
-        return self.game.winner is not None and self.game.loser is not None
+        return self.game.winner + self.game.loser == 1
 
     def save(self):
         self.game.last_saved = datetime.datetime.now().strftime("%c")
@@ -232,25 +240,50 @@ class ThreadedClient:
         self.game.players[self.data[1]].moved_hero = moved_hero
         self.game.get_next_turn()
 
-    def attack(self):
-        last_action = self.data[2]
-        attacked_hero = last_action[2]
-        self.game.players[self.data[1]].last_action = last_action
-        self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
-        self.game.get_next_turn()
-
     def random_spell(self):
         last_action = self.data[2]
         attacked_heroes = last_action[2]
         self.game.players[self.data[1]].last_action = last_action
         for attacked_hero in attacked_heroes:
             self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
+        self.game.players[self.data[1]].special_attack = last_action[1]
+        self.game.players[self.data[1]].attacked_with_special = attacked_heroes
+        self.game.get_next_turn()
+
+    def attack(self):
+        last_action = self.data[2]
+        attacked_hero = last_action[2]
+        attacking_hero = last_action[1]
+        self.game.players[self.data[1]].last_action = last_action
+        self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
+        self.game.players[self.data[1]].attacking_hero = attacking_hero
+        self.game.players[self.data[1]].attacked_hero = attacked_hero
+        self.game.get_next_turn()
+
+    def special_attack(self):
+        last_action = self.data[2]
+        attacked_hero = last_action[2]
+        attacking_hero = last_action[1]
+        self.game.players[self.data[1]].last_action = last_action
+        self.game.players[abs(self.data[1] - 1)].heroes[attacked_hero.hero_id] = attacked_hero
+        self.game.players[self.data[1]].special_attack = attacking_hero
+        self.game.players[self.data[1]].attacked_with_special = attacked_hero
         self.game.get_next_turn()
 
     def heal(self):
-        hero_to_heal = self.data[2]
+        last_action = self.data[2]
+        healing_hero = last_action[1]
+        hero_to_heal = last_action[2]
+        self.game.players[self.data[1]].special_attack = healing_hero
+        self.game.players[self.data[1]].attacked_with_special = hero_to_heal
         self.game.players[self.data[1]].heroes[hero_to_heal.hero_id] = hero_to_heal
         self.game.get_next_turn()
+
+    def update_potions(self):
+        self.game.potions = self.data[1]
+        if len(self.data) > 2:
+            affected_hero = self.data[2]
+            self.game.players[self.data[3]].heroes[affected_hero.hero_id] = affected_hero
 
 
 if __name__ == '__main__':

@@ -1,4 +1,5 @@
-from settings import game_sets, box_sets, hero_images, colors, coordinate, load_image, get_tile_pos, tile_dim, result
+from settings import game_sets, box_sets, hero_images, potion_img,\
+    colors, coordinate, load_image, get_tile_pos, tile_dim, result, index_error_handler
 import pygame as pg
 
 
@@ -10,14 +11,27 @@ def blit_text_center(screen, text_to_input, font, height, color):
 
 
 def draw_result_of_game(screen, player):
-    if player.result is not None:
-        result_image = pg.image.load(load_image(result[str(player.result)]))
-        screen.blit(result_image, [350, 150])
+    result_image = pg.image.load(load_image(result[str(len(player.heroes))]))
+    screen.blit(result_image, [350, 150])
+    pg.display.update()
 
 
-def draw_player_turn(screen, player_id, player_turn):
+def check_hero_side(attacked, attacking):
+    side = attacking.side
+    if attacked.pos[0] > attacking.pos[0]:
+        side = "east"
+    if attacked.pos[0] < attacking.pos[0]:
+        side = "west"
+    if attacked.pos[1] > attacking.pos[1]:
+        side = "south"
+    if attacked.pos[1] < attacking.pos[1]:
+        side = "north"
+    return side
+
+
+def draw_player_turn(screen, p_id, player_turn):
     font = pg.font.SysFont("Arial", 25)
-    text_to_input = "Your turn" if player_id == player_turn else "Opponent's turn"
+    text_to_input = "Your turn" if p_id == player_turn else "Opponent's turn"
     blit_text_center(screen, text_to_input, font, 20, colors["RED"])
 
 
@@ -27,11 +41,11 @@ def highlight_tile(screen, board, player, opponent, pos):
         tmp_pos = get_tile_pos(pos)
         if player.clicked_hero and player.clicked_in_range(tmp_pos) is False:
             color = colors["GRAY"]
-        if player.clicked_object(board.object_tiles,  tmp_pos):
+        if player.clicked_object(board.object_tiles, tmp_pos):
             color = colors["BLACK"]
         if player.clicked_death_hero(tmp_pos) or opponent.clicked_death_hero(tmp_pos):
             color = colors["BLACK"]
-        if player.clicked_opp_hero(opponent,  tmp_pos):
+        if player.clicked_opp_hero(opponent, tmp_pos):
             color = colors["RED"]
         if player.clicked_own_hero(tmp_pos):
             color = colors["BLUE"]
@@ -87,14 +101,38 @@ def draw_animated_hero(screen, hero, tile, frame_counter, total_frames):
     draw_health_bar(screen, hero, hero_coordinate)
 
 
-def draw_attacking_hero_animation(screen, hero, tile, frame_counter, total_frames):
+def draw_attacking_hero_animation(screen, hero, tile, frame_counter, total_frames, type_of_attack):
     current_image_counter = total_frames - frame_counter
-    if current_image_counter < 10:
-        current_hero_image = hero_images[hero.stats["NAME"]]["attacking"][hero.side] + \
-                             "0" + str(current_image_counter) + ".png"
-    else:
-        current_hero_image = hero_images[hero.stats["NAME"]]["attacking"][hero.side] + \
-                             str(current_image_counter) + ".png"
+
+    if type_of_attack == "basic" or type_of_attack == "special_hit":
+        if current_image_counter < 10:
+            current_hero_image = hero_images[hero.stats["NAME"]]["attacking"][hero.side] + \
+                                 "0" + str(current_image_counter) + ".png"
+        else:
+            current_hero_image = hero_images[hero.stats["NAME"]]["attacking"][hero.side] + \
+                                 str(current_image_counter) + ".png"
+    elif type_of_attack == "special_attack":
+        if current_image_counter < 10:
+            current_hero_image = hero_images[hero.stats["NAME"]]["special_attack"] + \
+                                 str(current_image_counter) + ".png"
+        else:
+            current_hero_image = hero_images[hero.stats["NAME"]]["special_attack"] + \
+                                 str(current_image_counter) + ".png"
+    elif type_of_attack == "special_shoot":
+        if current_image_counter < 10:
+            current_hero_image = hero_images[hero.stats["NAME"]]["special_shoot"] + \
+                                 str(current_image_counter) + ".png"
+        else:
+            current_hero_image = hero_images[hero.stats["NAME"]]["special_shoot"] + \
+                                 str(current_image_counter) + ".png"
+    elif type_of_attack == "special_lightning":
+        if current_image_counter < 10:
+            current_hero_image = hero_images[hero.stats["NAME"]]["special_lightning"] + \
+                                 str(current_image_counter) + ".png"
+        else:
+            current_hero_image = hero_images[hero.stats["NAME"]]["special_lightning"] + \
+                                 str(current_image_counter) + ".png"
+
     hero_image = pg.image.load(load_image(current_hero_image))
     tile_coordinates = coordinate(tile)
     screen.blit(hero_image, tile_coordinates)
@@ -118,18 +156,26 @@ def draw_death_hero(screen, hero, tile):
     screen.blit(hero_image, hero_coordinate)
 
 
-def draw_background(screen, board, player, opponent, player_turn, actual_pos):
+def draw_potions(screen, potions):
+    for potion in potions:
+        potion_coordinate = coordinate(potion.pos)
+        potion_image = pg.image.load(load_image(potion_img[potion.name]))
+        screen.blit(potion_image, potion_coordinate)
+
+
+def draw_background(screen, board, player, opponent, player_turn, actual_pos, potions):
     board.draw()
     highlight_tile(screen, board, player, opponent, actual_pos)
     draw_heroes(screen, player)
     draw_heroes(screen, opponent)
     draw_player_turn(screen, player.p_id, player_turn)
-    draw_result_of_game(screen, player)
+    # draw_result_of_game(screen, player)
+    draw_potions(screen, potions)
     if player.clicked_hero:
         highlight_clicked_hero(screen, player)
 
 
-def draw_with_animation_hero(screen, board, player, opponent, player_turn, actual_pos, tile):
+def draw_with_animation_hero(screen, board, player, opponent, player_turn, actual_pos, tile, potions):
     mage = False
     if player.moved_hero.stats["NAME"] == "MAGE":
         animation_counter, total_frames = 17, 17
@@ -137,7 +183,7 @@ def draw_with_animation_hero(screen, board, player, opponent, player_turn, actua
     else:
         animation_counter, total_frames = 29, 29
     while animation_counter >= 0:
-        draw_background(screen, board, player, opponent, player_turn, actual_pos)
+        draw_background(screen, board, player, opponent, player_turn, actual_pos, potions)
         draw_animated_hero(screen, player.moved_hero, tile, animation_counter, total_frames)
         pg.display.update()
         if mage:
@@ -148,20 +194,66 @@ def draw_with_animation_hero(screen, board, player, opponent, player_turn, actua
     pg.display.update()
 
 
-def draw_attacking_hero(screen, board, player, opponent, player_turn, actual_pos):
+def draw_attacking_hero(screen, board, player, opponent, player_turn, actual_pos, potions):
     mage = False
     healer = False
-    if player.attacking_hero.stats["NAME"] == "MAGE":
-        animation_counter, total_frames = 8, 8
-        mage = True
-    elif player.attacking_hero.stats["NAME"] == "HEALER":
-        animation_counter, total_frames = 29, 29
-        healer = True
-    else:
-        animation_counter, total_frames = 14, 14
+    animation_counter, total_frames = 0, 0
+    opp_animation_counter, opp_total_frames = 0, 0
+
+    if player.special_attack:
+        if player.special_attack.stats["NAME"] == "MAGE":
+            animation_counter, total_frames = 4, 4
+            opp_animation_counter, opp_total_frames = 8, 8
+        elif player.special_attack.stats["NAME"] == "HEALER":
+            animation_counter, total_frames = 6, 6
+        elif player.special_attack.stats["NAME"] == "WARRIOR":
+            animation_counter, total_frames = 6, 6
+        elif player.special_attack.stats["NAME"] == "ARCHER":
+            animation_counter, total_frames = 6, 6
+
+    if player.attacking_hero:
+        if player.attacking_hero.stats["NAME"] == "MAGE":
+            animation_counter, total_frames = 8, 8
+            mage = True
+        elif player.attacking_hero.stats["NAME"] == "HEALER":
+            animation_counter, total_frames = 29, 29
+            healer = True
+        else:
+            animation_counter, total_frames = 14, 14
+
     while animation_counter >= 0:
-        draw_background(screen, board, player, opponent, player_turn, actual_pos)
-        draw_attacking_hero_animation(screen, player.attacking_hero, actual_pos, animation_counter, total_frames)
+        draw_background(screen, board, player, opponent, player_turn, actual_pos, potions)
+        if player.attacking_hero:
+            which_attack = "basic"
+            draw_attacking_hero_animation(screen, player.attacking_hero, actual_pos, animation_counter, total_frames,
+                                          which_attack)
+        else:
+            which_attack = "special_attack"
+            if player.special_attack.stats["NAME"] == "HEALER":
+                draw_attacking_hero_animation(screen, player.special_attack, player.attacked_with_special.pos,
+                                              animation_counter, total_frames, which_attack)
+            elif player.special_attack.stats["NAME"] == "WARRIOR":
+                which_attack = "special_hit"
+                draw_attacking_hero_animation(screen, player.special_attack, actual_pos, animation_counter,
+                                              total_frames, which_attack)
+                pg.time.delay(30)
+            elif player.special_attack.stats["NAME"] == "ARCHER":
+                which_attack = "special_shoot"
+                draw_attacking_hero_animation(screen, player.special_attack, player.attacked_with_special.pos,
+                                              animation_counter, total_frames, which_attack)
+                pg.time.delay(30)
+            elif player.special_attack.stats["NAME"] == "MAGE":
+                draw_attacking_hero_animation(screen, player.special_attack, actual_pos, animation_counter,
+                                              total_frames, which_attack)
+                pg.time.delay(30)
+                which_attack = "special_lightning"
+                for heroes in player.attacked_with_special:
+                    draw_attacking_hero_animation(screen, heroes, heroes.pos, opp_animation_counter,
+                                                  opp_total_frames, which_attack)
+                    pg.time.delay(20)
+            else:
+                draw_attacking_hero_animation(screen, player.special_attack, actual_pos, animation_counter,
+                                              total_frames, which_attack)
         pg.display.update()
         if mage:
             pg.time.delay(30)
@@ -173,34 +265,62 @@ def draw_attacking_hero(screen, board, player, opponent, player_turn, actual_pos
     pg.display.update()
 
 
-def redraw_window(screen, board, player, opponent, player_turn, actual_pos, n):
+@index_error_handler
+def check_if_reach_potion(potions, tile):
+    return list(filter(lambda potion: tile == potion.pos, potions))[0]
+
+
+def react_to_potion(potions, tile, player, net):
+    potion = check_if_reach_potion(potions, tile)
+    if potion:
+        potion.affect(player.moved_hero)
+        del potions[potions.index(potion)]
+        net.send(["update_potions", potions, player.moved_hero, player.p_id])
+
+
+def redraw_window(screen, board, player, opponent, player_turn, actual_pos, n, potions):
     made_move = False
+
+    def moved(p1, p2):
+        for tile, face_to in p1.moved_hero.path:
+            p1.moved_hero.side = face_to
+            react_to_potion(potions, tile, p1, n)
+            draw_with_animation_hero(screen, board, p1, p2, player_turn, actual_pos, tile, potions)
+        p1.heroes[p1.moved_hero.hero_id].side = p1.moved_hero.side
+        p1.moved_hero = None
+
     if player.moved_hero:
-        for tile, side in player.moved_hero.path:
-            player.moved_hero.side = side
-            draw_with_animation_hero(screen, board, player, opponent, player_turn, actual_pos, tile)
-        player.heroes[player.moved_hero.hero_id].side = player.moved_hero.side
-        player.moved_hero = None
+        moved(player, opponent)
     if opponent.moved_hero:
-        for tile, side in opponent.moved_hero.path:
-            opponent.moved_hero.side = side
-            draw_with_animation_hero(screen, board, opponent, player, player_turn, actual_pos, tile)
-        opponent.heroes[opponent.moved_hero.hero_id].side = opponent.moved_hero.side
-        opponent.moved_hero = None
+        moved(opponent, player)
         n.send(["update_opponent", player.p_id, opponent])
         made_move = True
+
+    def special_attack(p1, p2):
+        if p1.special_attack.stats["NAME"] != "MAGE":
+            p1.heroes[p1.special_attack.hero_id].side = check_hero_side(p1.attacked_with_special, p1.special_attack)
+        draw_attacking_hero(screen, board, p1, p2, player_turn, p1.special_attack.pos, potions)
+        p1.special_attack = None
+        p1.attacked_with_special = None
+
+    if player.special_attack:
+        special_attack(player, opponent)
+    if opponent.special_attack:
+        special_attack(opponent, player)
+        n.send(["update_opponent", player.p_id, opponent])
+
+    def attack(p1, p2):
+        p1.heroes[p1.attacking_hero.hero_id].side = check_hero_side(p1.attacked_hero, p1.attacking_hero)
+        draw_attacking_hero(screen, board, p1, p2, player_turn, p1.attacking_hero.pos, potions)
+        p1.attacking_hero = None
+
     if player.attacking_hero:
-        if player.attacked_hero.pos[0] > player.attacking_hero.pos[0]:
-            player.heroes[player.attacking_hero.hero_id].side = "east"
-        if player.attacked_hero.pos[0] < player.attacking_hero.pos[0]:
-            player.heroes[player.attacking_hero.hero_id].side = "west"
-        if player.attacked_hero.pos[1] > player.attacking_hero.pos[1]:
-            player.heroes[player.attacking_hero.hero_id].side = "south"
-        if player.attacked_hero.pos[1] < player.attacking_hero.pos[1]:
-            player.heroes[player.attacking_hero.hero_id].side = "north"
-        draw_attacking_hero(screen, board, player, opponent, player_turn, player.attacking_hero.pos)
-        player.attacking_hero = None
+        attack(player, opponent)
+    if opponent.attacking_hero:
+        attack(opponent, player)
+        n.send(["update_opponent", player.p_id, opponent])
+        made_move = True
     else:
-        draw_background(screen, board, player, opponent, player_turn, actual_pos)
+        draw_background(screen, board, player, opponent, player_turn, actual_pos, potions)
         pg.display.update()
     return made_move

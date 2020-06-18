@@ -76,11 +76,11 @@ the game. For now, he will have a default test team at his disposal.
 STAGE 3 - WEEK 3/5 
     During this stage, we plan to implement the following elements:
     
-    • Team creator (3-4 week);
+    • Team creator (DONE);
     • add login and registration process (DONE);
     • enable player to save/load a game (DONE);
-    • implement some "animation" of attack/defense etc (4 week);
-    • add some content to maps for example traps,chest other typical stuff for RPG games (5 week);
+    • implement some "animation" of attack/defense etc (DONE);
+    • add some content to maps for example traps,chest other typical stuff for RPG games (DONE);
 
     Completing this stage means that the basic assumptions of our project will be met. However, if the work goes extremely well,
 we would like to try to implement the possibility of playing with a computer.
