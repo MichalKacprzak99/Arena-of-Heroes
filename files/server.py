@@ -281,9 +281,6 @@ class ThreadedClient:
 
     def update_potions(self):
         self.game.potions = self.data[1]
-        if len(self.data) > 2:
-            affected_hero = self.data[2]
-            self.game.players[self.data[3]].heroes[affected_hero.hero_id] = affected_hero
 
 
 if __name__ == '__main__':

@@ -156,7 +156,6 @@ def draw_background(screen, board, player, opponent, player_turn, actual_pos, po
     draw_heroes(screen, player)
     draw_heroes(screen, opponent)
     draw_player_turn(screen, player.p_id, player_turn)
-    # draw_result_of_game(screen, player)
     draw_potions(screen, potions)
     if player.clicked_hero:
         highlight_clicked_hero(screen, player)
@@ -258,7 +257,7 @@ def react_to_potion(potions, tile, player, net):
     if potion:
         potion.affect(player.moved_hero)
         del potions[potions.index(potion)]
-        net.send(["update_potions", potions, player.moved_hero, player.p_id])
+        net.send(["update_potions", potions])
 
 
 def redraw_window(screen, board, player, opponent, player_turn, actual_pos, n, potions):
