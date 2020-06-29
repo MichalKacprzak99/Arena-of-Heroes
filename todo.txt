@@ -1,5 +1,0 @@
-to do:
-- algorithm to find shortest path
-- how display moves
-- how to send next moves
-- display different images(depends on where the hero looks)
